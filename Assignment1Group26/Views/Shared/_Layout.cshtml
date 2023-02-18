@@ -12,19 +12,19 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
-                <a href="#" class="navbar-brand">JoseDore</a>
+                <a  class="navbar-brand" asp-controller="Home" asp-action="Index">JoseDore</a>
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav">
-                        <a href="#" class="nav-item nav-link active" asp-controller="Home" asp-action="Index">Home</a>
-                        <a href="#" class="nav-item nav-link" asp-controller="Profile" asp-action="Index">Profile</a>
-                        <a href="#" class="nav-item nav-link" asp-controller="Sell" asp-action="Index">Sell</a>
+                        <a class="nav-item nav-link active" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        <a class="nav-item nav-link" asp-area="" asp-controller="Profile" asp-action="Index">Profile</a>
+                        <a class="nav-item nav-link" asp-area="" asp-controller="Sell" asp-action="Index">Sell</a>
                     </div>
                     <div class="navbar-nav ms-auto">
-                        <a href="#" class="nav-item nav-link" asp-controller="Register" asp-action="Index">Register</a>
-                        <a href="#" class="nav-item nav-link" asp-controller="Login" asp-action="Index">Login</a>
+                        <a  class="nav-item nav-link" asp-area="" asp-controller="Registeration" asp-action="Index">Register</a>
+                        <a class="nav-item nav-link" asp-area="" asp-controller="Login" asp-action="Index">Login</a>
                             <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
                             <button type="button" class="btn btn-outline-primary">search</button>
                     </div>
