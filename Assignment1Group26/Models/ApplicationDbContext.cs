@@ -2,12 +2,13 @@
 
 namespace Assignment1Group26.Models
 {
-    public class HomeDbContext :DbContext
+    public class ApplicationDbContext :DbContext
     {
-        public HomeDbContext(DbContextOptions<HomeDbContext> options) : base(options) { }
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
         public DbSet<Bid> bids { get; set; }
         public DbSet<Category> categories { get; set; }
+        public DbSet<Client> clients { get; set; }
         public DbSet<AssetCondition> AssetConditions{ get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -53,7 +54,18 @@ namespace Assignment1Group26.Models
                       ClientUserName = "john.smith@gmail.com",
                       ClientPassword= "password"
 
+                  },
+
+                  new Client
+                  {
+                      ClienFirstName = "vedoor",
+                      ClienLastName = "Barakat",
+                      ClientId = 2,
+                      ClientUserName = "Vendor.Barakat@gmail.com",
+                      ClientPassword = "password"
+
                   }
+
 
 
               );

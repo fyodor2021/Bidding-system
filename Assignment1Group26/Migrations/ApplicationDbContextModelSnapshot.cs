@@ -4,18 +4,16 @@ using Assignment1Group26.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
 namespace Assignment1Group26.Migrations
 {
-    [DbContext(typeof(HomeDbContext))]
-    [Migration("20230218175349_Category-Conditio-Bid")]
-    partial class CategoryConditioBid
+    [DbContext(typeof(ApplicationDbContext))]
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -107,7 +105,7 @@ namespace Assignment1Group26.Migrations
                             BidDescription = "Long sleeve turtleneck sweater",
                             BidEndDate = new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             BidName = "Zara CROP KNIT TURTLENECK SWEATER",
-                            BidStartDate = new DateTime(2023, 2, 18, 12, 53, 49, 204, DateTimeKind.Local).AddTicks(4160),
+                            BidStartDate = new DateTime(2023, 2, 18, 14, 48, 51, 919, DateTimeKind.Local).AddTicks(8543),
                             CategoryId = 1
                         });
                 });
@@ -143,6 +141,53 @@ namespace Assignment1Group26.Migrations
                         {
                             CategoryId = 3,
                             CategoryName = "Electronics"
+                        });
+                });
+
+            modelBuilder.Entity("Assignment1Group26.Models.Client", b =>
+                {
+                    b.Property<int>("ClientId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ClientId"), 1L, 1);
+
+                    b.Property<string>("ClienFirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClienLastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClientPassword")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClientUserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ClientId");
+
+                    b.ToTable("clients");
+
+                    b.HasData(
+                        new
+                        {
+                            ClientId = 1,
+                            ClienFirstName = "John",
+                            ClienLastName = "Smith",
+                            ClientPassword = "password",
+                            ClientUserName = "john.smith@gmail.com"
+                        },
+                        new
+                        {
+                            ClientId = 2,
+                            ClienFirstName = "vedoor",
+                            ClienLastName = "Barakat",
+                            ClientPassword = "password",
+                            ClientUserName = "Vendor.Barakat@gmail.com"
                         });
                 });
 
