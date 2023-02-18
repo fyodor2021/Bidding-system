@@ -27,6 +27,36 @@ namespace Assignment1Group26.Models
 
                 );
 
+            modelBuilder.Entity<Bid>().HasData(
+                    
+                    new Bid { BidId = 1,
+                             BidName = "Zara CROP KNIT TURTLENECK SWEATER",
+                             BidDescription = "Long sleeve turtleneck sweater",
+                             BidCost= 20,
+                             BidStartDate = DateTime.Now,
+                             BidEndDate = new DateTime(2023,5,16),
+                             AssetConditionId = 1,
+                             CategoryId= 1
+
+                    }
+
+
+                );
+
+            modelBuilder.Entity<Client>().HasData(
+
+                  new Client
+                  {
+                      ClienFirstName=  "John",
+                      ClienLastName = "Smith",
+                      ClientId= 1,
+                      ClientUserName = "john.smith@gmail.com",
+                      ClientPassword= "password"
+
+                  }
+
+
+              );
 
 
 
