@@ -2,7 +2,7 @@
 
 namespace Assignment1Group26.Controllers
 {
-    public class LoginController : Controller
+    public class ProfileController : Controller
     {
         public IActionResult Index()
         {
@@ -10,4 +10,3 @@ namespace Assignment1Group26.Controllers
         }
     }
 }
-

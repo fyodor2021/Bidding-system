@@ -16,10 +16,7 @@ html {
 body {
   margin-bottom: 60px;
 }
-.box{
-    background-color:red;
-   
-}
-footer{
-    width:90px
+.card-row {
+    margin-top: 22px;
+    margin-Bottom: 22px;
 }
