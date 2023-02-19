@@ -1,9 +1,11 @@
 ﻿using Assignment1Group26.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Assignment1Group26.Controllers
 {
+    [Authorize]
     public class SellController : Controller
     {
         private ApplicationDbContext _context;

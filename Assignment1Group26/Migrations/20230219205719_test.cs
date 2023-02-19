@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Assignment1Group26.Migrations
 {
-    public partial class New : Migration
+    public partial class test : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -44,7 +44,9 @@ namespace Assignment1Group26.Migrations
                     ClienFirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ClienLastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ClientUserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ClientPassword = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    ClientPassword = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ClientType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    keepLoggedIn = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -111,11 +113,11 @@ namespace Assignment1Group26.Migrations
 
             migrationBuilder.InsertData(
                 table: "clients",
-                columns: new[] { "ClientId", "ClienFirstName", "ClienLastName", "ClientPassword", "ClientUserName" },
+                columns: new[] { "ClientId", "ClienFirstName", "ClienLastName", "ClientPassword", "ClientType", "ClientUserName", "keepLoggedIn" },
                 values: new object[,]
                 {
-                    { 1, "John", "Smith", "password", "john.smith@gmail.com" },
-                    { 2, "vedoor", "Barakat", "password", "Vendor.Barakat@gmail.com" }
+                    { 1, "John", "Smith", "password", "Buyer", "john.smith@gmail.com", false },
+                    { 2, "vedoor", "Barakat", "password", "Seller", "Vendor.Barakat@gmail.com", false }
                 });
 
             migrationBuilder.InsertData(
@@ -123,13 +125,13 @@ namespace Assignment1Group26.Migrations
                 columns: new[] { "BidId", "AssetConditionId", "BidCost", "BidDescription", "BidEndDate", "BidName", "BidStartDate", "CategoryId", "ClientId" },
                 values: new object[,]
                 {
-                    { 1, 1, 20, "Long sleeve turtleneck sweater", new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Zara CROP KNIT TURTLENECK SWEATER", new DateTime(2023, 2, 18, 22, 31, 0, 939, DateTimeKind.Local).AddTicks(6441), 1, 1 },
-                    { 2, 1, 20, "Long sleeve turtleneck sweater", new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Zara CROP KNIT TURTLENECK SWEATER", new DateTime(2023, 2, 18, 22, 31, 0, 939, DateTimeKind.Local).AddTicks(6449), 1, 1 },
-                    { 3, 1, 20, "Long sleeve turtleneck sweater", new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Zara CROP KNIT TURTLENECK SWEATER", new DateTime(2023, 2, 18, 22, 31, 0, 939, DateTimeKind.Local).AddTicks(6454), 1, 2 },
-                    { 4, 1, 20, "Long sleeve turtleneck sweater", new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Zara CROP KNIT TURTLENECK SWEATER", new DateTime(2023, 2, 18, 22, 31, 0, 939, DateTimeKind.Local).AddTicks(6459), 1, 1 },
-                    { 5, 1, 20, "Long sleeve turtleneck sweater", new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Zara CROP KNIT TURTLENECK SWEATER", new DateTime(2023, 2, 18, 22, 31, 0, 939, DateTimeKind.Local).AddTicks(6463), 1, 1 },
-                    { 6, 1, 20, "Long sleeve turtleneck sweater", new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Zara CROP KNIT TURTLENECK SWEATER", new DateTime(2023, 2, 18, 22, 31, 0, 939, DateTimeKind.Local).AddTicks(6467), 1, 1 },
-                    { 7, 1, 20, "Long sleeve turtleneck sweater", new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Zara CROP KNIT TURTLENECK SWEATER", new DateTime(2023, 2, 18, 22, 31, 0, 939, DateTimeKind.Local).AddTicks(6471), 1, 2 }
+                    { 1, 1, 20, "Long sleeve turtleneck sweater", new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Zara CROP KNIT TURTLENECK SWEATER", new DateTime(2023, 2, 19, 15, 57, 19, 66, DateTimeKind.Local).AddTicks(7267), 1, 1 },
+                    { 2, 1, 20, "Long sleeve turtleneck sweater", new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Zara CROP KNIT TURTLENECK SWEATER", new DateTime(2023, 2, 19, 15, 57, 19, 66, DateTimeKind.Local).AddTicks(7275), 1, 1 },
+                    { 3, 1, 20, "Long sleeve turtleneck sweater", new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Zara CROP KNIT TURTLENECK SWEATER", new DateTime(2023, 2, 19, 15, 57, 19, 66, DateTimeKind.Local).AddTicks(7278), 1, 2 },
+                    { 4, 1, 20, "Long sleeve turtleneck sweater", new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Zara CROP KNIT TURTLENECK SWEATER", new DateTime(2023, 2, 19, 15, 57, 19, 66, DateTimeKind.Local).AddTicks(7281), 1, 1 },
+                    { 5, 1, 20, "Long sleeve turtleneck sweater", new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Zara CROP KNIT TURTLENECK SWEATER", new DateTime(2023, 2, 19, 15, 57, 19, 66, DateTimeKind.Local).AddTicks(7284), 1, 1 },
+                    { 6, 1, 20, "Long sleeve turtleneck sweater", new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Zara CROP KNIT TURTLENECK SWEATER", new DateTime(2023, 2, 19, 15, 57, 19, 66, DateTimeKind.Local).AddTicks(7286), 1, 1 },
+                    { 7, 1, 20, "Long sleeve turtleneck sweater", new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Zara CROP KNIT TURTLENECK SWEATER", new DateTime(2023, 2, 19, 15, 57, 19, 66, DateTimeKind.Local).AddTicks(7289), 1, 2 }
                 });
 
             migrationBuilder.CreateIndex(

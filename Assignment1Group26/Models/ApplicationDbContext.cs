@@ -3,14 +3,14 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace Assignment1Group26.Models
 {
-    public class ApplicationDbContext :DbContext
+    public class ApplicationDbContext : DbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
         public DbSet<Bid> bids { get; set; }
         public DbSet<Category> categories { get; set; }
         public DbSet<Client> clients { get; set; }
-        public DbSet<AssetCondition> AssetConditions{ get; set; }
+        public DbSet<AssetCondition> AssetConditions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -30,22 +30,24 @@ namespace Assignment1Group26.Models
                 );
 
             modelBuilder.Entity<Bid>().HasData(
-                    
-                    new Bid { BidId = 1,
-                             BidName = "Zara CROP KNIT TURTLENECK SWEATER",
-                             BidDescription = "Long sleeve turtleneck sweater",
-                             BidCost= 20,
-                             BidStartDate = DateTime.Now,
-                             BidEndDate = new DateTime(2023,5,16),
-                             AssetConditionId = 1,
-                             CategoryId= 1,
-                             ClientId= 1
+
+                    new Bid
+                    {
+                        BidId = 1,
+                        BidName = "Zara CROP KNIT TURTLENECK SWEATER",
+                        BidDescription = "Long sleeve turtleneck sweater",
+                        BidCost = 20,
+                        BidStartDate = DateTime.Now,
+                        BidEndDate = new DateTime(2023, 5, 16),
+                        AssetConditionId = 1,
+                        CategoryId = 1,
+                        ClientId = 1
 
 
                     },
                     new Bid
                     {
-                        BidId =2,
+                        BidId = 2,
                         BidName = "Zara CROP KNIT TURTLENECK SWEATER",
                         BidDescription = "Long sleeve turtleneck sweater",
                         BidCost = 20,
@@ -119,9 +121,7 @@ namespace Assignment1Group26.Models
                         AssetConditionId = 1,
                         CategoryId = 1,
                         ClientId = 2
-
-
-                     }
+                    }
 
 
 
@@ -131,11 +131,11 @@ namespace Assignment1Group26.Models
 
                   new Client
                   {
-                      ClienFirstName=  "John",
+                      ClienFirstName = "John",
                       ClienLastName = "Smith",
-                      ClientId= 1,
+                      ClientId = 1,
                       ClientUserName = "john.smith@gmail.com",
-                      ClientPassword= "password"
+                      ClientPassword = "password"
 
                   },
 
@@ -146,7 +146,6 @@ namespace Assignment1Group26.Models
                       ClientId = 2,
                       ClientUserName = "Vendor.Barakat@gmail.com",
                       ClientPassword = "password"
-
                   }
 
 

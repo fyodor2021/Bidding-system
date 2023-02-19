@@ -14,10 +14,20 @@
                     <div class="mb-3">
                         <input asp-for="ClientPassword" type="password" class="form-control" id="password" placeholder="password">
                     </div>
+                    <div class="mb-3">
+                        <input asp-for="keepLoggedIn" type="checkbox"/>
+                        keep me logged In.
+                    </div>
                     <div class="text-center"><button type="submit" class="btn btn-color px-5 mb-5 w-100">Login</button></div>
                     <div id="emailHelp" class="form-text text-center mb-5 text-dark">
+                        @if (ViewData["ValidationMessage"] != null)
+                        {
+                        <div class="mb-3">
+                            @ViewData["ValidationMessage"]
+                        </div>
+                        }
                         Not
-                        Registered? <a asp-controller="Registeration" asp-action="Index" class="text-dark fw-bold">
+                        Registered? <a asp-controller="Registration" asp-action="Index" class="text-dark fw-bold">
                             Create an
                             Account.
                         </a>

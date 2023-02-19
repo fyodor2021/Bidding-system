@@ -16,7 +16,8 @@ html {
 body {
   margin-bottom: 60px;
 }
-.card-row {
-    margin-top: 22px;
-    margin-Bottom: 22px;
+
+.card {
+    margin-right: 20px;
+    margin-top: 20px;
 }

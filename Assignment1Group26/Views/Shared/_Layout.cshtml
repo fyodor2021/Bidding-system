@@ -23,8 +23,15 @@
                         <a class="nav-item nav-link" asp-area="" asp-controller="Sell" asp-action="Index">Sell</a>
                     </div>
                     <div class="navbar-nav ms-auto">
-                        <a  class="nav-item nav-link" asp-area="" asp-controller="Registration" asp-action="Index">Register</a>
-                        <a class="nav-item nav-link" asp-area="" asp-controller="Login" asp-action="Index">Login</a>
+                        @if (base.User.Identity.IsAuthenticated)
+                        {
+                            <a class="nav-item nav-link" asp-area="" asp-controller="Home" asp-action="Logout">Logout</a>
+
+                        }else{
+                            <a class="nav-item nav-link" asp-area="" asp-controller="Registration" asp-action="Index">Register</a>
+                            <a class="nav-item nav-link" asp-area="" asp-controller="Login" asp-action="Login">Login</a>
+
+                        }
                             <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
                             <button type="button" class="btn btn-outline-primary">search</button>
                     </div>

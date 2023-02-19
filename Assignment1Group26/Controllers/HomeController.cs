@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
-
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 namespace Assignment1Group26.Controllers
 {
     public class HomeController : Controller
@@ -12,14 +14,25 @@ namespace Assignment1Group26.Controllers
         {
             _Homecontext = ctx;
         }
+        
+
         public IActionResult Index()
         {
-            var bids = _Homecontext.bids.Include(c => c.Category).Include(a => a.AssetCondition).Include(u => u.Client)
+            
+            var Bids = _Homecontext.bids.Include(c => c.Category)
+                .Include(a => a.AssetCondition).
+                Include(u => u.Client)
                 .OrderBy(b => b.BidId).ToList();
-            return View(bids);
+            return View(Bids);
 
 
 
         }
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Login","Login");
+        }
     }
 }
+
