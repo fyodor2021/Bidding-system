@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Assignment1Group26.Migrations
 {
-    public partial class CategoryConditioBid : Migration
+    public partial class applicationClientdatabasecreation : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -33,6 +33,22 @@ namespace Assignment1Group26.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_categories", x => x.CategoryId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "clients",
+                columns: table => new
+                {
+                    ClientId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ClienFirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ClienLastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ClientUserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ClientPassword = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_clients", x => x.ClientId);
                 });
 
             migrationBuilder.CreateTable(
@@ -87,9 +103,18 @@ namespace Assignment1Group26.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "clients",
+                columns: new[] { "ClientId", "ClienFirstName", "ClienLastName", "ClientPassword", "ClientUserName" },
+                values: new object[,]
+                {
+                    { 1, "John", "Smith", "password", "john.smith@gmail.com" },
+                    { 2, "vedoor", "Barakat", "password", "Vendor.Barakat@gmail.com" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "bids",
                 columns: new[] { "BidId", "AssetConditionId", "BidCost", "BidDescription", "BidEndDate", "BidName", "BidStartDate", "CategoryId" },
-                values: new object[] { 1, 1, 20, "Long sleeve turtleneck sweater", new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Zara CROP KNIT TURTLENECK SWEATER", new DateTime(2023, 2, 18, 12, 53, 49, 204, DateTimeKind.Local).AddTicks(4160), 1 });
+                values: new object[] { 1, 1, 20, "Long sleeve turtleneck sweater", new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Zara CROP KNIT TURTLENECK SWEATER", new DateTime(2023, 2, 18, 14, 48, 51, 919, DateTimeKind.Local).AddTicks(8543), 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_bids_AssetConditionId",
@@ -106,6 +131,9 @@ namespace Assignment1Group26.Migrations
         {
             migrationBuilder.DropTable(
                 name: "bids");
+
+            migrationBuilder.DropTable(
+                name: "clients");
 
             migrationBuilder.DropTable(
                 name: "AssetConditions");

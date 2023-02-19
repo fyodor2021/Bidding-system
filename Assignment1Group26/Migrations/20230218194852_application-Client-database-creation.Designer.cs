@@ -11,9 +11,9 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Assignment1Group26.Migrations
 {
-    [DbContext(typeof(HomeDbContext))]
-    [Migration("20230218181830_Client")]
-    partial class Client
+    [DbContext(typeof(ApplicationDbContext))]
+    [Migration("20230218194852_application-Client-database-creation")]
+    partial class applicationClientdatabasecreation
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -107,7 +107,7 @@ namespace Assignment1Group26.Migrations
                             BidDescription = "Long sleeve turtleneck sweater",
                             BidEndDate = new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             BidName = "Zara CROP KNIT TURTLENECK SWEATER",
-                            BidStartDate = new DateTime(2023, 2, 18, 13, 18, 29, 809, DateTimeKind.Local).AddTicks(9645),
+                            BidStartDate = new DateTime(2023, 2, 18, 14, 48, 51, 919, DateTimeKind.Local).AddTicks(8543),
                             CategoryId = 1
                         });
                 });
@@ -172,7 +172,7 @@ namespace Assignment1Group26.Migrations
 
                     b.HasKey("ClientId");
 
-                    b.ToTable("Client");
+                    b.ToTable("clients");
 
                     b.HasData(
                         new
@@ -182,6 +182,14 @@ namespace Assignment1Group26.Migrations
                             ClienLastName = "Smith",
                             ClientPassword = "password",
                             ClientUserName = "john.smith@gmail.com"
+                        },
+                        new
+                        {
+                            ClientId = 2,
+                            ClienFirstName = "vedoor",
+                            ClienLastName = "Barakat",
+                            ClientPassword = "password",
+                            ClientUserName = "Vendor.Barakat@gmail.com"
                         });
                 });
 
