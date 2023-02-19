@@ -28,7 +28,6 @@ namespace Assignment1Group26.Models
 
         public Category? Category { get; set; }
 
-      ///  public byte[] BidImage { get; set; }
 
 
     }
