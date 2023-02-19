@@ -15,11 +15,9 @@ namespace Assignment1Group26.Controllers
         public IActionResult Index()
         {
             var bids = _Homecontext.bids.Include(c => c.Category).Include(a => a.AssetCondition).Include(u => u.Client)
-                .OrderBy(b => b.BidId).ToList();   
+                .OrderBy(b => b.BidId).ToList();
             return View(bids);
-=======
 
-        { 
 
         }
     }
