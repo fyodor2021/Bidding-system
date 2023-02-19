@@ -12,8 +12,8 @@ namespace Assignment1Group26.Controllers
             _Homecontext = ctx;
         }
         public IActionResult Index()
-        {
-            _Homecontext.bids()
+
+        { 
 
             return View();
         }
