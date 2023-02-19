@@ -15,10 +15,7 @@ namespace Assignment1Group26.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+       
         public IActionResult Login()
         {
             ClaimsPrincipal claimUser = HttpContext.User;

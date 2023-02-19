@@ -22,9 +22,7 @@
                     <div id="emailHelp" class="form-text text-center mb-5 text-dark">
                         @if (ViewData["ValidationMessage"] != null)
                         {
-                        <div class="mb-3">
-                            @ViewData["ValidationMessage"]
-                        </div>
+                            <h2 style="color:red;">@ViewData["ValidationMessage"]</h2>
                         }
                         Not
                         Registered? <a asp-controller="Registration" asp-action="Index" class="text-dark fw-bold">

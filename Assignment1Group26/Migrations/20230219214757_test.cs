@@ -45,7 +45,6 @@ namespace Assignment1Group26.Migrations
                     ClienLastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ClientUserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ClientPassword = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ClientType = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     keepLoggedIn = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -113,11 +112,11 @@ namespace Assignment1Group26.Migrations
 
             migrationBuilder.InsertData(
                 table: "clients",
-                columns: new[] { "ClientId", "ClienFirstName", "ClienLastName", "ClientPassword", "ClientType", "ClientUserName", "keepLoggedIn" },
+                columns: new[] { "ClientId", "ClienFirstName", "ClienLastName", "ClientPassword", "ClientUserName", "keepLoggedIn" },
                 values: new object[,]
                 {
-                    { 1, "John", "Smith", "password", "Buyer", "john.smith@gmail.com", false },
-                    { 2, "vedoor", "Barakat", "password", "Seller", "Vendor.Barakat@gmail.com", false }
+                    { 1, "John", "Smith", "password", "john.smith@gmail.com", false },
+                    { 2, "vedoor", "Barakat", "password", "Vendor.Barakat@gmail.com", false }
                 });
 
             migrationBuilder.InsertData(
@@ -125,13 +124,13 @@ namespace Assignment1Group26.Migrations
                 columns: new[] { "BidId", "AssetConditionId", "BidCost", "BidDescription", "BidEndDate", "BidName", "BidStartDate", "CategoryId", "ClientId" },
                 values: new object[,]
                 {
-                    { 1, 1, 20, "Long sleeve turtleneck sweater", new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Zara CROP KNIT TURTLENECK SWEATER", new DateTime(2023, 2, 19, 15, 57, 19, 66, DateTimeKind.Local).AddTicks(7267), 1, 1 },
-                    { 2, 1, 20, "Long sleeve turtleneck sweater", new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Zara CROP KNIT TURTLENECK SWEATER", new DateTime(2023, 2, 19, 15, 57, 19, 66, DateTimeKind.Local).AddTicks(7275), 1, 1 },
-                    { 3, 1, 20, "Long sleeve turtleneck sweater", new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Zara CROP KNIT TURTLENECK SWEATER", new DateTime(2023, 2, 19, 15, 57, 19, 66, DateTimeKind.Local).AddTicks(7278), 1, 2 },
-                    { 4, 1, 20, "Long sleeve turtleneck sweater", new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Zara CROP KNIT TURTLENECK SWEATER", new DateTime(2023, 2, 19, 15, 57, 19, 66, DateTimeKind.Local).AddTicks(7281), 1, 1 },
-                    { 5, 1, 20, "Long sleeve turtleneck sweater", new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Zara CROP KNIT TURTLENECK SWEATER", new DateTime(2023, 2, 19, 15, 57, 19, 66, DateTimeKind.Local).AddTicks(7284), 1, 1 },
-                    { 6, 1, 20, "Long sleeve turtleneck sweater", new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Zara CROP KNIT TURTLENECK SWEATER", new DateTime(2023, 2, 19, 15, 57, 19, 66, DateTimeKind.Local).AddTicks(7286), 1, 1 },
-                    { 7, 1, 20, "Long sleeve turtleneck sweater", new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Zara CROP KNIT TURTLENECK SWEATER", new DateTime(2023, 2, 19, 15, 57, 19, 66, DateTimeKind.Local).AddTicks(7289), 1, 2 }
+                    { 1, 1, 20, "Long sleeve turtleneck sweater", new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Zara CROP KNIT TURTLENECK SWEATER", new DateTime(2023, 2, 19, 16, 47, 56, 987, DateTimeKind.Local).AddTicks(6839), 1, 1 },
+                    { 2, 1, 20, "Long sleeve turtleneck sweater", new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Zara CROP KNIT TURTLENECK SWEATER", new DateTime(2023, 2, 19, 16, 47, 56, 987, DateTimeKind.Local).AddTicks(6844), 1, 1 },
+                    { 3, 1, 20, "Long sleeve turtleneck sweater", new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Zara CROP KNIT TURTLENECK SWEATER", new DateTime(2023, 2, 19, 16, 47, 56, 987, DateTimeKind.Local).AddTicks(6846), 1, 2 },
+                    { 4, 1, 20, "Long sleeve turtleneck sweater", new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Zara CROP KNIT TURTLENECK SWEATER", new DateTime(2023, 2, 19, 16, 47, 56, 987, DateTimeKind.Local).AddTicks(6848), 1, 1 },
+                    { 5, 1, 20, "Long sleeve turtleneck sweater", new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Zara CROP KNIT TURTLENECK SWEATER", new DateTime(2023, 2, 19, 16, 47, 56, 987, DateTimeKind.Local).AddTicks(6850), 1, 1 },
+                    { 6, 1, 20, "Long sleeve turtleneck sweater", new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Zara CROP KNIT TURTLENECK SWEATER", new DateTime(2023, 2, 19, 16, 47, 56, 987, DateTimeKind.Local).AddTicks(6853), 1, 1 },
+                    { 7, 1, 20, "Long sleeve turtleneck sweater", new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Zara CROP KNIT TURTLENECK SWEATER", new DateTime(2023, 2, 19, 16, 47, 56, 987, DateTimeKind.Local).AddTicks(6855), 1, 2 }
                 });
 
             migrationBuilder.CreateIndex(
