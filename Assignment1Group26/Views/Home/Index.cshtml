@@ -1,18 +1,20 @@
-﻿@{
+﻿@model IEnumerable<Bid>
+@{
     ViewData["Title"] = "JoseDore";
 }
-@{
-    for (int i = 0; i < 10; i++)
-    {
+@foreach (Bid b in Model)
+{
+
+    
         <div class="card-row">
             <div class="container">
                 <div class="row">
                     <div class="col">
                         <div class="card" style="width: 18rem;">
-                          <img class="card-img-top" src="..." alt="Card image cap">
+                          <img class="card-img-top" src="~/css/Images/zara_crop_knit.jpg" alt="Card image cap">
                           <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <h5 class="card-title">@b.BidName</h5>
+                            <p class="card-text">@b.BidCost</p>
                             <a href="#" class="btn btn-primary">Go somewhere</a>
                           </div>
                         </div>
@@ -20,6 +22,6 @@
                 </div>
             </div>
         </div>
-    }
-}
+    
 
+}

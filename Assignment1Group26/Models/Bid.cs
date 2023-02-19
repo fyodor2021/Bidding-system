@@ -22,11 +22,13 @@ namespace Assignment1Group26.Models
         public AssetCondition? AssetCondition { get; set; }
         [Range(1,3,ErrorMessage ="Please select a valid category")]
         public int CategoryId { get; set; }
+
+        public Client? Client { get; set; }
         public int ClientId { get; set; }
 
         public Category? Category { get; set; }
 
-
+      ///  public byte[] BidImage { get; set; }
 
 
     }
