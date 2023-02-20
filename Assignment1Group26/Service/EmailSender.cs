@@ -8,11 +8,12 @@ namespace Assignment1Group26.Service
         public Task SendEmailAsync(string email, string subject, string message) {
 
             var mail = "causeleea@gmail.com";
-            var password = "Pass@@wod22veo";
+            var password = "xajvgnbdjfmhkovd";
 
-            var client = new SmtpClient("smtp.mailgun.org", 587)
+            var client = new SmtpClient("smtp.gmail.com", 587)
             {
-                EnableSsl = true,
+                UseDefaultCredentials = false,
+               EnableSsl= true,
                 Credentials = new NetworkCredential(mail,password)
             };
             return client.SendMailAsync(new MailMessage(from: mail,

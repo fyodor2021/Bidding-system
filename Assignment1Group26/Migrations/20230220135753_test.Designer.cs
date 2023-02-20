@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Assignment1Group26.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230219214757_test")]
+    [Migration("20230220135753_test")]
     partial class test
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -112,7 +112,7 @@ namespace Assignment1Group26.Migrations
                             BidDescription = "Long sleeve turtleneck sweater",
                             BidEndDate = new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             BidName = "Zara CROP KNIT TURTLENECK SWEATER",
-                            BidStartDate = new DateTime(2023, 2, 19, 16, 47, 56, 987, DateTimeKind.Local).AddTicks(6839),
+                            BidStartDate = new DateTime(2023, 2, 20, 8, 57, 53, 699, DateTimeKind.Local).AddTicks(491),
                             CategoryId = 1,
                             ClientId = 1
                         },
@@ -124,7 +124,7 @@ namespace Assignment1Group26.Migrations
                             BidDescription = "Long sleeve turtleneck sweater",
                             BidEndDate = new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             BidName = "Zara CROP KNIT TURTLENECK SWEATER",
-                            BidStartDate = new DateTime(2023, 2, 19, 16, 47, 56, 987, DateTimeKind.Local).AddTicks(6844),
+                            BidStartDate = new DateTime(2023, 2, 20, 8, 57, 53, 699, DateTimeKind.Local).AddTicks(498),
                             CategoryId = 1,
                             ClientId = 1
                         },
@@ -136,7 +136,7 @@ namespace Assignment1Group26.Migrations
                             BidDescription = "Long sleeve turtleneck sweater",
                             BidEndDate = new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             BidName = "Zara CROP KNIT TURTLENECK SWEATER",
-                            BidStartDate = new DateTime(2023, 2, 19, 16, 47, 56, 987, DateTimeKind.Local).AddTicks(6846),
+                            BidStartDate = new DateTime(2023, 2, 20, 8, 57, 53, 699, DateTimeKind.Local).AddTicks(501),
                             CategoryId = 1,
                             ClientId = 2
                         },
@@ -148,7 +148,7 @@ namespace Assignment1Group26.Migrations
                             BidDescription = "Long sleeve turtleneck sweater",
                             BidEndDate = new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             BidName = "Zara CROP KNIT TURTLENECK SWEATER",
-                            BidStartDate = new DateTime(2023, 2, 19, 16, 47, 56, 987, DateTimeKind.Local).AddTicks(6848),
+                            BidStartDate = new DateTime(2023, 2, 20, 8, 57, 53, 699, DateTimeKind.Local).AddTicks(503),
                             CategoryId = 1,
                             ClientId = 1
                         },
@@ -160,7 +160,7 @@ namespace Assignment1Group26.Migrations
                             BidDescription = "Long sleeve turtleneck sweater",
                             BidEndDate = new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             BidName = "Zara CROP KNIT TURTLENECK SWEATER",
-                            BidStartDate = new DateTime(2023, 2, 19, 16, 47, 56, 987, DateTimeKind.Local).AddTicks(6850),
+                            BidStartDate = new DateTime(2023, 2, 20, 8, 57, 53, 699, DateTimeKind.Local).AddTicks(506),
                             CategoryId = 1,
                             ClientId = 1
                         },
@@ -172,7 +172,7 @@ namespace Assignment1Group26.Migrations
                             BidDescription = "Long sleeve turtleneck sweater",
                             BidEndDate = new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             BidName = "Zara CROP KNIT TURTLENECK SWEATER",
-                            BidStartDate = new DateTime(2023, 2, 19, 16, 47, 56, 987, DateTimeKind.Local).AddTicks(6853),
+                            BidStartDate = new DateTime(2023, 2, 20, 8, 57, 53, 699, DateTimeKind.Local).AddTicks(509),
                             CategoryId = 1,
                             ClientId = 1
                         },
@@ -184,7 +184,7 @@ namespace Assignment1Group26.Migrations
                             BidDescription = "Long sleeve turtleneck sweater",
                             BidEndDate = new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             BidName = "Zara CROP KNIT TURTLENECK SWEATER",
-                            BidStartDate = new DateTime(2023, 2, 19, 16, 47, 56, 987, DateTimeKind.Local).AddTicks(6855),
+                            BidStartDate = new DateTime(2023, 2, 20, 8, 57, 53, 699, DateTimeKind.Local).AddTicks(512),
                             CategoryId = 1,
                             ClientId = 2
                         });
@@ -248,6 +248,9 @@ namespace Assignment1Group26.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("EmailConfimed")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("keepLoggedIn")
                         .HasColumnType("bit");
 
@@ -263,6 +266,7 @@ namespace Assignment1Group26.Migrations
                             ClienLastName = "Smith",
                             ClientPassword = "password",
                             ClientUserName = "john.smith@gmail.com",
+                            EmailConfimed = false,
                             keepLoggedIn = false
                         },
                         new
@@ -272,6 +276,7 @@ namespace Assignment1Group26.Migrations
                             ClienLastName = "Barakat",
                             ClientPassword = "password",
                             ClientUserName = "Vendor.Barakat@gmail.com",
+                            EmailConfimed = false,
                             keepLoggedIn = false
                         });
                 });

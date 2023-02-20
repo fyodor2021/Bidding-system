@@ -11,7 +11,7 @@ namespace Assignment1Group26.Controllers
     {
 
         private ApplicationDbContext _context;
-        private IEmailSender _emailSender;
+        private readonly IEmailSender _emailSender;
         public RegistrationController(ApplicationDbContext context, IEmailSender emailSender)
         {
             _context = context;
