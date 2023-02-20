@@ -42,13 +42,10 @@ namespace Assignment1Group26.Controllers
                 return RedirectToAction("Index", "Home");
 
             }
-            else
-            {
-                ViewData["validMessage"] = "Invalid credentials";
-                return RedirectToAction("Register", "Registration");
-            }
-            
-            
+            ViewData["errorMessage"] = "Invalid Credentials";
+            return View("Register");
+
+
         }
 
     }
