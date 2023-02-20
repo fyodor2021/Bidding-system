@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Assignment1Group26.Migrations
 {
-    public partial class test : Migration
+    public partial class first : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -125,13 +125,13 @@ namespace Assignment1Group26.Migrations
                 columns: new[] { "BidId", "AssetConditionId", "BidCost", "BidDescription", "BidEndDate", "BidName", "BidStartDate", "CategoryId", "ClientId" },
                 values: new object[,]
                 {
-                    { 1, 1, 20, "Long sleeve turtleneck sweater", new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Zara CROP KNIT TURTLENECK SWEATER", new DateTime(2023, 2, 20, 8, 57, 53, 699, DateTimeKind.Local).AddTicks(491), 1, 1 },
-                    { 2, 1, 20, "Long sleeve turtleneck sweater", new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Zara CROP KNIT TURTLENECK SWEATER", new DateTime(2023, 2, 20, 8, 57, 53, 699, DateTimeKind.Local).AddTicks(498), 1, 1 },
-                    { 3, 1, 20, "Long sleeve turtleneck sweater", new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Zara CROP KNIT TURTLENECK SWEATER", new DateTime(2023, 2, 20, 8, 57, 53, 699, DateTimeKind.Local).AddTicks(501), 1, 2 },
-                    { 4, 1, 20, "Long sleeve turtleneck sweater", new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Zara CROP KNIT TURTLENECK SWEATER", new DateTime(2023, 2, 20, 8, 57, 53, 699, DateTimeKind.Local).AddTicks(503), 1, 1 },
-                    { 5, 1, 20, "Long sleeve turtleneck sweater", new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Zara CROP KNIT TURTLENECK SWEATER", new DateTime(2023, 2, 20, 8, 57, 53, 699, DateTimeKind.Local).AddTicks(506), 1, 1 },
-                    { 6, 1, 20, "Long sleeve turtleneck sweater", new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Zara CROP KNIT TURTLENECK SWEATER", new DateTime(2023, 2, 20, 8, 57, 53, 699, DateTimeKind.Local).AddTicks(509), 1, 1 },
-                    { 7, 1, 20, "Long sleeve turtleneck sweater", new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Zara CROP KNIT TURTLENECK SWEATER", new DateTime(2023, 2, 20, 8, 57, 53, 699, DateTimeKind.Local).AddTicks(512), 1, 2 }
+                    { 1, 1, 20, "Long sleeve turtleneck sweater", new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Zara CROP KNIT TURTLENECK SWEATER", new DateTime(2023, 2, 20, 10, 47, 14, 425, DateTimeKind.Local).AddTicks(5792), 1, 1 },
+                    { 2, 1, 20, "Long sleeve turtleneck sweater", new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Zara CROP KNIT TURTLENECK SWEATER", new DateTime(2023, 2, 20, 10, 47, 14, 425, DateTimeKind.Local).AddTicks(5797), 1, 1 },
+                    { 3, 1, 20, "Long sleeve turtleneck sweater", new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Zara CROP KNIT TURTLENECK SWEATER", new DateTime(2023, 2, 20, 10, 47, 14, 425, DateTimeKind.Local).AddTicks(5800), 1, 2 },
+                    { 4, 1, 20, "Long sleeve turtleneck sweater", new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Zara CROP KNIT TURTLENECK SWEATER", new DateTime(2023, 2, 20, 10, 47, 14, 425, DateTimeKind.Local).AddTicks(5803), 1, 1 },
+                    { 5, 1, 20, "Long sleeve turtleneck sweater", new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Zara CROP KNIT TURTLENECK SWEATER", new DateTime(2023, 2, 20, 10, 47, 14, 425, DateTimeKind.Local).AddTicks(5805), 1, 1 },
+                    { 6, 1, 20, "Long sleeve turtleneck sweater", new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Zara CROP KNIT TURTLENECK SWEATER", new DateTime(2023, 2, 20, 10, 47, 14, 425, DateTimeKind.Local).AddTicks(5808), 1, 1 },
+                    { 7, 1, 20, "Long sleeve turtleneck sweater", new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Zara CROP KNIT TURTLENECK SWEATER", new DateTime(2023, 2, 20, 10, 47, 14, 425, DateTimeKind.Local).AddTicks(5811), 1, 2 }
                 });
 
             migrationBuilder.CreateIndex(

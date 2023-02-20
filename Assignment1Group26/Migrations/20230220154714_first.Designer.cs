@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Assignment1Group26.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230220135753_test")]
-    partial class test
+    [Migration("20230220154714_first")]
+    partial class first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -112,7 +112,7 @@ namespace Assignment1Group26.Migrations
                             BidDescription = "Long sleeve turtleneck sweater",
                             BidEndDate = new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             BidName = "Zara CROP KNIT TURTLENECK SWEATER",
-                            BidStartDate = new DateTime(2023, 2, 20, 8, 57, 53, 699, DateTimeKind.Local).AddTicks(491),
+                            BidStartDate = new DateTime(2023, 2, 20, 10, 47, 14, 425, DateTimeKind.Local).AddTicks(5792),
                             CategoryId = 1,
                             ClientId = 1
                         },
@@ -124,7 +124,7 @@ namespace Assignment1Group26.Migrations
                             BidDescription = "Long sleeve turtleneck sweater",
                             BidEndDate = new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             BidName = "Zara CROP KNIT TURTLENECK SWEATER",
-                            BidStartDate = new DateTime(2023, 2, 20, 8, 57, 53, 699, DateTimeKind.Local).AddTicks(498),
+                            BidStartDate = new DateTime(2023, 2, 20, 10, 47, 14, 425, DateTimeKind.Local).AddTicks(5797),
                             CategoryId = 1,
                             ClientId = 1
                         },
@@ -136,7 +136,7 @@ namespace Assignment1Group26.Migrations
                             BidDescription = "Long sleeve turtleneck sweater",
                             BidEndDate = new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             BidName = "Zara CROP KNIT TURTLENECK SWEATER",
-                            BidStartDate = new DateTime(2023, 2, 20, 8, 57, 53, 699, DateTimeKind.Local).AddTicks(501),
+                            BidStartDate = new DateTime(2023, 2, 20, 10, 47, 14, 425, DateTimeKind.Local).AddTicks(5800),
                             CategoryId = 1,
                             ClientId = 2
                         },
@@ -148,7 +148,7 @@ namespace Assignment1Group26.Migrations
                             BidDescription = "Long sleeve turtleneck sweater",
                             BidEndDate = new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             BidName = "Zara CROP KNIT TURTLENECK SWEATER",
-                            BidStartDate = new DateTime(2023, 2, 20, 8, 57, 53, 699, DateTimeKind.Local).AddTicks(503),
+                            BidStartDate = new DateTime(2023, 2, 20, 10, 47, 14, 425, DateTimeKind.Local).AddTicks(5803),
                             CategoryId = 1,
                             ClientId = 1
                         },
@@ -160,7 +160,7 @@ namespace Assignment1Group26.Migrations
                             BidDescription = "Long sleeve turtleneck sweater",
                             BidEndDate = new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             BidName = "Zara CROP KNIT TURTLENECK SWEATER",
-                            BidStartDate = new DateTime(2023, 2, 20, 8, 57, 53, 699, DateTimeKind.Local).AddTicks(506),
+                            BidStartDate = new DateTime(2023, 2, 20, 10, 47, 14, 425, DateTimeKind.Local).AddTicks(5805),
                             CategoryId = 1,
                             ClientId = 1
                         },
@@ -172,7 +172,7 @@ namespace Assignment1Group26.Migrations
                             BidDescription = "Long sleeve turtleneck sweater",
                             BidEndDate = new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             BidName = "Zara CROP KNIT TURTLENECK SWEATER",
-                            BidStartDate = new DateTime(2023, 2, 20, 8, 57, 53, 699, DateTimeKind.Local).AddTicks(509),
+                            BidStartDate = new DateTime(2023, 2, 20, 10, 47, 14, 425, DateTimeKind.Local).AddTicks(5808),
                             CategoryId = 1,
                             ClientId = 1
                         },
@@ -184,7 +184,7 @@ namespace Assignment1Group26.Migrations
                             BidDescription = "Long sleeve turtleneck sweater",
                             BidEndDate = new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             BidName = "Zara CROP KNIT TURTLENECK SWEATER",
-                            BidStartDate = new DateTime(2023, 2, 20, 8, 57, 53, 699, DateTimeKind.Local).AddTicks(512),
+                            BidStartDate = new DateTime(2023, 2, 20, 10, 47, 14, 425, DateTimeKind.Local).AddTicks(5811),
                             CategoryId = 1,
                             ClientId = 2
                         });
