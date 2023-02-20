@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using Assignment1Group26.Service;
 
 namespace Assignment1Group26.Controllers
 {
@@ -10,9 +11,11 @@ namespace Assignment1Group26.Controllers
     {
 
         private ApplicationDbContext _context;
-        public RegistrationController(ApplicationDbContext context)
+        private IEmailSender _emailSender;
+        public RegistrationController(ApplicationDbContext context, IEmailSender emailSender)
         {
             _context = context;
+            _emailSender = emailSender;
         }
         public ActionResult Register()
         {
@@ -24,6 +27,8 @@ namespace Assignment1Group26.Controllers
             
             if(ModelState.IsValid)
             {
+                //adding the contact to the database
+
                 _context.clients.Add(c);
                 _context.SaveChanges();
                 List<Claim> claims = new List<Claim>()
@@ -39,6 +44,13 @@ namespace Assignment1Group26.Controllers
                 };
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
                     new ClaimsPrincipal(ClaimsIdentity), properties);
+
+                //email verification
+                var receiver = c.ClientUserName;
+                var subject = "please verify your email(josedore)";
+                var message = "Hello World";
+
+                await _emailSender.SendEmailAsync(receiver, subject, message);
                 return RedirectToAction("Index", "Home");
 
             }
