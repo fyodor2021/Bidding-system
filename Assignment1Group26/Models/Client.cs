@@ -16,6 +16,7 @@ namespace Assignment1Group26.Models
         public string? ClientUserName { get; set; }
         [Required]
         public string? ClientPassword { get; set; }
+        public bool EmailConfimed { get; set; }
         public bool keepLoggedIn { get; set; }
     }
 }
