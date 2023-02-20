@@ -1,4 +1,7 @@
-﻿namespace Assignment1Group26.Service
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+
+namespace Assignment1Group26.Service
 {
     public interface IEmailSender
     {

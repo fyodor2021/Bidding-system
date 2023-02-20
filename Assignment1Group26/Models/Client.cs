@@ -17,6 +17,7 @@ namespace Assignment1Group26.Models
         [Required]
         public string? ClientPassword { get; set; }
         public bool EmailConfimed { get; set; }
+        public string? VerficationToken { get; set; }
         public bool keepLoggedIn { get; set; }
     }
 }
