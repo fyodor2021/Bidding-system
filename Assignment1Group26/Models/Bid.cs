@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Assignment1Group26.Models
 {
@@ -12,9 +14,11 @@ namespace Assignment1Group26.Models
         public string? BidDescription { get; set; }
         [Required(ErrorMessage = "Please enter a valid cost")]
         public int? BidCost { get; set; }
-        [Required]
+        
         public DateTime BidStartDate { get; set; } = DateTime.Now;
-        [Required(ErrorMessage = "Please enter a valid end date")]
+        
+
+        [Required(ErrorMessage = "Date must be after or equal to current date")]
         public DateTime BidEndDate { get; set; }
 
         [Range(1, 4, ErrorMessage = "Please select a valid condition")]
@@ -28,7 +32,11 @@ namespace Assignment1Group26.Models
 
         public Category? Category { get; set; }
 
+        public string? ImagePath { get; set; }
 
+        [NotMapped]
+        [Required(ErrorMessage = "Please upload an image")]
+        public IFormFile? ImageFile { get; set; }
 
     }
 }
