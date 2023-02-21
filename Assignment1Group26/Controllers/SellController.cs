@@ -71,6 +71,7 @@ namespace Assignment1Group26.Controllers
 						else
 						{
 							// Handle edit action
+
 						}
 
 						_context.SaveChanges();
@@ -121,7 +122,16 @@ namespace Assignment1Group26.Controllers
 
             return RedirectToAction("Index", "Sell");
         }
+        [HttpGet]
+        public IActionResult Edit(int id) 
+        {
+            var b = _context.bids
+                .Include(c => c.Category).Include(a => a.AssetCondition).FirstOrDefault(b => b.BidId == id);
+                
+            return View(b);
 
+
+        }
 
 
 

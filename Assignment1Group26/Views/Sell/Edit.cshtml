@@ -33,26 +33,23 @@
 
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <label class="input-group-text" for="inputGroupSelect01">Category</label>
+                            <label class="input-group-text" for="inputGroupSelect01" style="margin-right:5px;">Category: </label>
                         </div>
-                        <select asp-for="Category" class="custom-select" id="inputGroupSelect01">
-                            <option selected>Choose...</option>
-                            
-                                <option value="@Model.Category">@Model.Category</option>
-                            
-                        </select>
+                        <div>
+                            <label class="input-group-text">@Model.Category.CategoryName</label>
+
+                        </div>
+                        
                     </div>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <label class="input-group-text" for="inputGroupSelect01">Asset Condition</label>
+                            <label class="input-group-text" for="inputGroupSelect01" style="margin-right:5px;">Asset Condition: </label>
                         </div>
-                        <select asp-for="AssetCondition" class="custom-select" id="inputGroupSelect01">
-                            <option selected>Choose...</option>
-                            @foreach (AssetCondition a in ViewBag.AssetCondition)
-                            {
-                                <option value="@a.AssetConditionId">@a.AssetConditionStatus</option>
-                            }
-                        </select>
+                        <div>
+                            <label class="input-group-text">@Model.AssetCondition.AssetConditionStatus</label>
+
+                        </div>
+                        
                     </div>
                     <div class="input-group mb-3">
                         <div class="custom-file">
