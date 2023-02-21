@@ -1,4 +1,5 @@
 ﻿@model Bid
+@using (Html.BeginForm("Editing", "Sell", FormMethod.Post, new { @enctype = "multipart/form-data" })){
 
 <div class="container">
     <div class="row">
@@ -8,9 +9,11 @@
                 Please Enter The Following Information
             </h2>
             <div class="card my-5">
+                        
 
-                <form class="card-body cardbody-color p-lg-5" asp-controller="Sell" asp-action="Editing" method="post">
-                    <div class="mb-3">
+                    <form class="card-body cardbody-color p-lg-5" asp-controller="Sell" asp-action="Editing"  method="post">
+                        <input hidden readonly asp-for="@Model.BidId">
+                        <div class="mb-3">
                         <input asp-for="BidName" type="text" class="form-control" id="BidName" aria-describedby="emailHelp"
                                placeholder="@Model.BidName">
                     </div>
@@ -70,7 +73,7 @@
 
                     <div class="input-group mb-3">
 
-                        <button type="submit" class="btn btn-primary" style="margin-right:5px;">Edit</button>
+                        <button  type="submit" class="btn btn-primary" style="margin-right:5px;">Edit</button>
                         <button asp-controller="Home" asp-action="Index" class="btn btn-primary">Home</button>
 
                     </div>
@@ -81,3 +84,4 @@
         </div>
     </div>
 </div>
+}
