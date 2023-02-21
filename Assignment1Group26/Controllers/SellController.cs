@@ -20,9 +20,16 @@ namespace Assignment1Group26.Controllers
                 .OrderBy(b => b.BidId).ToList();
             return View(bids);
         }
+        [HttpGet]
         public IActionResult Add()
         {
-            return View();
+            ViewBag.Action = "Add";
+            ViewBag.Categories = _context.categories.OrderBy(c => c.CategoryName).ToList();
+            ViewBag.AssetCondition = _context.AssetConditions.ToList();
+
+            return View(new Bid());
         }
+     
+
     }
 }
