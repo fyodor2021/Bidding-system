@@ -1,15 +1,19 @@
 ﻿@model Bid
+@using (Html.BeginForm("Editing", "Sell", FormMethod.Post, new { @enctype = "multipart/form-data" })){
+
 <div class="container">
     <div class="row">
-        <h1>@ViewBag.Action Bid</h1>
+        <h1>Edit</h1>
         <div class="col-md-6 offset-md-3">
             <h2 class="text-center text-dark mt-5">
                 Please Enter The Following Information
             </h2>
             <div class="card my-5">
+                        
 
-                <form class="card-body cardbody-color p-lg-5" asp-controller="Sell" asp-action="Add">
-                    <div class="mb-3">
+                    <form class="card-body cardbody-color p-lg-5" asp-controller="Sell" asp-action="Editing"  method="post">
+                        <input hidden readonly asp-for="@Model.BidId">
+                        <div class="mb-3">
                         <input asp-for="BidName" type="text" class="form-control" id="BidName" aria-describedby="emailHelp"
                                placeholder="@Model.BidName">
                     </div>
@@ -55,13 +59,21 @@
                         <div class="custom-file">
                             <label class="custom-file-label" for="inputGroupFile04">Upload the item image</label>
                             <input type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
+                            @if (ViewBag.Image != null)
+
+                            {
+                                <p>You have uploaded</p>
+                                <img src="@Url.Content(ViewBag.Image)" width="200px" height="200px" />
+
+                            }
+
                         </div>
 
                     </div>
 
                     <div class="input-group mb-3">
 
-                        <button type="submit" class="btn btn-primary" style="margin-right:5px;">Edit</button>
+                        <button  type="submit" class="btn btn-primary" style="margin-right:5px;">Edit</button>
                         <button asp-controller="Home" asp-action="Index" class="btn btn-primary">Home</button>
 
                     </div>
@@ -72,3 +84,4 @@
         </div>
     </div>
 </div>
+}

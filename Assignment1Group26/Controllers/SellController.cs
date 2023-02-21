@@ -32,6 +32,7 @@ namespace Assignment1Group26.Controllers
         [HttpGet]
         public IActionResult Add()
         {
+            
             ViewBag.Action = "Add";
             ViewBag.Categories = _context.categories.OrderBy(c => c.CategoryName).ToList();
             ViewBag.AssetCondition = _context.assetConditions.ToList();
@@ -41,10 +42,11 @@ namespace Assignment1Group26.Controllers
         [HttpPost]
         public IActionResult Add(Bid b)
         {
+            var userName = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+            var user = _context.clients.FirstOrDefault(c => c.ClientUserName == userName);
+            b.ClientId = user.ClientId;
             string action = (b.BidId == 0) ? "Add" : "Edit";
-
-
-            if (ValidateDate(b))
+            if (!ValidateDate(b) || b.ImagePath == null)
             {
                 if (b.ImageFile != null && b.ImageFile.ContentType.Contains("image"))
                 {
@@ -57,32 +59,33 @@ namespace Assignment1Group26.Controllers
                         b.ImageFile.CopyTo(fs);
                     }
 
+
+                    
                     b.ImagePath = "~/Images/" + uniqueFileName;
-                    var userName = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
-                    var user = _context.clients.FirstOrDefault(c=>c.ClientUserName== userName);
-                    b.ClientId = user.ClientId;
-                    if (ModelState.IsValid)
-					{
-						if (action == "Add")
-						{
+                   
 
 
-							_context.bids.Add(b);
 
-						}
-						else
-						{
-							// Handle edit action
-
-						}
-
-						_context.SaveChanges();
-						return RedirectToAction("Index", "Sell");
-					}
-				}
-                return View(b);
+                }
             }
             
+
+            if (ModelState.IsValid)
+            {
+                if (action == "Add")
+                {
+                    _context.bids.Add(b);
+
+                }  ///if edit
+            else
+            {
+
+               _context.bids.Update(b);
+
+            }
+
+            }
+
             else
             {
                 // Validation failed
@@ -90,9 +93,38 @@ namespace Assignment1Group26.Controllers
                 ViewBag.Action = action;
                 ViewBag.Categories = _context.categories.OrderBy(c => c.CategoryName).ToList();
                 ViewBag.AssetCondition = _context.assetConditions.ToList();
+
+
                 return View(new Bid());
             }
+          
+
+                _context.SaveChanges();
+                return RedirectToAction("Index", "Sell");
+
         }
+       
+        
+     
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            ViewBag.Action = "Edit";
+
+            ViewBag.Categories = _context.categories.OrderBy(c => c.CategoryName).ToList();
+            ViewBag.AssetCondition = _context.assetConditions.ToList();
+            var b = _context.bids
+                .Include(c => c.Category).Include(a => a.AssetCondition).FirstOrDefault(b => b.BidId == id);
+            ViewBag.Image = b.ImagePath;
+            var bb = b.BidId;
+
+            return View("Add",b);
+
+
+        }
+
+
+
 
 
         public bool ValidateDate(Bid b)
@@ -124,17 +156,7 @@ namespace Assignment1Group26.Controllers
 
             return RedirectToAction("Index", "Sell");
         }
-        [HttpGet]
-        public IActionResult Edit(int id) 
-        {
-            var b = _context.bids
-                .Include(c => c.Category).Include(a => a.AssetCondition).FirstOrDefault(b => b.BidId == id);
-                
-            return View(b);
-
-
-        }
-
+       
 
 
     }
