@@ -58,8 +58,10 @@ namespace Assignment1Group26.Controllers
                     }
 
                     b.ImagePath = "~/Images/" + uniqueFileName;
-
-					if (ModelState.IsValid)
+                    var userName = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+                    var user = _context.clients.FirstOrDefault(c=>c.ClientUserName== userName);
+                    b.ClientId = user.ClientId;
+                    if (ModelState.IsValid)
 					{
 						if (action == "Add")
 						{
@@ -108,14 +110,14 @@ namespace Assignment1Group26.Controllers
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            var bid = _context.bids.Include(c => c.Category).Include(a => a.AssetCondition).Include(u => u.Client)
-             .FirstOrDefault(b => b.BidId == id);
+            var bid = _context.bids.FirstOrDefault(b => b.BidId == id);
             return View(bid);
         }
 
         [HttpPost]
-        public IActionResult Delete(Bid b)
+        public IActionResult Deleting(int id)
         {
+            var b = _context.bids.FirstOrDefault(b => b.BidId == id);
            _context.bids.Remove(b);
             _context.SaveChanges();
 

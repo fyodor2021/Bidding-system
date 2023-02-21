@@ -30,7 +30,7 @@
                 <td>@b.BidName</td>
                 <td>@b.BidDescription</td>
                 <td><a asp-route-id="@b.BidId" asp-controller="Sell" asp-action="Edit" class="btn btn-outline-primary">Edit</a>
-                    <a asp-controller="Sell" asp-action="Delete" class="btn btn-outline-danger">Delete</a>
+                    <a asp-route-id="@b.BidId" asp-controller="Sell" asp-action="Delete" class="btn btn-outline-danger">Delete</a>
                 </td>
 
             </tr>
