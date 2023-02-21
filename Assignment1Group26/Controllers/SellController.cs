@@ -125,19 +125,47 @@ namespace Assignment1Group26.Controllers
             return RedirectToAction("Index", "Sell");
         }
         [HttpGet]
-        public IActionResult Edit(int id) 
-        {
-            var b = _context.bids
-                .Include(c => c.Category).Include(a => a.AssetCondition).FirstOrDefault(b => b.BidId == id);
-                
-            return View(b);
-
-
-        }
+        
         public IActionResult Details(int id)
         {
             var b = _context.bids.Include(c=>c.AssetCondition).Include(c => c.Category).FirstOrDefault(b => b.BidId == id);
             return View(b);
+        }
+        [HttpPost]
+        public IActionResult Editing(Bid b)
+        {
+           var bb =  _context.bids.FirstOrDefault(c => c.BidName == b.BidName);
+            _context.bids.Update(bb);
+            _context.SaveChanges();
+            if (ModelState.IsValid)
+            {
+                _context.bids.Update(b);
+                _context.SaveChanges();
+
+
+            }
+            else
+            {
+                var errors = ModelState.Values.SelectMany(v => v.Errors);
+
+            }
+
+            return RedirectToAction("Index", "Sell");
+
+
+
+        }
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var b = _context.bids
+                .Include(c => c.Category).Include(a => a.AssetCondition).FirstOrDefault(b => b.BidId == id);
+            ViewBag.Image = b.ImagePath;
+
+
+            return View(b);
+
+
         }
 
 
