@@ -27,8 +27,9 @@
         {
             <tr>
                 <th class="cell" scope="row" >@b.BidId</th>
-                <td>@b.BidName</td>
-                <td>@b.BidDescription</td>
+                <td class="align-items-center justify-content">@b.BidName</td>
+
+                <td class ="align-items-center justify-content">@b.BidDescription</td>
                 <td><a asp-route-id="@b.BidId" asp-controller="Sell" asp-action="Edit" class="btn btn-outline-primary">Edit</a>
                     <a asp-route-id="@b.BidId" asp-controller="Sell" asp-action="Delete" class="btn btn-outline-danger">Delete</a>
                 </td>

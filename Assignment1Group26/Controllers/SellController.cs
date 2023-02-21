@@ -156,7 +156,25 @@ namespace Assignment1Group26.Controllers
 
             return RedirectToAction("Index", "Sell");
         }
+<<<<<<< HEAD
        
+=======
+        [HttpGet]
+        public IActionResult Edit(int id) 
+        {
+            var b = _context.bids
+                .Include(c => c.Category).Include(a => a.AssetCondition).FirstOrDefault(b => b.BidId == id);
+                
+            return View(b);
+
+
+        }
+        public IActionResult Details(int id)
+        {
+            var b = _context.bids.Include(c=>c.AssetCondition).Include(c => c.Category).FirstOrDefault(b => b.BidId == id);
+            return View(b);
+        }
+>>>>>>> a381c75da75ebed3c9a5e95438ecc243ab420f64
 
 
     }

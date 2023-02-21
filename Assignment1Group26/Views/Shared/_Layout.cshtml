@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="~/Assignment1Group26.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <header>
+    <header >
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
                 <a  class="navbar-brand" asp-controller="Home" asp-action="Index">JoseDore</a>
@@ -33,16 +33,16 @@
                     <div class="navbar-nav ms-auto">
                         @if (base.User.Identity.IsAuthenticated)
                         {
-                            <a class="nav-item nav-link" asp-area="" asp-controller="Home" asp-action="Logout">Logout</a>
+                            <a class="nav-item nav-link border rounded" asp-area="" asp-controller="Home" asp-action="Logout" style="margin-right:5px;">Logout</a>
 
                         }else{
 
-                            <a class="nav-item nav-link" asp-area="" asp-controller="Registration" asp-action="Register">Register</a>
-                            <a class="nav-item nav-link" asp-area="" asp-controller="Login" asp-action="Login">Login</a>
+                            <a class="nav-item nav-link border rounded bg-white" asp-area="" asp-controller="Registration" asp-action="Register" style="margin-right:5px;">Register</a>
+                            <a class="nav-item nav-link border rounded bg-white" asp-area="" asp-controller="Login" asp-action="Login" style="margin-right:5px;">Login</a>
 
                         }
-                            <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-                            <button type="button" class="btn btn-outline-primary">search</button>
+                            <input type="search" class="form-control rounded border" placeholder="Search" aria-label="Search" aria-describedby="search-addon" style="margin-right:5px;"/>
+                            <button type="button" class="btn border bg-white">search</button>
                     </div>
 
                 </div>
@@ -56,7 +56,7 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted bg-light">
         <div class="container">
             <div class="row">
                 <div class="col">
