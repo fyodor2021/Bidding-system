@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
+using System.Security.Cryptography;
 
 namespace Assignment1Group26.Controllers
 {
@@ -21,8 +22,7 @@ namespace Assignment1Group26.Controllers
             var client = _context.clients.FirstOrDefault(c => c.ClientUserName == clientUserName);
             if (client.EmailConfimed == true)
             {
-                var bids = _context.bids.Include(c => c.Category).Include(a => a.AssetCondition).Include(u => u.Client)
-                .OrderBy(b => b.BidId).ToList();
+                var bids = _context.bids.ToList();
                 return View(bids);
             }
             return View("../Email/EmailVerifyPage");
@@ -36,7 +36,17 @@ namespace Assignment1Group26.Controllers
 
             return View(new Bid());
         }
-     
+        
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var bid = _context.bids.FirstOrDefault(c => c.BidId == id);
+            
+            return View(bid);
+        }
+        
+
+
 
     }
 }

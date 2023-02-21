@@ -7,6 +7,6 @@ namespace Assignment1Group26.Models
         [Key]
         public int AssetConditionId { get; set; }
         
-        public string AssetConditionName { get; set; }
+        public string AssetConditionStatus { get; set; }
     }
 }

@@ -151,7 +151,46 @@ namespace Assignment1Group26.Models
 
 
               );
+            modelBuilder.Entity<Category>().HasData(
 
+                  new Category
+                  {
+                      
+                      CategoryId = 1,
+                      CategoryName= "Clothes"
+                      
+
+                  },
+
+                  new Category
+                  {
+                      CategoryId = 1,
+                      CategoryName = "Clothes"
+                  }
+
+
+
+              );
+            modelBuilder.Entity<AssetCondition>().HasData(
+
+                 new AssetCondition
+                 {
+
+                     AssetConditionId = 1,
+                     AssetConditionStatus = "Lightly Used"
+
+
+                 },
+
+                 new AssetCondition
+                 {
+                     AssetConditionId = 1,
+                     AssetConditionStatus = "Brand New"
+                 }
+
+
+
+             );
 
 
 

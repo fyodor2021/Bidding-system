@@ -11,64 +11,64 @@
                 <form class="card-body cardbody-color p-lg-5" asp-controller="Sell" asp-action="Add">
                     <div class="mb-3">
                         <input asp-for="BidName" type="text" class="form-control" id="BidName" aria-describedby="emailHelp"
-                               placeholder="Bid Name">
+                               placeholder="@Model.BidName">
                     </div>
                     <div class="mb-3">
                         <input asp-for="BidDescription" type="text" class="form-control" id="BidDescription" aria-describedby="emailHelp"
-                               placeholder="Bid Description">
+                               placeholder="@Model.BidDescription">
                     </div>
                     <div class="mb-3">
                         <input asp-for="BidCost" type="text" class="form-control" id="BidCost" aria-describedby="emailHelp"
-                               placeholder="Bid Cost">
+                               placeholder="@Model.BidCost">
                     </div>
                     <div class="mb-3">
                         <label asp-for="BidStartDate">Bid Start Date</label>
                         <input asp-for="BidStartDate" type="date" class="form-control" id="Username" aria-describedby="emailHelp"
-                               placeholder="Bid Start Date">
+                               placeholder="@Model.BidStartDate">
                     </div>
                     <div class="mb-3">
                         <label asp-for="BidEndDate">Bid End Date</label>
-                        <input asp-for="BidEndDate" type="date" class="form-control" id="password" placeholder="Bid Start Date">
+                        <input asp-for="BidEndDate" type="date" class="form-control" id="password" placeholder="@Model.BidEndDate">
                     </div>
-                
+
                     <div class="input-group mb-3">
-                     <div class="input-group-prepend">
-                    <label class="input-group-text" for="inputGroupSelect01">Category</label>
-                      </div>
-                      <select asp-for="Category" class="custom-select" id="inputGroupSelect01">
-                        <option selected>Choose...</option>
-                        @foreach (Category c in ViewBag.Categories)
-                        {
-                              <option value="@c.CategoryId">@c.CategoryName</option>
-                        }
-                      </select>
-                     </div>
-                     <div class="input-group mb-3">
-                         <div class="input-group-prepend">
-                        <label class="input-group-text" for="inputGroupSelect01">Asset Condition</label>
-                          </div>
-                          <select asp-for="AssetCondition" class="custom-select" id="inputGroupSelect01">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="inputGroupSelect01">Category</label>
+                        </div>
+                        <select asp-for="Category" class="custom-select" id="inputGroupSelect01">
+                            <option selected>Choose...</option>
+                            @foreach (Category c in ViewBag.Categories)
+                            {
+                                <option value="@c.CategoryId">@c.CategoryName</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="inputGroupSelect01">Asset Condition</label>
+                        </div>
+                        <select asp-for="AssetCondition" class="custom-select" id="inputGroupSelect01">
                             <option selected>Choose...</option>
                             @foreach (AssetCondition a in ViewBag.AssetCondition)
                             {
-                                  <option value="@a.AssetConditionId">@a.AssetConditionName</option>
+                                <option value="@a.AssetConditionId">@a.AssetConditionName</option>
                             }
-                          </select>
-                       </div>
+                        </select>
+                    </div>
                     <div class="input-group mb-3">
                         <div class="custom-file">
                             <label class="custom-file-label" for="inputGroupFile04">Upload the item image</label>
                             <input type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
                         </div>
 
-                      </div>
+                    </div>
 
                     <div class="input-group mb-3">
-                           
-                       <button type="submit" class="btn btn-primary" style="margin-right:5px;">Add</button>
+
+                        <button type="submit" class="btn btn-primary" style="margin-right:5px;">Edit</button>
                         <button asp-controller="Home" asp-action="Index" class="btn btn-primary">Home</button>
 
-                       </div>
+                    </div>
 
                 </form>
             </div>
