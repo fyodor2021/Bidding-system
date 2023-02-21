@@ -37,10 +37,9 @@
                         </div>
                         <select asp-for="Category" class="custom-select" id="inputGroupSelect01">
                             <option selected>Choose...</option>
-                            @foreach (Category c in ViewBag.Categories)
-                            {
-                                <option value="@c.CategoryId">@c.CategoryName</option>
-                            }
+                            
+                                <option value="@Model.Category">@Model.Category</option>
+                            
                         </select>
                     </div>
                     <div class="input-group mb-3">
