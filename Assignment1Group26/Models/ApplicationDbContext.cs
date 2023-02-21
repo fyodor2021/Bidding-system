@@ -24,9 +24,9 @@ namespace Assignment1Group26.Models
 
 
             modelBuilder.Entity<AssetCondition>().HasData(
-                    new AssetCondition { AssetConditionId = 1, AssetConditionName = "New" },
-                    new AssetCondition { AssetConditionId = 2, AssetConditionName = "Lightly Used" },
-                    new AssetCondition { AssetConditionId = 3, AssetConditionName = "Used" }
+                    new AssetCondition { AssetConditionId = 1, AssetConditionStatus = "New" },
+                    new AssetCondition { AssetConditionId = 2, AssetConditionStatus = "Lightly Used" },
+                    new AssetCondition { AssetConditionId = 3, AssetConditionStatus = "Used" }
 
                 );
 
