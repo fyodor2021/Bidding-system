@@ -5,7 +5,7 @@
 @foreach (Bid b in Model)
 {
     <div class="card" style="width: 18rem; display:inline-block;">
-        <img class="card-img-top" src="~/Images/zara_crop_knit.jpg" alt="Card image cap">
+        <img class="card-img-top" src="@Url.Content(b.ImagePath)" alt="Card image cap" hight="300" width="300">
         <div class="card-body">
         <h5 class="card-title">@b.BidName</h5>
         <p class="card-text">@b.BidCost</p>
