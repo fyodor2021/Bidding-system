@@ -5,7 +5,9 @@
 @foreach (Bid b in Model)
 {
     <div class="card" style="width: 18rem; display:inline-block;">
-        <img class="card-img-top" src="@Url.Content(b.ImagePath)" alt="Card image cap" hight="300" width="300">
+        <a asp-controller="Sell" asp-action="Details" asp-route-id="@b.BidId">
+            <img  class="card-img-top" src="@Url.Content(b.ImagePath)" alt="Card image cap" hight="300" width="300">
+            </a>
         <div class="card-body">
         <h5 class="card-title">@b.BidName</h5>
         <p class="card-text">@b.BidCost</p>
