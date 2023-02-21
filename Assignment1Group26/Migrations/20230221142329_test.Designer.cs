@@ -4,6 +4,7 @@ using Assignment1Group26.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Assignment1Group26.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230221142329_test")]
+    partial class test
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,7 +32,7 @@ namespace Assignment1Group26.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AssetConditionId"), 1L, 1);
 
-                    b.Property<string>("AssetConditionName")
+                    b.Property<string>("AssetConditionStatus")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -42,17 +44,17 @@ namespace Assignment1Group26.Migrations
                         new
                         {
                             AssetConditionId = 1,
-                            AssetConditionName = "New"
+                            AssetConditionStatus = "New"
                         },
                         new
                         {
                             AssetConditionId = 2,
-                            AssetConditionName = "Lightly Used"
+                            AssetConditionStatus = "Lightly Used"
                         },
                         new
                         {
                             AssetConditionId = 3,
-                            AssetConditionName = "Used"
+                            AssetConditionStatus = "Used"
                         });
                 });
 
@@ -103,6 +105,92 @@ namespace Assignment1Group26.Migrations
                     b.HasIndex("ClientId");
 
                     b.ToTable("bids");
+
+                    b.HasData(
+                        new
+                        {
+                            BidId = 1,
+                            AssetConditionId = 1,
+                            BidCost = 20,
+                            BidDescription = "Long sleeve turtleneck sweater",
+                            BidEndDate = new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            BidName = "Zara CROP KNIT TURTLENECK SWEATER",
+                            BidStartDate = new DateTime(2023, 2, 21, 9, 23, 29, 139, DateTimeKind.Local).AddTicks(9020),
+                            CategoryId = 1,
+                            ClientId = 1
+                        },
+                        new
+                        {
+                            BidId = 2,
+                            AssetConditionId = 1,
+                            BidCost = 20,
+                            BidDescription = "Long sleeve turtleneck sweater",
+                            BidEndDate = new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            BidName = "Zara CROP KNIT TURTLENECK SWEATER",
+                            BidStartDate = new DateTime(2023, 2, 21, 9, 23, 29, 139, DateTimeKind.Local).AddTicks(9025),
+                            CategoryId = 1,
+                            ClientId = 1
+                        },
+                        new
+                        {
+                            BidId = 3,
+                            AssetConditionId = 1,
+                            BidCost = 20,
+                            BidDescription = "Long sleeve turtleneck sweater",
+                            BidEndDate = new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            BidName = "Zara CROP KNIT TURTLENECK SWEATER",
+                            BidStartDate = new DateTime(2023, 2, 21, 9, 23, 29, 139, DateTimeKind.Local).AddTicks(9028),
+                            CategoryId = 1,
+                            ClientId = 2
+                        },
+                        new
+                        {
+                            BidId = 4,
+                            AssetConditionId = 1,
+                            BidCost = 20,
+                            BidDescription = "Long sleeve turtleneck sweater",
+                            BidEndDate = new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            BidName = "Zara CROP KNIT TURTLENECK SWEATER",
+                            BidStartDate = new DateTime(2023, 2, 21, 9, 23, 29, 139, DateTimeKind.Local).AddTicks(9031),
+                            CategoryId = 1,
+                            ClientId = 1
+                        },
+                        new
+                        {
+                            BidId = 5,
+                            AssetConditionId = 1,
+                            BidCost = 20,
+                            BidDescription = "Long sleeve turtleneck sweater",
+                            BidEndDate = new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            BidName = "Zara CROP KNIT TURTLENECK SWEATER",
+                            BidStartDate = new DateTime(2023, 2, 21, 9, 23, 29, 139, DateTimeKind.Local).AddTicks(9033),
+                            CategoryId = 1,
+                            ClientId = 1
+                        },
+                        new
+                        {
+                            BidId = 6,
+                            AssetConditionId = 1,
+                            BidCost = 20,
+                            BidDescription = "Long sleeve turtleneck sweater",
+                            BidEndDate = new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            BidName = "Zara CROP KNIT TURTLENECK SWEATER",
+                            BidStartDate = new DateTime(2023, 2, 21, 9, 23, 29, 139, DateTimeKind.Local).AddTicks(9036),
+                            CategoryId = 1,
+                            ClientId = 1
+                        },
+                        new
+                        {
+                            BidId = 7,
+                            AssetConditionId = 1,
+                            BidCost = 20,
+                            BidDescription = "Long sleeve turtleneck sweater",
+                            BidEndDate = new DateTime(2023, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            BidName = "Zara CROP KNIT TURTLENECK SWEATER",
+                            BidStartDate = new DateTime(2023, 2, 21, 9, 23, 29, 139, DateTimeKind.Local).AddTicks(9038),
+                            CategoryId = 1,
+                            ClientId = 2
+                        });
                 });
 
             modelBuilder.Entity("Assignment1Group26.Models.Category", b =>

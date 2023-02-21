@@ -1,6 +1,6 @@
 ﻿@model Bid
 
-<form asp-controller="Sell" asp-action="Delete" method="post">
+<form asp-route-id="@Model.BidId" asp-controller="Sell" asp-action="Deleting" method="post">
 <p>Would you like to delete @Model.BidName</p>
 <button type="submit" class="btn btn-primary btn-sm">Yes</button>
 <button type="submit" class="btn btn-secondary btn-sm">No</button>

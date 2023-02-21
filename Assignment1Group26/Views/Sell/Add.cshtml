@@ -73,7 +73,7 @@
                                 <option selected>Choose...</option>
                                 @foreach (AssetCondition a in ViewBag.AssetCondition)
                                 {
-                                    <option value="@a.AssetConditionId">@a.AssetConditionName</option>
+                                    <option value="@a.AssetConditionId">@a.AssetConditionStatus</option>
                                 }
                             </select>
                         </div>
@@ -94,7 +94,9 @@
 
                     <div class="input-group mb-3">
                            
-                       <button type="submit" class="btn btn-primary">Add</button>
+                       <button type="submit" class="btn btn-primary" style="margin-right:5px;">Add</button>
+                        <button asp-controller="Home" asp-action="Index" class="btn btn-primary">Home</button>
+
                        </div>
 
                 </form>

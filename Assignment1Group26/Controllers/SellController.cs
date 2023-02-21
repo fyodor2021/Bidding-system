@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
+using System.Security.Cryptography;
 
 namespace Assignment1Group26.Controllers
 {
@@ -23,8 +24,7 @@ namespace Assignment1Group26.Controllers
             var client = _context.clients.FirstOrDefault(c => c.ClientUserName == clientUserName);
             if (client.EmailConfimed == true)
             {
-                var bids = _context.bids.Include(c => c.Category).Include(a => a.AssetCondition).Include(u => u.Client)
-                .OrderBy(b => b.BidId).ToList();
+                var bids = _context.bids.ToList();
                 return View(bids);
             }
             return View("../Email/EmailVerifyPage");
@@ -58,8 +58,10 @@ namespace Assignment1Group26.Controllers
                     }
 
                     b.ImagePath = "~/Images/" + uniqueFileName;
-
-					if (ModelState.IsValid)
+                    var userName = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+                    var user = _context.clients.FirstOrDefault(c=>c.ClientUserName== userName);
+                    b.ClientId = user.ClientId;
+                    if (ModelState.IsValid)
 					{
 						if (action == "Add")
 						{
@@ -71,6 +73,7 @@ namespace Assignment1Group26.Controllers
 						else
 						{
 							// Handle edit action
+
 						}
 
 						_context.SaveChanges();
@@ -107,20 +110,31 @@ namespace Assignment1Group26.Controllers
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            var bid = _context.bids.Include(c => c.Category).Include(a => a.AssetCondition).Include(u => u.Client)
-             .FirstOrDefault(b => b.BidId == id);
+            var bid = _context.bids.FirstOrDefault(b => b.BidId == id);
             return View(bid);
         }
 
         [HttpPost]
-        public IActionResult Delete(Bid b)
+        public IActionResult Deleting(int id)
         {
+            var b = _context.bids.FirstOrDefault(b => b.BidId == id);
            _context.bids.Remove(b);
             _context.SaveChanges();
 
 
             return RedirectToAction("Index", "Sell");
         }
+        [HttpGet]
+        public IActionResult Edit(int id) 
+        {
+            var b = _context.bids
+                .Include(c => c.Category).Include(a => a.AssetCondition).FirstOrDefault(b => b.BidId == id);
+                
+            return View(b);
+
+
+        }
+
 
 
     }

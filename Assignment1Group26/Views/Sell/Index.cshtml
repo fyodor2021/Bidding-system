@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<Bid>
 <div class="container">
     <div class="row">
         <div class="col">
@@ -13,19 +13,27 @@
         </div>
     </div>
 </div>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Category</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(Bid b in Model)
+        {
+            <tr>
+                <th class="cell" scope="row" >@b.BidId</th>
+                <td>@b.BidName</td>
+                <td>@b.BidDescription</td>
+                <td><a asp-route-id="@b.BidId" asp-controller="Sell" asp-action="Edit" class="btn btn-outline-primary">Edit</a>
+                    <a asp-route-id="@b.BidId" asp-controller="Sell" asp-action="Delete" class="btn btn-outline-danger">Delete</a>
+                </td>
 
-<div class="container">
-    <div class="row" style="border-bottom:1px;">
-        <div class="col">
-         <span>item name</span>
-         </div>
-        <div class="col" style="border-right:1px;">
-            <a class="justify-content-end" asp-controller="Sell" asp-action="" >Edit</a>
-            <a class="justify-content-end" asp-controller="Sell" asp-action="" >Delete</a>
-         </div>
-        
-    </div>
-
-</div>
-
-
+            </tr>
+    }
+    </tbody>
+</table>

@@ -24,9 +24,9 @@ namespace Assignment1Group26.Models
 
 
             modelBuilder.Entity<AssetCondition>().HasData(
-                    new AssetCondition { AssetConditionId = 1, AssetConditionName = "New" },
-                    new AssetCondition { AssetConditionId = 2, AssetConditionName = "Lightly Used" },
-                    new AssetCondition { AssetConditionId = 3, AssetConditionName = "Used" }
+                    new AssetCondition { AssetConditionId = 1, AssetConditionStatus = "New" },
+                    new AssetCondition { AssetConditionId = 2, AssetConditionStatus = "Lightly Used" },
+                    new AssetCondition { AssetConditionId = 3, AssetConditionStatus = "Used" }
 
                 );
 
@@ -56,6 +56,103 @@ namespace Assignment1Group26.Models
 
 
               );
+            modelBuilder.Entity<Bid>().HasData(
+
+                     new Bid
+                     {
+                         BidId = 1,
+                         BidName = "Zara CROP KNIT TURTLENECK SWEATER",
+                         BidDescription = "Long sleeve turtleneck sweater",
+                         BidCost = 20,
+                         BidStartDate = DateTime.Now,
+                         BidEndDate = new DateTime(2023, 5, 16),
+                         AssetConditionId = 1,
+                         CategoryId = 1,
+                         ClientId = 1
+
+
+                     },
+                     new Bid
+                     {
+                         BidId = 2,
+                         BidName = "Zara CROP KNIT TURTLENECK SWEATER",
+                         BidDescription = "Long sleeve turtleneck sweater",
+                         BidCost = 20,
+                         BidStartDate = DateTime.Now,
+                         BidEndDate = new DateTime(2023, 5, 16),
+                         AssetConditionId = 1,
+                         CategoryId = 1,
+                         ClientId = 1
+
+                     },
+                     new Bid
+                     {
+                         BidId = 3,
+                         BidName = "Zara CROP KNIT TURTLENECK SWEATER",
+                         BidDescription = "Long sleeve turtleneck sweater",
+                         BidCost = 20,
+                         BidStartDate = DateTime.Now,
+                         BidEndDate = new DateTime(2023, 5, 16),
+                         AssetConditionId = 1,
+                         CategoryId = 1,
+                         ClientId = 2
+
+                     },
+                     new Bid
+                     {
+                         BidId = 4,
+                         BidName = "Zara CROP KNIT TURTLENECK SWEATER",
+                         BidDescription = "Long sleeve turtleneck sweater",
+                         BidCost = 20,
+                         BidStartDate = DateTime.Now,
+                         BidEndDate = new DateTime(2023, 5, 16),
+                         AssetConditionId = 1,
+                         CategoryId = 1,
+                         ClientId = 1
+
+                     },
+                     new Bid
+                     {
+                         BidId = 5,
+                         BidName = "Zara CROP KNIT TURTLENECK SWEATER",
+                         BidDescription = "Long sleeve turtleneck sweater",
+                         BidCost = 20,
+                         BidStartDate = DateTime.Now,
+                         BidEndDate = new DateTime(2023, 5, 16),
+                         AssetConditionId = 1,
+                         CategoryId = 1,
+                         ClientId = 1
+
+                     },
+                     new Bid
+                     {
+                         BidId = 6,
+                         BidName = "Zara CROP KNIT TURTLENECK SWEATER",
+                         BidDescription = "Long sleeve turtleneck sweater",
+                         BidCost = 20,
+                         BidStartDate = DateTime.Now,
+                         BidEndDate = new DateTime(2023, 5, 16),
+                         AssetConditionId = 1,
+                         CategoryId = 1,
+                         ClientId = 1
+
+                     },
+                     new Bid
+                     {
+                         BidId = 7,
+                         BidName = "Zara CROP KNIT TURTLENECK SWEATER",
+                         BidDescription = "Long sleeve turtleneck sweater",
+                         BidCost = 20,
+                         BidStartDate = DateTime.Now,
+                         BidEndDate = new DateTime(2023, 5, 16),
+                         AssetConditionId = 1,
+                         CategoryId = 1,
+                         ClientId = 2
+                     }
+
+
+
+                 );
 
 
 
