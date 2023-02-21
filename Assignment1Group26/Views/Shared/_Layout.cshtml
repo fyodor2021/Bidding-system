@@ -19,8 +19,16 @@
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav">
                         <a class="nav-item nav-link active" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        <a class="nav-item nav-link" asp-area="" asp-controller="Profile" asp-action="Index">Profile</a>
+                        @{
+
+                            var currentController = ViewContext.RouteData.Values["controller"].ToString();
+                        }
+                        @if(currentController != "Registration" && currentController != "Login" )
+                        {
+                            <a class="nav-item nav-link" asp-area="" asp-controller="Profile" asp-action="Index">Profile</a>
                         <a class="nav-item nav-link" asp-area="" asp-controller="Sell" asp-action="Index">Sell</a>
+                        }
+                        
                     </div>
                     <div class="navbar-nav ms-auto">
                         @if (base.User.Identity.IsAuthenticated)
@@ -28,6 +36,7 @@
                             <a class="nav-item nav-link" asp-area="" asp-controller="Home" asp-action="Logout">Logout</a>
 
                         }else{
+
                             <a class="nav-item nav-link" asp-area="" asp-controller="Registration" asp-action="Register">Register</a>
                             <a class="nav-item nav-link" asp-area="" asp-controller="Login" asp-action="Login">Login</a>
 

@@ -78,7 +78,7 @@ namespace Assignment1Group26.Controllers
         }
 
         [HttpPost]
-        public async Task SendEmail(Client c)
+        public async Task<IActionResult> SendEmail(Client c)
         {
             string receiver;
             if(c.ClientUserName != null)
@@ -98,6 +98,7 @@ namespace Assignment1Group26.Controllers
             await _emailSender.SendEmailAsync(receiver, subject, message);
             //var client = _context.clients.FirstOrDefault(c=> c.ClientUserName == receiver);
             //await ValidateToken(client.VerficationToken);
+            return View("../Email/EmailVerifyPage");
         }
         [HttpGet]
         public async Task<IActionResult> ValidateToken(String token)
