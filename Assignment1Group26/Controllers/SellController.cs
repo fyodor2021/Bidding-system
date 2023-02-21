@@ -16,11 +16,7 @@ namespace Assignment1Group26.Controllers
             _context = context;
             this.webHostEnvironment = webHostEnvironment;
         }
-<<<<<<< HEAD
 
-=======
-        
->>>>>>> 385fecc0136964863d8c74c687219cc2a3e7fd54
         public IActionResult Index()
         {
             var clientUserName = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
