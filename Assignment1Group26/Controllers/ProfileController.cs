@@ -16,15 +16,24 @@ namespace Assignment1Group26.Controllers
         }
         public IActionResult Index()
         {
+            
             var clientUserName = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
-            var clients = _context.clients.ToList();
-            foreach (Client c in clients)
+            var client = _context.clients.FirstOrDefault(c => c.ClientUserName == clientUserName);
+            if (client != null)
             {
-                if(c.ClientUserName == clientUserName)
+                if (client.EmailConfimed == true)
                 {
-                    return View(c);
+                    return View(client);
+
+                }
+                else
+                {
+                    return View("../Email/EmailVerifyPage");
                 }
             }
+
+
+
             return RedirectToAction("Login", "Login");
         }
         

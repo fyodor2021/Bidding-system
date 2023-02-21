@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace Assignment1Group26.Controllers
 {
@@ -15,13 +16,22 @@ namespace Assignment1Group26.Controllers
             _context = context;
             this.webHostEnvironment = webHostEnvironment;
         }
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> 385fecc0136964863d8c74c687219cc2a3e7fd54
         public IActionResult Index()
         {
-
-            var bids = _context.bids.Include(c => c.Category).Include(a => a.AssetCondition).Include(u => u.Client)
+            var clientUserName = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+            var client = _context.clients.FirstOrDefault(c => c.ClientUserName == clientUserName);
+            if (client.EmailConfimed == true)
+            {
+                var bids = _context.bids.Include(c => c.Category).Include(a => a.AssetCondition).Include(u => u.Client)
                 .OrderBy(b => b.BidId).ToList();
-            return View(bids);
+                return View(bids);
+            }
+            return View("../Email/EmailVerifyPage");
         }
         [HttpGet]
         public IActionResult Add()

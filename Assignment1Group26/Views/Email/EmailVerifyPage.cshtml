@@ -1,0 +1,6 @@
+﻿@model Client
+<h2>Please Verify Your Email To Enter This Page</h2>
+@using (Html.BeginForm("SendEmail", "Registration", FormMethod.Post))
+{
+    <input type="submit" value="submit" name="submit" />
+}
