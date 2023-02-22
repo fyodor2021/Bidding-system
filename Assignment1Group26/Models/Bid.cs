@@ -102,10 +102,7 @@ namespace Assignment1Group26.Models
                 {
                     return new ValidationResult("Bid end date must be greater than bid start date.");
                 }
-                if (bid.BidStartDate == bid.BidEndDate) {
-                    return new ValidationResult("Bid Start date must be greater than Today's");
-
-                }
+               
 
                 return ValidationResult.Success;
             }

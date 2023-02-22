@@ -39,7 +39,6 @@
                                placeholder="Bid Start Date">
                     </div>
                     <div class="mb-3">
-                            <p style="color:red">@Html.ValidationMessageFor(b=>b.BidEndDate)  </p>
                             @if (ViewData["ValidationMessage"] != null)
                             {
                                 <p style="color:red;">@ViewData["ValidationMessage"]</p>
