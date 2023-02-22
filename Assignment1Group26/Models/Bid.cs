@@ -13,12 +13,13 @@ namespace Assignment1Group26.Models
         [Required(ErrorMessage = "Please enter a valid discription")]
         public string? BidDescription { get; set; }
         [Required(ErrorMessage = "Please enter a valid cost")]
-        public int? BidCost { get; set; }
-        
+        public double? BidCost { get; set; }
+        [ValidateDate]
+
         public DateTime BidStartDate { get; set; } = DateTime.Now;
         
 
-        [Required(ErrorMessage = "Date must be after or equal to current date")]
+        [ValidateDate]
         public DateTime BidEndDate { get; set; }
 
         [Range(1, 4, ErrorMessage = "Please select a valid condition")]
@@ -35,8 +36,68 @@ namespace Assignment1Group26.Models
         public string? ImagePath { get; set; }
 
         [NotMapped]
-        [Required(ErrorMessage = "Please upload an image")]
+        [ValidateImage]
+
         public IFormFile? ImageFile { get; set; }
 
+
+        public async Task SaveImageAsync(IWebHostEnvironment webHostEnvironment)
+        {
+            if (ImageFile != null && ImageFile.ContentType.Contains("image"))
+            {
+                string ImageUploadedFolder = Path.Combine(webHostEnvironment.WebRootPath, "Images");
+                string uniqueFileName = Guid.NewGuid().ToString() + "_" + ImageFile.FileName;
+                string filepath = Path.Combine(ImageUploadedFolder, uniqueFileName);
+
+                using (var fs = new FileStream(filepath, FileMode.Create))
+                {
+                    await ImageFile.CopyToAsync(fs);
+                }
+
+                ImagePath = "~/Images/" + uniqueFileName;
+            }
+            else if (ImageFile == null)
+            {
+                // If no new file was uploaded but there is a path to an existing image,
+                // assign the existing image path to the ImagePath property.
+                ImagePath = ImagePath;
+            }
+        }
+        public class ValidateImage : ValidationAttribute
+        {
+            protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+            {
+                var bid = (Bid)validationContext.ObjectInstance;
+
+                if ( bid.ImageFile == null || !(bid.ImageFile.ContentType.Contains("image")))
+                {
+
+                    return new ValidationResult("An image file is required.");
+                }
+
+                return ValidationResult.Success;
+            }
+        }
+        public class ValidateDate : ValidationAttribute
+        {
+            protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+            {
+                var bidEndDate = (DateTime)value;
+                var bid = (Bid)validationContext.ObjectInstance;
+
+                if (bidEndDate <= bid.BidStartDate)
+                {
+                    return new ValidationResult("Bid end date must be greater than bid start date.");
+                }
+                if (bid.BidStartDate <= bid.BidEndDate) {
+                    return new ValidationResult("Bid Start date must be greater than Today's");
+
+                }
+
+                return ValidationResult.Success;
+            }
+        }
     }
+
+
 }

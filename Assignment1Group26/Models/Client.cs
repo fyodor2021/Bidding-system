@@ -7,14 +7,16 @@ namespace Assignment1Group26.Models
         [Key]
         public int ClientId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please enter your first name")]
         public string? ClienFirstName { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Please enter your last name")]
         public string? ClienLastName { get; set; }
         [Required]
 
+        [EmailAddress(ErrorMessage = "Invalid email address.")]
         public string? ClientUserName { get; set; }
         [Required]
+        [StringLength(10, MinimumLength = 6, ErrorMessage = "Password must be between 6-10 characters long")]
         public string? ClientPassword { get; set; }
         public bool EmailConfimed { get; set; }
         public string? VerficationToken { get; set; }

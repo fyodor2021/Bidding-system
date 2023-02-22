@@ -33,7 +33,7 @@
                                placeholder="Bid Cost">
                     </div>
                     <div class="mb-3">
-
+                            <p style="color:red">@Html.ValidationMessageFor(b=>b.BidStartDate)  </p>
                         <label asp-for="BidStartDate">Bid Start Date</label>
                         <input asp-for="BidStartDate" type="date" class="form-control" id="Username" aria-describedby="emailHelp"
                                placeholder="Bid Start Date">
@@ -80,35 +80,24 @@
                                 }
                             </select>
                         </div>
+                        <p style="color:red">@Html.ValidationMessageFor(b=>b.ImageFile)  </p>
+                        <div class="input-group mb-3">
+                            <div class="custom-file">
+                                <label class="custom-file-label" for="inputGroupFile04">Upload the item image</label>
+                                <input asp-for="@Model.ImageFile" type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
+                                <input hidden  asp-for="@Model.ImagePath">
 
-                     
-            
-              
-                                @if (ViewBag.Action == "Edit")
+                                @if (ViewBag.Image != null)
+
                                 {
                                     <p>You have uploaded</p>
-                                    <input readonly asp-for="@Model.ImageFile" type="file" name="myFile" value="exist">
-                                    <input readonly asp-for="@Model.ImagePath" >
-                                    <img src="@Url.Content(ViewBag.Image)" width="200px" height="200px" />
+                                    <img src="@Url.Content(ViewBag.Image)" width="100px" height="100px" />
 
-                        }
-                       
-                              <div class="input-group mb-3">
-                                <div class="custom-file">
-                                    <p style="color:red">@Html.ValidationMessageFor(b=>b.ImageFile)  </p>
-
-                                    <label class="custom-file-label" for="inputGroupFile04">Upload the item image</label>
-                                    <input asp-for="@Model.ImageFile" type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
-
-
-
-                                </div>
+                                }
 
                             </div>
-                       
-                                
-                          
 
+                        </div>
                     <div class="input-group mb-3">
 
                             <button type="submit" class="btn btn-primary" style="margin-right:5px;">@ViewBag.Action</button>

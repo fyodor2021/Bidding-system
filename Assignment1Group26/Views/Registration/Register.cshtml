@@ -8,19 +8,25 @@
             </h2>
             <div class="card my-5">
 
+
                 <form class="card-body cardbody-color p-lg-5" asp-controller="Registration" asp-action="RegisterProcess">
+                    <p style="color:red">@Html.ValidationMessageFor(c=>c.ClienFirstName)</p>
                     <div class="mb-3">
                         <input asp-for="ClienFirstName" type="text" class="form-control" id="Username" aria-describedby="emailHelp"
                                placeholder="First Name">
                     </div>
+                    <p style="color:red">@Html.ValidationMessageFor(c=>c.ClienLastName)</p>
+
                     <div class="mb-3">
                         <input asp-for="ClienLastName" type="text" class="form-control" id="Username" aria-describedby="emailHelp"
                                placeholder="Last Name">
                     </div>
+                    <p style="color:red">@Html.ValidationMessageFor(c=>c.ClientUserName)</p>
                     <div class="mb-3">
                         <input asp-for="ClientUserName" type="text" class="form-control" id="Username" aria-describedby="emailHelp"
                                placeholder="Email Address">
                     </div>
+                    <p style="color:red">@Html.ValidationMessageFor(c=>c.ClientPassword)</p>
                     <div class="mb-3">
                         <input asp-for="ClientPassword" type="password" class="form-control" id="password" placeholder="password">
                     </div>

@@ -1,5 +1,6 @@
 ﻿using Assignment1Group26.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
@@ -40,71 +41,42 @@ namespace Assignment1Group26.Controllers
             return View(new Bid());
         }
         [HttpPost]
-        public IActionResult Add(Bid b)
+        public async Task<IActionResult> Add(Bid b)
         {
+            
             var userName = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
             var user = _context.clients.FirstOrDefault(c => c.ClientUserName == userName);
             b.ClientId = user.ClientId;
             string action = (b.BidId == 0) ? "Add" : "Edit";
-            if (!ValidateDate(b) || b.ImagePath == null)
-            {
-                if (b.ImageFile != null && b.ImageFile.ContentType.Contains("image"))
-                {
-                    string ImageUploadedFolder = Path.Combine(webHostEnvironment.WebRootPath, "Images");
-                    string uniqueFileName = Guid.NewGuid().ToString() + "_" + b.ImageFile.FileName;
-                    string filepath = Path.Combine(ImageUploadedFolder, uniqueFileName);
-
-                    using (var fs = new FileStream(filepath, FileMode.Create))
-                    {
-                        b.ImageFile.CopyTo(fs);
-                    }
-
-
-                    
-                    b.ImagePath = "~/Images/" + uniqueFileName;
-                   
-
-
-
-                }
-            }
-            
-
+            await b.SaveImageAsync(webHostEnvironment);
             if (ModelState.IsValid)
             {
                 if (action == "Add")
                 {
                     _context.bids.Add(b);
 
-                }  ///if edit
-            else
-            {
+                } else{
 
-               _context.bids.Update(b);
-
-            }
+                    _context.bids.Update(b);
+                }
 
             }
 
             else
             {
                 // Validation failed
-                var errors = ModelState.Values.SelectMany(v => v.Errors);
                 ViewBag.Action = action;
                 ViewBag.Categories = _context.categories.OrderBy(c => c.CategoryName).ToList();
                 ViewBag.AssetCondition = _context.assetConditions.ToList();
-
+                ViewBag.Image = b.ImagePath;
 
                 return View(new Bid());
             }
-          
 
                 _context.SaveChanges();
                 return RedirectToAction("Index", "Sell");
-
         }
        
-        
      
         [HttpGet]
         public IActionResult Edit(int id)
@@ -120,11 +92,7 @@ namespace Assignment1Group26.Controllers
 
             return View("Add",b);
 
-
         }
-
-
-
 
 
         public bool ValidateDate(Bid b)
@@ -156,25 +124,14 @@ namespace Assignment1Group26.Controllers
 
             return RedirectToAction("Index", "Sell");
         }
-<<<<<<< HEAD
-       
-=======
-        [HttpGet]
-        public IActionResult Edit(int id) 
-        {
-            var b = _context.bids
-                .Include(c => c.Category).Include(a => a.AssetCondition).FirstOrDefault(b => b.BidId == id);
-                
-            return View(b);
 
 
-        }
         public IActionResult Details(int id)
         {
             var b = _context.bids.Include(c=>c.AssetCondition).Include(c => c.Category).FirstOrDefault(b => b.BidId == id);
             return View(b);
         }
->>>>>>> a381c75da75ebed3c9a5e95438ecc243ab420f64
+
 
 
     }
