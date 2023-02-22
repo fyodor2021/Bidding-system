@@ -68,12 +68,25 @@ namespace Assignment1Group26.Models
             protected override ValidationResult IsValid(object value, ValidationContext validationContext)
             {
                 var bid = (Bid)validationContext.ObjectInstance;
+                string action = (bid.BidId == 0) ? "Add" : "Edit";
 
-                if ( bid.ImageFile == null || !(bid.ImageFile.ContentType.Contains("image")))
+                if (action == "Add")
                 {
+                    if (bid.ImageFile == null || !(bid.ImageFile.ContentType.Contains("image")))
+                    {
 
-                    return new ValidationResult("An image file is required.");
+                        return new ValidationResult("An image file is required.");
+                    }
                 }
+                else
+                {
+                    if ((bid.ImagePath != null))
+                    {
+                        return ValidationResult.Success;
+                    }
+                }
+                
+                
 
                 return ValidationResult.Success;
             }
@@ -82,14 +95,14 @@ namespace Assignment1Group26.Models
         {
             protected override ValidationResult IsValid(object value, ValidationContext validationContext)
             {
-                var bidEndDate = (DateTime)value;
                 var bid = (Bid)validationContext.ObjectInstance;
+                var bidEndDate = bid.BidEndDate;
 
-                if (bidEndDate <= bid.BidStartDate)
+                if (bidEndDate < bid.BidStartDate)
                 {
                     return new ValidationResult("Bid end date must be greater than bid start date.");
                 }
-                if (bid.BidStartDate <= bid.BidEndDate) {
+                if (bid.BidStartDate == bid.BidEndDate) {
                     return new ValidationResult("Bid Start date must be greater than Today's");
 
                 }

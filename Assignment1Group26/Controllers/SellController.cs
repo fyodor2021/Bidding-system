@@ -124,7 +124,6 @@ namespace Assignment1Group26.Controllers
 
             return RedirectToAction("Index", "Sell");
         }
-<<<<<<< HEAD
 
 
         public IActionResult Details(int id)
@@ -134,7 +133,6 @@ namespace Assignment1Group26.Controllers
         }
 
 
-=======
 
         [HttpGet]
         
@@ -164,7 +162,6 @@ namespace Assignment1Group26.Controllers
 
         }
         
->>>>>>> 13bed8df14b7c5eec20ea98362beda97e185a4a8
 
     }
 }
