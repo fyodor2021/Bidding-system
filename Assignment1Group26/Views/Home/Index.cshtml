@@ -1,17 +1,68 @@
-﻿@model IEnumerable<Bid>
+﻿@model HomeViewModel
 @{
     ViewData["Title"] = "JoseDore";
 }
-@foreach (Bid b in Model)
-{
-    <div class="card" style="width: 18rem; display:inline-block;">
-        <a asp-controller="Sell" asp-action="Details" asp-route-id="@b.BidId">
-            <img  class="card-img-top" src="@Url.Content(b.ImagePath)" alt="Card image cap" hight="300" width="300">
-            </a>
-        <div class="card-body">
-        <h5 class="card-title">@b.BidName</h5>
-        <p class="card-text">@b.BidCost</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+<div style="margin-right:20px">
+    <div class="row py-3">
+        <div class="col-3 order-2" id="sticky-sidebar">
+            <div class="sticky-top">
+
+                <article class="col">
+                    <header class="card-header">
+                        <h6 class="title">Categories </h6>
+                    </header>
+                    <div class="filter-content">
+                        <div class="card-body">
+                            <form>
+                                @foreach(Category c in Model.Categories)
+                                {
+                                    <label class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="">
+                                        <span class="form-check-label">
+                                            @c.CategoryName
+                                        </span>
+                                    </label>
+                                }
+                                <header class="card-header">
+                                    <h6 class="title">Condition</h6>
+                                </header>
+                                @foreach(AssetCondition a in Model.AssetConditions)
+                                {
+                                    <label class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="">
+                                        <span class="form-check-label">
+                                            @a.AssetConditionStatus
+                                        </span>
+                                    </label>
+                                }
+
+
+                            </form>
+
+                        </div>
+                    </div>
+                </article>
+
+
+
+            </div>
+        </div>
+        <div class="col" id="main">
+            @foreach(Bid b in Model.Bids)
+            {
+                <div class="card" style="width: 18rem;display:inline-block;">
+                    <a asp-controller="Details" asp-action="Details" asp-route-id="@b.BidId">
+                        <img class="card-img-top" src="@Url.Content(b.ImagePath)" alt="Card image cap" >
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title">@b.BidName</h5>
+                        <p class="card-text">@b.BidCost</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            }
         </div>
     </div>
-}
+</div>
+
+

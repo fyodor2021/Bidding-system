@@ -31,8 +31,4 @@
     <PackageReference Include="RestSharp" Version="109.0.0-preview.2" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\images\" />
-  </ItemGroup>
-
 </Project>

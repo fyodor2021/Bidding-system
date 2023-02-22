@@ -10,17 +10,33 @@ namespace Assignment1Group26.Controllers
         {
             _context = context;
         }
+        [HttpGet]
         public IActionResult Search(string Search)
         {
             if (!String.IsNullOrEmpty(Search))
             {
-                var items = _context.bids.Where(b => b.BidName.Contains(Search)).ToList();
-                return View("../Home/Index",items);
+                var tables = new HomeViewModel
+                {
+                    
+                    Bids = _context.bids.Where(b => b.BidName.Contains(Search)).ToList(),
+                    Categories = _context.categories.ToList(),
+                    AssetConditions = _context.assetConditions.ToList()
+
+                };
+
+                return View("../Home/Index",tables);
             }
             else
             {
-                var items = _context.bids.ToList();
-                return View("../Home/Index", items);
+                var tables = new HomeViewModel
+                {
+                    Bids = _context.bids.ToList(),
+                    Categories = _context.categories.ToList(),
+                    AssetConditions = _context.assetConditions.ToList()
+
+                };
+
+                return View("../Home/Index", tables);
             }
 
         }

@@ -9,9 +9,9 @@
     <link rel="stylesheet" href="~/Assignment1Group26.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <header >
+    <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
+            <div class="container-fluid" style="margin:0 150px">
                 <a  class="navbar-brand" asp-controller="Home" asp-action="Index">JoseDore</a>
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
@@ -43,7 +43,7 @@
                         }
                         <form asp-controller="Search" asp-action="Search" method="get" class="navbar-nav ms-auto">
                             <input type="search" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="search-addon" style="margin-right:5px;" name="Search" />
-                            <button type="button" class="btn bg-white">search</button>
+                            <button type="submit" class="btn bg-white">search</button>
                         </form>
                             
                     </div>
