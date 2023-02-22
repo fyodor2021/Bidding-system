@@ -9,21 +9,26 @@ namespace Assignment1Group26.Controllers
 {
     public class HomeController : Controller
     {
-        private ApplicationDbContext _Homecontext;
-        public HomeController(ApplicationDbContext ctx)
+        private ApplicationDbContext _context;
+        public HomeController(ApplicationDbContext context)
         {
-            _Homecontext = ctx;
+            _context = context;
         }
         
 
         public IActionResult Index()
         {
+            var tables = new HomeViewModel
+            {
+                Bids = _context.bids.ToList(),
+                Categories = _context.categories.ToList(),
+                AssetConditions= _context.assetConditions.ToList()
+
+            };
+
             
-            var Bids = _Homecontext.bids.Include(c => c.Category)
-                .Include(a => a.AssetCondition).
-                Include(u => u.Client)
-                .OrderBy(b => b.BidId).ToList();
-            return View(Bids);
+            
+            return View(tables);
 
 
 

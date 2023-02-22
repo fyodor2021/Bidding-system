@@ -124,6 +124,7 @@ namespace Assignment1Group26.Controllers
 
             return RedirectToAction("Index", "Sell");
         }
+<<<<<<< HEAD
 
 
         public IActionResult Details(int id)
@@ -133,6 +134,37 @@ namespace Assignment1Group26.Controllers
         }
 
 
+=======
+
+        [HttpGet]
+        
+        
+        [HttpPost]
+        public IActionResult Editing(Bid b)
+        {
+           var bb =  _context.bids.FirstOrDefault(c => c.BidName == b.BidName);
+            _context.bids.Update(bb);
+            _context.SaveChanges();
+            if (ModelState.IsValid)
+            {
+                _context.bids.Update(b);
+                _context.SaveChanges();
+
+
+            }
+            else
+            {
+                var errors = ModelState.Values.SelectMany(v => v.Errors);
+
+            }
+
+            return RedirectToAction("Index", "Sell");
+
+
+
+        }
+        
+>>>>>>> 13bed8df14b7c5eec20ea98362beda97e185a4a8
 
     }
 }
