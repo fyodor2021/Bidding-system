@@ -5,5 +5,6 @@
         public IEnumerable<Bid> Bids { get; set; }
         public IEnumerable<Category> Categories { get; set; }
         public IEnumerable<AssetCondition> AssetConditions { get; set; }
+
     }
 }

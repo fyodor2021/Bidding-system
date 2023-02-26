@@ -8,42 +8,64 @@
             <div class="sticky-top">
 
                 <article class="col">
-                    <header class="card-header">
-                        <h6 class="title">Categories </h6>
-                    </header>
+                  
                     <div class="filter-content">
                         <div class="card-body">
-                            <form>
+
+                            <form asp-controller="SearchController" asp-action="Sort" method="post"></form>
+                            @using(Html.BeginForm("Sort","Search",FormMethod.Post)){
+                                <header class="card-header">
+                                    <h6 class="title">Categories </h6>
+                                </header>
+                                  
                                 @foreach(Category c in Model.Categories)
                                 {
-                                    <label class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="">
-                                        <span class="form-check-label">
-                                            @c.CategoryName
-                                        </span>
-                                    </label>
+                                    <div>
+                                        @Html.RadioButton("selectedCategories", c.CategoryId )
+                                        @c.CategoryName
+                                    </div>
                                 }
+
                                 <header class="card-header">
                                     <h6 class="title">Condition</h6>
                                 </header>
-                                @foreach(AssetCondition a in Model.AssetConditions)
+
+                             
+
+                                @foreach (AssetCondition a in Model.AssetConditions)
                                 {
-                                    <label class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="">
-                                        <span class="form-check-label">
-                                            @a.AssetConditionStatus
-                                        </span>
-                                    </label>
+                                    <div>
+                                        @Html.RadioButton("selectedAsset", a.AssetConditionId)
+                                        @a.AssetConditionStatus
+                                    </div>
                                 }
 
 
-                            </form>
+                            <header class="card-header">
+                                <h6 class="title">Price</h6>
+                            </header>
+
+                           <label class="form-check">
+                                    <input class="form-check-input" type="radio" value="1" name="selectedPriceRange">
+                                    <span class="form-check-label">
+                                        Highest to Lowest
+                                    </span>
+                                </label>
+                                <label class="form-check">
+                                    <input class="form-check-input" type="radio" value="2" name="selectedPriceRange">
+                                    <span class="form-check-label">
+                                        Lowest to Highest
+                                    </span>
+                                </label>
+                        
+
+                          <button type="submit">submit</button>
+
+                            }
 
                         </div>
                     </div>
                 </article>
-
-
             </div>
         </div>
         <div class="col" id="main">

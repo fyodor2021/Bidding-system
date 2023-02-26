@@ -25,7 +25,9 @@ namespace Assignment1Group26.Controllers
             var client = _context.clients.FirstOrDefault(c => c.ClientUserName == clientUserName);
             if (client.EmailConfimed == true)
             {
-                var bids = _context.bids.ToList();
+                int clientId = client.ClientId;
+                var bids = _context.bids.Where(b => b.ClientId == clientId).ToList();
+               
                 return View(bids);
             }
             return View("../Email/EmailVerifyPage");
@@ -43,7 +45,6 @@ namespace Assignment1Group26.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(Bid b)
         {
-            
             var userName = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
             var user = _context.clients.FirstOrDefault(c => c.ClientUserName == userName);
             b.ClientId = user.ClientId;
@@ -95,16 +96,6 @@ namespace Assignment1Group26.Controllers
         }
 
 
-        public bool ValidateDate(Bid b)
-        {
-            var dt = b.BidEndDate;
-            if (dt >= DateTime.Now)
-            {
-                return true;
-            }
-            return false;
-        }
-
 
 
         [HttpGet]
@@ -121,6 +112,10 @@ namespace Assignment1Group26.Controllers
            _context.bids.Remove(b);
             _context.SaveChanges();
 
+            var lastId = _context.bids.Max(b => b.BidId);
+
+
+        
 
             return RedirectToAction("Index", "Sell");
         }
@@ -133,35 +128,7 @@ namespace Assignment1Group26.Controllers
         }
 
 
-
-        [HttpGet]
-        
-        
-        [HttpPost]
-        public IActionResult Editing(Bid b)
-        {
-           var bb =  _context.bids.FirstOrDefault(c => c.BidName == b.BidName);
-            _context.bids.Update(bb);
-            _context.SaveChanges();
-            if (ModelState.IsValid)
-            {
-                _context.bids.Update(b);
-                _context.SaveChanges();
-
-
-            }
-            else
-            {
-                var errors = ModelState.Values.SelectMany(v => v.Errors);
-
-            }
-
-            return RedirectToAction("Index", "Sell");
-
-
-
-        }
-        
+     
 
     }
 }

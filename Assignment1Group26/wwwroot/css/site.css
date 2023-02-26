@@ -7,10 +7,17 @@ html {
     font-size: 16px;
   }
 }
-
+.card-img-top {
+    height: 400px;
+    width: 300px;
+}
+.card-title {
+    height: 50px;
+    width: 200px;
+}
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {

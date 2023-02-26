@@ -8,7 +8,7 @@
         </div>
         <div class="col">
             <h2>
-                <a class="justify-content-end" asp-controller="Sell" asp-action="Add" style="border-right:1px;">Add</a>
+                <a class="justify-content-end" asp-controller="Sell" asp-action="Add"  style="border-right:1px;">Add</a>
             </h2>
         </div>
     </div>
@@ -31,6 +31,7 @@
 
                 <td class ="align-items-center justify-content">@b.BidDescription</td>
                 <td><a asp-route-id="@b.BidId" asp-controller="Sell" asp-action="Edit" class="btn btn-outline-primary">Edit</a>
+                    <a asp-route-id="@b.BidId" asp-controller="Details" asp-action="Details" class="btn btn-outline-primary">Review</a>
                     <a asp-route-id="@b.BidId" asp-controller="Sell" asp-action="Delete" class="btn btn-outline-danger">Delete</a>
                 </td>
 
