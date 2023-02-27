@@ -18,7 +18,7 @@ namespace Assignment1Group26.Models
         [Required]
         [StringLength(10, MinimumLength = 6, ErrorMessage = "Password must be between 6-10 characters long")]
         public string? ClientPassword { get; set; }
-        public bool EmailConfimed { get; set; }
+        public bool EmailConfirmed { get; set; }
         public string? VerficationToken { get; set; }
         public bool keepLoggedIn { get; set; }
     }

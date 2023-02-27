@@ -21,7 +21,7 @@ namespace Assignment1Group26.Controllers
             var client = _context.clients.FirstOrDefault(c => c.ClientUserName == clientUserName);
             if (client != null)
             {
-                if (client.EmailConfimed == true)
+                if (client.EmailConfirmed == true)
                 {
                     return View(client);
 

@@ -23,7 +23,7 @@ namespace Assignment1Group26.Controllers
         {
             var clientUserName = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
             var client = _context.clients.FirstOrDefault(c => c.ClientUserName == clientUserName);
-            if (client.EmailConfimed == true)
+            if (client.EmailConfirmed == true)
             {
                 int clientId = client.ClientId;
                 var bids = _context.bids.Where(b => b.ClientId == clientId).ToList();

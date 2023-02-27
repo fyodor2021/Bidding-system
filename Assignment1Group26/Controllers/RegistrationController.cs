@@ -37,7 +37,7 @@ namespace Assignment1Group26.Controllers
                 if(client == null)
                 {
                     //adding the contact to the database
-                    c.EmailConfimed = false;
+                    c.EmailConfirmed = false;
                     c.VerficationToken = getToken();
                     c.keepLoggedIn = false;
                     _context.clients.Add(c);
@@ -109,7 +109,7 @@ namespace Assignment1Group26.Controllers
 
                var client =  _context.clients.FirstOrDefault(c => c.VerficationToken == token);
                 if(client != null) {
-                    client.EmailConfimed = true;
+                    client.EmailConfirmed = true;
                     _context.SaveChanges();
 
                 }
@@ -120,7 +120,7 @@ namespace Assignment1Group26.Controllers
                 var client = _context.clients.FirstOrDefault(c => c.ClientUserName == clientUserName);
                 if(client != null)
                 {
-                    client.EmailConfimed = true;
+                    client.EmailConfirmed = true;
                     _context.SaveChanges();
                 }
                 

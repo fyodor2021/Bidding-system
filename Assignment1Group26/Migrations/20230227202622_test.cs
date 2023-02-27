@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Assignment1Group26.Migrations
 {
-    public partial class first : Migration
+    public partial class test : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -45,7 +45,7 @@ namespace Assignment1Group26.Migrations
                     ClienLastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ClientUserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ClientPassword = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
-                    EmailConfimed = table.Column<bool>(type: "bit", nullable: false),
+                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
                     VerficationToken = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     keepLoggedIn = table.Column<bool>(type: "bit", nullable: false)
                 },
@@ -115,11 +115,11 @@ namespace Assignment1Group26.Migrations
 
             migrationBuilder.InsertData(
                 table: "clients",
-                columns: new[] { "ClientId", "ClienFirstName", "ClienLastName", "ClientPassword", "ClientUserName", "EmailConfimed", "VerficationToken", "keepLoggedIn" },
+                columns: new[] { "ClientId", "ClienFirstName", "ClienLastName", "ClientPassword", "ClientUserName", "EmailConfirmed", "VerficationToken", "keepLoggedIn" },
                 values: new object[,]
                 {
-                    { 1, "John", "Smith", "password", "john.smith@gmail.com", false, null, false },
-                    { 2, "vedoor", "Barakat", "password", "Vendor.Barakat@gmail.com", false, null, false }
+                    { 1, "John", "Smith", "password", "john.smith@gmail.com", true, null, false },
+                    { 2, "vedoor", "Barakat", "password", "Vendor.Barakat@gmail.com", true, null, false }
                 });
 
             migrationBuilder.InsertData(
@@ -127,16 +127,21 @@ namespace Assignment1Group26.Migrations
                 columns: new[] { "BidId", "AssetConditionId", "BidCost", "BidDescription", "BidEndDate", "BidName", "BidStartDate", "CategoryId", "ClientId", "ImagePath" },
                 values: new object[,]
                 {
-                    { 1, 1, 59.990000000000002, "High heel slingback shoes. Tied closure. Pointed toe.", new DateTime(2023, 2, 26, 2, 53, 45, 527, DateTimeKind.Local).AddTicks(3710), "LACE UP TIED HIGH HEELED SHOES", new DateTime(2023, 2, 26, 2, 53, 45, 527, DateTimeKind.Local).AddTicks(3708), 1, 1, "~/Images/shoes.jpg" },
-                    { 2, 2, 45.899999999999999, "Mini city bag. Handle and removable, adjustable crossbody strap. Magnetic closure.", new DateTime(2023, 2, 26, 2, 53, 45, 527, DateTimeKind.Local).AddTicks(3720), "MINI CITY BAG", new DateTime(2023, 2, 26, 2, 53, 45, 527, DateTimeKind.Local).AddTicks(3718), 1, 1, "~/Images/pinkBag.jpg" },
-                    { 3, 1, 69.989999999999995, "Mid-rise jeans with front pockets .", new DateTime(2023, 2, 26, 2, 53, 45, 527, DateTimeKind.Local).AddTicks(3725), "WOMEN'S BELT LOOP CARGO TRF JEANS", new DateTime(2023, 2, 26, 2, 53, 45, 527, DateTimeKind.Local).AddTicks(3724), 1, 1, "~/Images/jeans.jpg" },
-                    { 4, 1, 39.990000000000002, "Openwork knit top with round neck and short sleeves.", new DateTime(2023, 2, 26, 2, 53, 45, 527, DateTimeKind.Local).AddTicks(3730), "RUFFLED KNIT TOP", new DateTime(2023, 2, 26, 2, 53, 45, 527, DateTimeKind.Local).AddTicks(3728), 1, 1, "~/Images/knitShirt.jpg" },
-                    { 5, 3, 29.989999999999998, "Long sleeves. Rib trim.", new DateTime(2023, 2, 26, 2, 53, 45, 527, DateTimeKind.Local).AddTicks(3734), "ZIP COLLAR SWEATSHIRT", new DateTime(2023, 2, 26, 2, 53, 45, 527, DateTimeKind.Local).AddTicks(3733), 1, 1, "~/Images/menBlueHoddie.jpg" },
-                    { 6, 1, 129.99000000000001, "Coat made of wool blend fabric.", new DateTime(2023, 2, 26, 2, 53, 45, 527, DateTimeKind.Local).AddTicks(3739), "WOOL BLEND COAT", new DateTime(2023, 2, 26, 2, 53, 45, 527, DateTimeKind.Local).AddTicks(3738), 1, 1, "~/Images/coat.jpg" },
-                    { 7, 2, 129.99000000000001, "Sneakers.Slightly chunky soles.", new DateTime(2023, 2, 26, 2, 53, 45, 527, DateTimeKind.Local).AddTicks(3744), "RUNNING SHOES", new DateTime(2023, 2, 26, 2, 53, 45, 527, DateTimeKind.Local).AddTicks(3743), 1, 1, "~/Images/runningShoes.jpg" },
-                    { 8, 3, 19.989999999999998, "Cotton sweater vest. Sleeveless. V-neckline. Rib trim.", new DateTime(2023, 2, 26, 2, 53, 45, 527, DateTimeKind.Local).AddTicks(3749), "TEXTURED KNIT VEST", new DateTime(2023, 2, 26, 2, 53, 45, 527, DateTimeKind.Local).AddTicks(3747), 1, 1, "~/Images/vest.jpg" },
-                    { 9, 1, 29.989999999999998, "Girl short sleeves dress with elastic cuffs.", new DateTime(2023, 2, 26, 2, 53, 45, 527, DateTimeKind.Local).AddTicks(3754), "ASSYMETRIC POPLIN DRESS", new DateTime(2023, 2, 26, 2, 53, 45, 527, DateTimeKind.Local).AddTicks(3752), 1, 1, "~/Images/girlDress.jpg" },
-                    { 10, 3, 19.989999999999998, "Girl short sleeves dress with elastic cuffs.", new DateTime(2023, 2, 26, 2, 53, 45, 527, DateTimeKind.Local).AddTicks(3758), "ASSYMETRIC POPLIN DRESS", new DateTime(2023, 2, 26, 2, 53, 45, 527, DateTimeKind.Local).AddTicks(3757), 1, 1, "~/Images/girlDress.jpg" }
+                    { 1, 1, 59.990000000000002, "High heel slingback shoes. Tied closure. Pointed toe.", new DateTime(2023, 2, 27, 15, 26, 21, 881, DateTimeKind.Local).AddTicks(7645), "LACE UP TIED HIGH HEELED SHOES", new DateTime(2023, 2, 27, 15, 26, 21, 881, DateTimeKind.Local).AddTicks(7644), 1, 1, "~/Images/shoes.jpg" },
+                    { 2, 2, 45.899999999999999, "Mini city bag. Handle and removable, adjustable crossbody strap. Magnetic closure.", new DateTime(2023, 2, 27, 15, 26, 21, 881, DateTimeKind.Local).AddTicks(7651), "MINI CITY BAG", new DateTime(2023, 2, 27, 15, 26, 21, 881, DateTimeKind.Local).AddTicks(7650), 1, 1, "~/Images/pinkBag.jpg" },
+                    { 3, 1, 69.989999999999995, "Mid-rise jeans with front pockets .", new DateTime(2023, 2, 27, 15, 26, 21, 881, DateTimeKind.Local).AddTicks(7654), "WOMEN'S BELT LOOP CARGO TRF JEANS", new DateTime(2023, 2, 27, 15, 26, 21, 881, DateTimeKind.Local).AddTicks(7653), 1, 1, "~/Images/jeans.jpg" },
+                    { 4, 1, 39.990000000000002, "Openwork knit top with round neck and short sleeves.", new DateTime(2023, 2, 27, 15, 26, 21, 881, DateTimeKind.Local).AddTicks(7657), "RUFFLED KNIT TOP", new DateTime(2023, 2, 27, 15, 26, 21, 881, DateTimeKind.Local).AddTicks(7656), 1, 1, "~/Images/knitShirt.jpg" },
+                    { 5, 3, 29.989999999999998, "Long sleeves. Rib trim.", new DateTime(2023, 2, 27, 15, 26, 21, 881, DateTimeKind.Local).AddTicks(7659), "ZIP COLLAR SWEATSHIRT", new DateTime(2023, 2, 27, 15, 26, 21, 881, DateTimeKind.Local).AddTicks(7659), 1, 1, "~/Images/menBlueHoddie.jpg" },
+                    { 6, 1, 129.99000000000001, "Coat made of wool blend fabric.", new DateTime(2023, 2, 27, 15, 26, 21, 881, DateTimeKind.Local).AddTicks(7662), "WOOL BLEND COAT", new DateTime(2023, 2, 27, 15, 26, 21, 881, DateTimeKind.Local).AddTicks(7661), 1, 1, "~/Images/coat.jpg" },
+                    { 7, 2, 129.99000000000001, "Sneakers.Slightly chunky soles.", new DateTime(2023, 2, 27, 15, 26, 21, 881, DateTimeKind.Local).AddTicks(7665), "RUNNING SHOES", new DateTime(2023, 2, 27, 15, 26, 21, 881, DateTimeKind.Local).AddTicks(7664), 1, 1, "~/Images/runningShoes.jpg" },
+                    { 8, 3, 19.989999999999998, "Cotton sweater vest. Sleeveless. V-neckline. Rib trim.", new DateTime(2023, 2, 27, 15, 26, 21, 881, DateTimeKind.Local).AddTicks(7668), "TEXTURED KNIT VEST", new DateTime(2023, 2, 27, 15, 26, 21, 881, DateTimeKind.Local).AddTicks(7667), 1, 1, "~/Images/vest.jpg" },
+                    { 9, 1, 29.989999999999998, "Girl short sleeves dress with elastic cuffs.", new DateTime(2023, 2, 27, 15, 26, 21, 881, DateTimeKind.Local).AddTicks(7670), "ASSYMETRIC POPLIN DRESS", new DateTime(2023, 2, 27, 15, 26, 21, 881, DateTimeKind.Local).AddTicks(7670), 1, 1, "~/Images/girlDress.jpg" },
+                    { 10, 3, 649.99000000000001, "onsumer Notebook 15.6 FHD AMD Ryzen 5 5625U AMD Radeon Graphics 12GB 512GB SSD Windows 11 Home ", new DateTime(2023, 2, 27, 15, 26, 21, 881, DateTimeKind.Local).AddTicks(7673), "LENOVO IdeaPad 3", new DateTime(2023, 2, 27, 15, 26, 21, 881, DateTimeKind.Local).AddTicks(7672), 3, 1, "~/Images/lenovoIdeaPad3.jpg" },
+                    { 11, 1, 1200.99, "16.1 QHD, Intel Core i7-11800H, NVIDIA GeForce RTX 3070, 16GB DDR4, 1TB SSD.", new DateTime(2023, 2, 27, 15, 26, 21, 881, DateTimeKind.Local).AddTicks(7676), "HP OMEN 16-b0020ca Gaming Notebook", new DateTime(2023, 2, 27, 15, 26, 21, 881, DateTimeKind.Local).AddTicks(7675), 3, 1, "~/Images/omen.jpg" },
+                    { 12, 3, 899.99000000000001, "256GB Gold", new DateTime(2023, 2, 27, 15, 26, 21, 881, DateTimeKind.Local).AddTicks(7679), "IPHONE 14 PRO MAX", new DateTime(2023, 2, 27, 15, 26, 21, 881, DateTimeKind.Local).AddTicks(7678), 3, 1, "~/Images/iphone14.jpg" },
+                    { 13, 1, 25250.0, "2018 MAZDA 3", new DateTime(2023, 2, 27, 15, 26, 21, 881, DateTimeKind.Local).AddTicks(7681), "MAZDA 3", new DateTime(2023, 2, 27, 15, 26, 21, 881, DateTimeKind.Local).AddTicks(7681), 2, 2, "~/Images/mazda32018.jpg" },
+                    { 14, 1, 50150.0, "VW 310 Rampaging German Horse Power", new DateTime(2023, 2, 27, 15, 26, 21, 881, DateTimeKind.Local).AddTicks(7684), "Golf R", new DateTime(2023, 2, 27, 15, 26, 21, 881, DateTimeKind.Local).AddTicks(7683), 2, 1, "~/Images/golfR.jpg" },
+                    { 15, 1, 70120.300000000003, "2023 chevy pick up Truck", new DateTime(2023, 2, 27, 15, 26, 21, 881, DateTimeKind.Local).AddTicks(7687), "Chevy Silverado", new DateTime(2023, 2, 27, 15, 26, 21, 881, DateTimeKind.Local).AddTicks(7686), 2, 2, "~/Images/chevySilverado.jpg" }
                 });
 
             migrationBuilder.CreateIndex(

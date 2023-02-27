@@ -8,21 +8,31 @@
             <div class="sticky-top">
 
                 <article class="col">
-                  
+
                     <div class="filter-content">
                         <div class="card-body">
+                            <form asp-controller="Search" asp-action="Sort" method="Get" id="sort">
 
-                            <form asp-controller="SearchController" asp-action="Sort" method="post"></form>
-                            @using(Html.BeginForm("Sort","Search",FormMethod.Post)){
+                                <div class="row ms-auto">
+                                    <div class="col" style="padding-left: 0px;">
+                                        <input type="search" class="form-control search" placeholder="Search" aria-label="Search" aria-describedby="search-addon" style="margin-right:5px;
+                                         width: 157px;" name="Search" />
+                                    </div>
+                                    <div class="col">
+                                        <button type="submit" class="btn bg-white">search</button>
+                                    </div>
+                                </div>
                                 <header class="card-header">
                                     <h6 class="title">Categories </h6>
                                 </header>
-                                  
-                                @foreach(Category c in Model.Categories)
+
+                                @foreach (Category c in Model.Categories)
                                 {
                                     <div>
-                                        @Html.RadioButton("selectedCategories", c.CategoryId )
+                                        <input class="form-check-input unCheck" type="radio" value="@c.CategoryId" name="selectedCategories" >
+                                        <span class="form-check-label">
                                         @c.CategoryName
+                                    </span>
                                     </div>
                                 }
 
@@ -30,38 +40,37 @@
                                     <h6 class="title">Condition</h6>
                                 </header>
 
-                             
+
 
                                 @foreach (AssetCondition a in Model.AssetConditions)
                                 {
                                     <div>
-                                        @Html.RadioButton("selectedAsset", a.AssetConditionId)
-                                        @a.AssetConditionStatus
+                                        <input class="form-check-input unCheck" type="radio" value="@a.AssetConditionId" name="selectedAsset">
+                                        <span class="form-check-label">
+                                            @a.AssetConditionStatus
+                                        </span>
                                     </div>
                                 }
 
 
-                            <header class="card-header">
-                                <h6 class="title">Price</h6>
-                            </header>
+                                <header class="card-header">
+                                    <h6 class="title">Price</h6>
+                                </header>
 
-                           <label class="form-check">
-                                    <input class="form-check-input" type="radio" value="1" name="selectedPriceRange">
+                                <label class="form-check">
+                                    <input class="form-check-input unCheck" type="radio" value="1" name="selectedPriceRange">
                                     <span class="form-check-label">
                                         Highest to Lowest
                                     </span>
                                 </label>
                                 <label class="form-check">
-                                    <input class="form-check-input" type="radio" value="2" name="selectedPriceRange">
+                                    <input class="form-check-input unCheck" type="radio" value="2" name="selectedPriceRange">
                                     <span class="form-check-label">
                                         Lowest to Highest
                                     </span>
                                 </label>
-                        
-
-                          <button type="submit">submit</button>
-
-                            }
+                            </form>
+                            <button class="btn bg-white" onclick="unCheck()">DeSelect</button>
 
                         </div>
                     </div>
@@ -69,11 +78,11 @@
             </div>
         </div>
         <div class="col" id="main">
-            @foreach(Bid b in Model.Bids)
+            @foreach (Bid b in Model.Bids)
             {
                 <div class="card" style="width: 18rem;display:inline-block;">
                     <a asp-controller="Details" asp-action="Details" asp-route-id="@b.BidId">
-                        <img class="card-img-top" src="@Url.Content(b.ImagePath)" alt="Card image cap" >
+                        <img class="card-img-top" src="@Url.Content(b.ImagePath)" alt="Card image cap">
                     </a>
                     <div class="card-body">
                         <h5 class="card-title">@b.BidName</h5>

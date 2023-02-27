@@ -1,5 +1,6 @@
 ﻿using Assignment1Group26.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
 namespace Assignment1Group26.Controllers
@@ -11,40 +12,9 @@ namespace Assignment1Group26.Controllers
         {
             _context = context;
         }
+
         [HttpGet]
-        public IActionResult Search(string Search)
-        {
-            if (!String.IsNullOrEmpty(Search))
-            {
-                var tables = new HomeViewModel
-                {
-                    
-                    Bids = _context.bids.Where(b => b.BidName.Contains(Search)).ToList(),
-                    Categories = _context.categories.ToList(),
-                    AssetConditions = _context.assetConditions.ToList()
-
-                };
-
-                return View("../Home/Index",tables);
-
-            }
-            else
-            {
-                var tables = new HomeViewModel
-                {
-                    Bids = _context.bids.ToList(),
-                    Categories = _context.categories.ToList(),
-                    AssetConditions = _context.assetConditions.ToList()
-
-                };
-
-                return View("../Home/Index", tables);
-            }
-
-        }
-        [HttpPost]
-        public IActionResult Sort(int selectedCategories, int selectedAsset, int selectedPriceRange) {
-
+        public IActionResult Sort(string Search, int selectedCategories, int selectedAsset, int selectedPriceRange) {
             var tables = new HomeViewModel
             {
                 Bids = _context.bids.ToList(),
@@ -54,6 +24,8 @@ namespace Assignment1Group26.Controllers
             };
 
 
+         
+          
 
             if (selectedCategories != 0)
             {
@@ -74,7 +46,12 @@ namespace Assignment1Group26.Controllers
                    
                     
             }
+            if (!String.IsNullOrEmpty(Search))
+            {
+               tables.Bids = tables.Bids.Where(b => b.BidName.Contains(Search, StringComparison.OrdinalIgnoreCase)).ToList();
 
+
+            }
 
 
             return View("../Home/Index", tables);
