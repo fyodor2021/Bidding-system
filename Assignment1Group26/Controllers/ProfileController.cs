@@ -1,6 +1,7 @@
 ﻿using Assignment1Group26.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using System.Reflection.Metadata.Ecma335;
 using System.Security.Claims;
 
@@ -14,7 +15,7 @@ namespace Assignment1Group26.Controllers
         {
             _context = context;
         }
-        public IActionResult Index()
+        public IActionResult Profile()
         {
             
             var clientUserName = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
@@ -37,5 +38,29 @@ namespace Assignment1Group26.Controllers
             return RedirectToAction("Login", "Login");
         }
         
+        public IActionResult Edit(int id)
+        {
+            var c = _context.clients.FirstOrDefault(c => c.ClientId == id);
+            return View(c);
+        }
+        [HttpPost]
+        public IActionResult Edit(Client c) {
+                
+
+                if(c.ClientPassword == c.ClientRetypePassword)
+                {
+                    _context.clients.Update(c);
+                    _context.SaveChanges();
+                ViewData["confirmationMessage"] = "Your Profile was Updated";
+                }
+                else
+                {
+                    ViewData["errorMessage"] = "passwords don't match";
+                    return View(c);
+                }
+                return View(c);
+            
+        }
+
     }
 }
