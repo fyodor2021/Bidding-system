@@ -47,7 +47,7 @@ namespace Assignment1Group26.Controllers
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
                         new ClaimsPrincipal(ClaimsIdentity), properties); 
 
-                    return RedirectToAction("Index","Home");
+                    return RedirectToAction("Profile","Profile");
                 }
             }
             ViewData["ValidationMessage"] = "user not found";

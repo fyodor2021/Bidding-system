@@ -10,9 +10,9 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #212529;">
             <div class="container-fluid" style="margin:0 150px">
-                <a  class="navbar-brand" asp-controller="Home" asp-action="Index">JoseDore</a>
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">JoseDore</a>
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -23,19 +23,21 @@
 
                             var currentController = ViewContext.RouteData.Values["controller"].ToString();
                         }
-                        @if(currentController != "Registration" && currentController != "Login" )
+                        @if (currentController != "Registration" && currentController != "Login")
                         {
                             <a class="nav-item nav-link" asp-area="" asp-controller="Profile" asp-action="Profile">Profile</a>
-                        <a class="nav-item nav-link" asp-area="" asp-controller="Sell" asp-action="Index">Sell</a>
+                            <a class="nav-item nav-link" asp-area="" asp-controller="Sell" asp-action="Index">Sell</a>
                         }
-                        
+
                     </div>
                     <div class="navbar-nav ms-auto">
                         @if (base.User.Identity.IsAuthenticated)
                         {
                             <a class="nav-item nav-link" asp-area="" asp-controller="Home" asp-action="Logout" style="margin-right:5px;">Logout</a>
 
-                        }else{
+                        }
+                        else
+                        {
 
                             <a class="nav-item nav-link bg-white" asp-area="" asp-controller="Registration" asp-action="Register" style="margin-right:5px;">Register</a>
                             <a class="nav-item nav-link bg-white" asp-area="" asp-controller="Login" asp-action="Login" style="margin-right:5px;">Login</a>
@@ -43,11 +45,11 @@
                         }
                         <form asp-controller="Search" asp-action="Search" method="Get" class="navbar-nav ms-auto" id="search">
                         </form>
-                            
+
                     </div>
 
                 </div>
-                
+
             </div>
         </nav>
     </header>
@@ -56,26 +58,39 @@
             @RenderBody()
         </main>
     </div>
-
-    <footer class="border-top footer text-muted bg-light">
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <p>Group Number 26</p>
-                </div>
-                <div class="col">
-                    <p>josephine Abdulaziz,Vedoor Barakat</p>
+    <footer class="w-100 py-4 flex-shrink-0">
+        <div class="container py-4">
+            <div class="row gy-4 gx-5">
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="h1 text-white">Group Members</h5>
+                    <p class="small text-muted">Vedoor Barakat</p>
+                    <p class="small text-muted">Josefin Abdulaziz</p>
 
                 </div>
-                <div class="col">
-                    <p>Josephine:101390844, Vedoor:101388514</p>
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="text-white mb-3">Student IDs</h5>
+                    <ul class="list-unstyled text-muted">
+                        <li>101388514</li>
+                        <li>101390844</li>
+
+                    </ul>
                 </div>
-                <div class="col">
-                    <p>CRN-48622</p>
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="text-white mb-3">Group Number</h5>
+                    <ul class="list-unstyled text-muted">
+                        <li>Group 26</li>
+
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="text-white mb-3">Sections</h5>
+                    <p class="small text-muted">CRN-48622-202202</p>
+                    <p class="small text-muted">CRN-48622-202202</p>
                 </div>
             </div>
         </div>
     </footer>
+    </div>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

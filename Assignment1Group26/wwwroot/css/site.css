@@ -452,3 +452,24 @@ b, strong {
 .mb-3 {
     margin: 10px;
 }
+
+.text-small {
+    font-size: 0.9rem;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+
+
+footer {
+    background: #212529;
+}
+
+
+body, html {
+    height: 100%;
+}
