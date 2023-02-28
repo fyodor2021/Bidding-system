@@ -473,3 +473,9 @@ footer {
 body, html {
     height: 100%;
 }
+.nav-color{
+    color:white;
+}
+.nav-item{
+    color:white;
+}

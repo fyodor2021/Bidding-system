@@ -10,13 +10,13 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #212529;">
+        <nav class="nav-color navbar navbar-expand-lg " style="background-color:#212529;>
             <div class="container-fluid" style="margin:0 150px">
-                <a class="navbar-brand" asp-controller="Home" asp-action="Index">JoseDore</a>
-                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index" style="margin-left:10px;">JoseDore</a>
+                <button type="button" class="navbar-toggler navbar-dark" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon "></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="collapse navbar-collapse nav-color" id="navbarCollapse">
                     <div class="navbar-nav">
                         <a class="nav-item nav-link active" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         @{
@@ -30,7 +30,7 @@
                         }
 
                     </div>
-                    <div class="navbar-nav ms-auto">
+                    <div class="navbar-nav ms-auto nav-color">
                         @if (base.User.Identity.IsAuthenticated)
                         {
                             <a class="nav-item nav-link" asp-area="" asp-controller="Home" asp-action="Logout" style="margin-right:5px;">Logout</a>
@@ -39,8 +39,8 @@
                         else
                         {
 
-                            <a class="nav-item nav-link bg-white" asp-area="" asp-controller="Registration" asp-action="Register" style="margin-right:5px;">Register</a>
-                            <a class="nav-item nav-link bg-white" asp-area="" asp-controller="Login" asp-action="Login" style="margin-right:5px;">Login</a>
+                            <a class="nav-item nav-link" asp-area="" asp-controller="Registration" asp-action="Register" style="margin-right:5px;">Register</a>
+                            <a class="nav-item nav-link" asp-area="" asp-controller="Login" asp-action="Login" style="margin-right:5px;">Login</a>
 
                         }
                         <form asp-controller="Search" asp-action="Search" method="Get" class="navbar-nav ms-auto" id="search">
