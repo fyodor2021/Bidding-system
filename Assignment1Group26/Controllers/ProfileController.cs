@@ -17,7 +17,7 @@ namespace Assignment1Group26.Controllers
         }
         public IActionResult Profile()
         {
-            
+
             var clientUserName = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
             var client = _context.clients.FirstOrDefault(c => c.ClientUserName == clientUserName);
             if (client != null)
@@ -37,29 +37,29 @@ namespace Assignment1Group26.Controllers
 
             return RedirectToAction("Login", "Login");
         }
-        
+
         public IActionResult Edit(int id)
         {
             var c = _context.clients.FirstOrDefault(c => c.ClientId == id);
             return View(c);
         }
         [HttpPost]
-        public IActionResult Edit(Client c) {
-                
+        public IActionResult Edit(Client cc)
+        {
 
-                if(c.ClientPassword == c.ClientRetypePassword)
-                {
-                    _context.clients.Update(c);
-                    _context.SaveChanges();
+
+            if (cc.ClientPassword == cc.ClientRetypePassword)
+            {
+                _context.clients.Update(cc);
+                _context.SaveChanges();
                 ViewData["confirmationMessage"] = "Your Profile was Updated";
-                }
-                else
-                {
+                return View(cc);
+            }
+            var client = _context.clients.FirstOrDefault(c => c.ClientId == cc.ClientId);
                     ViewData["errorMessage"] = "passwords don't match";
-                    return View(c);
-                }
-                return View(c);
-            
+            return View(client);
+
+
         }
 
     }
