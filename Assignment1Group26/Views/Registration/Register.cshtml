@@ -30,6 +30,10 @@
                     <div class="mb-3">
                         <input asp-for="ClientPassword" type="password" class="form-control" id="password" placeholder="password">
                     </div>
+                    <p style="color:red">@Html.ValidationMessageFor(c=>c.ClientRetypePassword)</p>
+                    <div class="mb-3">
+                        <input asp-for="ClientRetypePassword" type="password" class="form-control" id="RetypePassword" placeholder="password">
+                    </div>
                     @if(ViewData["errorMessage"] != null)
                     {
                         <h6  style="color:red;">@ViewData["errorMessage"]</h6>

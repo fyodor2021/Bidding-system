@@ -31,57 +31,64 @@ namespace Assignment1Group26.Controllers
         [HttpPost]
         public async Task<IActionResult> RegisterProcess(Client c)
         {
-            var client = _context.clients.FirstOrDefault(u => u.ClientUserName == c.ClientUserName);
-            if (ModelState.IsValid)
+            if (c.ClientPassword == c.ClientRetypePassword)
             {
-                if(client == null)
+                var client = _context.clients.FirstOrDefault(u => u.ClientUserName == c.ClientUserName);
+                if (ModelState.IsValid)
                 {
-                    //adding the contact to the database
-                    c.EmailConfirmed = false;
-                    c.VerficationToken = getToken();
-                    c.keepLoggedIn = false;
-                    _context.clients.Add(c);
-                    _context.SaveChanges();
-                    List<Claim> claims = new List<Claim>()
+                    if (client == null)
+                    {
+                        //adding the contact to the database
+                        c.EmailConfirmed = false;
+                        c.VerficationToken = getToken();
+                        c.keepLoggedIn = false;
+                        _context.clients.Add(c);
+                        _context.SaveChanges();
+                        List<Claim> claims = new List<Claim>()
                     {
                         new Claim(ClaimTypes.NameIdentifier, c.ClientUserName)
                     };
-                    ClaimsIdentity ClaimsIdentity
-                        = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-                    AuthenticationProperties properties = new AuthenticationProperties()
+                        ClaimsIdentity ClaimsIdentity
+                            = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                        AuthenticationProperties properties = new AuthenticationProperties()
+                        {
+                            AllowRefresh = true,
+                            IsPersistent = c.keepLoggedIn
+                        };
+                        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
+                            new ClaimsPrincipal(ClaimsIdentity), properties);
+
+                        //email verification
+
+                        await SendEmail(c);
+
+                    }
+                    else
                     {
-                        AllowRefresh = true,
-                        IsPersistent = c.keepLoggedIn
-                    };
-                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
-                        new ClaimsPrincipal(ClaimsIdentity), properties);
-
-                    //email verification
-
-                    await SendEmail(c);
+                        ViewData["errorMessage"] = "user already exists";
+                        return View("Register");
+                    }
 
                 }
                 else
                 {
-                    ViewData["errorMessage"] = "user already exists";
+                    ViewData["errorMessage"] = "Invalid Credentials";
                     return View("Register");
                 }
+                return RedirectToAction("Index", "Home");
 
             }
             else
             {
-                ViewData["errorMessage"] = "Invalid Credentials";
+                ViewData["errorMessage"] = "Passwords don't match";
                 return View("Register");
             }
-            return RedirectToAction("Index","Home");
-            
         }
-
         [HttpPost]
         public async Task<IActionResult> SendEmail(Client c)
         {
             string receiver;
-            if(c.ClientUserName != null)
+            if (c.ClientUserName != null)
             {
                 receiver = c.ClientUserName;
             }
@@ -89,25 +96,27 @@ namespace Assignment1Group26.Controllers
             {
                 receiver = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
             }
-            
+
             var hostName = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}/";
             var subject = "please verify your email(josedore)";
             var message = "<h1>please confirm your email</h1>" +
                           "<a href=\"" + hostName + "Registration/ValidateToken?token=" + c.VerficationToken + "\">verify your email</a>";
 
             await _emailSender.SendEmailAsync(receiver, subject, message);
-            
+
             return View("../Email/EmailVerifyPage");
         }
         [HttpGet]
         public async Task<IActionResult> ValidateToken(String token)
         {
-            
 
-            if (token != null) {
 
-               var client =  _context.clients.FirstOrDefault(c => c.VerficationToken == token);
-                if(client != null) {
+            if (token != null)
+            {
+
+                var client = _context.clients.FirstOrDefault(c => c.VerficationToken == token);
+                if (client != null)
+                {
                     client.EmailConfirmed = true;
                     _context.SaveChanges();
 
@@ -117,15 +126,15 @@ namespace Assignment1Group26.Controllers
             {
                 var clientUserName = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
                 var client = _context.clients.FirstOrDefault(c => c.ClientUserName == clientUserName);
-                if(client != null)
+                if (client != null)
                 {
                     client.EmailConfirmed = true;
                     _context.SaveChanges();
                 }
-                
+
             }
-            
-            return RedirectToAction("Index","Home");
+
+            return RedirectToAction("Index", "Home");
         }
         public string getToken()
         {
@@ -136,7 +145,7 @@ namespace Assignment1Group26.Controllers
             var Clients = _context.clients.ToList();
             foreach (var c in Clients)
             {
-                if(cl.ClientUserName == c.ClientUserName)
+                if (cl.ClientUserName == c.ClientUserName)
                 {
                     return View(c);
                 }
