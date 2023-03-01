@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Assignment1Group26.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230228012354_test")]
-    partial class test
+    [Migration("20230301160206_mssql_migration_270")]
+    partial class mssql_migration_270
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -113,9 +113,9 @@ namespace Assignment1Group26.Migrations
                             AssetConditionId = 1,
                             BidCost = 59.990000000000002,
                             BidDescription = "High heel slingback shoes. Tied closure. Pointed toe.",
-                            BidEndDate = new DateTime(2023, 2, 27, 20, 23, 54, 659, DateTimeKind.Local).AddTicks(3567),
+                            BidEndDate = new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7067),
                             BidName = "LACE UP TIED HIGH HEELED SHOES",
-                            BidStartDate = new DateTime(2023, 2, 27, 20, 23, 54, 659, DateTimeKind.Local).AddTicks(3566),
+                            BidStartDate = new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7065),
                             CategoryId = 1,
                             ClientId = 1,
                             ImagePath = "~/Images/shoes.jpg"
@@ -126,9 +126,9 @@ namespace Assignment1Group26.Migrations
                             AssetConditionId = 2,
                             BidCost = 45.899999999999999,
                             BidDescription = "Mini city bag. Handle and removable, adjustable crossbody strap. Magnetic closure.",
-                            BidEndDate = new DateTime(2023, 2, 27, 20, 23, 54, 659, DateTimeKind.Local).AddTicks(3573),
+                            BidEndDate = new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7075),
                             BidName = "MINI CITY BAG",
-                            BidStartDate = new DateTime(2023, 2, 27, 20, 23, 54, 659, DateTimeKind.Local).AddTicks(3572),
+                            BidStartDate = new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7073),
                             CategoryId = 1,
                             ClientId = 1,
                             ImagePath = "~/Images/pinkBag.jpg"
@@ -139,9 +139,9 @@ namespace Assignment1Group26.Migrations
                             AssetConditionId = 1,
                             BidCost = 69.989999999999995,
                             BidDescription = "Mid-rise jeans with front pockets .",
-                            BidEndDate = new DateTime(2023, 2, 27, 20, 23, 54, 659, DateTimeKind.Local).AddTicks(3577),
+                            BidEndDate = new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7079),
                             BidName = "WOMEN'S BELT LOOP CARGO TRF JEANS",
-                            BidStartDate = new DateTime(2023, 2, 27, 20, 23, 54, 659, DateTimeKind.Local).AddTicks(3576),
+                            BidStartDate = new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7078),
                             CategoryId = 1,
                             ClientId = 1,
                             ImagePath = "~/Images/jeans.jpg"
@@ -152,9 +152,9 @@ namespace Assignment1Group26.Migrations
                             AssetConditionId = 1,
                             BidCost = 39.990000000000002,
                             BidDescription = "Openwork knit top with round neck and short sleeves.",
-                            BidEndDate = new DateTime(2023, 2, 27, 20, 23, 54, 659, DateTimeKind.Local).AddTicks(3580),
+                            BidEndDate = new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7083),
                             BidName = "RUFFLED KNIT TOP",
-                            BidStartDate = new DateTime(2023, 2, 27, 20, 23, 54, 659, DateTimeKind.Local).AddTicks(3579),
+                            BidStartDate = new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7082),
                             CategoryId = 1,
                             ClientId = 1,
                             ImagePath = "~/Images/knitShirt.jpg"
@@ -165,9 +165,9 @@ namespace Assignment1Group26.Migrations
                             AssetConditionId = 3,
                             BidCost = 29.989999999999998,
                             BidDescription = "Long sleeves. Rib trim.",
-                            BidEndDate = new DateTime(2023, 2, 27, 20, 23, 54, 659, DateTimeKind.Local).AddTicks(3584),
+                            BidEndDate = new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7087),
                             BidName = "ZIP COLLAR SWEATSHIRT",
-                            BidStartDate = new DateTime(2023, 2, 27, 20, 23, 54, 659, DateTimeKind.Local).AddTicks(3583),
+                            BidStartDate = new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7086),
                             CategoryId = 1,
                             ClientId = 1,
                             ImagePath = "~/Images/menBlueHoddie.jpg"
@@ -178,9 +178,9 @@ namespace Assignment1Group26.Migrations
                             AssetConditionId = 1,
                             BidCost = 129.99000000000001,
                             BidDescription = "Coat made of wool blend fabric.",
-                            BidEndDate = new DateTime(2023, 2, 27, 20, 23, 54, 659, DateTimeKind.Local).AddTicks(3586),
+                            BidEndDate = new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7091),
                             BidName = "WOOL BLEND COAT",
-                            BidStartDate = new DateTime(2023, 2, 27, 20, 23, 54, 659, DateTimeKind.Local).AddTicks(3586),
+                            BidStartDate = new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7090),
                             CategoryId = 1,
                             ClientId = 1,
                             ImagePath = "~/Images/coat.jpg"
@@ -191,9 +191,9 @@ namespace Assignment1Group26.Migrations
                             AssetConditionId = 2,
                             BidCost = 129.99000000000001,
                             BidDescription = "Sneakers.Slightly chunky soles.",
-                            BidEndDate = new DateTime(2023, 2, 27, 20, 23, 54, 659, DateTimeKind.Local).AddTicks(3589),
+                            BidEndDate = new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7094),
                             BidName = "RUNNING SHOES",
-                            BidStartDate = new DateTime(2023, 2, 27, 20, 23, 54, 659, DateTimeKind.Local).AddTicks(3588),
+                            BidStartDate = new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7093),
                             CategoryId = 1,
                             ClientId = 1,
                             ImagePath = "~/Images/runningShoes.jpg"
@@ -204,9 +204,9 @@ namespace Assignment1Group26.Migrations
                             AssetConditionId = 3,
                             BidCost = 19.989999999999998,
                             BidDescription = "Cotton sweater vest. Sleeveless. V-neckline. Rib trim.",
-                            BidEndDate = new DateTime(2023, 2, 27, 20, 23, 54, 659, DateTimeKind.Local).AddTicks(3592),
+                            BidEndDate = new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7098),
                             BidName = "TEXTURED KNIT VEST",
-                            BidStartDate = new DateTime(2023, 2, 27, 20, 23, 54, 659, DateTimeKind.Local).AddTicks(3591),
+                            BidStartDate = new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7097),
                             CategoryId = 1,
                             ClientId = 1,
                             ImagePath = "~/Images/vest.jpg"
@@ -217,9 +217,9 @@ namespace Assignment1Group26.Migrations
                             AssetConditionId = 1,
                             BidCost = 29.989999999999998,
                             BidDescription = "Girl short sleeves dress with elastic cuffs.",
-                            BidEndDate = new DateTime(2023, 2, 27, 20, 23, 54, 659, DateTimeKind.Local).AddTicks(3595),
+                            BidEndDate = new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7102),
                             BidName = "ASSYMETRIC POPLIN DRESS",
-                            BidStartDate = new DateTime(2023, 2, 27, 20, 23, 54, 659, DateTimeKind.Local).AddTicks(3594),
+                            BidStartDate = new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7101),
                             CategoryId = 1,
                             ClientId = 1,
                             ImagePath = "~/Images/girlDress.jpg"
@@ -230,9 +230,9 @@ namespace Assignment1Group26.Migrations
                             AssetConditionId = 3,
                             BidCost = 649.99000000000001,
                             BidDescription = "onsumer Notebook 15.6 FHD AMD Ryzen 5 5625U AMD Radeon Graphics 12GB 512GB SSD Windows 11 Home ",
-                            BidEndDate = new DateTime(2023, 2, 27, 20, 23, 54, 659, DateTimeKind.Local).AddTicks(3599),
+                            BidEndDate = new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7105),
                             BidName = "LENOVO IdeaPad 3",
-                            BidStartDate = new DateTime(2023, 2, 27, 20, 23, 54, 659, DateTimeKind.Local).AddTicks(3598),
+                            BidStartDate = new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7104),
                             CategoryId = 3,
                             ClientId = 1,
                             ImagePath = "~/Images/lenovoIdeaPad3.jpg"
@@ -243,9 +243,9 @@ namespace Assignment1Group26.Migrations
                             AssetConditionId = 1,
                             BidCost = 1200.99,
                             BidDescription = "16.1 QHD, Intel Core i7-11800H, NVIDIA GeForce RTX 3070, 16GB DDR4, 1TB SSD.",
-                            BidEndDate = new DateTime(2023, 2, 27, 20, 23, 54, 659, DateTimeKind.Local).AddTicks(3602),
+                            BidEndDate = new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7109),
                             BidName = "HP OMEN 16-b0020ca Gaming Notebook",
-                            BidStartDate = new DateTime(2023, 2, 27, 20, 23, 54, 659, DateTimeKind.Local).AddTicks(3601),
+                            BidStartDate = new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7108),
                             CategoryId = 3,
                             ClientId = 1,
                             ImagePath = "~/Images/omen.jpg"
@@ -256,9 +256,9 @@ namespace Assignment1Group26.Migrations
                             AssetConditionId = 3,
                             BidCost = 899.99000000000001,
                             BidDescription = "256GB Gold",
-                            BidEndDate = new DateTime(2023, 2, 27, 20, 23, 54, 659, DateTimeKind.Local).AddTicks(3604),
+                            BidEndDate = new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7112),
                             BidName = "IPHONE 14 PRO MAX",
-                            BidStartDate = new DateTime(2023, 2, 27, 20, 23, 54, 659, DateTimeKind.Local).AddTicks(3604),
+                            BidStartDate = new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7111),
                             CategoryId = 3,
                             ClientId = 1,
                             ImagePath = "~/Images/iphone14.jpg"
@@ -269,9 +269,9 @@ namespace Assignment1Group26.Migrations
                             AssetConditionId = 1,
                             BidCost = 25250.0,
                             BidDescription = "2018 MAZDA 3",
-                            BidEndDate = new DateTime(2023, 2, 27, 20, 23, 54, 659, DateTimeKind.Local).AddTicks(3610),
+                            BidEndDate = new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7116),
                             BidName = "MAZDA 3",
-                            BidStartDate = new DateTime(2023, 2, 27, 20, 23, 54, 659, DateTimeKind.Local).AddTicks(3609),
+                            BidStartDate = new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7115),
                             CategoryId = 2,
                             ClientId = 2,
                             ImagePath = "~/Images/mazda32018.jpg"
@@ -282,9 +282,9 @@ namespace Assignment1Group26.Migrations
                             AssetConditionId = 1,
                             BidCost = 50150.0,
                             BidDescription = "VW 310 Rampaging German Horse Power",
-                            BidEndDate = new DateTime(2023, 2, 27, 20, 23, 54, 659, DateTimeKind.Local).AddTicks(3614),
+                            BidEndDate = new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7119),
                             BidName = "Golf R",
-                            BidStartDate = new DateTime(2023, 2, 27, 20, 23, 54, 659, DateTimeKind.Local).AddTicks(3613),
+                            BidStartDate = new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7118),
                             CategoryId = 2,
                             ClientId = 1,
                             ImagePath = "~/Images/golfR.jpg"
@@ -295,9 +295,9 @@ namespace Assignment1Group26.Migrations
                             AssetConditionId = 1,
                             BidCost = 70120.300000000003,
                             BidDescription = "2023 chevy pick up Truck",
-                            BidEndDate = new DateTime(2023, 2, 27, 20, 23, 54, 659, DateTimeKind.Local).AddTicks(3617),
+                            BidEndDate = new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7123),
                             BidName = "Chevy Silverado",
-                            BidStartDate = new DateTime(2023, 2, 27, 20, 23, 54, 659, DateTimeKind.Local).AddTicks(3616),
+                            BidStartDate = new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7122),
                             CategoryId = 2,
                             ClientId = 2,
                             ImagePath = "~/Images/chevySilverado.jpg"
