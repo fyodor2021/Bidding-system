@@ -20,7 +20,7 @@ namespace Assignment1Group26.Service
             var client = new SmtpClient("smtp.gmail.com", 587)
             {
                 UseDefaultCredentials = false,
-               EnableSsl= true,
+                 EnableSsl= true,
                 Credentials = new NetworkCredential(mail,password)
             };
             MailMessage mailMessage = new MailMessage();
@@ -32,18 +32,7 @@ namespace Assignment1Group26.Service
                 mailMessage.Subject = subject;
 
                 mailMessage.Body = message;
-                var user = _context.clients.ToList();
-                /*foreach (var item in user) {
-                    if(item.ClientUserName == email)
-                    {
-                        if(item.VerficationToken != null)
-                        {
-                            string token = item.VerficationToken;
-                            mailMessage.Body.Replace("{Token}", token);
-
-                        }
-                    }
-                }*/
+                
                 mailMessage.IsBodyHtml = true;
 
             }

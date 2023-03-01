@@ -96,8 +96,7 @@ namespace Assignment1Group26.Controllers
                           "<a href=\"" + hostName + "Registration/ValidateToken?token=" + c.VerficationToken + "\">verify your email</a>";
 
             await _emailSender.SendEmailAsync(receiver, subject, message);
-            //var client = _context.clients.FirstOrDefault(c=> c.ClientUserName == receiver);
-            //await ValidateToken(client.VerficationToken);
+            
             return View("../Email/EmailVerifyPage");
         }
         [HttpGet]
