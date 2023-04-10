@@ -1,7 +1,31 @@
 ﻿@model Client
-<h2>Please Verify Your Email To Enter This Page</h2>
-<h6>If You'd Like To Resend Verification Email Please Click The Button Below</h6>
-@using (Html.BeginForm("SendEmail", "Registration", FormMethod.Post))
+
+@if(Model != null)
 {
-    <input type="submit" value="Send" name="submit" />
+    @if (Model.EmailConfirmed)
+    {
+        <form asp-controller="Login" asp-action="LoggingIn" method="post">
+            <input hidden readonly asp-for="ClientId" value="@Model.ClientId">
+            <lable name="validation">Please enter your PIN: </lable>
+            <input name="MultiPin" type="text">
+            <h3 style="color:red;">@ViewData["ValidationMessage"]</h3>
+            @if (@ViewData["ValidationMessage"] != null)
+            {
+                <h6><a asp-controller="Login" asp-action="ResendEmail" asp-route-id="@Model.ClientId">Resend Code</a></h6>
+            }
+            <input type="submit" value="Submit">
+        </form>
+
+    }
 }
+else
+{
+    <h2>Please Verify Your Email To Enter This Page</h2>
+    <h6>If You'd Like To Resend Verification Email Please Click The Button Below</h6>
+    @using (Html.BeginForm("SendEmail", "Registration", FormMethod.Post))
+    {
+        <input type="submit" value="Send" name="submit" />
+    }
+}
+
+

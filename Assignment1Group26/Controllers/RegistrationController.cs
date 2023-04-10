@@ -138,6 +138,7 @@ namespace Assignment1Group26.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+        
         public string getToken()
         {
             return Convert.ToHexString(RandomNumberGenerator.GetBytes(64));

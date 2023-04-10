@@ -81,6 +81,26 @@ namespace Assignment1Group26.Controllers
            
             return View(tables);
         }
-        
+        public IActionResult Block(int id)
+        {
+             Client clientToUpdate  =  _context.clients.FirstOrDefault(c => c.ClientId == id);
+            clientToUpdate.Blocked = true;
+                  _context.Update(clientToUpdate);
+                  _context.SaveChanges();
+            Client clientToDisplay = _context.clients.FirstOrDefault(c => c.ClientId == id);
+            return View("../../Views/Profile/Profile", clientToDisplay);
+
+        }
+        public IActionResult Unblock(int id)
+        {
+
+            Client clientToUpdate = _context.clients.FirstOrDefault(c => c.ClientId == id);
+            clientToUpdate.Blocked = false;
+                _context.Update(clientToUpdate);
+                _context.SaveChanges();
+            Client clientToDisplay = _context.clients.FirstOrDefault(c => c.ClientId == id);
+            return View("../../Views/Profile/Profile", clientToDisplay);
+
+        }
     }
 }

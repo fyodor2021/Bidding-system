@@ -23,7 +23,8 @@ namespace Assignment1Group26.Models
         public string? ClientRetypePassword { get; set; }
         public bool EmailConfirmed { get; set; }
         public string? ClientRole { get; set; }
-        public bool blocked { get; set; } = false;
+        public bool Blocked { get; set; } = false;
+        public int MultiPin { get; set; } = 11111111;
         public string? VerficationToken { get; set; }
         public bool keepLoggedIn { get; set; }
     }
