@@ -33,27 +33,42 @@ namespace Assignment1Group26.Controllers
             {
                 if(Cl.ClientUserName == c.ClientUserName && Cl.ClientPassword == c.ClientPassword)
                 {
-                    List<Claim> claims = new List<Claim>()
+                    List<Claim> claims;
+                    if (Cl.ClientRole == "Admin")
                     {
-                        new Claim(ClaimTypes.NameIdentifier, c.ClientUserName)
-                    };
-                    ClaimsIdentity ClaimsIdentity
-                        = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-                    AuthenticationProperties properties = new AuthenticationProperties()
-                    {
-                        AllowRefresh= true,
-                        IsPersistent = c.keepLoggedIn
-                    };
-                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
-                        new ClaimsPrincipal(ClaimsIdentity), properties); 
+                        claims = new List<Claim>()
+                        {
+                            new Claim(ClaimTypes.NameIdentifier, c.ClientUserName),
+                            new Claim(ClaimTypes.Name, Cl.ClientRole)
+                        };
 
-                    return RedirectToAction("Profile","Profile");
+                    }
+                    else
+                    {
+                        claims = new List<Claim>()
+                        {
+                            new Claim(ClaimTypes.NameIdentifier, c.ClientUserName),
+                            new Claim(ClaimTypes.Name, Cl.ClientUserName)
+                        };
+
+                    }
+                        ClaimsIdentity ClaimsIdentity
+                        = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                        AuthenticationProperties properties = new AuthenticationProperties()
+                        {
+                            AllowRefresh = true,
+                            IsPersistent = c.keepLoggedIn
+                        };
+                        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
+                            new ClaimsPrincipal(ClaimsIdentity), properties);
+
+                        return RedirectToAction("Profile", "Profile");
+                    }
                 }
-            }
             ViewData["ValidationMessage"] = "user not found";
             return View();
         }
-        
+            
     }
 
     

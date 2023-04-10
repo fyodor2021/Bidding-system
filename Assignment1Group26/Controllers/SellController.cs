@@ -12,24 +12,44 @@ namespace Assignment1Group26.Controllers
     public class SellController : Controller
     {
         private ApplicationDbContext _context;
-        private IWebHostEnvironment webHostEnvironment;
-        public SellController(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment)
+        public SellController(ApplicationDbContext context)
         {
             _context = context;
-            this.webHostEnvironment = webHostEnvironment;
         }
 
         public IActionResult Index()
         {
+            
             var clientUserName = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
             var client = _context.clients.FirstOrDefault(c => c.ClientUserName == clientUserName);
-            if (client.EmailConfirmed == true)
+            if( client.ClientRole != "Admin")
             {
-                int clientId = client.ClientId;
-                var bids = _context.bids.Where(b => b.ClientId == clientId).ToList();
-               
-                return View(bids);
+                if (client.EmailConfirmed == true)
+                {
+                    var sellTables = new SellViewModel
+                    {
+                        Bids = _context.bids.Where(b => b.ClientId == client.ClientId).ToList(),
+                        Clients = _context.clients.Where(c => c.ClientId == client.ClientId).ToList()
+
+
+
+
+
+                    };
+
+                    return View(sellTables);
+                }
             }
+            else
+            {
+                var sellTables = new SellViewModel
+                {
+                    Bids = _context.bids.OrderBy(b => b.ClientId).ToList(),
+                    Clients = _context.clients.ToList(),
+                };
+                return View(sellTables);
+            }
+            
             return View("../Email/EmailVerifyPage");
         }
         [HttpGet]
@@ -49,7 +69,7 @@ namespace Assignment1Group26.Controllers
             var user = _context.clients.FirstOrDefault(c => c.ClientUserName == userName);
             b.ClientId = user.ClientId;
             string action = (b.BidId == 0) ? "Add" : "Edit";
-            await b.SaveImageAsync(webHostEnvironment);
+            await b.SaveImageAsync();
             if (ModelState.IsValid)
             {
                 if (action == "Add")
@@ -69,7 +89,7 @@ namespace Assignment1Group26.Controllers
                 ViewBag.Action = action;
                 ViewBag.Categories = _context.categories.OrderBy(c => c.CategoryName).ToList();
                 ViewBag.AssetCondition = _context.assetConditions.ToList();
-                ViewBag.Image = b.ImagePath;
+                ViewBag.Image = "data:image/*;base64," + Convert.ToBase64String(b.ImageData); ;
 
                 return View(new Bid());
             }
@@ -88,7 +108,7 @@ namespace Assignment1Group26.Controllers
             ViewBag.AssetCondition = _context.assetConditions.ToList();
             var b = _context.bids
                 .Include(c => c.Category).Include(a => a.AssetCondition).FirstOrDefault(b => b.BidId == id);
-            ViewBag.Image = b.ImagePath;
+            ViewBag.Image = "data:image/*;base64," + Convert.ToBase64String(b.ImageData);
             var bb = b.BidId;
 
             return View("Add",b);

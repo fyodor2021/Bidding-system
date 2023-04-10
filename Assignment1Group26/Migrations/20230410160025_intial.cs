@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Assignment1Group26.Migrations
 {
-    public partial class mssql_migration_270 : Migration
+    public partial class intial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -41,17 +41,34 @@ namespace Assignment1Group26.Migrations
                 {
                     ClientId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ClienFirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ClienLastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ClientFirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ClientLastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ClientUserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ClientPassword = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    ClientRole = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     VerficationToken = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     keepLoggedIn = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_clients", x => x.ClientId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "reviews",
+                columns: table => new
+                {
+                    ReviewId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ClientId = table.Column<int>(type: "int", nullable: false),
+                    CreatedBy = table.Column<int>(type: "int", nullable: false),
+                    CreatedByStr = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Comment = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_reviews", x => x.ReviewId);
                 });
 
             migrationBuilder.CreateTable(
@@ -68,7 +85,7 @@ namespace Assignment1Group26.Migrations
                     AssetConditionId = table.Column<int>(type: "int", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     ClientId = table.Column<int>(type: "int", nullable: false),
-                    ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    ImageData = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -115,33 +132,22 @@ namespace Assignment1Group26.Migrations
 
             migrationBuilder.InsertData(
                 table: "clients",
-                columns: new[] { "ClientId", "ClienFirstName", "ClienLastName", "ClientPassword", "ClientUserName", "EmailConfirmed", "VerficationToken", "keepLoggedIn" },
+                columns: new[] { "ClientId", "ClientFirstName", "ClientLastName", "ClientPassword", "ClientRole", "ClientUserName", "EmailConfirmed", "VerficationToken", "keepLoggedIn" },
                 values: new object[,]
                 {
-                    { 1, "John", "Smith", "password", "john.smith@gmail.com", true, null, false },
-                    { 2, "vedoor", "Barakat", "password", "Vendor.Barakat@gmail.com", true, null, false }
+                    { 1, "John", "Smith", "password", "Client", "john.smith@gmail.com", true, null, false },
+                    { 2, "vedoor", "Barakat", "password", "Client", "Vedoor.Barakat@gmail.com", true, null, false },
+                    { 3, "josephine", "abdulaziz", "juju123", "Admin", "juju.josedore@gmail.com", true, null, false }
                 });
 
             migrationBuilder.InsertData(
-                table: "bids",
-                columns: new[] { "BidId", "AssetConditionId", "BidCost", "BidDescription", "BidEndDate", "BidName", "BidStartDate", "CategoryId", "ClientId", "ImagePath" },
+                table: "reviews",
+                columns: new[] { "ReviewId", "ClientId", "Comment", "CreatedBy", "CreatedByStr" },
                 values: new object[,]
                 {
-                    { 1, 1, 59.990000000000002, "High heel slingback shoes. Tied closure. Pointed toe.", new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7067), "LACE UP TIED HIGH HEELED SHOES", new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7065), 1, 1, "~/Images/shoes.jpg" },
-                    { 2, 2, 45.899999999999999, "Mini city bag. Handle and removable, adjustable crossbody strap. Magnetic closure.", new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7075), "MINI CITY BAG", new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7073), 1, 1, "~/Images/pinkBag.jpg" },
-                    { 3, 1, 69.989999999999995, "Mid-rise jeans with front pockets .", new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7079), "WOMEN'S BELT LOOP CARGO TRF JEANS", new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7078), 1, 1, "~/Images/jeans.jpg" },
-                    { 4, 1, 39.990000000000002, "Openwork knit top with round neck and short sleeves.", new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7083), "RUFFLED KNIT TOP", new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7082), 1, 1, "~/Images/knitShirt.jpg" },
-                    { 5, 3, 29.989999999999998, "Long sleeves. Rib trim.", new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7087), "ZIP COLLAR SWEATSHIRT", new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7086), 1, 1, "~/Images/menBlueHoddie.jpg" },
-                    { 6, 1, 129.99000000000001, "Coat made of wool blend fabric.", new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7091), "WOOL BLEND COAT", new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7090), 1, 1, "~/Images/coat.jpg" },
-                    { 7, 2, 129.99000000000001, "Sneakers.Slightly chunky soles.", new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7094), "RUNNING SHOES", new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7093), 1, 1, "~/Images/runningShoes.jpg" },
-                    { 8, 3, 19.989999999999998, "Cotton sweater vest. Sleeveless. V-neckline. Rib trim.", new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7098), "TEXTURED KNIT VEST", new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7097), 1, 1, "~/Images/vest.jpg" },
-                    { 9, 1, 29.989999999999998, "Girl short sleeves dress with elastic cuffs.", new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7102), "ASSYMETRIC POPLIN DRESS", new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7101), 1, 1, "~/Images/girlDress.jpg" },
-                    { 10, 3, 649.99000000000001, "onsumer Notebook 15.6 FHD AMD Ryzen 5 5625U AMD Radeon Graphics 12GB 512GB SSD Windows 11 Home ", new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7105), "LENOVO IdeaPad 3", new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7104), 3, 1, "~/Images/lenovoIdeaPad3.jpg" },
-                    { 11, 1, 1200.99, "16.1 QHD, Intel Core i7-11800H, NVIDIA GeForce RTX 3070, 16GB DDR4, 1TB SSD.", new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7109), "HP OMEN 16-b0020ca Gaming Notebook", new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7108), 3, 1, "~/Images/omen.jpg" },
-                    { 12, 3, 899.99000000000001, "256GB Gold", new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7112), "IPHONE 14 PRO MAX", new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7111), 3, 1, "~/Images/iphone14.jpg" },
-                    { 13, 1, 25250.0, "2018 MAZDA 3", new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7116), "MAZDA 3", new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7115), 2, 2, "~/Images/mazda32018.jpg" },
-                    { 14, 1, 50150.0, "VW 310 Rampaging German Horse Power", new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7119), "Golf R", new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7118), 2, 1, "~/Images/golfR.jpg" },
-                    { 15, 1, 70120.300000000003, "2023 chevy pick up Truck", new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7123), "Chevy Silverado", new DateTime(2023, 3, 1, 11, 2, 6, 304, DateTimeKind.Local).AddTicks(7122), 2, 2, "~/Images/chevySilverado.jpg" }
+                    { 1, 1, "Awsome Experience, it was Delvired on Time, #HappyCustomer", 1, "john.smith@gmail.com" },
+                    { 2, 1, "terrible Experience, i'm Done! Buying from this seller, #SadSeller", 2, "Vedoor.Barakat@gmail.com" },
+                    { 3, 2, "Fair Experience, got what i Paid for, #FairCustomer", 1, "john.smith@gmail.com" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -164,6 +170,9 @@ namespace Assignment1Group26.Migrations
         {
             migrationBuilder.DropTable(
                 name: "bids");
+
+            migrationBuilder.DropTable(
+                name: "reviews");
 
             migrationBuilder.DropTable(
                 name: "assetConditions");

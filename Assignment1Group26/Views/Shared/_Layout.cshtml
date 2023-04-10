@@ -9,50 +9,67 @@
     <link rel="stylesheet" href="~/Assignment1Group26.styles.css" asp-append-version="true" />
 </head>
 <body class="d-flex">
-    <header>
-        <nav class="nav-color navbar navbar-expand-lg " style="background-color:#212529;>
-            <div class="container-fluid" style="margin:0 150px">
-                <a class="navbar-brand" asp-controller="Home" asp-action="Index" style="margin-left:10px;">JoseDore</a>
-                <button type="button" class="navbar-toggler navbar-dark" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon "></span>
-                </button>
-                <div class="collapse navbar-collapse nav-color" id="navbarCollapse">
-                    <div class="navbar-nav">
-                        <a class="nav-item nav-link active" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        @{
+    
+            <header>
+                <nav class="nav-color navbar navbar-expand-lg " style="background-color:#212529;>
+                    <div class="container-fluid" style="margin:0 150px">
+                        <a class="navbar-brand" asp-controller="Home" asp-action="Index" style="margin-left:10px;">JoseDore</a>
+                        <button type="button" class="navbar-toggler navbar-dark" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                            <span class="navbar-toggler-icon "></span>
+                        </button>
+                        <div class="collapse navbar-collapse nav-color" id="navbarCollapse">
+                            <div class="navbar-nav">
+                            @{
 
-                            var currentController = ViewContext.RouteData.Values["controller"].ToString();
-                        }
-                        @if (currentController != "Registration" && currentController != "Login")
-                        {
-                            <a class="nav-item nav-link" asp-area="" asp-controller="Profile" asp-action="Profile">Profile</a>
-                            <a class="nav-item nav-link" asp-area="" asp-controller="Sell" asp-action="Index">Sell</a>
-                        }
-
-                    </div>
-                    <div class="navbar-nav ms-auto nav-color">
-                        @if (base.User.Identity.IsAuthenticated)
-                        {
-                            <a class="nav-item nav-link" asp-area="" asp-controller="Home" asp-action="Logout" style="margin-right:5px;">Logout</a>
+                                var currentController = ViewContext.RouteData.Values["controller"].ToString();
+                            }
+                            @if (currentController != "Registration" && currentController != "Login")
+                            {
+                                if (base.User.Identity.Name == "Admin")
+                                {
+                                <a class="nav-item nav-link active" asp-area="" asp-controller="Home" asp-action="Index">Auctioned Items</a>
+                                <a class="nav-item nav-link" asp-area="" asp-controller="AccountLookup" asp-action="Index">LookUp an Account</a>
+                                <a class="nav-item nav-link" asp-area="" asp-controller="Sell" asp-action="Index">Sellers Items</a>
+                                <a class="nav-item nav-link" asp-area="" asp-controller="Profile" asp-action="Profile">My Profile</a>
 
                         }
                         else
+
                         {
-
-                            <a class="nav-item nav-link" asp-area="" asp-controller="Registration" asp-action="Register" style="margin-right:5px;">Register</a>
-                            <a class="nav-item nav-link" asp-area="" asp-controller="Login" asp-action="Login" style="margin-right:5px;">Login</a>
-
+                                <a class="nav-item nav-link active" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                                <a class="nav-item nav-link" asp-area="" asp-controller="Profile" asp-action="Profile">Profile</a>
+                                <a class="nav-item nav-link" asp-area="" asp-controller="Sell" asp-action="Index">Sell</a>
                         }
-                        <form asp-controller="Search" asp-action="Search" method="Get" class="navbar-nav ms-auto" id="search">
-                        </form>
+
+                            }
+
+                            </div>
+                            <div class="navbar-nav ms-auto nav-color">
+                            @if (base.User.Identity.IsAuthenticated)
+                            {
+                                    <a class="nav-item nav-link" asp-area="" asp-controller="Home" asp-action="Logout" style="margin-right:5px;">Logout</a>
+
+                            }
+                            else
+                            {
+
+                                    <a class="nav-item nav-link" asp-area="" asp-controller="Registration" asp-action="Register" style="margin-right:5px;">Register</a>
+                                    <a class="nav-item nav-link" asp-area="" asp-controller="Login" asp-action="Login" style="margin-right:5px;">Login</a>
+
+                            }
+                                <form asp-controller="Search" asp-action="Search" method="Get" class="navbar-nav ms-auto" id="search">
+                                </form>
+
+                            </div>
+
+                        </div>
 
                     </div>
-
-                </div>
-
-            </div>
-        </nav>
-    </header>
+                </nav>
+            </header>
+        
+    
+    
     <div class="container content">
         <main role="main" class="pb-3">
             @RenderBody()

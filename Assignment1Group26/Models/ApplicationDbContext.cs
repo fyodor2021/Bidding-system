@@ -12,7 +12,7 @@ namespace Assignment1Group26.Models
         public DbSet<Category> categories { get; set; }
         public DbSet<Client> clients { get; set; }
         public DbSet<AssetCondition> assetConditions { get; set; }
-
+        public DbSet<Review> reviews { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Category>().HasData(
@@ -36,28 +36,39 @@ namespace Assignment1Group26.Models
 
                   new Client
                   {
-                      ClienFirstName = "John",
-                      ClienLastName = "Smith",
+                      ClientFirstName = "John",
+                      ClientLastName = "Smith",
                       ClientId = 1,
                       ClientUserName = "john.smith@gmail.com",
                       ClientPassword = "password",
-                      EmailConfirmed= true,
-
+                      EmailConfirmed = true,
+                      ClientRole = "Client"
                   },
 
                   new Client
                   {
-                      ClienFirstName = "vedoor",
-                      ClienLastName = "Barakat",
+                      ClientFirstName = "vedoor",
+                      ClientLastName = "Barakat",
                       ClientId = 2,
-                      ClientUserName = "Vendor.Barakat@gmail.com",
+                      ClientUserName = "Vedoor.Barakat@gmail.com",
                       ClientPassword = "password",
                       EmailConfirmed = true,
+                      ClientRole = "Client"
+                  },
+                  new Client
+                  {
+                      ClientFirstName = "josephine",
+                      ClientLastName = "abdulaziz",
+                      ClientId = 3,
+                      ClientUserName = "juju.josedore@gmail.com",
+                      ClientPassword = "juju123",
+                      EmailConfirmed = true,
+                      ClientRole = "Admin"
                   }
 
 
-
               );
+            /*
             modelBuilder.Entity<Bid>().HasData(
                      new Bid
                      {
@@ -98,7 +109,7 @@ namespace Assignment1Group26.Models
                              CategoryId = 1,
                              AssetConditionId = 1,
                              ClientId = 1,
-                             ImagePath = "~/Images/jeans.jpg"
+                            // ImagePath = "~/Images/jeans.jpg"
 
                          },
                              new Bid
@@ -112,7 +123,7 @@ namespace Assignment1Group26.Models
                                  CategoryId = 1,
                                  AssetConditionId = 1,
                                  ClientId = 1,
-                                 ImagePath = "~/Images/knitShirt.jpg"
+/ImagePath = "~/Images/knitShirt.jpg"
 
                              },
                              new Bid
@@ -276,7 +287,37 @@ namespace Assignment1Group26.Models
 
 
                  );
+            */
+            modelBuilder.Entity<Review>().HasData(
 
+                  new Review
+                  {
+                      ReviewId = 1,
+                      ClientId = 1,
+                      CreatedBy = 1,
+                      CreatedByStr = "john.smith@gmail.com",
+                     Comment = "Awsome Experience, it was Delvired on Time, #HappyCustomer"
+                  },
+
+                  new Review
+                  {
+                      ReviewId = 2,
+                      ClientId = 1,
+                      CreatedBy = 2,
+                      CreatedByStr = "Vedoor.Barakat@gmail.com",
+                      Comment = "terrible Experience, i'm Done! Buying from this seller, #SadSeller"
+                  },
+                  new Review
+                  {
+                      ReviewId = 3,
+                      ClientId = 2,
+                      CreatedBy = 1,
+                      CreatedByStr = "john.smith@gmail.com",
+                      Comment = "Fair Experience, got what i Paid for, #FairCustomer"
+                  }
+
+
+              );
 
 
 

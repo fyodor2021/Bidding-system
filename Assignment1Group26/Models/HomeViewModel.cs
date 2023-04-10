@@ -7,4 +7,6 @@
         public IEnumerable<AssetCondition> AssetConditions { get; set; }
 
     }
+
+
 }

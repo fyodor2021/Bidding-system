@@ -42,6 +42,7 @@ namespace Assignment1Group26.Controllers
                         c.EmailConfirmed = false;
                         c.VerficationToken = getToken();
                         c.keepLoggedIn = false;
+                        c.ClientRole = "Client";
                         _context.clients.Add(c);
                         _context.SaveChanges();
                         List<Claim> claims = new List<Claim>()

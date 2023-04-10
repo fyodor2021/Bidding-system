@@ -1,0 +1,32 @@
+﻿@model Client
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h2 class="text-center text-dark mt-5">Enter The User's Credentials</h2>
+            <div class="card my-5">
+
+                <form class="card-body cardbody-color p-lg-5" asp-controller="AccountLookup" asp-action="AccountLookup">
+                    <div class="mb-3">
+                        <input asp-for="ClientFirstName" type="text" class="form-control" id="FirstName" aria-describedby="emailHelp"
+                               placeholder="First Name">
+                    </div>
+                    <div class="mb-3">
+                        <input asp-for="ClientLastName" type="text" class="form-control" id="LastName" aria-describedby="emailHelp"
+                               placeholder="Last Name">
+                    </div>
+                    <div class="mb-3">
+                        <input asp-for="ClientUserName" type="text" class="form-control" id="Username" aria-describedby="emailHelp"
+                               placeholder="User Name">
+                    </div>
+                    @if (ViewData["errorMessage"] != null)
+                    {
+                        <h2 style="color:red;">@ViewData["errorMessage"]</h2>
+                    }
+                    <div class="text-center"><button type="submit" class="btn btn-color px-5 mb-5 w-100">Find Account</button></div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>

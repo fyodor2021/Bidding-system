@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Bid>
+﻿@model SellViewModel
+
 <div class="container">
     <div class="row">
         <div class="col">
@@ -7,29 +8,44 @@
             </h1>
         </div>
         <div class="col">
-            <h2>
-                <a class="justify-content-end" asp-controller="Sell" asp-action="Add"  style="border-right:1px;">Add</a>
-            </h2>
+            @if(base.User.Identity.Name != "Admin")
+            {
+                <h2>
+                    <a class="justify-content-end" asp-controller="Sell" asp-action="Add" style="border-right:1px;">Add</a>
+                </h2>
+            }
+            
+            
         </div>
     </div>
 </div>
 <table class="table table-bordered">
     <thead>
         <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
+            <th scope="col">Item #</th>
+            @if (base.User.Identity.Name == "Admin")
+            {
+                <th scope="col">Seller #</th>
+                <th scope="col">Seller Name</th>
+            }
+            <th scope="col">Item Name</th>
             <th scope="col">Category</th>
             <th scope="col">Actions</th>
+            
+            
         </tr>
     </thead>
     <tbody>
-        @foreach(Bid b in Model)
+        @foreach(Bid b in Model.Bids)
         {
+             var client = Model.Clients.FirstOrDefault(c => c.ClientId == b.ClientId);
             <tr>
                 <th class="cell" scope="row" >@b.BidId</th>
+                <th class="cell" scope="row">@b.ClientId</th>
+                <th class="cell" scope="row"><a asp-controller="Profile" asp-action="CommonProfile" asp-route-id="@client.ClientId">@client.ClientFirstName @client.ClientLastName</a></th>
                 <td class="align-items-center justify-content">@b.BidName</td>
-
                 <td class ="align-items-center justify-content">@b.BidDescription</td>
+
                 <td><a asp-route-id="@b.BidId" asp-controller="Sell" asp-action="Edit" class="btn btn-outline-primary">Edit</a>
                     <a asp-route-id="@b.BidId" asp-controller="Details" asp-action="Details" class="btn btn-outline-primary">Review</a>
                     <a asp-route-id="@b.BidId" asp-controller="Sell" asp-action="Delete" class="btn btn-outline-danger">Delete</a>

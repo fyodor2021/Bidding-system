@@ -17,27 +17,37 @@ namespace Assignment1Group26.Controllers
         }
         public IActionResult Profile()
         {
-
-            var clientUserName = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
-            var client = _context.clients.FirstOrDefault(c => c.ClientUserName == clientUserName);
-            if (client != null)
+            if (TempData["clientUserName"] != null)
             {
-                if (client.EmailConfirmed == true)
+                var client = _context.clients.FirstOrDefault(c => c.ClientUserName == TempData["clientUserName"]);
+                if (client != null)
                 {
                     return View(client);
-
-                }
-                else
-                {
-                    return View("../Email/EmailVerifyPage");
                 }
             }
+            else
+            {
+                var clientUserName = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+                var client = _context.clients.FirstOrDefault(c => c.ClientUserName == clientUserName);
+                if (client != null)
+                {
+                    if (client.EmailConfirmed == true)
+                    {
+                        return View(client);
+                    }
+                    else
+                    {
+                        return View("../Email/EmailVerifyPage");
+                    }
+                }
+            }
+            
 
 
 
             return RedirectToAction("Login", "Login");
         }
-
+        
         public IActionResult Edit(int id)
         {
             var c = _context.clients.FirstOrDefault(c => c.ClientId == id);
@@ -61,6 +71,16 @@ namespace Assignment1Group26.Controllers
 
 
         }
-
+        public IActionResult CommonProfile(int id) {
+           var tables = new ProfileReviewModel
+           {
+               Reviews = _context.reviews.Where(r => r.ClientId == id), 
+               Client = _context.clients.FirstOrDefault(c => c.ClientId == id)
+           };
+          
+           
+            return View(tables);
+        }
+        
     }
 }

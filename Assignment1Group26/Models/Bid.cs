@@ -32,8 +32,8 @@ namespace Assignment1Group26.Models
         public int ClientId { get; set; }
 
         public Category? Category { get; set; }
-
-        public string? ImagePath { get; set; }
+        
+        public Byte[]? ImageData { get; set; }
 
         [NotMapped]
         [ValidateImage]
@@ -41,26 +41,23 @@ namespace Assignment1Group26.Models
         public IFormFile? ImageFile { get; set; }
 
 
-        public async Task SaveImageAsync(IWebHostEnvironment webHostEnvironment)
+        public async Task SaveImageAsync()
         {
             if (ImageFile != null && ImageFile.ContentType.Contains("image"))
             {
-                string ImageUploadedFolder = Path.Combine(webHostEnvironment.WebRootPath, "Images");
-                string uniqueFileName = Guid.NewGuid().ToString() + "_" + ImageFile.FileName;
-                string filepath = Path.Combine(ImageUploadedFolder, uniqueFileName);
 
-                using (var fs = new FileStream(filepath, FileMode.Create))
+                using (var ms = new MemoryStream())
                 {
-                    await ImageFile.CopyToAsync(fs);
+                    await ImageFile.CopyToAsync(ms);
+                    ImageData = ms.ToArray();
                 }
 
-                ImagePath = "~/Images/" + uniqueFileName;
             }
             else if (ImageFile == null)
             {
-                // If no new file was uploaded but there is a path to an existing image,
-                // assign the existing image path to the ImagePath property.
-                ImagePath = ImagePath;
+                // If no new file was uploaded but there is  an existing image,
+                // assign the existing image  to the ImagePath property.
+                ImageData = ImageData;
             }
         }
         public class ValidateImage : ValidationAttribute
@@ -80,13 +77,13 @@ namespace Assignment1Group26.Models
                 }
                 else
                 {
-                    if ((bid.ImagePath != null))
+                    if ((bid.ImageData != null))
                     {
                         return ValidationResult.Success;
                     }
                 }
-                
-                
+
+
 
                 return ValidationResult.Success;
             }

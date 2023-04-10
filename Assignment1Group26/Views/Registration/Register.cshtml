@@ -10,15 +10,15 @@
 
 
                 <form class="card-body cardbody-color p-lg-5" asp-controller="Registration" asp-action="RegisterProcess">
-                    <p style="color:red">@Html.ValidationMessageFor(c=>c.ClienFirstName)</p>
+                    <p style="color:red">@Html.ValidationMessageFor(c=>c.ClientFirstName)</p>
                     <div class="mb-3">
-                        <input asp-for="ClienFirstName" type="text" class="form-control" id="Username" aria-describedby="emailHelp"
+                        <input asp-for="ClientFirstName" type="text" class="form-control" id="Username" aria-describedby="emailHelp"
                                placeholder="First Name">
                     </div>
-                    <p style="color:red">@Html.ValidationMessageFor(c=>c.ClienLastName)</p>
+                    <p style="color:red">@Html.ValidationMessageFor(c=>c.ClientLastName)</p>
 
                     <div class="mb-3">
-                        <input asp-for="ClienLastName" type="text" class="form-control" id="Username" aria-describedby="emailHelp"
+                        <input asp-for="ClientLastName" type="text" class="form-control" id="Username" aria-describedby="emailHelp"
                                placeholder="Last Name">
                     </div>
                     <p style="color:red">@Html.ValidationMessageFor(c=>c.ClientUserName)</p>

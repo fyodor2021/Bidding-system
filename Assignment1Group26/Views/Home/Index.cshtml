@@ -1,7 +1,9 @@
 ﻿@model HomeViewModel
 @{
     ViewData["Title"] = "JoseDore";
+    
 }
+
 <div style="margin-right:20px">
     <div class="row py-3">
         <div class="col-3 order-2" id="sticky-sidebar">
@@ -82,7 +84,7 @@
             {
                 <div class="card" style="width: 18rem;display:inline-block;">
                     <a asp-controller="Details" asp-action="Details" asp-route-id="@b.BidId">
-                        <img class="card-img-top" src="@Url.Content(b.ImagePath)" alt="Card image cap">
+                        <img class="card-img-top" src="data:image/*;base64,@(Convert.ToBase64String(b.ImageData))">
                     </a>
                     <div class="card-body">
                         <h5 class="card-title">@b.BidName</h5>

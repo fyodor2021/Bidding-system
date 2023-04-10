@@ -84,13 +84,12 @@
                             <div class="custom-file">
                                 <label class="custom-file-label" for="inputGroupFile04">Upload the item image</label>
                                 <input asp-for="@Model.ImageFile" type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
-                                <input hidden  asp-for="@Model.ImagePath">
 
-                                @if (ViewBag.Image != null)
+                                @if (Model.ImageData != null)
 
                                 {
                                     <p>You have uploaded</p>
-                                    <img src="@Url.Content(ViewBag.Image)" width="100px" height="100px" />
+                                    <img src="data:image/*;base64,@(Convert.ToBase64String(Model.ImageData))" width="100px" height="100px" />
 
                                 }
 
