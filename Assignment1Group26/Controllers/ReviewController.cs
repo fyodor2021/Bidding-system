@@ -1,5 +1,6 @@
 ﻿using Assignment1Group26.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Runtime.Intrinsics.Arm;
 
 namespace Assignment1Group26.Controllers
 {
@@ -28,8 +29,31 @@ namespace Assignment1Group26.Controllers
             }
             _context.reviews.Add(reviewToAdd);
             _context.SaveChanges();
-            return View("CommonProfile");
+            var tables = new ProfileReviewModel
+            {
+                Reviews = _context.reviews.Where(r => r.ClientId == rvm.Review.ClientId).ToList(),
+                Client = _context.clients.FirstOrDefault(C => C.ClientId == rvm.Review.ClientId)
 
+            };
+            return View("../../Views/Profile/CommonProfile", tables);
+
+        }
+        public IActionResult Delete(int id) 
+        {
+            Review reviewToDelete = _context.reviews.FirstOrDefault(r => r.ReviewId == id);
+            Client client = _context.clients.FirstOrDefault(c => c.ClientId == reviewToDelete.ClientId);
+            if (reviewToDelete != null)
+            {
+                _context.Remove(reviewToDelete);
+                _context.SaveChanges();
+            }
+            var tables = new ProfileReviewModel
+            {
+                Reviews = _context.reviews.Where(r => r.ClientId == client.ClientId).ToList(),
+                Client = client
+
+            };
+            return View("../../Views/Profile/CommonProfile", tables);
         }
     }
 }

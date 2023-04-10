@@ -47,7 +47,8 @@ namespace Assignment1Group26.Controllers
                         _context.SaveChanges();
                         List<Claim> claims = new List<Claim>()
                     {
-                        new Claim(ClaimTypes.NameIdentifier, c.ClientUserName)
+                        new Claim(ClaimTypes.NameIdentifier, c.ClientUserName),
+                        new Claim(ClaimTypes.Name, c.ClientRole)
                     };
                         ClaimsIdentity ClaimsIdentity
                             = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
