@@ -91,10 +91,9 @@ namespace Assignment1Group26.Controllers
                         receiver = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
                     }
 
-                    var hostName = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}/";
-                    var subject = "please verify your email(josedore)";
+                    var subject = "Verification PIN (JoseDore)";
                     var message = "<h1>Welcome Again to JoseDore</h1>" +
-                                  "<h2>Your PIN for this session is " + x;
+                                  "<h4>Your PIN for this session is: </h4>" + "<h2>" + x + "</h2>";
                     updatePin(client.ClientId, x);
 
                     await _emailSender.SendEmailAsync(receiver, subject, message);
@@ -125,7 +124,7 @@ namespace Assignment1Group26.Controllers
         {
             Client client = _context.clients.FirstOrDefault(c => c.ClientId == id);
             string receiver = client.ClientUserName;
-            var subject = "please verify your email(josedore)";
+            var subject = "Verification PIN (josedore)";
             var message = "<h1>Welcome Again to JoseDore</h1>" +
                           "<h2>Your PIN for this session is " + client.MultiPin;
 
