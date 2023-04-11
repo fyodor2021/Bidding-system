@@ -67,9 +67,11 @@ namespace Assignment1Group26.Controllers
         {
             var userName = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
             var user = _context.clients.FirstOrDefault(c => c.ClientUserName == userName);
+
             b.ClientId = user.ClientId;
             string action = (b.BidId == 0) ? "Add" : "Edit";
-            await b.SaveImageAsync();
+            
+                await b.SaveImageAsync();
             if (ModelState.IsValid)
             {
                 if (action == "Add")
@@ -97,8 +99,17 @@ namespace Assignment1Group26.Controllers
                 _context.SaveChanges();
                 return RedirectToAction("Index", "Sell");
         }
-       
-     
+
+        private Byte[] SameImageTrick(int id)
+        {
+           Bid bid = _context.bids.FirstOrDefault(b => b.BidId == id);
+            if (bid != null)
+            {
+                return bid.ImageData.ToArray();
+            }
+            return null;
+        }
+
         [HttpGet]
         public IActionResult Edit(int id)
         {
