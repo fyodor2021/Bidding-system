@@ -116,7 +116,9 @@ namespace Assignment1Group26.Controllers
             ViewBag.AssetCondition = _context.assetConditions.ToList();
             var b = _context.bids
                 .Include(c => c.Category).Include(a => a.AssetCondition).FirstOrDefault(b => b.BidId == id);
+            
             ViewBag.Image = "data:image/*;base64," + Convert.ToBase64String(b.ImageData);
+            
             var bb = b.BidId;
 
             return View("Add",b);

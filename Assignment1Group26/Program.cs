@@ -2,6 +2,8 @@ using Assignment1Group26.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Assignment1Group26.Service;
+using Stripe;
+using Assignment1Group26.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,7 +34,12 @@ var configuration = builder.Configuration;
 var emailconfig = configuration.GetSection("email");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.Configure<StripeSetting>(configuration.GetSection("StripeKeys"));
+
 var app = builder.Build();
+StripeConfiguration.ApiKey = configuration.GetSection("StripeKeys")["SecreteKey"];
+
+///StripeConfiguration.SetApiKey(configuration.GetSection("StripeKeys")["SecreteKey"]);
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

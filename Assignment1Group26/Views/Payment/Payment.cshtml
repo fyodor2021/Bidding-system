@@ -1,0 +1,17 @@
+﻿@using Microsoft.Extensions.Options
+@inject IOptions<Assignment1Group26.Data.StripeSetting> Stripe
+@{
+}
+<form asp-action="Charge" asp-controller="Payment" method="post">
+    <script src="https://checkout.stripe.com/checkout.js" 
+    class="stripe-button"
+            data-key="pk_test_51MvUuvAO8tl6rEU1DjtXyuH1egkj7W76KkaMska7K4oEGG8HiNqUuwdVz7etwP7Q5xGFa8Fp1LAy8O8ptbKH4BFj00DAMQsl1F"
+            data-amount="5000"
+            data-name="Demo Site"
+            data-description="Sample Charge"
+            data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+            data-currency="usd"
+            data-email="customer@example.com"
+            data-locale="auto">
+    </script>
+</form>

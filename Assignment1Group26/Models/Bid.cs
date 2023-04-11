@@ -20,7 +20,8 @@ namespace Assignment1Group26.Models
         [NotMapped]
         public DateTime BidStartTime { get; set; }
         [ValidateDate]
-        public DateTime BidEndDate { get; set; }
+        public DateTime BidEndDate { get; set; } = DateTime.Now.AddDays(1);
+
         [NotMapped]
         public DateTime BidEndTime { get; set;}
 
@@ -35,14 +36,14 @@ namespace Assignment1Group26.Models
 
         public Category? Category { get; set; }
         
-        public Byte[]? ImageData { get; set; }
+        public byte[]? ImageData { get; set; }
 
         [NotMapped]
         [ValidateImage]
         public IFormFile? ImageFile { get; set; }
 
 
-        public async Task SaveImageAsync()
+       public async Task SaveImageAsync()
         {
             if (ImageFile != null && ImageFile.ContentType.Contains("image"))
             {
@@ -50,7 +51,9 @@ namespace Assignment1Group26.Models
                 using (var ms = new MemoryStream())
                 {
                     await ImageFile.CopyToAsync(ms);
+
                     ImageData = ms.ToArray();
+                    //ImageData = Convert.ToBase64String(data);   
                 }
 
             }
