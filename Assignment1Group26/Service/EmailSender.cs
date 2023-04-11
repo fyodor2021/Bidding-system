@@ -27,7 +27,7 @@ namespace Assignment1Group26.Service
             {
                 mailMessage.To.Add(email);
 
-                mailMessage.From = new MailAddress(mail);
+                mailMessage.From = new MailAddress(mail,"JoseDore");
 
                 mailMessage.Subject = subject;
 

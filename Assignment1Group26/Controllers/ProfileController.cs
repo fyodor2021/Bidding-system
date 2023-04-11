@@ -76,7 +76,7 @@ namespace Assignment1Group26.Controllers
                 {
                     receiver = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
                 }
-                var subject = "please verify your email(josedore)";
+                var subject = "Profile Changes Were Made";
                 var message = "<h1>Hello Friend</h1>" +
                               "<h3>This is To Notify you that you Password was Recently Changed</h3>";
                 await _emailSender.SendEmailAsync(receiver, subject, message);
