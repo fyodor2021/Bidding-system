@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Security.Permissions;
 
 namespace Assignment1Group26.Models
 {
@@ -26,6 +27,18 @@ namespace Assignment1Group26.Models
         public bool EmailConfirmed { get; set; }
         public string? ClientRole { get; set; }
         public bool Blocked { get; set; } = false;
+        [NotMapped]
+        public int? FirstNumber { get; set; }
+        [NotMapped]
+        public int? SecondNumber { get; set; }
+        [NotMapped]
+        public int? ThirdNumber { get; set; }
+        [NotMapped]
+        public int? FourthNumber { get; set; }
+        [NotMapped]
+        public int? FifthNumber { get; set; }
+        [NotMapped]
+        public int? SixthNumber { get; set; }
         public int MultiPin { get; set; } = 11111111;
         public string? VerficationToken { get; set; }
         public bool keepLoggedIn { get; set; }

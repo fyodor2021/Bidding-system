@@ -33,8 +33,9 @@ namespace Assignment1Group26.Controllers
 
         public async Task<IActionResult> LoggingIn(Client cl)
         {
+            string assembledPin = cl.FirstNumber.ToString() + cl.SecondNumber.ToString() + cl.ThirdNumber.ToString() + cl.FourthNumber.ToString() + cl.FifthNumber.ToString() + cl.SixthNumber.ToString();
             Client client = _context.clients.FirstOrDefault(c => c.ClientId == cl.ClientId);
-            if (client.MultiPin == cl.MultiPin)
+            if (client.MultiPin == int.Parse(assembledPin))
             {
                 List<Claim> claims;
                 if (client.ClientRole == "Admin")
@@ -79,7 +80,7 @@ namespace Assignment1Group26.Controllers
                 if (client.Blocked == false)
                 {
                     Random rn = new Random();
-                    int x = rn.Next();
+                    int x = rn.Next(000000,999999);
 
                     string receiver;
                     if (c.ClientUserName != null)

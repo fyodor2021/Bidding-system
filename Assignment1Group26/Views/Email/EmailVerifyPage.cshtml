@@ -1,19 +1,42 @@
 ﻿@model Client
 
-@if(Model != null)
+@if (Model != null)
 {
     @if (Model.EmailConfirmed)
     {
         <form asp-controller="Login" asp-action="LoggingIn" method="post">
             <input hidden readonly asp-for="ClientId" value="@Model.ClientId">
-            <lable name="validation">Please enter your PIN: </lable>
-            <input name="MultiPin" type="text">
-            <h3 style="color:red;">@ViewData["ValidationMessage"]</h3>
-            @if (@ViewData["ValidationMessage"] != null)
-            {
-                <h6><a asp-controller="Login" asp-action="ResendEmail" asp-route-id="@Model.ClientId">Resend Code</a></h6>
-            }
-            <input type="submit" value="Submit">
+            
+            <div class="d-flex justify-content-center align-items-center container">
+                <div class="card py-5 px-3">
+                    <h5 class="m-0" style="color:darkblue;">Email Verification</h5>
+                    <span class="mobile-text">Enter the code we just send to your</span>
+                    <span>Email Address: <strong style="color:darkblue;">@Model.ClientUserName</strong></span>
+                    <div class="d-flex flex-row mt-5">
+                        <input name="FirstNumber"  type="text" maxlength="1" class="form-control pin-entery" autofocus="">
+                        <input name="SecondNumber" type="text" maxlength="1" class="form-control pin-entery">
+                        <input name="ThirdNumber" type="text" maxlength="1" class="form-control pin-entery">
+                        <input name="FourthNumber" type="text" maxlength="1" class="form-control pin-entery">
+                        <input name="FifthNumber" type="text" maxlength="1" class="form-control pin-entery">
+                        <input name="SixthNumber" type="text" maxlength="1" class="form-control pin-entery">
+
+                    </div>
+                    <h3 style="color:red; font-size:20px">@ViewData["ValidationMessage"]</h3>
+
+                    <div class="text-center mt-5">
+                        <span class="d-block mobile-text" style="margin-bottom:10px;">Don't receive the code?</span>
+                        @if (@ViewData["ValidationMessage"] != null)
+                        {
+                            <span><a  asp-controller="Login" asp-action="ResendEmail" asp-route-id="@Model.ClientId" style="color:indianred">Resend Code</a></span>
+                        }
+                    </div>
+                    
+                        <input class="btn-outline-primary" type="submit" value="Submit">
+
+                    
+                    
+                </div>
+            </div>
         </form>
 
     }

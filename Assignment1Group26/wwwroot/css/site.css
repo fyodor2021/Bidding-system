@@ -368,3 +368,8 @@ td {
     padding-top: 4px;
     text-align: center;
 }
+.pin-entery {
+    width: 70px;
+    margin: 2px;
+    text-align:center;
+}
