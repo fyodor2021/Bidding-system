@@ -168,6 +168,70 @@
             </div>
         </div>
     </div>
+<<<<<<< HEAD
 </section>
+=======
+
+    <div class="col-md-8">
+        <div class="card mb-3">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">Full Name</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        @Model.ClientFirstName  @Model.ClientLastName
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">Email</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        @Model.ClientUserName
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">Email Verified</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        @Model.EmailConfirmed
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-sm-12 " style="margin-top:5px;">
+                        <a asp-controller="Profile" asp-action="Edit" asp-route-id="@Model.ClientId" class="btn btn-info">Edit</a>
+                        <a class="btn btn-info " asp-action="Index" asp-controller="Home">Home</a>
+                        <p></p>
+                        @if (base.User.Identity.Name == "Admin")
+                        {
+                            @if (Model.ClientRole != "Admin")
+                            {
+                                @if (Model.Blocked)
+                                {
+                                    <a class="btn btn-info btn-outline-danger" style="background-color:white;" asp-action="Unblock" asp-controller="Profile" asp-route-id="@Model.ClientId">UnBlock</a>
+                                }
+                                else
+                                {
+                                    <a class="btn btn-info btn-outline-danger " style="background-color:white;" asp-action="Block" asp-controller="Profile" asp-route-id="@Model.ClientId">Block</a>
+
+                                }
+                            }
+                        }
+                        
+                        
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+>>>>>>> 89c551a25b7dd22a8bd651e8839c878a0266d1a1
 
 

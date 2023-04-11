@@ -1,52 +1,57 @@
 ﻿@model Bid
-@using (Html.BeginForm("Add", "Sell", FormMethod.Post, new { @enctype = "multipart/form-data" }))
 {
-<div class="container">
-    <div class="row">
-        <h1>@ViewBag.Action Bid</h1>
-        <div class="col-md-6 offset-md-3">
-            <h2 class="text-center text-dark mt-5">
-                Please Enter The Following Information
-            </h2>
-            <div class="card my-5">
+    <div class="container">
+        <div class="row">
+            <h1>@ViewBag.Action Bid</h1>
+            <div class="col-md-6 offset-md-3">
+                <h2 class="text-center text-dark mt-5">
+                    Please Enter The Following Information
+                </h2>
+                <div class="card my-5">
 
-                <form class="card-body cardbody-color p-lg-5" asp-controller="Sell" asp-action="Add" method="post">
-                    <div class="mb-3">
+                    <form class="card-body cardbody-color p-lg-5" asp-controller="Sell" asp-action="Add" enctype="multipart/form-data" method="post">
+                        <div class="mb-3">
 
                             <p style="color:red">@Html.ValidationMessageFor(b=>b.BidName)</p>
                             <input hidden readonly asp-for="@Model.BidId">
+                        <input hidden readonly name="ImageData" value="@if(Model.ImageData != null){ @Convert.ToBase64String(Model.ImageData)}">
 
-                        <input asp-for="BidName" type="text" class="form-control" id="BidName" aria-describedby="emailHelp"
-                               placeholder="Bid Name">
-                    </div>
-                    <div class="mb-3">
+                            <input asp-for="BidName" type="text" class="form-control" id="BidName" aria-describedby="emailHelp"
+                                   placeholder="Bid Name">
+                        </div>
+                        <div class="mb-3">
                             <p style="color:red">
-                          @Html.ValidationMessageFor(b=>b.BidDescription)  </p>
-                        <input asp-for="BidDescription" type="text" class="form-control" id="BidDescription" aria-describedby="emailHelp"
-                               placeholder="Bid Description">
-                    </div>
-                    <div class="mb-3">
+                                @Html.ValidationMessageFor(b=>b.BidDescription)
+                            </p>
+                            <input asp-for="BidDescription" type="text" class="form-control" id="BidDescription" aria-describedby="emailHelp"
+                                   placeholder="Bid Description">
+                        </div>
+                        <div class="mb-3">
                             <p style="color:red">@Html.ValidationMessageFor(b=>b.BidCost)  </p>
 
-                            
-                        <input asp-for="BidCost" type="text" class="form-control" id="BidCost" aria-describedby="emailHelp"
-                               placeholder="Bid Cost">
-                    </div>
-                    <div class="mb-3">
+
+                            <input asp-for="BidCost" type="text" class="form-control" id="BidCost" aria-describedby="emailHelp"
+                                   placeholder="Bid Cost">
+                        </div>
+                        <div class="mb-3">
                             <p style="color:red">@Html.ValidationMessageFor(b=>b.BidStartDate)  </p>
-                        <label asp-for="BidStartDate">Bid Start Date</label>
-                        <input asp-for="BidStartDate" type="date" class="form-control" id="Username" aria-describedby="emailHelp"
-                               placeholder="Bid Start Date">
+                            <label asp-for="BidStartDate">Bid Start Date</label>
+                        <input name="BidStartDate" asp-for="@Model.BidStartDate" type="date" class="form-control" id="StartDate" aria-describedby="emailHelp"
+                                   placeholder="@Model.BidStartDate">
+                        <input name="BidStartTime" asp-for="@Model.BidStartDate.TimeOfDay" type="time" class="form-control" id="StartTime" placeholder="@Model.BidStartDate">
+
                     </div>
-                    <div class="mb-3">
+                        <div class="mb-3">
                             @if (ViewData["ValidationMessage"] != null)
                             {
                                 <p style="color:red;">@ViewData["ValidationMessage"]</p>
                             }
-                        <label asp-for="BidEndDate">Bid End Date</label>
-                            <input asp-for="BidEndDate" type="date" class="form-control" id="Username" aria-describedby="emailHelp"
-                               placeholder="Bid End Date">
-                    </div>
+                            <label asp-for="BidEndDate">Bid End Date</label>
+                        <input name="BidEndDate" asp-for="@Model.BidEndDate" type="date" class="form-control" id="StartDate" aria-describedby="emailHelp"
+                                   placeholder="@Model.BidEndDate">
+                        <input name="BidEndTime" asp-for="@Model.BidEndDate.TimeOfDay" type="time" class="form-control" id="EndTime" placeholder="@Model.BidEndDate">
+
+                        </div>
                         <p style="color:red">@Html.ValidationMessageFor(b=>b.CategoryId)</p>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
@@ -63,7 +68,7 @@
                                 }
                             </select>
                         </div>
-                         <p style="color:red">@Html.ValidationMessageFor(b=>b.AssetConditionId)  </p>
+                        <p style="color:red">@Html.ValidationMessageFor(b=>b.AssetConditionId)  </p>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <label class="input-group-text" for="inputGroupSelect01">Asset Condition</label>
@@ -83,9 +88,13 @@
                         <div class="input-group mb-3">
                             <div class="custom-file">
                                 <label class="custom-file-label" for="inputGroupFile04">Upload the item image</label>
+<<<<<<< HEAD
                                 <input asp-for="@Model.ImageFile" type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
                                 <input type="hidden" name="ImageData" asp-for="@Model.ImageData" value="@Convert.ToBase64String(Model.ImageData ?? new byte[0])"  />
 
+=======
+                                <input asp-for="ImageFile" type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
+>>>>>>> 89c551a25b7dd22a8bd651e8839c878a0266d1a1
 
                                 @if (Model.ImageData != null)
 
@@ -98,19 +107,19 @@
                             </div>
 
                         </div>
-                    <div class="input-group mb-3">
+                        <div class="input-group mb-3">
 
                             <button type="submit" class="btn btn-primary" style="margin-right:5px;">@ViewBag.Action</button>
-                        <button asp-controller="Home" asp-action="Index" class="btn btn-primary">Home</button>
+                            <button asp-controller="Home" asp-action="Index" class="btn btn-primary">Home</button>
 
-                       </div>
+                        </div>
 
-                </form>
+                    </form>
+                </div>
+
+
             </div>
-
-
         </div>
     </div>
-</div>
 }
 

@@ -17,10 +17,13 @@ namespace Assignment1Group26.Models
         [ValidateDate]
 
         public DateTime BidStartDate { get; set; } = DateTime.Now;
-        
-
+        [NotMapped]
+        public DateTime BidStartTime { get; set; }
         [ValidateDate]
         public DateTime BidEndDate { get; set; } = DateTime.Now.AddDays(1);
+
+        [NotMapped]
+        public DateTime BidEndTime { get; set;}
 
         [Range(1, 4, ErrorMessage = "Please select a valid condition")]
         public int AssetConditionId { get; set; }
@@ -37,7 +40,6 @@ namespace Assignment1Group26.Models
 
         [NotMapped]
         [ValidateImage]
-
         public IFormFile? ImageFile { get; set; }
 
 

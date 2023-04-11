@@ -100,7 +100,7 @@ namespace Assignment1Group26.Controllers
             }
 
             var hostName = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}/";
-            var subject = "please verify your email(josedore)";
+            var subject = "Please Verify Your Email";
             var message = "<h1>please confirm your email</h1>" +
                           "<a href=\"" + hostName + "Registration/ValidateToken?token=" + c.VerficationToken + "\">verify your email</a>";
 
@@ -121,7 +121,7 @@ namespace Assignment1Group26.Controllers
                 {
                     client.EmailConfirmed = true;
                     _context.SaveChanges();
-
+                    
                 }
             }
             else
@@ -138,6 +138,7 @@ namespace Assignment1Group26.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+        
         public string getToken()
         {
             return Convert.ToHexString(RandomNumberGenerator.GetBytes(64));

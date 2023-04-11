@@ -1,7 +1,9 @@
 ﻿using Assignment1Group26.Models;
+using Assignment1Group26.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
+using System.Net.Mail;
 using System.Reflection.Metadata.Ecma335;
 using System.Security.Claims;
 
@@ -11,9 +13,11 @@ namespace Assignment1Group26.Controllers
     public class ProfileController : Controller
     {
         private ApplicationDbContext _context;
-        public ProfileController(ApplicationDbContext context)
+        private IEmailSender _emailSender;
+        public ProfileController(ApplicationDbContext context, IEmailSender emailSender)
         {
             _context = context;
+            _emailSender = emailSender;
         }
         public IActionResult Profile()
         {
@@ -54,7 +58,7 @@ namespace Assignment1Group26.Controllers
             return View(c);
         }
         [HttpPost]
-        public IActionResult Edit(Client cc)
+        public async Task<IActionResult> Edit(Client cc)
         {
 
 
@@ -63,6 +67,19 @@ namespace Assignment1Group26.Controllers
                 _context.clients.Update(cc);
                 _context.SaveChanges();
                 ViewData["confirmationMessage"] = "Your Profile was Updated";
+                string receiver;
+                if (cc.ClientUserName != null)
+                {
+                    receiver = cc.ClientUserName;
+                }
+                else
+                {
+                    receiver = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+                }
+                var subject = "Profile Changes Were Made";
+                var message = "<h1>Hello Friend</h1>" +
+                              "<h3>This is To Notify you that you Password was Recently Changed</h3>";
+                await _emailSender.SendEmailAsync(receiver, subject, message);
                 return View(cc);
             }
             var client = _context.clients.FirstOrDefault(c => c.ClientId == cc.ClientId);
@@ -81,6 +98,26 @@ namespace Assignment1Group26.Controllers
            
             return View(tables);
         }
-        
+        public IActionResult Block(int id)
+        {
+             Client clientToUpdate  =  _context.clients.FirstOrDefault(c => c.ClientId == id);
+            clientToUpdate.Blocked = true;
+                  _context.Update(clientToUpdate);
+                  _context.SaveChanges();
+            Client clientToDisplay = _context.clients.FirstOrDefault(c => c.ClientId == id);
+            return View("../../Views/Profile/Profile", clientToDisplay);
+
+        }
+        public IActionResult Unblock(int id)
+        {
+
+            Client clientToUpdate = _context.clients.FirstOrDefault(c => c.ClientId == id);
+            clientToUpdate.Blocked = false;
+                _context.Update(clientToUpdate);
+                _context.SaveChanges();
+            Client clientToDisplay = _context.clients.FirstOrDefault(c => c.ClientId == id);
+            return View("../../Views/Profile/Profile", clientToDisplay);
+
+        }
     }
 }

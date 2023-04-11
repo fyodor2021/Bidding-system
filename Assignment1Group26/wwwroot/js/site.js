@@ -1,4 +1,13 @@
-﻿function unCheck() {
+﻿import Timer from "./Timer.js";
+
+new Timer(
+    document.querySelector(".timer")
+);
+
+
+
+
+function unCheck() {
 
     var elements = document.getElementsByClassName("unCheck");
 
@@ -8,5 +17,3 @@
         }
     }
 }
-
-

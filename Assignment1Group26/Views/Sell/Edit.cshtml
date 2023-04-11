@@ -13,6 +13,7 @@
 
                     <form class="card-body cardbody-color p-lg-5" asp-controller="Sell" asp-action="Editing"  method="post">
                         <input hidden readonly asp-for="@Model.BidId">
+                        <input hidden readonly name="ImageData" value="@Url.Content(ViewBag.Image)">
                         <div class="mb-3">
                         <input asp-for="BidName" type="text" class="form-control" id="BidName" aria-describedby="emailHelp"
                                placeholder="@Model.BidName">
