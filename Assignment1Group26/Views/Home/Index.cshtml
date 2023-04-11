@@ -79,17 +79,23 @@
                 </article>
             </div>
         </div>
+        <a asp-controller="Payment" asp-action="Payment" >Payment</a>
+
         <div class="col" id="main">
             @foreach (Bid b in Model.Bids)
             {
                 <div class="card" style="width: 18rem;display:inline-block;">
                     <a asp-controller="Details" asp-action="Details" asp-route-id="@b.BidId">
-                        <img class="card-img-top" src="data:image/*;base64,@(Convert.ToBase64String(b.ImageData))">
+                        @if (b.ImageData != null)
+                        {
+                                                    <img class="card-img-top" src="data:image/*;base64,@(Convert.ToBase64String(b.ImageData))">
+                        }
                     </a>
                     <div class="card-body">
                         <h5 class="card-title">@b.BidName</h5>
                         <p class="card-text">$@b.BidCost</p>
                         <a asp-controller="Details" asp-action="Details" asp-route-id="@b.BidId" class="btn btn-primary">View Details</a>
+
                     </div>
                 </div>
             }

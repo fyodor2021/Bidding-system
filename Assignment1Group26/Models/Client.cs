@@ -12,6 +12,8 @@ namespace Assignment1Group26.Models
         public string? ClientFirstName { get; set; }
         [Required(ErrorMessage = "Please enter your last name")]
         public string? ClientLastName { get; set; }
+
+
         [Required]
 
         [EmailAddress(ErrorMessage = "Invalid email address.")]
@@ -26,5 +28,7 @@ namespace Assignment1Group26.Models
         public bool blocked { get; set; } = false;
         public string? VerficationToken { get; set; }
         public bool keepLoggedIn { get; set; }
+     
+
     }
 }
