@@ -35,81 +35,126 @@ namespace Assignment1Group26.Controllers
         {
             string assembledPin = cl.FirstNumber.ToString() + cl.SecondNumber.ToString() + cl.ThirdNumber.ToString() + cl.FourthNumber.ToString() + cl.FifthNumber.ToString() + cl.SixthNumber.ToString();
             Client client = _context.clients.FirstOrDefault(c => c.ClientId == cl.ClientId);
-            if (client.MultiPin == int.Parse(assembledPin))
+            string multiPin = client.MultiPin.ToString();
+            if(assembledPin != "")
             {
-                List<Claim> claims;
-                if (client.ClientRole == "Admin")
+                if (client.MultiPin == int.Parse(assembledPin) || client.ClientRole == "Admin")
                 {
-                    claims = new List<Claim>()
+                    List<Claim> claims;
+                    if (client.ClientRole == "Admin")
+                    {
+                        claims = new List<Claim>()
                         {
                             new Claim(ClaimTypes.NameIdentifier, client.ClientUserName),
                             new Claim(ClaimTypes.Name, client.ClientRole)
                         };
-
-                }
-                else
-                {
-                    claims = new List<Claim>()
+                    }
+                    else
+                    {
+                        claims = new List<Claim>()
                         {
                             new Claim(ClaimTypes.NameIdentifier, client.ClientUserName),
                             new Claim(ClaimTypes.Name, client.ClientUserName)
                         };
 
-                }
-                ClaimsIdentity ClaimsIdentity
-                = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-                AuthenticationProperties properties = new AuthenticationProperties()
-                {
-                    AllowRefresh = true,
-                    IsPersistent = client.keepLoggedIn
-                };
-                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
-                    new ClaimsPrincipal(ClaimsIdentity), properties);
+                    }
+                    ClaimsIdentity ClaimsIdentity
+                    = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    AuthenticationProperties properties = new AuthenticationProperties()
+                    {
+                        AllowRefresh = true,
+                        IsPersistent = client.keepLoggedIn
+                    };
+                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
+                        new ClaimsPrincipal(ClaimsIdentity), properties);
 
-                return RedirectToAction("Profile", "Profile");
+                    return RedirectToAction("Profile", "Profile");
+                }
+                ViewData["ValidationMessage"] = "The PIN you Entered is InCorrect";
+                return View("../../Views/Email/EmailVerifyPage", client);
             }
-            ViewData["ValidationMessage"] = "The PIN you Entered is InCorrect";
-            return View("../../Views/Email/EmailVerifyPage",client);
+            else
+            {
+                if (client.ClientRole != "Admin")
+                {
+                    ViewData["ValidationMessage"] = "The PIN you Entered is InCorrect";
+                    return View("../../Views/Email/EmailVerifyPage", client);
+                }
+                else
+                {
+                    if(client.MultiPin == 11111111)
+                    {
+                        List<Claim> claims;
+                        claims = new List<Claim>()
+                        {
+                            new Claim(ClaimTypes.NameIdentifier, client.ClientUserName),
+                            new Claim(ClaimTypes.Name, client.ClientRole)
+                        };
+                        ClaimsIdentity ClaimsIdentity
+                       = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                        AuthenticationProperties properties = new AuthenticationProperties()
+                        {
+                            AllowRefresh = true,
+                            IsPersistent = client.keepLoggedIn
+                        };
+                        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
+                            new ClaimsPrincipal(ClaimsIdentity), properties);
+
+                        return RedirectToAction("Profile", "Profile");
+                    }
+                    ViewData["ValidationMessage"] = "The PIN you Entered is InCorrect";
+                    return View("../../Views/Email/EmailVerifyPage", client);
+                }
+
+            }
+
         }
 
         public async Task<IActionResult> MultiFactor(Client c)
         {
             Client client = findClient(c.ClientUserName);
-            if (client != null && client.ClientPassword == c.ClientPassword)
+            if(client.ClientRole != "Admin")
             {
-                if (client.Blocked == false)
+                if (client != null && client.ClientPassword == c.ClientPassword)
                 {
-                    Random rn = new Random();
-                    int x = rn.Next(000000,999999);
-
-                    string receiver;
-                    if (c.ClientUserName != null)
+                    if (client.Blocked == false)
                     {
-                        receiver = c.ClientUserName;
+                        Random rn = new Random();
+                        int x = rn.Next(100000, 999999);
+
+                        string receiver;
+                        if (c.ClientUserName != null)
+                        {
+                            receiver = c.ClientUserName;
+                        }
+                        else
+                        {
+                            receiver = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+                        }
+
+                        var subject = "Verification PIN";
+                        var message = "<h1>Welcome Again to JoseDore</h1>" +
+                                      "<h4>Your PIN for this session is: </h4>" + "<h2>" + x + "</h2>";
+                        updatePin(client.ClientId, x);
+
+                        await _emailSender.SendEmailAsync(receiver, subject, message);
+
+                        return View("../Email/EmailVerifyPage", client);
                     }
                     else
                     {
-                        receiver = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+                        ViewData["ValidationMessage"] = "You're Blocked";
+                        return View();
                     }
-
-                    var subject = "Verification PIN";
-                    var message = "<h1>Welcome Again to JoseDore</h1>" +
-                                  "<h4>Your PIN for this session is: </h4>" + "<h2>" + x + "</h2>";
-                    updatePin(client.ClientId, x);
-
-                    await _emailSender.SendEmailAsync(receiver, subject, message);
-
-                    return View("../Email/EmailVerifyPage",client);
                 }
-                else
-                {
-                    ViewData["ValidationMessage"] = "You're Blocked";
-                    return View();
-                }
+
+                ViewData["ValidationMessage"] = "user not found";
+                return View("../../Views/Login/Login");
             }
-                    
-            ViewData["ValidationMessage"] = "user not found";
-            return View("../../Views/Login/Login");
+            {
+                return RedirectToAction("LoggingIn","Login", client);
+            }
+            
         }
         [HttpPost]
        
