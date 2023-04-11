@@ -94,36 +94,32 @@
                         <p class="card-text">$@b.BidCost</p>
                         @if (datesToStart > TimeSpan.Zero)
                         {
-
-                            <h5 class="card-title">Bid Starts:</h5>
-
+                            <h5 class="card-text">Bid Starts:</h5>
                             <div class="card_body card_body_timer timer">
                                 <div class="countdown_section">
-                                    <div id="days" class="value">@datesToStart.Days</div>
+                                    <div id="days" class="value days">@datesToStart.Days</div>
                                     <div class="countdown_label">DAYS</div>
                                 </div>
                                 <div class="countdown_section">
-                                    <div id="hours" class="value">@datesToStart.Hours</div>
+                                    <div id="hours" class="value hours">@datesToStart.Hours</div>
                                     <div class="countdown_label">HOURS</div>
                                 </div>
                                 <div class="countdown_section">
-                                    <div id="minutes" class="value">@datesToStart.Minutes</div>
+                                    <div id="minutes" class="value minutes">@datesToStart.Minutes</div>
                                     <div class="countdown_label">MINUTES</div>
                                 </div>
                                 <div class="countdown_section">
-                                    <div id="seconds" class="value">@datesToStart.Seconds</div>
+                                    <div id="seconds" class="value seconds">@datesToStart.Seconds</div>
                                     <div class="countdown_label">SECONDS</div>
                                 </div>
-
                             </div>
                         }
                         else
                         {
-                            <h5 class="card-title">Bid Starts:</h5>
-
-                            <div class="card_body card_body_timer timer">
+                            <h5 class="card-text">Bid Starts:</h5>
+                            <div class="card_body card_body_timer ">
                                 <div class="countdown_section">
-                                    <div id="days" class="value">00</div>
+                                    <div id="days" class="value ">00</div>
                                     <div class="countdown_label">DAYS</div>
                                 </div>
                                 <div class="countdown_section">
@@ -141,24 +137,24 @@
 
                             </div>
 
+                            
                         }
-                        <h5 class="card-title">bid Ends:</h5>
-
+                        <h5 class="card-text">bid Ends:</h5>
                         <div class="card_body card_body_timer timer">
                             <div class="countdown_section">
-                                <div id="days" class="value">@dateLeft.Days</div>
+                                <div id="days" class="value days">@dateLeft.Days</div>
                                 <div class="countdown_label">DAYS</div>
                             </div>
                             <div class="countdown_section">
-                                <div id="hours" class="value">@dateLeft.Hours</div>
+                                <div id="hours" class="value hours">@dateLeft.Hours</div>
                                 <div class="countdown_label">HOURS</div>
                             </div>
                             <div class="countdown_section">
-                                <div id="minutes" class="value">@dateLeft.Minutes</div>
+                                <div id="minutes" class="value minutes">@dateLeft.Minutes</div>
                                 <div class="countdown_label">MINUTES</div>
                             </div>
                             <div class="countdown_section">
-                                <div id="seconds" class="value">@dateLeft.Seconds</div>
+                                <div id="seconds" class="value seconds">@dateLeft.Seconds</div>
                                 <div class="countdown_label">SECONDS</div>
                             </div>
 
