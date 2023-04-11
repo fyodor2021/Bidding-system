@@ -4,7 +4,6 @@ using Assignment1Group26.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -12,10 +11,9 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Assignment1Group26.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230410220624_first")]
-    partial class first
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -149,9 +147,19 @@ namespace Assignment1Group26.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ClientId"), 1L, 1);
 
+                    b.Property<bool>("Blocked")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ClientBirthData")
+                        .IsRequired()
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("ClientFirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("ClientImage")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("ClientLastName")
                         .IsRequired()
@@ -159,6 +167,10 @@ namespace Assignment1Group26.Migrations
 
                     b.Property<string>("ClientPassword")
                         .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("ClientPhoneNumber")
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
@@ -172,11 +184,11 @@ namespace Assignment1Group26.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<int>("MultiPin")
+                        .HasColumnType("int");
+
                     b.Property<string>("VerficationToken")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("blocked")
-                        .HasColumnType("bit");
 
                     b.Property<bool>("keepLoggedIn")
                         .HasColumnType("bit");

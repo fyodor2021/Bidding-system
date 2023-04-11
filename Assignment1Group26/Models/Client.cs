@@ -42,7 +42,67 @@ namespace Assignment1Group26.Models
         public int MultiPin { get; set; } = 11111111;
         public string? VerficationToken { get; set; }
         public bool keepLoggedIn { get; set; }
-     
+        
+     [StringLength(10,ErrorMessage = "Please enter your phone number")]
+     public string? ClientPhoneNumber { get; set; }
+
+     [Required(ErrorMessage = "Please enter your date of birth")]
+     public DateTime? ClientBirthData{ get; set; }
+
+
+
+        public byte[]? ClientImage { get; set; }
+
+     [NotMapped]
+     [ValidateImage]
+
+        public IFormFile? ImageFile { get; set; }
+
+
+     public async Task SaveImageAsync()
+     {
+         if (ImageFile != null && ImageFile.ContentType.Contains("image"))
+         {
+
+             using (var ms = new MemoryStream())
+             {
+                 await ImageFile.CopyToAsync(ms);
+
+                 ClientImage = ms.ToArray();
+                 //ImageData = Convert.ToBase64String(data);   
+             }
+
+         }
+         else if (ImageFile == null)
+         {
+             // If no new file was uploaded but there is  an existing image,
+             // assign the existing image  to the ImagePath property.
+             ClientImage = ClientImage;
+         }
+     }
+     public class ValidateImage : ValidationAttribute
+     {
+         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+         {
+             var client = (Client)validationContext.ObjectInstance;
+
+                 if ((client.ClientImage == null))
+                 {
+                     return ValidationResult.Success;
+                 }
+
+
+             return ValidationResult.Success;
+         }
+     }
+
+
+
+
+
+
+        
+
 
     }
 }

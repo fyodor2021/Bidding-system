@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Assignment1Group26.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230410212723_intial")]
-    partial class intial
+    [Migration("20230411223754_first")]
+    partial class first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -152,9 +152,16 @@ namespace Assignment1Group26.Migrations
                     b.Property<bool>("Blocked")
                         .HasColumnType("bit");
 
+                    b.Property<DateTime?>("ClientBirthData")
+                        .IsRequired()
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("ClientFirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("ClientImage")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("ClientLastName")
                         .IsRequired()
@@ -162,6 +169,10 @@ namespace Assignment1Group26.Migrations
 
                     b.Property<string>("ClientPassword")
                         .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("ClientPhoneNumber")
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
@@ -187,47 +198,6 @@ namespace Assignment1Group26.Migrations
                     b.HasKey("ClientId");
 
                     b.ToTable("clients");
-
-                    b.HasData(
-                        new
-                        {
-                            ClientId = 1,
-                            Blocked = false,
-                            ClientFirstName = "John",
-                            ClientLastName = "Smith",
-                            ClientPassword = "password",
-                            ClientRole = "Client",
-                            ClientUserName = "john.smith@gmail.com",
-                            EmailConfirmed = true,
-                            MultiPin = 11111111,
-                            keepLoggedIn = false
-                        },
-                        new
-                        {
-                            ClientId = 2,
-                            Blocked = false,
-                            ClientFirstName = "vedoor",
-                            ClientLastName = "Barakat",
-                            ClientPassword = "password",
-                            ClientRole = "Client",
-                            ClientUserName = "Vedoor.Barakat@gmail.com",
-                            EmailConfirmed = true,
-                            MultiPin = 11111111,
-                            keepLoggedIn = false
-                        },
-                        new
-                        {
-                            ClientId = 3,
-                            Blocked = false,
-                            ClientFirstName = "josephine",
-                            ClientLastName = "abdulaziz",
-                            ClientPassword = "juju123",
-                            ClientRole = "Admin",
-                            ClientUserName = "juju.josedore@gmail.com",
-                            EmailConfirmed = true,
-                            MultiPin = 11111111,
-                            keepLoggedIn = false
-                        });
                 });
 
             modelBuilder.Entity("Assignment1Group26.Models.Review", b =>

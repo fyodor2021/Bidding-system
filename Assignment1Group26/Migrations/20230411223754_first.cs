@@ -47,9 +47,13 @@ namespace Assignment1Group26.Migrations
                     ClientPassword = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
                     ClientRole = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    blocked = table.Column<bool>(type: "bit", nullable: false),
+                    Blocked = table.Column<bool>(type: "bit", nullable: false),
+                    MultiPin = table.Column<int>(type: "int", nullable: false),
                     VerficationToken = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    keepLoggedIn = table.Column<bool>(type: "bit", nullable: false)
+                    keepLoggedIn = table.Column<bool>(type: "bit", nullable: false),
+                    ClientPhoneNumber = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
+                    ClientBirthData = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ClientImage = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
                 },
                 constraints: table =>
                 {
