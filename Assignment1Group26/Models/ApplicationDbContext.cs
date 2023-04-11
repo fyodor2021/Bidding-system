@@ -30,7 +30,7 @@ namespace Assignment1Group26.Models
 
                 );
 
-            /*
+            
 
             modelBuilder.Entity<Client>().HasData(
 
