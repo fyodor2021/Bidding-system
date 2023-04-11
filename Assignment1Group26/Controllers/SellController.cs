@@ -100,15 +100,6 @@ namespace Assignment1Group26.Controllers
                 return RedirectToAction("Index", "Sell");
         }
 
-        private Byte[] SameImageTrick(int id)
-        {
-           Bid bid = _context.bids.FirstOrDefault(b => b.BidId == id);
-            if (bid != null)
-            {
-                return bid.ImageData.ToArray();
-            }
-            return null;
-        }
 
         [HttpGet]
         public IActionResult Edit(int id)
