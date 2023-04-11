@@ -332,3 +332,39 @@ td {
 .vote {
     cursor: pointer;
 }
+
+.card_body_timer {
+    font-size: 0;
+    padding: 1.25rem;
+    padding-left: 0;
+}
+
+.countdown_section {
+    display: inline-block;
+    margin-left: 4px;
+    
+}
+
+.countdown_section:first-child {
+    margin-left: 0;
+}
+
+    .countdown_section .value {
+        background-color: rgb(2, 24, 129);
+        border-radius: 10px;
+        color: rgb(251, 245, 245);
+        line-height: 50px;
+        text-align: center;
+        height: 50px;
+        width: 50px;
+    }
+
+.value {
+    font-size: 25px;
+}
+
+.countdown_label {
+    font-size: 11px;
+    padding-top: 4px;
+    text-align: center;
+}

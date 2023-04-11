@@ -65,10 +65,16 @@ namespace Assignment1Group26.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(Bid b)
         {
+
             var userName = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
             var user = _context.clients.FirstOrDefault(c => c.ClientUserName == userName);
 
             b.ClientId = user.ClientId;
+            
+            DateTime newStartDate = b.BidStartDate.AddHours(b.BidStartTime.Hour).AddMinutes(b.BidStartTime.Minute).AddSeconds(b.BidStartTime.Second);
+            DateTime newEndDate = b.BidEndDate.AddHours(b.BidEndTime.Hour).AddMinutes(b.BidEndTime.Minute).AddSeconds(b.BidEndTime.Second);
+            b.BidStartDate = newStartDate;
+            b.BidEndDate = newEndDate;
             string action = (b.BidId == 0) ? "Add" : "Edit";
             
                 await b.SaveImageAsync();

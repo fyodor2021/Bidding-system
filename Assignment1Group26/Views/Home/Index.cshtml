@@ -82,15 +82,90 @@
         <div class="col" id="main">
             @foreach (Bid b in Model.Bids)
             {
+                var dateLeft = b.BidEndDate.Subtract(DateTime.Now);
+                var datesToStart = b.BidStartDate.Subtract(DateTime.Now);
                 <div class="card" style="width: 18rem;display:inline-block;">
                     <a asp-controller="Details" asp-action="Details" asp-route-id="@b.BidId">
                         <img class="card-img-top" src="data:image/*;base64,@(Convert.ToBase64String(b.ImageData))">
                     </a>
                     <div class="card-body">
+                        
                         <h5 class="card-title">@b.BidName</h5>
                         <p class="card-text">$@b.BidCost</p>
+                        @if (datesToStart > TimeSpan.Zero)
+                        {
+
+                            <h5 class="card-title">Bid Starts:</h5>
+
+                            <div class="card_body card_body_timer timer">
+                                <div class="countdown_section">
+                                    <div id="days" class="value">@datesToStart.Days</div>
+                                    <div class="countdown_label">DAYS</div>
+                                </div>
+                                <div class="countdown_section">
+                                    <div id="hours" class="value">@datesToStart.Hours</div>
+                                    <div class="countdown_label">HOURS</div>
+                                </div>
+                                <div class="countdown_section">
+                                    <div id="minutes" class="value">@datesToStart.Minutes</div>
+                                    <div class="countdown_label">MINUTES</div>
+                                </div>
+                                <div class="countdown_section">
+                                    <div id="seconds" class="value">@datesToStart.Seconds</div>
+                                    <div class="countdown_label">SECONDS</div>
+                                </div>
+
+                            </div>
+                        }
+                        else
+                        {
+                            <h5 class="card-title">Bid Starts:</h5>
+
+                            <div class="card_body card_body_timer timer">
+                                <div class="countdown_section">
+                                    <div id="days" class="value">00</div>
+                                    <div class="countdown_label">DAYS</div>
+                                </div>
+                                <div class="countdown_section">
+                                    <div id="hours" class="value">00</div>
+                                    <div class="countdown_label">HOURS</div>
+                                </div>
+                                <div class="countdown_section">
+                                    <div id="minutes" class="value">00</div>
+                                    <div class="countdown_label">MINUTES</div>
+                                </div>
+                                <div class="countdown_section">
+                                    <div id="seconds" class="value">00</div>
+                                    <div class="countdown_label">SECONDS</div>
+                                </div>
+
+                            </div>
+
+                        }
+                        <h5 class="card-title">bid Ends:</h5>
+
+                        <div class="card_body card_body_timer timer">
+                            <div class="countdown_section">
+                                <div id="days" class="value">@dateLeft.Days</div>
+                                <div class="countdown_label">DAYS</div>
+                            </div>
+                            <div class="countdown_section">
+                                <div id="hours" class="value">@dateLeft.Hours</div>
+                                <div class="countdown_label">HOURS</div>
+                            </div>
+                            <div class="countdown_section">
+                                <div id="minutes" class="value">@dateLeft.Minutes</div>
+                                <div class="countdown_label">MINUTES</div>
+                            </div>
+                            <div class="countdown_section">
+                                <div id="seconds" class="value">@dateLeft.Seconds</div>
+                                <div class="countdown_label">SECONDS</div>
+                            </div>
+
+                        </div>
                         <a asp-controller="Details" asp-action="Details" asp-route-id="@b.BidId" class="btn btn-primary">View Details</a>
                     </div>
+                    
                 </div>
             }
         </div>
