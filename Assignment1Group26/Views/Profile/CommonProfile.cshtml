@@ -102,6 +102,7 @@
                         
                     </div>
 
+<<<<<<< HEAD
 			<div class="row">
 			</div>
 			}
@@ -193,4 +194,37 @@
 		</div>
 	</div>
 
+=======
+                } 
+                @{
+                   // var userName = ;
+                }
+                @if (base.User.Identity.Name != "Admin" && base.User.Identity.Name != Model.Client.ClientUserName)
+                {
+                    <form asp-controller="Review" asp-action="Add" enctype="multipart/form-data" method="post">
+                        <p>@base.User.Identity.Name</p>
+                        <input hidden readonly asp-for="@Model.Review.CreatedByStr" value="@base.User.Identity.Name">
+                        <input hidden readonly asp-for="Review.ClientId" value="@Model.Client.ClientId">
+                        <div class="card-footer py-3 border-0" style="background-color: #f8f9fa; border-radius: 3%;">
+                            <div class="d-flex flex-start w-100">
+                                <div class="form-outline w-100">
+                                    <textarea asp-for="Review.Comment" class="form-control" id="review-box" rows="4" style="background: #fff;"></textarea>
+                                    <label class="form-label" for="review-box">Tell Us How We Did!</label>
+                                </div>
+                            </div>
+                            <div class="float-end mt-2 pt-1">
+                                <button type="submit" class="btn btn-primary btn-sm">
+                                    Post comment
+                                </button>
+                                <a asp-controller="Home" asp-action="Index" class="btn btn-primary btn-sm">
+                                    Home
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                }
+            </div>
+        </div>
+    </div>
+>>>>>>> bd695f96cfeee005d467d8d243ec537af8608aef
 </div>

@@ -433,7 +433,7 @@ mark {
     color: var(--color-dark);
 }
 
-/**:first-child {
+:first-child {
     margin-top: 0;
 }
 
@@ -492,5 +492,9 @@ mark {
 
 .hidden {
     display: none;
+<<<<<<< HEAD
 }*/
 >>>>>>> 8387b5a4194ac408724932caffc8fcbf563e573a
+=======
+}
+>>>>>>> bd695f96cfeee005d467d8d243ec537af8608aef
