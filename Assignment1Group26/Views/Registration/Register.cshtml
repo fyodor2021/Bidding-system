@@ -21,6 +21,19 @@
                         <input asp-for="ClientLastName" type="text" class="form-control" id="Username" aria-describedby="emailHelp"
                                placeholder="Last Name">
                     </div>
+                     <p style="color:red">@Html.ValidationMessageFor(c=>c.ClientPhoneNumber)>
+
+                    <div class="mb-3">
+                        <input asp-for="ClientPhoneNumber" type="text" class="form-control" id="Username" aria-describedby="emailHelp"
+                               placeholder="Phone Number">
+                    </div>
+                    <p style="color:red"> @Html.ValidationMessageFor(c=>c.ClientBirthData)>
+                    <div class="mb-3">
+                            <input asp-for="ClientBirthData" type="date" class="form-control" id="Username" aria-describedby="emailHelp"
+                                   placeholder="Date of Birth">
+                    </div>
+
+
                     <p style="color:red">@Html.ValidationMessageFor(c=>c.ClientUserName)</p>
                     <div class="mb-3">
                         <input asp-for="ClientUserName" type="text" class="form-control" id="Username" aria-describedby="emailHelp"

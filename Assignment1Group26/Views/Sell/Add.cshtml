@@ -88,6 +88,10 @@
                         <div class="input-group mb-3">
                             <div class="custom-file">
                                 <label class="custom-file-label" for="inputGroupFile04">Upload the item image</label>
+<<<<<<< HEAD
+                                <input asp-for="@Model.ImageFile" type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
+=======
+>>>>>>> f2e7dd780c7fdb518fa218654544a2cb82a45c5c
                                 <input type="hidden" name="ImageData" asp-for="@Model.ImageData" value="@Convert.ToBase64String(Model.ImageData ?? new byte[0])"  />
 
                                 <input asp-for="ImageFile" type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
