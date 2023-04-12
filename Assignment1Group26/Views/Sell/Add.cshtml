@@ -7,7 +7,7 @@
                 <h2 class="text-center text-dark mt-5">
                     Please Enter The Following Information
                 </h2>
-                <div class="card my-5">
+            <div class="card formStyle my-5">
 
                     <form class="card-body cardbody-color p-lg-5" asp-controller="Sell" asp-action="Add" enctype="multipart/form-data" method="post">
                         <div class="mb-3">
@@ -88,10 +88,7 @@
                         <div class="input-group mb-3">
                             <div class="custom-file">
                                 <label class="custom-file-label" for="inputGroupFile04">Upload the item image</label>
-<<<<<<< HEAD
                                 <input asp-for="@Model.ImageFile" type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
-=======
->>>>>>> f2e7dd780c7fdb518fa218654544a2cb82a45c5c
                                 <input type="hidden" name="ImageData" asp-for="@Model.ImageData" value="@Convert.ToBase64String(Model.ImageData ?? new byte[0])"  />
 
                                 <input asp-for="ImageFile" type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">

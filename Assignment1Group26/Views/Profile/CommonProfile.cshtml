@@ -1,7 +1,7 @@
 ﻿@model ProfileReviewModel
 
     <div class="col-md-8">
-        <div class="card mb-3">
+    <div class="card formStyle mb-3">
             <div class="card-body">
                 <div class="row">
                     <div class="col-sm-3">
@@ -30,7 +30,7 @@
               
                 @foreach (Review r in Model.Reviews)
                 {
-                    <div class="card profile-card">
+                    <div class="card formStyle profile-card">
                         
                         <div class="row text-left">
                             <p class="content">@r.Comment</p>

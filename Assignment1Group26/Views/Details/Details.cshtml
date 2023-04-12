@@ -41,118 +41,7 @@
 
 
 
-    :root {
-        --color-light: white;
-        --color-dark: #212121;
-        --color-signal: #fab700;
-        --color-background: var(--color-light);
-        --color-text: var(--color-dark);
-        --color-accent: var(--color-signal);
-        --size-bezel: .5rem;
-        --size-radius: 4px;
-        line-height: 1.4;
-        font-family: 'Inter', sans-serif;
-        font-size: calc(.6rem + .4vw);
-        color: var(--color-text);
-        background: var(--color-background);
-        font-weight: 300;
-        padding: 0 calc(var(--size-bezel) * 3);
-    }
 
-    h1, h2, h3 {
-        font-weight: 900;
-    }
-
-    mark {
-        background: var(--color-accent);
-        color: var(--color-text);
-        font-weight: bold;
-        padding: 0 0.2em;
-    }
-
-    .card {
-        background: var(--color-background);
-        padding: calc(4 * var(--size-bezel));
-        margin-top: calc(4 * var(--size-bezel));
-        border-radius: var(--size-radius);
-        border: 3px solid var(--color-shadow, currentColor);
-        box-shadow: .5rem .5rem 0 var(--color-shadow, currentColor);
-        &--inverted
-
-    {
-        --color-background: var(--color-dark);
-        color: var(--color-light);
-        --color-shadow: var(--color-accent);
-    }
-
-    &--accent {
-        --color-background: var(--color-signal);
-        --color-accent: var(--color-light);
-        color: var(--color-dark);
-    }
-
-    *:first-child {
-        margin-top: 0;
-    }
-
-    }
-
-
-    .l-design-widht {
-        max-width: 40rem;
-        padding: 1rem;
-    }
-
-    .input {
-        position: relative;
-        &__label
-
-    {
-        position: absolute;
-        left: 0;
-        top: 0;
-        padding: calc(var(--size-bezel) * 0.75) calc(var(--size-bezel) * .5);
-        margin: calc(var(--size-bezel) * 0.75 + 3px) calc(var(--size-bezel) * .5);
-        background: pink;
-        white-space: nowrap;
-        transform: translate(0, 0);
-        transform-origin: 0 0;
-        background: var(--color-background);
-        transition: transform 120ms ease-in;
-        font-weight: bold;
-        line-height: 1.2;
-    }
-
-    &__field {
-        box-sizing: border-box;
-        display: block;
-        width: 100%;
-        border: 3px solid currentColor;
-        padding: calc(var(--size-bezel) * 1.5) var(--size-bezel);
-        color: currentColor;
-        background: transparent;
-        border-radius: var(--size-radius);
-        &:focus, &:not(:placeholder-shown)
-    }
-
-    .button-groug {
-        margin-top: calc(var(--size-bezel) * 2.5);
-    }
-
-
-
-    .icon {
-        display: inline-block;
-        width: 1em;
-        height: 1em;
-        margin-right: .5em;
-    }
-
-    .hidden {
-        display: none;
-    }
-
-    
 </style>
 
 <div class="container">
@@ -190,7 +79,7 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                   <h1>Placing Bid</h1>
+                                    <h1>Placing Bid</h1>
                                 </div>
                                 <div class="modal-body" style="margin-left: 17px;">
                                     <div class="form-body">
@@ -221,7 +110,7 @@
                                                         </form>
                                                     </div>
                                                     <div style="display:inline" class="col bidButton">
-                                                        <form asp-action="Add" asp-controller="Details" method="post" enctype="multipart/form-data" >
+                                                        <form asp-action="Add" asp-controller="Details" method="post" enctype="multipart/form-data">
 
 
                                                             <input hidden readonly asp-for="BidPlaced.BidAmount" value="@(Model.Bid.HighestBid + 50)" style="width: 20px;">
@@ -242,42 +131,35 @@
 
                                                         </form>
                                                     </div>
-                                                    
+
 
                                                 </div>
-                                                
 
-                                                    
+
+
 
                                             </div>
                                             <div class="container" style="margin-bottom:20px">
-                                                <div class="card">
+                                                <div class="card formStyle">
                                                     <h2>
                                                         Enter Bid Amount:
                                                     </h2>
-                                                    
+
                                                     <form asp-action="Add" asp-controller="Details" method="post" enctype="multipart/form-data">
-                                                        <label class="input">
-                                                            <input asp-for="BidPlaced.BidAmount" class="input__field" type="number" style="margin-bottom:10px;width: 360px;" id="bid_input" placeholder="Current Highest Bid: @Model.Bid.HighestBid" />
-                                                        </label>
-                                                        <div class="button-group" ;">
+                                                        <input asp-for="BidPlaced.BidAmount" class="input__field" type="number" style="margin-bottom:10px;width: 360px;" id="bid_input" placeholder="Current Highest Bid: @Model.Bid.HighestBid" value="">
+                                                        <div class="button-group">
                                                             <input asp-for="Bid.BidId" hidden readonly>
                                                             <button type="submit">Submit</button>
                                                         </div>
                                                     </form>
-
-                                                    
                                                 </div>
-
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 }
 
 
