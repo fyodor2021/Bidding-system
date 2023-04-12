@@ -7,11 +7,20 @@
             <div class="col-lg-4">
                 <div class="card mb-4">
                     <div class="card-body text-center">
-                        <img src="~/Images/coat.jpg" alt="avatar"
+                        @if (Model.ClientImage != null)
+                        {
+                            <img src="data:image/*;base64,@(Convert.ToBase64String(Model.ClientImage))"
+                             class="rounded-circle " style="width: 300px; height: 400px;">
+
+                        }
+                        else
+                        {
+                            <img src="~/Images/user.png" alt="avatar"
                              class="rounded-circle " style="width: 300px height: 400px;">
-                        <h5 class="my-3">John Smith</h5>
-                        <p class="text-muted mb-1">Full Stack Developer</p>
-                        <p class="text-muted mb-4">Bay Area, San Francisco, CA</p>
+
+                        }
+
+                        <h5 class="my-3">@Model.ClientFirstName @Model.ClientLastName</h5>
                         <div class="d-flex justify-content-center mb-2">
                             <a type="button" asp-controller="Profile" asp-action="Edit" asp-route-id="@Model.ClientId" class="btn btn-primary">Edit</a>
                             <a type="button" target="_blank" asp-action="Index" asp-controller="Home" class="btn btn-outline-primary ms-1">Home</a>
@@ -168,9 +177,7 @@
             </div>
         </div>
     </div>
-<<<<<<< HEAD
 </section>
-=======
 
     <div class="col-md-8">
         <div class="card mb-3">
@@ -232,6 +239,5 @@
         </div>
 
     </div>
->>>>>>> 89c551a25b7dd22a8bd651e8839c878a0266d1a1
 
 

@@ -31,7 +31,7 @@ namespace Assignment1Group26.Models
                 );
 
             
-
+            /*
             modelBuilder.Entity<Client>().HasData(
 
                   new Client
@@ -67,7 +67,7 @@ namespace Assignment1Group26.Models
                   }
 
 
-              );
+              );*/
             /*
             modelBuilder.Entity<Bid>().HasData(
                      new Bid

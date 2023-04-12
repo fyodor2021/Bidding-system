@@ -77,7 +77,7 @@ namespace Assignment1Group26.Controllers
             b.BidEndDate = newEndDate;
             string action = (b.BidId == 0) ? "Add" : "Edit";
             
-                await b.SaveImageAsync();
+            await b.SaveImageAsync();
             if (ModelState.IsValid)
             {
                 if (action == "Add")

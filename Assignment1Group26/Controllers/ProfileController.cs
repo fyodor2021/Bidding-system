@@ -51,8 +51,9 @@ namespace Assignment1Group26.Controllers
 
             return RedirectToAction("Login", "Login");
         }
-        
-        public IActionResult Edit(int id)
+
+		[HttpGet]
+		public IActionResult Edit(int id)
         {
             var c = _context.clients.FirstOrDefault(c => c.ClientId == id);
             return View(c);
@@ -61,8 +62,9 @@ namespace Assignment1Group26.Controllers
         public async Task<IActionResult> Edit(Client cc)
         {
 
+			await cc.SaveImageAsync();
 
-            if (cc.ClientPassword == cc.ClientRetypePassword)
+			if (cc.ClientPassword == cc.ClientRetypePassword)
             {
                 _context.clients.Update(cc);
                 _context.SaveChanges();

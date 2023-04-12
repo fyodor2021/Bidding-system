@@ -48,15 +48,13 @@ namespace Assignment1Group26.Models
 
      [Required(ErrorMessage = "Please enter your date of birth")]
      public DateTime? ClientBirthData{ get; set; }
-
-
-
-        public byte[]? ClientImage { get; set; }
+        
+     public byte[]? ClientImage { get; set; }
 
      [NotMapped]
      [ValidateImage]
 
-        public IFormFile? ImageFile { get; set; }
+     public IFormFile? ImageFile { get; set; }
 
 
      public async Task SaveImageAsync()
@@ -85,11 +83,14 @@ namespace Assignment1Group26.Models
          protected override ValidationResult IsValid(object value, ValidationContext validationContext)
          {
              var client = (Client)validationContext.ObjectInstance;
-
-                 if ((client.ClientImage == null))
+                
+                 if (client.ClientImage == null  )
                  {
-                     return ValidationResult.Success;
-                 }
+                    if ( client.ImageFile == null) {
+
+                        return ValidationResult.Success;
+                    }
+                }
 
 
              return ValidationResult.Success;
@@ -101,7 +102,7 @@ namespace Assignment1Group26.Models
 
 
 
-        
+       
 
 
     }
