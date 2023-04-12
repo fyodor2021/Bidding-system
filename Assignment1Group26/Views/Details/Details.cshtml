@@ -152,6 +152,7 @@
         display: none;
     }
 
+    
 </style>
 
 <div class="container">
@@ -171,7 +172,7 @@
                 <p><b>Item Name:</b> @Model.Bid.BidName</p>
                 <p><b>Start Date:</b> @Model.Bid.BidStartDate</p>
                 <p><b>End Date:</b> @Model.Bid.BidEndDate</p>
-                <p class="mb-0"><b>Cost:</b> $@Model.Bid.BidCost</p>
+                <p class="mb-0"><b>Cost:</b> $@Model.Bid.BidStartPrice</p>
                 <p><b>Condition:</b> @Model.Bid.AssetCondition.AssetConditionStatus</p>
                 <p><b>Category:</b> @Model.Bid.Category.CategoryName</p>
                 @if (datesToStart > TimeSpan.Zero)
@@ -196,26 +197,76 @@
                                         <div class="row">
                                             <div class="container" style="margin-bottom: 22px;">
                                                 <h3 style="margin-bottom: 22px;">Please Select Or Enter the Amount you'd Like to Add to the Heighest bid</h3>
+                                                <div class="row">
+                                                    <div style="display:inline" class="col bidButton">
+                                                        <form asp-action="Add" asp-controller="Details" method="post" enctype="multipart/form-data" style="width: 20px;">
 
-                                                <button style="--color:#031866;--slant:20px;--border:5px">$10</button>
-                                                <button style="--color:#031866;--slant:20px;--border:5px">$20</button>
-                                                <button style="--color:#031866;--slant:20px;--border:5px">$50</button>
-                                                <button style="--color:#031866;--slant:20px;--border:5px">$100</button>
-                                                <button style="--color:#031866;--slant:20px;--border:5px">$200</button>
+
+                                                            <input hidden readonly asp-for="BidPlaced.BidAmount" value="@(Model.Bid.HighestBid + 10)" style="width: 20px;">
+                                                            <input asp-for="Bid.BidId" hidden readonly>
+
+                                                            <button type="submit" style="--color:#031866;--slant:20px;--border:5px">$@(Model.Bid.HighestBid + 10)</button>
+
+                                                        </form>
+                                                    </div>
+                                                    <div style="display:inline" class="col bidButton">
+                                                        <form asp-action="Add" asp-controller="Details" method="post" enctype="multipart/form-data">
+
+
+                                                            <input hidden readonly asp-for="BidPlaced.BidAmount" value="@(Model.Bid.HighestBid +20)" style="width: 20px;">
+                                                            <input asp-for="Bid.BidId" hidden readonly>
+
+                                                            <button type="submit" style="--color:#031866;--slant:20px;--border:5px">$@(Model.Bid.HighestBid + 20)</button>
+
+                                                        </form>
+                                                    </div>
+                                                    <div style="display:inline" class="col bidButton">
+                                                        <form asp-action="Add" asp-controller="Details" method="post" enctype="multipart/form-data" >
+
+
+                                                            <input hidden readonly asp-for="BidPlaced.BidAmount" value="@(Model.Bid.HighestBid + 50)" style="width: 20px;">
+                                                            <input asp-for="Bid.BidId" hidden readonly>
+
+                                                            <button type="submit" style="--color:#031866;--slant:20px;--border:5px">$@(Model.Bid.HighestBid + 50)</button>
+
+                                                        </form>
+                                                    </div>
+                                                    <div style="display:inline" class="col bidButton">
+                                                        <form asp-action="Add" asp-controller="Details" method="post" enctype="multipart/form-data" style="width: 20px;">
+
+
+                                                            <input hidden readonly asp-for="BidPlaced.BidAmount" value="@(Model.Bid.HighestBid + 100)">
+                                                            <input asp-for="Bid.BidId" hidden readonly>
+
+                                                            <button type="submit" style="--color:#031866;--slant:20px;--border:5px">$@(Model.Bid.HighestBid + 100)</button>
+
+                                                        </form>
+                                                    </div>
+                                                    
+
+                                                </div>
+                                                
+
+                                                    
 
                                             </div>
                                             <div class="container" style="margin-bottom:20px">
                                                 <div class="card">
                                                     <h2>
-                                                       Enter Bid Amount:
+                                                        Enter Bid Amount:
                                                     </h2>
-                                                    <label class="input">
-                                                        <input class="input__field" type="text" style="margin-bottom:10px;" placeholder="" />
-                                                    </label>
-                                                    <div class="button-group";">
-                                                        <button>Send</button>
-                                                        <button type="reset">Reset</button>
-                                                    </div>
+                                                    
+                                                    <form asp-action="Add" asp-controller="Details" method="post" enctype="multipart/form-data">
+                                                        <label class="input">
+                                                            <input asp-for="BidPlaced.BidAmount" class="input__field" type="number" style="margin-bottom:10px;width: 360px;" id="bid_input" placeholder="Current Highest Bid: @Model.Bid.HighestBid" />
+                                                        </label>
+                                                        <div class="button-group" ;">
+                                                            <input asp-for="Bid.BidId" hidden readonly>
+                                                            <button type="submit">Submit</button>
+                                                        </div>
+                                                    </form>
+
+                                                    
                                                 </div>
 
                                             </div>
@@ -282,6 +333,7 @@
 
                 </div>
             }
+            <h5 style="color:red;">@ViewData["errorMessage"]</h5>
         </div>
 
 

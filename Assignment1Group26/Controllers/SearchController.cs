@@ -38,10 +38,10 @@ namespace Assignment1Group26.Controllers
             if (selectedPriceRange != 0)
             {
                  if (selectedPriceRange == 1) {
-                    tables.Bids = tables.Bids.OrderByDescending(b => b.BidCost).ToList();
+                    tables.Bids = tables.Bids.OrderByDescending(b => b.BidStartPrice).ToList();
                  }
                 else {
-                    tables.Bids = tables.Bids.OrderBy(b => b.BidCost).ToList(); 
+                    tables.Bids = tables.Bids.OrderBy(b => b.BidStartPrice).ToList(); 
                 }
                    
                     

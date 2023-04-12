@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Assignment1Group26.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230412122343_intial")]
+    [Migration("20230412161053_intial")]
     partial class intial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -108,6 +108,21 @@ namespace Assignment1Group26.Migrations
                     b.HasIndex("ClientId");
 
                     b.ToTable("bids");
+
+                    b.HasData(
+                        new
+                        {
+                            BidId = 1,
+                            AssetConditionId = 1,
+                            BidCost = 59.990000000000002,
+                            BidDescription = "High heel slingback shoes. Tied closure. Pointed toe.",
+                            BidEndDate = new DateTime(2023, 4, 12, 12, 10, 53, 290, DateTimeKind.Local).AddTicks(4528),
+                            BidName = "LACE UP TIED HIGH HEELED SHOES",
+                            BidStartDate = new DateTime(2023, 4, 12, 12, 10, 53, 290, DateTimeKind.Local).AddTicks(4527),
+                            CategoryId = 1,
+                            ClientId = 1,
+                            Status = false
+                        });
                 });
 
             modelBuilder.Entity("Assignment1Group26.Models.BidsPlaced", b =>
@@ -127,12 +142,46 @@ namespace Assignment1Group26.Migrations
                     b.Property<int>("ClientId")
                         .HasColumnType("int");
 
-                    b.Property<int>("LatestBid")
-                        .HasColumnType("int");
-
                     b.HasKey("BidsPlacedId");
 
                     b.ToTable("bidsPlaced");
+
+                    b.HasData(
+                        new
+                        {
+                            BidsPlacedId = 1,
+                            BidDate = new DateTime(2023, 4, 12, 12, 10, 53, 290, DateTimeKind.Local).AddTicks(4485),
+                            BidId = 1,
+                            ClientId = 1
+                        },
+                        new
+                        {
+                            BidsPlacedId = 2,
+                            BidDate = new DateTime(2023, 4, 12, 12, 10, 53, 290, DateTimeKind.Local).AddTicks(4511),
+                            BidId = 1,
+                            ClientId = 1
+                        },
+                        new
+                        {
+                            BidsPlacedId = 3,
+                            BidDate = new DateTime(2023, 4, 12, 12, 10, 53, 290, DateTimeKind.Local).AddTicks(4513),
+                            BidId = 1,
+                            ClientId = 1
+                        },
+                        new
+                        {
+                            BidsPlacedId = 4,
+                            BidDate = new DateTime(2023, 4, 12, 12, 10, 53, 290, DateTimeKind.Local).AddTicks(4514),
+                            BidId = 1,
+                            ClientId = 2
+                        },
+                        new
+                        {
+                            BidsPlacedId = 5,
+                            BidDate = new DateTime(2023, 4, 12, 12, 10, 53, 290, DateTimeKind.Local).AddTicks(4515),
+                            BidId = 1,
+                            ClientId = 2
+                        });
                 });
 
             modelBuilder.Entity("Assignment1Group26.Models.Category", b =>

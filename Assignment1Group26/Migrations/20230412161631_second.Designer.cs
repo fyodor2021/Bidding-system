@@ -4,6 +4,7 @@ using Assignment1Group26.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Assignment1Group26.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230412161631_second")]
+    partial class second
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -67,6 +69,10 @@ namespace Assignment1Group26.Migrations
                     b.Property<int>("AssetConditionId")
                         .HasColumnType("int");
 
+                    b.Property<double?>("BidCost")
+                        .IsRequired()
+                        .HasColumnType("float");
+
                     b.Property<string>("BidDescription")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -81,18 +87,11 @@ namespace Assignment1Group26.Migrations
                     b.Property<DateTime>("BidStartDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<double?>("BidStartPrice")
-                        .IsRequired()
-                        .HasColumnType("float");
-
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<int>("ClientId")
                         .HasColumnType("int");
-
-                    b.Property<double?>("HighestBid")
-                        .HasColumnType("float");
 
                     b.Property<byte[]>("ImageData")
                         .HasColumnType("varbinary(max)");
@@ -140,7 +139,7 @@ namespace Assignment1Group26.Migrations
                         {
                             BidsPlacedId = 1,
                             BidAmount = 17000.0,
-                            BidDate = new DateTime(2023, 4, 12, 13, 57, 12, 309, DateTimeKind.Local).AddTicks(2327),
+                            BidDate = new DateTime(2023, 4, 12, 12, 16, 31, 599, DateTimeKind.Local).AddTicks(610),
                             BidId = 1,
                             ClientId = 1
                         },
@@ -148,7 +147,7 @@ namespace Assignment1Group26.Migrations
                         {
                             BidsPlacedId = 2,
                             BidAmount = 18000.0,
-                            BidDate = new DateTime(2023, 4, 12, 13, 57, 12, 309, DateTimeKind.Local).AddTicks(2383),
+                            BidDate = new DateTime(2023, 4, 12, 12, 16, 31, 599, DateTimeKind.Local).AddTicks(637),
                             BidId = 1,
                             ClientId = 1
                         },
@@ -156,7 +155,7 @@ namespace Assignment1Group26.Migrations
                         {
                             BidsPlacedId = 3,
                             BidAmount = 19000.0,
-                            BidDate = new DateTime(2023, 4, 12, 13, 57, 12, 309, DateTimeKind.Local).AddTicks(2385),
+                            BidDate = new DateTime(2023, 4, 12, 12, 16, 31, 599, DateTimeKind.Local).AddTicks(639),
                             BidId = 1,
                             ClientId = 1
                         },
@@ -164,7 +163,7 @@ namespace Assignment1Group26.Migrations
                         {
                             BidsPlacedId = 4,
                             BidAmount = 20000.0,
-                            BidDate = new DateTime(2023, 4, 12, 13, 57, 12, 309, DateTimeKind.Local).AddTicks(2387),
+                            BidDate = new DateTime(2023, 4, 12, 12, 16, 31, 599, DateTimeKind.Local).AddTicks(640),
                             BidId = 1,
                             ClientId = 2
                         },
@@ -172,7 +171,7 @@ namespace Assignment1Group26.Migrations
                         {
                             BidsPlacedId = 5,
                             BidAmount = 21000.0,
-                            BidDate = new DateTime(2023, 4, 12, 13, 57, 12, 309, DateTimeKind.Local).AddTicks(2388),
+                            BidDate = new DateTime(2023, 4, 12, 12, 16, 31, 599, DateTimeKind.Local).AddTicks(641),
                             BidId = 1,
                             ClientId = 2
                         });

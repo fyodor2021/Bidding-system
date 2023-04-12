@@ -28,7 +28,6 @@ namespace Assignment1Group26.Migrations
                 {
                     BidsPlacedId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    LatestBid = table.Column<int>(type: "int", nullable: false),
                     BidId = table.Column<int>(type: "int", nullable: false),
                     ClientId = table.Column<int>(type: "int", nullable: false),
                     BidDate = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -140,6 +139,18 @@ namespace Assignment1Group26.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "bidsPlaced",
+                columns: new[] { "BidsPlacedId", "BidDate", "BidId", "ClientId" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2023, 4, 12, 12, 10, 53, 290, DateTimeKind.Local).AddTicks(4485), 1, 1 },
+                    { 2, new DateTime(2023, 4, 12, 12, 10, 53, 290, DateTimeKind.Local).AddTicks(4511), 1, 1 },
+                    { 3, new DateTime(2023, 4, 12, 12, 10, 53, 290, DateTimeKind.Local).AddTicks(4513), 1, 1 },
+                    { 4, new DateTime(2023, 4, 12, 12, 10, 53, 290, DateTimeKind.Local).AddTicks(4514), 1, 2 },
+                    { 5, new DateTime(2023, 4, 12, 12, 10, 53, 290, DateTimeKind.Local).AddTicks(4515), 1, 2 }
+                });
+
+            migrationBuilder.InsertData(
                 table: "categories",
                 columns: new[] { "CategoryId", "CategoryName" },
                 values: new object[,]
@@ -168,6 +179,11 @@ namespace Assignment1Group26.Migrations
                     { 2, 1, "terrible Experience, i'm Done! Buying from this seller, #SadSeller", 2, "Vedoor.Barakat@gmail.com" },
                     { 3, 2, "Fair Experience, got what i Paid for, #FairCustomer", 1, "john.smith@gmail.com" }
                 });
+
+            migrationBuilder.InsertData(
+                table: "bids",
+                columns: new[] { "BidId", "AssetConditionId", "BidCost", "BidDescription", "BidEndDate", "BidName", "BidStartDate", "CategoryId", "ClientId", "ImageData", "Status" },
+                values: new object[] { 1, 1, 59.990000000000002, "High heel slingback shoes. Tied closure. Pointed toe.", new DateTime(2023, 4, 12, 12, 10, 53, 290, DateTimeKind.Local).AddTicks(4528), "LACE UP TIED HIGH HEELED SHOES", new DateTime(2023, 4, 12, 12, 10, 53, 290, DateTimeKind.Local).AddTicks(4527), 1, 1, null, false });
 
             migrationBuilder.CreateIndex(
                 name: "IX_bids_AssetConditionId",

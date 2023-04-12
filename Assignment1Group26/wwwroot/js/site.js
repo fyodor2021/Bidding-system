@@ -43,4 +43,3 @@ $('#modalOpener').click(function (event) {
     $('#exampleModal').modal('show')
 })
 
-    
