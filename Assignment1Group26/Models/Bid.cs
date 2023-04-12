@@ -35,6 +35,7 @@ namespace Assignment1Group26.Models
         public int ClientId { get; set; }
 
         public Category? Category { get; set; }
+        public bool Status { get; set; } = false;
         
         public byte[]? ImageData { get; set; }
 

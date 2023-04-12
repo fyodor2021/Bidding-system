@@ -44,20 +44,15 @@
     {
         <h2>Please Verify Your Email To Enter This Page</h2>
         <h6>If You'd Like To Resend Verification Email Please Click The Button Below</h6>
-        @using (Html.BeginForm("SendEmail", "Registration", FormMethod.Post))
-        {
-            <input type="submit" value="Send" name="submit" />
-        }
+        <a asp-action="SendEmail" asp-controller="Registration" asp-route-id="@Model.ClientId" type="submit"> Send</a>
     }
 }
 else
 {
     <h2>Please Verify Your Email To Enter This Page</h2>
     <h6>If You'd Like To Resend Verification Email Please Click The Button Below</h6>
-    @using (Html.BeginForm("SendEmail", "Registration", FormMethod.Post))
-    {
-        <input type="submit" value="Send" name="submit" />
-    }
+
+    <a asp-action="SendEmail" asp-controller="Registraition" asp-route-id="@Model.ClientId" type="submit">Send</a>
 }
 
 

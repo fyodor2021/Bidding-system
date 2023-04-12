@@ -1,24 +1,179 @@
-﻿@model Bid
+﻿@model DetailsVeiwModel
+<style>
+
+    button {
+        --border: 5px; /* the border width */
+        --slant: 0.7em; /* control the slanted corners */
+        --color: #37E8FC; /* the color */
+
+        padding: 0.4em 1.2em;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+        color: var(--color);
+        background: linear-gradient(to bottom left,var(--color) 50%,#0000 50.1%) top right, linear-gradient(to top right,var(--color) 50%,#0000 50.1%) bottom left;
+        background-size: calc(var(--slant) + 1.3*var(--border)) calc(var(--slant) + 1.3*var(--border));
+        background-repeat: no-repeat;
+        box-shadow: 0 0 0 200px inset var(--s,#0000), 0 0 0 var(--border) inset var(--color);
+        clip-path: polygon(0 0, calc(100% - var(--slant)) 0, 100% var(--slant), 100% 100%, var(--slant) 100%,0 calc(100% - var(--slant)) );
+        transition: color var(--t,0.3s), background-size 0.3s;
+    }
+
+        button:focus-visible {
+            outline-offset: calc(-1*var(--border));
+            outline: var(--border) solid #000c;
+            clip-path: none;
+            background-size: 0 0;
+        }
+
+        button:hover,
+        button:active {
+            background-size: 100% 100%;
+            color: #fff;
+            --t: 0.2s 0.1s;
+        }
+
+        button:active {
+            --s: #0005;
+            transition: none;
+        }
+
+
+
+
+    :root {
+        --color-light: white;
+        --color-dark: #212121;
+        --color-signal: #fab700;
+        --color-background: var(--color-light);
+        --color-text: var(--color-dark);
+        --color-accent: var(--color-signal);
+        --size-bezel: .5rem;
+        --size-radius: 4px;
+        line-height: 1.4;
+        font-family: 'Inter', sans-serif;
+        font-size: calc(.6rem + .4vw);
+        color: var(--color-text);
+        background: var(--color-background);
+        font-weight: 300;
+        padding: 0 calc(var(--size-bezel) * 3);
+    }
+
+    h1, h2, h3 {
+        font-weight: 900;
+    }
+
+    mark {
+        background: var(--color-accent);
+        color: var(--color-text);
+        font-weight: bold;
+        padding: 0 0.2em;
+    }
+
+    .card {
+        background: var(--color-background);
+        padding: calc(4 * var(--size-bezel));
+        margin-top: calc(4 * var(--size-bezel));
+        border-radius: var(--size-radius);
+        border: 3px solid var(--color-shadow, currentColor);
+        box-shadow: .5rem .5rem 0 var(--color-shadow, currentColor);
+        &--inverted
+
+    {
+        --color-background: var(--color-dark);
+        color: var(--color-light);
+        --color-shadow: var(--color-accent);
+    }
+
+    &--accent {
+        --color-background: var(--color-signal);
+        --color-accent: var(--color-light);
+        color: var(--color-dark);
+    }
+
+    *:first-child {
+        margin-top: 0;
+    }
+
+    }
+
+
+    .l-design-widht {
+        max-width: 40rem;
+        padding: 1rem;
+    }
+
+    .input {
+        position: relative;
+        &__label
+
+    {
+        position: absolute;
+        left: 0;
+        top: 0;
+        padding: calc(var(--size-bezel) * 0.75) calc(var(--size-bezel) * .5);
+        margin: calc(var(--size-bezel) * 0.75 + 3px) calc(var(--size-bezel) * .5);
+        background: pink;
+        white-space: nowrap;
+        transform: translate(0, 0);
+        transform-origin: 0 0;
+        background: var(--color-background);
+        transition: transform 120ms ease-in;
+        font-weight: bold;
+        line-height: 1.2;
+    }
+
+    &__field {
+        box-sizing: border-box;
+        display: block;
+        width: 100%;
+        border: 3px solid currentColor;
+        padding: calc(var(--size-bezel) * 1.5) var(--size-bezel);
+        color: currentColor;
+        background: transparent;
+        border-radius: var(--size-radius);
+        &:focus, &:not(:placeholder-shown)
+    }
+
+    .button-groug {
+        margin-top: calc(var(--size-bezel) * 2.5);
+    }
+
+
+
+    .icon {
+        display: inline-block;
+        width: 1em;
+        height: 1em;
+        margin-right: .5em;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+</style>
+
 <div class="container">
     <div class="row">
         <div class="col-md-5" style="margin-top: 37px;">
             <div class="project-info-box mt-0">
                 <h5>PROJECT DETAILS</h5>
-                <p class="mb-0">@Model.BidDescription</p>
+                <p class="mb-0">@Model.Bid.BidDescription</p>
             </div>
             @{
-                var dateLeft = Model.BidEndDate.Subtract(DateTime.Now);
-                var datesToStart = Model.BidStartDate.Subtract(DateTime.Now);
+                var dateLeft = Model.Bid.BidEndDate.Subtract(DateTime.Now);
+                var datesToStart = Model.Bid.BidStartDate.Subtract(DateTime.Now);
             }
             <div class="project-info-box">
-                <p><b>Sold By:</b><a asp-controller="Profile" asp-action="CommonProfile" asp-route-id="@Model.Client.ClientId">@Model.Client.ClientFirstName @Model.Client.ClientLastName</a></p>
+                <p><b>Sold By:</b><a asp-controller="Profile" asp-action="CommonProfile" asp-route-id="@Model.Bid.Client.ClientId">@Model.Bid.Client.ClientFirstName @Model.Bid.Client.ClientLastName</a></p>
 
-                <p><b>Item Name:</b> @Model.BidName</p>
-                <p><b>Start Date:</b> @Model.BidStartDate</p>
-                <p><b>End Date:</b> @Model.BidEndDate</p>
-                <p class="mb-0"><b>Cost:</b> $@Model.BidCost</p>
-                <p><b>Condition:</b> @Model.AssetCondition.AssetConditionStatus</p>
-                <p><b>Category:</b> @Model.Category.CategoryName</p>
+                <p><b>Item Name:</b> @Model.Bid.BidName</p>
+                <p><b>Start Date:</b> @Model.Bid.BidStartDate</p>
+                <p><b>End Date:</b> @Model.Bid.BidEndDate</p>
+                <p class="mb-0"><b>Cost:</b> $@Model.Bid.BidCost</p>
+                <p><b>Condition:</b> @Model.Bid.AssetCondition.AssetConditionStatus</p>
+                <p><b>Category:</b> @Model.Bid.Category.CategoryName</p>
                 @if (datesToStart > TimeSpan.Zero)
                 {
                     <p><b>Status: </b><botton class="btn-outline-danger"><strong>INACTIVE</strong></botton></p>
@@ -26,7 +181,51 @@
                 else
                 {
                     <p><b>Status: </b><botton class="btn-outline-success"><strong>ACTIVE</strong></botton></p>
-                    <a asp-action="Index" asp-controller="Bid" type="submit" value="Item" class="btn btn-primary" style="width:7.5rem;">Place Bid</a>
+                    <a type="submit" value="Item" class="btn btn-primary" style="width:7.5rem;" id="modalOpener">Place Bid</a>
+
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                   <h1>Placing Bid</h1>
+                                </div>
+                                <div class="modal-body" style="margin-left: 17px;">
+                                    <div class="form-body">
+                                        <div class="row">
+                                            <div class="container" style="margin-bottom: 22px;">
+                                                <h3 style="margin-bottom: 22px;">Please Select Or Enter the Amount you'd Like to Add to the Heighest bid</h3>
+
+                                                <button style="--color:#031866;--slant:20px;--border:5px">$10</button>
+                                                <button style="--color:#031866;--slant:20px;--border:5px">$20</button>
+                                                <button style="--color:#031866;--slant:20px;--border:5px">$50</button>
+                                                <button style="--color:#031866;--slant:20px;--border:5px">$100</button>
+                                                <button style="--color:#031866;--slant:20px;--border:5px">$200</button>
+
+                                            </div>
+                                            <div class="container" style="margin-bottom:20px">
+                                                <div class="card">
+                                                    <h2>
+                                                       Enter Bid Amount:
+                                                    </h2>
+                                                    <label class="input">
+                                                        <input class="input__field" type="text" style="margin-bottom:10px;" placeholder="" />
+                                                    </label>
+                                                    <div class="button-group";">
+                                                        <button>Send</button>
+                                                        <button type="reset">Reset</button>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                 }
 
@@ -37,7 +236,7 @@
         </div>
 
         <div class="col-md-7">
-            <img src="data:image/*;base64,@(Convert.ToBase64String(Model.ImageData))" alt="project-image" class="rounded" style="margin-top:36px; margin-bottom:10px">
+            <img src="data:image/*;base64,@(Convert.ToBase64String(Model.Bid.ImageData))" alt="project-image" class="rounded" style="margin-top:36px; margin-bottom:10px">
             @if (datesToStart > TimeSpan.Zero)
             {
                 <h3 class="card-text">Item Starts:</h3>

@@ -113,48 +113,53 @@ namespace Assignment1Group26.Controllers
         public async Task<IActionResult> MultiFactor(Client c)
         {
             Client client = findClient(c.ClientUserName);
-            if(client.ClientRole != "Admin")
+            if(client != null)
             {
-                if (client != null && client.ClientPassword == c.ClientPassword)
+                if (client.ClientRole != "Admin")
                 {
-                    if (client.Blocked == false)
+                    if (client != null && client.ClientPassword == c.ClientPassword)
                     {
-                        Random rn = new Random();
-                        int x = rn.Next(100000, 999999);
-
-                        string receiver;
-                        if (c.ClientUserName != null)
+                        if (client.Blocked == false)
                         {
-                            receiver = c.ClientUserName;
+                            Random rn = new Random();
+                            int x = rn.Next(100000, 999999);
+
+                            string receiver;
+                            if (c.ClientUserName != null)
+                            {
+                                receiver = c.ClientUserName;
+                            }
+                            else
+                            {
+                                receiver = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+                            }
+
+                            var subject = "Verification PIN";
+                            var message = "<h1>Welcome Again to JoseDore</h1>" +
+                                          "<h4>Your PIN for this session is: </h4>" + "<h2>" + x + "</h2>";
+                            updatePin(client.ClientId, x);
+
+                            await _emailSender.SendEmailAsync(receiver, subject, message);
+
+                            return View("../Email/EmailVerifyPage", client);
                         }
                         else
                         {
-                            receiver = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+                            ViewData["ValidationMessage"] = "You're Blocked";
+                            return View("../../Views/Login/Login");
                         }
-
-                        var subject = "Verification PIN";
-                        var message = "<h1>Welcome Again to JoseDore</h1>" +
-                                      "<h4>Your PIN for this session is: </h4>" + "<h2>" + x + "</h2>";
-                        updatePin(client.ClientId, x);
-
-                        await _emailSender.SendEmailAsync(receiver, subject, message);
-
-                        return View("../Email/EmailVerifyPage", client);
                     }
-                    else
-                    {
-                        ViewData["ValidationMessage"] = "You're Blocked";
-                        return View();
-                    }
+
+                    ViewData["ValidationMessage"] = "user not found";
+                    return View("../../Views/Login/Login");
                 }
+                {
+                    return RedirectToAction("LoggingIn", "Login", client);
+                }
+            }
+            ViewData["ValidationMessage"] = "user not found";
+            return View("../../Views/Login/Login");
 
-                ViewData["ValidationMessage"] = "user not found";
-                return View("../../Views/Login/Login");
-            }
-            {
-                return RedirectToAction("LoggingIn","Login", client);
-            }
-            
         }
         [HttpPost]
        
@@ -179,13 +184,10 @@ namespace Assignment1Group26.Controllers
         }
         public Client findClient(string userName)
         {
-           var clients =  _context.clients.ToList();
-            foreach (var client in clients)
+           var client =  _context.clients.FirstOrDefault(c => c.ClientUserName == userName);
+            if(client != null)
             {
-                if(client.ClientUserName == userName)
-                {
-                    return client;
-                }
+                return  client;
             }
             return null;
         }

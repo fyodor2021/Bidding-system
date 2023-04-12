@@ -62,7 +62,8 @@ namespace Assignment1Group26.Controllers
 
                         //email verification
 
-                        await SendEmail(c);
+                        await SendEmail(c.ClientId);
+                        return View("../Email/EmailVerifyPage", c);
 
                     }
                     else
@@ -77,7 +78,6 @@ namespace Assignment1Group26.Controllers
                     ViewData["errorMessage"] = "Invalid Credentials";
                     return View("Register");
                 }
-                return RedirectToAction("Index", "Home");
 
             }
             else
@@ -86,27 +86,26 @@ namespace Assignment1Group26.Controllers
                 return View("Register");
             }
         }
-        [HttpPost]
-        public async Task<IActionResult> SendEmail(Client c)
+        public async Task<IActionResult> SendEmail(int id)
         {
+            Client client = _context.clients.FirstOrDefault(c => c.ClientId == id);
             string receiver;
-            if (c.ClientUserName != null)
+            if (client.ClientUserName != null)
             {
-                receiver = c.ClientUserName;
+                receiver = client.ClientUserName;
             }
             else
             {
                 receiver = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
             }
-
             var hostName = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}/";
             var subject = "Please Verify Your Email";
             var message = "<h1>please confirm your email</h1>" +
-                          "<a href=\"" + hostName + "Registration/ValidateToken?token=" + c.VerficationToken + "\">verify your email</a>";
+                          "<a href=\"" + hostName + "Registration/ValidateToken?token=" + client.VerficationToken + "\">verify your email</a>";
 
             await _emailSender.SendEmailAsync(receiver, subject, message);
+            return View("../Email/EmailVerifyPage", client);
 
-            return View("../Email/EmailVerifyPage");
         }
         [HttpGet]
         public async Task<IActionResult> ValidateToken(String token)

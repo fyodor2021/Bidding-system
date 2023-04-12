@@ -13,9 +13,13 @@ namespace Assignment1Group26.Controllers
         }
         public IActionResult Details(int id)
         {
-
-            var b = _context.bids.Include(c => c.AssetCondition).Include(c => c.Category).Include(c => c.Client).FirstOrDefault(b => b.BidId == id);
-            return View(b);
+            Bid bid = _context.bids.FirstOrDefault(b => b.BidId == id);
+            var tables = new DetailsVeiwModel
+            {
+                BidsPlaced = _context.bidsPlaced.Where(c => c.ClientId == bid.ClientId).ToList(),
+                Bid = _context.bids.Include(c => c.AssetCondition).Include(c => c.Category).Include(c => c.Client).FirstOrDefault(b => b.BidId == id)
+            };
+            return View(tables);
         }
     }
 }
