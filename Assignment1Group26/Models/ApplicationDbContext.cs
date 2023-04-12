@@ -298,7 +298,8 @@ namespace Assignment1Group26.Models
                       ClientId = 1,
                       CreatedBy = 1,
                       CreatedByStr = "john.smith@gmail.com",
-                     Comment = "Awsome Experience, it was Delvired on Time, #HappyCustomer"
+                     Comment = "Awsome Experience, it was Delvired on Time, #HappyCustomer",
+                     Rating= 1
                   },
 
                   new Review
@@ -307,7 +308,8 @@ namespace Assignment1Group26.Models
                       ClientId = 1,
                       CreatedBy = 2,
                       CreatedByStr = "Vedoor.Barakat@gmail.com",
-                      Comment = "terrible Experience, i'm Done! Buying from this seller, #SadSeller"
+                      Comment = "terrible Experience, i'm Done! Buying from this seller, #SadSeller",
+                      Rating= 2
                   },
                   new Review
                   {
@@ -315,7 +317,8 @@ namespace Assignment1Group26.Models
                       ClientId = 2,
                       CreatedBy = 1,
                       CreatedByStr = "john.smith@gmail.com",
-                      Comment = "Fair Experience, got what i Paid for, #FairCustomer"
+                      Comment = "Fair Experience, got what i Paid for, #FairCustomer",
+                      Rating= 2
                   }
 
 

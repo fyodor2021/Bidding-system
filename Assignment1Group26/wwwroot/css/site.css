@@ -373,3 +373,8 @@ td {
     margin: 2px;
     text-align:center;
 }
+.stars {
+    color: orange;
+    font-size: 25px;
+    display: inline-block;
+}

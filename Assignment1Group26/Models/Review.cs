@@ -15,5 +15,7 @@ namespace Assignment1Group26.Models
         public string CreatedByStr { get; set; }
         [Required]
         public string Comment { get; set; }
+
+        public int Rating { get; set; }
     }
 }

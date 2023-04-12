@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Assignment1Group26.Migrations
 {
-    public partial class intial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -66,7 +66,10 @@ namespace Assignment1Group26.Migrations
                     Blocked = table.Column<bool>(type: "bit", nullable: false),
                     MultiPin = table.Column<int>(type: "int", nullable: false),
                     VerficationToken = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    keepLoggedIn = table.Column<bool>(type: "bit", nullable: false)
+                    keepLoggedIn = table.Column<bool>(type: "bit", nullable: false),
+                    ClientPhoneNumber = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
+                    ClientBirthData = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ClientImage = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -82,7 +85,8 @@ namespace Assignment1Group26.Migrations
                     ClientId = table.Column<int>(type: "int", nullable: false),
                     CreatedBy = table.Column<int>(type: "int", nullable: false),
                     CreatedByStr = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Comment = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Comment = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Rating = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -150,23 +154,13 @@ namespace Assignment1Group26.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "clients",
-                columns: new[] { "ClientId", "Blocked", "ClientFirstName", "ClientLastName", "ClientPassword", "ClientRole", "ClientUserName", "EmailConfirmed", "MultiPin", "VerficationToken", "keepLoggedIn" },
-                values: new object[,]
-                {
-                    { 1, false, "John", "Smith", "password", "Client", "john.smith@gmail.com", true, 11111111, null, false },
-                    { 2, false, "vedoor", "Barakat", "password", "Client", "Vedoor.Barakat@gmail.com", true, 11111111, null, false },
-                    { 3, false, "josephine", "abdulaziz", "juju123", "Admin", "juju.josedore@gmail.com", true, 11111111, null, false }
-                });
-
-            migrationBuilder.InsertData(
                 table: "reviews",
-                columns: new[] { "ReviewId", "ClientId", "Comment", "CreatedBy", "CreatedByStr" },
+                columns: new[] { "ReviewId", "ClientId", "Comment", "CreatedBy", "CreatedByStr", "Rating" },
                 values: new object[,]
                 {
-                    { 1, 1, "Awsome Experience, it was Delvired on Time, #HappyCustomer", 1, "john.smith@gmail.com" },
-                    { 2, 1, "terrible Experience, i'm Done! Buying from this seller, #SadSeller", 2, "Vedoor.Barakat@gmail.com" },
-                    { 3, 2, "Fair Experience, got what i Paid for, #FairCustomer", 1, "john.smith@gmail.com" }
+                    { 1, 1, "Awsome Experience, it was Delvired on Time, #HappyCustomer", 1, "john.smith@gmail.com", 1 },
+                    { 2, 1, "terrible Experience, i'm Done! Buying from this seller, #SadSeller", 2, "Vedoor.Barakat@gmail.com", 2 },
+                    { 3, 2, "Fair Experience, got what i Paid for, #FairCustomer", 1, "john.smith@gmail.com", 2 }
                 });
 
             migrationBuilder.CreateIndex(

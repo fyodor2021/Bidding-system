@@ -43,4 +43,40 @@ $('#modalOpener').click(function (event) {
     $('#exampleModal').modal('show')
 })
 
+function RateOut(rating) {
+	for (var i = 1; i <= rating; i++) {
+		$("#span" + i).attr('class', 'fa fa-star')
+	}
+}
+function RateOver(rating) {
+	for (var i = 1; i <= rating; i++) {
+		$("#span" + i).attr('class', 'fa fa-star stars')
+	}
+}
+function RateClick(rating) {
+	$("#lbRating").val(rating);
+	for (var i = 1; i <= rating; i++) {
+		$("#span" + i).attr('class', 'fa fa-star stars')
+	}
+	for (var i = rating + 1; i <= 5; i++) {
+		$("#span" + i).attr('class', 'fa fa-star')
+	}
+}
+function RateSelected() {
+	var rating = $("#lbRating").val();
+	const select = document.querySelector('#lbRating');
+	select.value = rating
+	for (var i = 1; i <= rating; i++) {
+		$("#span" + i).attr('class', 'fa fa-star stars')
+	}
+
+}
+function Rate() {
+	var rating = $("#lbRating").val();
+	if (rating == "0") {
+		alert("Please Select Rating");
+		return false;
+
+	}
+}
     

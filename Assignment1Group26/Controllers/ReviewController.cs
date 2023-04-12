@@ -25,6 +25,7 @@ namespace Assignment1Group26.Controllers
                 reviewToAdd.CreatedBy = client.ClientId;
                 reviewToAdd.CreatedByStr = rvm.Review.CreatedByStr;
                 reviewToAdd.Comment = rvm.Review.Comment;
+                reviewToAdd.Rating = rvm.Review.Rating;
             
             }
             _context.reviews.Add(reviewToAdd);

@@ -1,90 +1,150 @@
 ﻿@model ProfileReviewModel
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript">
 
-    <div class="col-md-8">
-        <div class="card mb-3">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-sm-3">
-                        <h6 class="mb-0">Full Name</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                        @Model.Client.ClientFirstName  @Model.Client.ClientLastName
-                    </div>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="col-sm-3">
-                        <h6 class="mb-0">Email</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                        @Model.Client.ClientUserName
-                    </div>
-                </div>
-
-                <div class="row">
-                    
-            </div>
-
-
-            <div class="row">
-              
-                @foreach (Review r in Model.Reviews)
-                {
-                    <div class="card profile-card">
-                        
-                        <div class="row text-left">
-                            <p class="content">@r.Comment</p>
-                            @if(base.User.Identity.Name == "Admin")
-                            {
-                                <div class="form-outline w-100 col">
-                                    <a asp-controller="Review" asp-action="Delete" asp-route-id="@r.ReviewId" class="btn btn-danger btn-sm">
-                                        Delete
-                                    </a>
-                                </div>
-                            }
-                            
-                        </div>
-                        
-                    </div>
-
-                } 
-                @{
-                   // var userName = ;
-                }
-                @if (base.User.Identity.Name != "Admin" && base.User.Identity.Name != Model.Client.ClientUserName)
-                {
-                    <form asp-controller="Review" asp-action="Add" enctype="multipart/form-data" method="post">
-                        <p>@base.User.Identity.Name</p>
-                        <input hidden readonly asp-for="@Model.Review.CreatedByStr" value="@base.User.Identity.Name">
-                        <input hidden readonly asp-for="Review.ClientId" value="@Model.Client.ClientId">
-                        <div class="card-footer py-3 border-0" style="background-color: #f8f9fa; border-radius: 3%;">
-                            <div class="d-flex flex-start w-100">
-                                <div class="form-outline w-100">
-                                    <textarea asp-for="Review.Comment" class="form-control" id="review-box" rows="4" style="background: #fff;"></textarea>
-                                    <label class="form-label" for="review-box">Tell Us How We Did!</label>
-                                </div>
-                            </div>
-                            <div class="float-end mt-2 pt-1">
-                                <button type="submit" class="btn btn-primary btn-sm">
-                                    Post comment
-                                </button>
-                                <a asp-controller="Home" asp-action="Index" class="btn btn-primary btn-sm">
-                                    Home
-                                </a>
-                            </div>
-                        </div>
-                    </form>
-                }
-                
-
-                
+	function RateOut(rating){
+		for(var i = 1; i <= rating; i++ ){
+			$("#span" + i).attr('class', 'fa fa-star')
+		}
+	}
+	function RateOver(rating){
+		for (var i = 1; i <= rating; i++) {
+			$("#span" + i).attr('class', 'fa fa-star stars')
+		}
+	}
+	function RateClick(rating){
+		$("#lbRating").val(rating);
+		for (var i = 1; i <= rating; i++) {
+			$("#span" + i).attr('class', 'fa fa-star stars')
+		}
+		for (var i = rating + 1; i <= 5; i++) {
+			$("#span" + i).attr('class', 'fa fa-star')
+		}
+	}
+	function RateSelected(){
+		var rating = $("#lbRating").val();
+		const select = document.querySelector('#lbRating');
+		select.value = rating
+		for (var i = 1; i <= rating; i++) {
+			$("#span" + i).attr('class', 'fa fa-star stars')
+		}
+	
+	}
 
 
+</script>
+<div class="col-md-8">
+	<div class="card mb-3">
+		<div class="card-body">
+			<div class="row">
+				<div class="col-sm-3">
+					<h6 class="mb-0">Full Name</h6>
+				</div>
+				<div class="col-sm-9 text-secondary">
+					@Model.Client.ClientFirstName  @Model.Client.ClientLastName
+				</div>
+			</div>
+			<hr>
+			<div class="row">
+				<div class="col-sm-3">
+					<h6 class="mb-0">Email</h6>
+				</div>
+				<div class="col-sm-9 text-secondary">
+					@Model.Client.ClientUserName
+				</div>
+			</div>
 
-            </div>
-            
+			<div class="row">
+			</div>
 
-        </div>
-    </div>
+
+			<div class="row">
+
+				@foreach (Review r in Model.Reviews)
+				{
+					<div class="card profile-card">
+
+						<div class="row text-left">
+								<div >
+							@for (int i = 0; i < r.Rating; i++)
+
+							{
+								<span class="fa fa-star stars"></span>
+							}
+								@for (int i = r.Rating; i < 5; i++)
+
+								{
+									<span class="fa fa-star "></span>
+								}
+							<br>
+						</div>
+							<p class="content">@r.Comment</p>
+
+							@if (base.User.Identity.Name == "Admin")
+							{
+								<div class="form-outline w-100 col">
+									<a asp-controller="Review" asp-action="Delete" asp-route-id="@r.ReviewId" class="btn btn-danger btn-sm">
+										Delete
+									</a>
+								</div>
+							}
+
+						</div>
+					
+
+
+					</div>
+
+				}
+				@{
+					// var userName = ;
+				}
+				@if (base.User.Identity.Name != "Admin" && base.User.Identity.Name != Model.Client.ClientUserName)
+				{
+					<form asp-controller="Review" asp-action="Add" enctype="multipart/form-data" method="post" >
+						<p>@base.User.Identity.Name</p>
+						<input hidden readonly asp-for="@Model.Review.CreatedByStr" value="@base.User.Identity.Name">
+						<input hidden readonly asp-for="Review.ClientId" value="@Model.Client.ClientId">
+						<div class="card-footer py-3 border-0" style="background-color: #f8f9fa; border-radius: 3%;">
+							<div >
+								<div class="form-outline w-100" onmouseout="RateSelected()">
+									<span Id="span1" onmouseout="RateSelected(1)" onmouseover="RateOver(1)" onclick="RateClick(1)" class="fa fa-star checked"></span>
+									<span Id="span2" onmouseout="RateSelected(2)" onmouseover="RateOver(2)" onclick="RateClick(2)" class="fa fa-star checked"></span>
+									<span Id="span3" onmouseout="RateSelected(3)" onmouseover="RateOver(3)" onclick="RateClick(3)" class="fa fa-star checked"></span>
+									<span Id="span4" onmouseout="RateSelected(4)" onmouseover="RateOver(4)" onclick="RateClick(4)" class="fa fa-star checked"></span>
+									<span Id="span5" onmouseout="RateSelected(5)" onmouseover="RateOver(5)" onclick="RateClick(5)" class="fa fa-star"></span>
+								</div>
+								<br>
+								<input hidden id="lbRating" asp-for="Review.Rating">
+								<div class="form-outline w-100">
+									<textarea asp-for="Review.Comment" class="form-control" id="review-box" rows="4" style="background: #fff;"></textarea>
+									<label class="form-label" for="review-box">Tell Us How We Did!</label>
+								</div>
+
+								
+
+							</div>
+							<div class="float-end mt-2 pt-1">
+								<button type="submit" class="btn btn-primary btn-sm">
+									Post comment
+								</button>
+								<a asp-controller="Home" asp-action="Index" class="btn btn-primary btn-sm">
+									Home
+								</a>
+							</div>
+						</div>
+					</form>
+				}
+
+
+
+
+
+
+			</div>
+
+
+		</div>
+	</div>
 
 </div>

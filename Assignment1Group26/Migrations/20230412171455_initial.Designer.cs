@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Assignment1Group26.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230412122343_intial")]
-    partial class intial
+    [Migration("20230412171455_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -180,9 +180,16 @@ namespace Assignment1Group26.Migrations
                     b.Property<bool>("Blocked")
                         .HasColumnType("bit");
 
+                    b.Property<DateTime?>("ClientBirthData")
+                        .IsRequired()
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("ClientFirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("ClientImage")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("ClientLastName")
                         .IsRequired()
@@ -190,6 +197,10 @@ namespace Assignment1Group26.Migrations
 
                     b.Property<string>("ClientPassword")
                         .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("ClientPhoneNumber")
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
@@ -215,47 +226,6 @@ namespace Assignment1Group26.Migrations
                     b.HasKey("ClientId");
 
                     b.ToTable("clients");
-
-                    b.HasData(
-                        new
-                        {
-                            ClientId = 1,
-                            Blocked = false,
-                            ClientFirstName = "John",
-                            ClientLastName = "Smith",
-                            ClientPassword = "password",
-                            ClientRole = "Client",
-                            ClientUserName = "john.smith@gmail.com",
-                            EmailConfirmed = true,
-                            MultiPin = 11111111,
-                            keepLoggedIn = false
-                        },
-                        new
-                        {
-                            ClientId = 2,
-                            Blocked = false,
-                            ClientFirstName = "vedoor",
-                            ClientLastName = "Barakat",
-                            ClientPassword = "password",
-                            ClientRole = "Client",
-                            ClientUserName = "Vedoor.Barakat@gmail.com",
-                            EmailConfirmed = true,
-                            MultiPin = 11111111,
-                            keepLoggedIn = false
-                        },
-                        new
-                        {
-                            ClientId = 3,
-                            Blocked = false,
-                            ClientFirstName = "josephine",
-                            ClientLastName = "abdulaziz",
-                            ClientPassword = "juju123",
-                            ClientRole = "Admin",
-                            ClientUserName = "juju.josedore@gmail.com",
-                            EmailConfirmed = true,
-                            MultiPin = 11111111,
-                            keepLoggedIn = false
-                        });
                 });
 
             modelBuilder.Entity("Assignment1Group26.Models.Review", b =>
@@ -280,6 +250,9 @@ namespace Assignment1Group26.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
+
                     b.HasKey("ReviewId");
 
                     b.ToTable("reviews");
@@ -291,7 +264,8 @@ namespace Assignment1Group26.Migrations
                             ClientId = 1,
                             Comment = "Awsome Experience, it was Delvired on Time, #HappyCustomer",
                             CreatedBy = 1,
-                            CreatedByStr = "john.smith@gmail.com"
+                            CreatedByStr = "john.smith@gmail.com",
+                            Rating = 1
                         },
                         new
                         {
@@ -299,7 +273,8 @@ namespace Assignment1Group26.Migrations
                             ClientId = 1,
                             Comment = "terrible Experience, i'm Done! Buying from this seller, #SadSeller",
                             CreatedBy = 2,
-                            CreatedByStr = "Vedoor.Barakat@gmail.com"
+                            CreatedByStr = "Vedoor.Barakat@gmail.com",
+                            Rating = 2
                         },
                         new
                         {
@@ -307,7 +282,8 @@ namespace Assignment1Group26.Migrations
                             ClientId = 2,
                             Comment = "Fair Experience, got what i Paid for, #FairCustomer",
                             CreatedBy = 1,
-                            CreatedByStr = "john.smith@gmail.com"
+                            CreatedByStr = "john.smith@gmail.com",
+                            Rating = 2
                         });
                 });
 
