@@ -15,6 +15,21 @@
                         <div class="d-flex justify-content-center mb-2">
                             <a type="button" asp-controller="Profile" asp-action="Edit" asp-route-id="@Model.ClientId" class="btn btn-primary">Edit</a>
                             <a type="button" target="_blank" asp-action="Index" asp-controller="Home" class="btn btn-outline-primary ms-1">Home</a>
+                            @if (base.User.Identity.Name == "Admin")
+                            {
+                                @if (Model.ClientRole != "Admin")
+                                {
+                                    @if (Model.Blocked)
+                                    {
+                                        <a class="btn btn-info btn-outline-danger" style="background-color:white;" asp-action="Unblock" asp-controller="Profile" asp-route-id="@Model.ClientId">UnBlock</a>
+                                    }
+                                    else
+                                    {
+                                        <a class="btn btn-info btn-outline-danger " style="background-color:white;" asp-action="Block" asp-controller="Profile" asp-route-id="@Model.ClientId">Block</a>
+
+                                    }
+                                }
+                            }
                         </div>
                     </div>
                 </div>
@@ -95,83 +110,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="card mb-4 mb-md-0">
-                            <div class="card-body">
-                                <p class="mb-4">
-                                    <span class="text-primary font-italic me-1">assigment</span> Project Status
-                                </p>
-                                <p class="mb-1" style="font-size: .77rem;">Web Design</p>
-                                <div class="progress rounded" style="height: 5px;">
-                                    <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80"
-                                         aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <p class="mt-4 mb-1" style="font-size: .77rem;">Website Markup</p>
-                                <div class="progress rounded" style="height: 5px;">
-                                    <div class="progress-bar" role="progressbar" style="width: 72%" aria-valuenow="72"
-                                         aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <p class="mt-4 mb-1" style="font-size: .77rem;">One Page</p>
-                                <div class="progress rounded" style="height: 5px;">
-                                    <div class="progress-bar" role="progressbar" style="width: 89%" aria-valuenow="89"
-                                         aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <p class="mt-4 mb-1" style="font-size: .77rem;">Mobile Template</p>
-                                <div class="progress rounded" style="height: 5px;">
-                                    <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="55"
-                                         aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <p class="mt-4 mb-1" style="font-size: .77rem;">Backend API</p>
-                                <div class="progress rounded mb-2" style="height: 5px;">
-                                    <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66"
-                                         aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card mb-4 mb-md-0">
-                            <div class="card-body">
-                                <p class="mb-4">
-                                    <span class="text-primary font-italic me-1">assigment</span> Project Status
-                                </p>
-                                <p class="mb-1" style="font-size: .77rem;">Web Design</p>
-                                <div class="progress rounded" style="height: 5px;">
-                                    <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80"
-                                         aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <p class="mt-4 mb-1" style="font-size: .77rem;">Website Markup</p>
-                                <div class="progress rounded" style="height: 5px;">
-                                    <div class="progress-bar" role="progressbar" style="width: 72%" aria-valuenow="72"
-                                         aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <p class="mt-4 mb-1" style="font-size: .77rem;">One Page</p>
-                                <div class="progress rounded" style="height: 5px;">
-                                    <div class="progress-bar" role="progressbar" style="width: 89%" aria-valuenow="89"
-                                         aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <p class="mt-4 mb-1" style="font-size: .77rem;">Mobile Template</p>
-                                <div class="progress rounded" style="height: 5px;">
-                                    <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="55"
-                                         aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <p class="mt-4 mb-1" style="font-size: .77rem;">Backend API</p>
-                                <div class="progress rounded mb-2" style="height: 5px;">
-                                    <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66"
-                                         aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
-<<<<<<< HEAD
 </section>
-=======
-
     <div class="col-md-8">
         <div class="card mb-3">
             <div class="card-body">
@@ -202,36 +144,9 @@
                     </div>
                 </div>
                 <hr />
-                <div class="row">
-                    <div class="col-sm-12 " style="margin-top:5px;">
-                        <a asp-controller="Profile" asp-action="Edit" asp-route-id="@Model.ClientId" class="btn btn-info">Edit</a>
-                        <a class="btn btn-info " asp-action="Index" asp-controller="Home">Home</a>
-                        <p></p>
-                        @if (base.User.Identity.Name == "Admin")
-                        {
-                            @if (Model.ClientRole != "Admin")
-                            {
-                                @if (Model.Blocked)
-                                {
-                                    <a class="btn btn-info btn-outline-danger" style="background-color:white;" asp-action="Unblock" asp-controller="Profile" asp-route-id="@Model.ClientId">UnBlock</a>
-                                }
-                                else
-                                {
-                                    <a class="btn btn-info btn-outline-danger " style="background-color:white;" asp-action="Block" asp-controller="Profile" asp-route-id="@Model.ClientId">Block</a>
-
-                                }
-                            }
-                        }
-                        
-                        
-
-                    </div>
-
-                </div>
+               
             </div>
         </div>
-
     </div>
->>>>>>> 89c551a25b7dd22a8bd651e8839c878a0266d1a1
 
 

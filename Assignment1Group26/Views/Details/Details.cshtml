@@ -40,14 +40,6 @@
 
 
 
-    body {
-        display: grid;
-        grid-auto-flow: column;
-        grid-gap: 20px;
-        place-content: center;
-        margin: 0;
-        height: 100vh;
-    }
 
     :root {
         --color-light: white;
@@ -141,10 +133,9 @@
         background: transparent;
         border-radius: var(--size-radius);
         &:focus, &:not(:placeholder-shown)
-
     }
 
-    .button-groug{
+    .button-groug {
         margin-top: calc(var(--size-bezel) * 2.5);
     }
 
@@ -204,7 +195,7 @@
                                     <div class="form-body">
                                         <div class="row">
                                             <div class="container" style="margin-bottom: 22px;">
-                                                <h3>Please Select Or Enter the Amount you'd Like to Add to the Heighest bid</h3>
+                                                <h3 style="margin-bottom: 22px;">Please Select Or Enter the Amount you'd Like to Add to the Heighest bid</h3>
 
                                                 <button style="--color:#031866;--slant:20px;--border:5px">$10</button>
                                                 <button style="--color:#031866;--slant:20px;--border:5px">$20</button>
