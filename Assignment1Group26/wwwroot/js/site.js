@@ -43,6 +43,7 @@ $('#modalOpener').click(function (event) {
     $('#exampleModal').modal('show')
 })
 
+<<<<<<< HEAD
 function RateOut(rating) {
 	for (var i = 1; i <= rating; i++) {
 		$("#span" + i).attr('class', 'fa fa-star')
@@ -80,3 +81,5 @@ function Rate() {
 	}
 }
     
+=======
+>>>>>>> 8387b5a4194ac408724932caffc8fcbf563e573a

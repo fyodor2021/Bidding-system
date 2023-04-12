@@ -2,7 +2,7 @@
 {
     public class DetailsVeiwModel
     {
-        public IEnumerable<BidsPlaced> BidsPlaced { get; set; }
-        public Bid Bid {get; set;}
+        public BidsPlaced? BidPlaced { get; set; }
+        public Bid? Bid {get; set;}
     }
 }

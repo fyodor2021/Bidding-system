@@ -9,12 +9,9 @@ namespace Assignment1Group26.Models
         [Key]
         public int BidsPlacedId { get; set; }
         [Required]
-        public int LatestBid { get; set; }
-        [Required]
         public int BidId { get; set; }
         public int ClientId { get; set; }
-        [NotMapped]
-        public int BidAmount { get; set; }
+        public double BidAmount { get; set; }
         public DateTime BidDate { get; set; } = DateTime.Now;
 
     }

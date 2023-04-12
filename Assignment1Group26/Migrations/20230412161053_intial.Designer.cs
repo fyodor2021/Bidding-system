@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Assignment1Group26.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230412171455_initial")]
-    partial class initial
+    [Migration("20230412161053_intial")]
+    partial class intial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -108,6 +108,21 @@ namespace Assignment1Group26.Migrations
                     b.HasIndex("ClientId");
 
                     b.ToTable("bids");
+
+                    b.HasData(
+                        new
+                        {
+                            BidId = 1,
+                            AssetConditionId = 1,
+                            BidCost = 59.990000000000002,
+                            BidDescription = "High heel slingback shoes. Tied closure. Pointed toe.",
+                            BidEndDate = new DateTime(2023, 4, 12, 12, 10, 53, 290, DateTimeKind.Local).AddTicks(4528),
+                            BidName = "LACE UP TIED HIGH HEELED SHOES",
+                            BidStartDate = new DateTime(2023, 4, 12, 12, 10, 53, 290, DateTimeKind.Local).AddTicks(4527),
+                            CategoryId = 1,
+                            ClientId = 1,
+                            Status = false
+                        });
                 });
 
             modelBuilder.Entity("Assignment1Group26.Models.BidsPlaced", b =>
@@ -127,12 +142,46 @@ namespace Assignment1Group26.Migrations
                     b.Property<int>("ClientId")
                         .HasColumnType("int");
 
-                    b.Property<int>("LatestBid")
-                        .HasColumnType("int");
-
                     b.HasKey("BidsPlacedId");
 
                     b.ToTable("bidsPlaced");
+
+                    b.HasData(
+                        new
+                        {
+                            BidsPlacedId = 1,
+                            BidDate = new DateTime(2023, 4, 12, 12, 10, 53, 290, DateTimeKind.Local).AddTicks(4485),
+                            BidId = 1,
+                            ClientId = 1
+                        },
+                        new
+                        {
+                            BidsPlacedId = 2,
+                            BidDate = new DateTime(2023, 4, 12, 12, 10, 53, 290, DateTimeKind.Local).AddTicks(4511),
+                            BidId = 1,
+                            ClientId = 1
+                        },
+                        new
+                        {
+                            BidsPlacedId = 3,
+                            BidDate = new DateTime(2023, 4, 12, 12, 10, 53, 290, DateTimeKind.Local).AddTicks(4513),
+                            BidId = 1,
+                            ClientId = 1
+                        },
+                        new
+                        {
+                            BidsPlacedId = 4,
+                            BidDate = new DateTime(2023, 4, 12, 12, 10, 53, 290, DateTimeKind.Local).AddTicks(4514),
+                            BidId = 1,
+                            ClientId = 2
+                        },
+                        new
+                        {
+                            BidsPlacedId = 5,
+                            BidDate = new DateTime(2023, 4, 12, 12, 10, 53, 290, DateTimeKind.Local).AddTicks(4515),
+                            BidId = 1,
+                            ClientId = 2
+                        });
                 });
 
             modelBuilder.Entity("Assignment1Group26.Models.Category", b =>
@@ -180,16 +229,9 @@ namespace Assignment1Group26.Migrations
                     b.Property<bool>("Blocked")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime?>("ClientBirthData")
-                        .IsRequired()
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("ClientFirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<byte[]>("ClientImage")
-                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("ClientLastName")
                         .IsRequired()
@@ -197,10 +239,6 @@ namespace Assignment1Group26.Migrations
 
                     b.Property<string>("ClientPassword")
                         .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
-
-                    b.Property<string>("ClientPhoneNumber")
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
@@ -226,6 +264,47 @@ namespace Assignment1Group26.Migrations
                     b.HasKey("ClientId");
 
                     b.ToTable("clients");
+
+                    b.HasData(
+                        new
+                        {
+                            ClientId = 1,
+                            Blocked = false,
+                            ClientFirstName = "John",
+                            ClientLastName = "Smith",
+                            ClientPassword = "password",
+                            ClientRole = "Client",
+                            ClientUserName = "john.smith@gmail.com",
+                            EmailConfirmed = true,
+                            MultiPin = 11111111,
+                            keepLoggedIn = false
+                        },
+                        new
+                        {
+                            ClientId = 2,
+                            Blocked = false,
+                            ClientFirstName = "vedoor",
+                            ClientLastName = "Barakat",
+                            ClientPassword = "password",
+                            ClientRole = "Client",
+                            ClientUserName = "Vedoor.Barakat@gmail.com",
+                            EmailConfirmed = true,
+                            MultiPin = 11111111,
+                            keepLoggedIn = false
+                        },
+                        new
+                        {
+                            ClientId = 3,
+                            Blocked = false,
+                            ClientFirstName = "josephine",
+                            ClientLastName = "abdulaziz",
+                            ClientPassword = "juju123",
+                            ClientRole = "Admin",
+                            ClientUserName = "juju.josedore@gmail.com",
+                            EmailConfirmed = true,
+                            MultiPin = 11111111,
+                            keepLoggedIn = false
+                        });
                 });
 
             modelBuilder.Entity("Assignment1Group26.Models.Review", b =>
@@ -250,9 +329,6 @@ namespace Assignment1Group26.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Rating")
-                        .HasColumnType("int");
-
                     b.HasKey("ReviewId");
 
                     b.ToTable("reviews");
@@ -264,8 +340,7 @@ namespace Assignment1Group26.Migrations
                             ClientId = 1,
                             Comment = "Awsome Experience, it was Delvired on Time, #HappyCustomer",
                             CreatedBy = 1,
-                            CreatedByStr = "john.smith@gmail.com",
-                            Rating = 1
+                            CreatedByStr = "john.smith@gmail.com"
                         },
                         new
                         {
@@ -273,8 +348,7 @@ namespace Assignment1Group26.Migrations
                             ClientId = 1,
                             Comment = "terrible Experience, i'm Done! Buying from this seller, #SadSeller",
                             CreatedBy = 2,
-                            CreatedByStr = "Vedoor.Barakat@gmail.com",
-                            Rating = 2
+                            CreatedByStr = "Vedoor.Barakat@gmail.com"
                         },
                         new
                         {
@@ -282,8 +356,7 @@ namespace Assignment1Group26.Migrations
                             ClientId = 2,
                             Comment = "Fair Experience, got what i Paid for, #FairCustomer",
                             CreatedBy = 1,
-                            CreatedByStr = "john.smith@gmail.com",
-                            Rating = 2
+                            CreatedByStr = "john.smith@gmail.com"
                         });
                 });
 

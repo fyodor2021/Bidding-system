@@ -33,6 +33,7 @@
 
 
 </script>
+
 <div class="col-md-8">
 	<div class="card mb-3">
 		<div class="card-body">
@@ -54,9 +55,56 @@
 				</div>
 			</div>
 
+    <div class="col-md-8">
+    <div class="card formStyle mb-3">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">Full Name</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        @Model.Client.ClientFirstName  @Model.Client.ClientLastName
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">Email</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        @Model.Client.ClientUserName
+                    </div>
+                </div>
+
+                <div class="row">
+                    
+            </div>
+
+
+            <div class="row">
+              
+                @foreach (Review r in Model.Reviews)
+                {
+                    <div class="card formStyle profile-card">
+                        
+                        <div class="row text-left">
+                            <p class="content">@r.Comment</p>
+                            @if(base.User.Identity.Name == "Admin")
+                            {
+                                <div class="form-outline w-100 col">
+                                    <a asp-controller="Review" asp-action="Delete" asp-route-id="@r.ReviewId" class="btn btn-danger btn-sm">
+                                        Delete
+                                    </a>
+                                </div>
+                            }
+                            
+                        </div>
+                        
+                    </div>
+
 			<div class="row">
 			</div>
-
+			}
 
 			<div class="row">
 
@@ -96,12 +144,10 @@
 					</div>
 
 				}
-				@{
-					// var userName = ;
-				}
+				
 				@if (base.User.Identity.Name != "Admin" && base.User.Identity.Name != Model.Client.ClientUserName)
 				{
-					<form asp-controller="Review" asp-action="Add" enctype="multipart/form-data" method="post" >
+					<form asp-controller="Review" asp-action="Add" enctype="multipart/form-data" method="post">
 						<p>@base.User.Identity.Name</p>
 						<input hidden readonly asp-for="@Model.Review.CreatedByStr" value="@base.User.Identity.Name">
 						<input hidden readonly asp-for="Review.ClientId" value="@Model.Client.ClientId">

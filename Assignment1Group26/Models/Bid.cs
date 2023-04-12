@@ -13,7 +13,7 @@ namespace Assignment1Group26.Models
         [Required(ErrorMessage = "Please enter a valid discription")]
         public string? BidDescription { get; set; }
         [Required(ErrorMessage = "Please enter a valid cost")]
-        public double? BidCost { get; set; }
+        public double? BidStartPrice { get; set; }
         [ValidateDate]
 
         public DateTime BidStartDate { get; set; } = DateTime.Now;
@@ -36,6 +36,7 @@ namespace Assignment1Group26.Models
 
         public Category? Category { get; set; }
         public bool Status { get; set; } = false;
+        public double? HighestBid { get;set; }
         
         public byte[]? ImageData { get; set; }
 

@@ -171,6 +171,17 @@ namespace Assignment1Group26.Controllers
             _context.SaveChanges();
 
         }
+        public async Task<IActionResult> PassResetEmail(string userName)
+        {
+            Client client = _context.clients.FirstOrDefault(c => c.ClientUserName == userName);
+            string receiver = client.ClientUserName;
+            var subject = "Verification PIN";
+            var message = "<h1>Welcome Again to JoseDore</h1>" +
+                          "<h2>Your PIN for this session is " + client.MultiPin;
+
+            await _emailSender.SendEmailAsync(receiver, subject, message);
+            return View("../../Views/Email/EmailVerifyPage", client);
+        }
         public async Task<IActionResult> ResendEmail(int id)
         {
             Client client = _context.clients.FirstOrDefault(c => c.ClientId == id);

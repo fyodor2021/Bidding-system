@@ -47,7 +47,7 @@ namespace Assignment1Group26.Models
      public string? ClientPhoneNumber { get; set; }
 
      [Required(ErrorMessage = "Please enter your date of birth")]
-     public DateTime? ClientBirthData{ get; set; }
+     public DateTime? ClientBirthDate{ get; set; }
         
      public byte[]? ClientImage { get; set; }
 

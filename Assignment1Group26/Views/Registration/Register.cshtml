@@ -6,7 +6,7 @@
             <h2 class="text-center text-dark mt-5">
                 Please Enter The Following Information
             </h2>
-            <div class="card my-5">
+            <div class="card formStyle my-5">
 
 
                 <form class="card-body cardbody-color p-lg-5" asp-controller="Registration" asp-action="RegisterProcess">
@@ -27,9 +27,9 @@
                         <input asp-for="ClientPhoneNumber" type="text" class="form-control" id="Username" aria-describedby="emailHelp"
                                placeholder="Phone Number">
                     </div>
-                    <p style="color:red"> @Html.ValidationMessageFor(c=>c.ClientBirthData)>
+                    <p style="color:red"> @Html.ValidationMessageFor(c=>c.ClientBirthDate)>
                     <div class="mb-3">
-                            <input asp-for="ClientBirthData" type="date" class="form-control" id="Username" aria-describedby="emailHelp"
+                            <input asp-for="ClientBirthDate" type="date" class="form-control" id="Username" aria-describedby="emailHelp"
                                    placeholder="Date of Birth">
                     </div>
 

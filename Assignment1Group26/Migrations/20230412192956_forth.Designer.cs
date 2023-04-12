@@ -4,6 +4,7 @@ using Assignment1Group26.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Assignment1Group26.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230412192956_forth")]
+    partial class forth
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -67,10 +69,6 @@ namespace Assignment1Group26.Migrations
                     b.Property<int>("AssetConditionId")
                         .HasColumnType("int");
 
-                    b.Property<double?>("BidCost")
-                        .IsRequired()
-                        .HasColumnType("float");
-
                     b.Property<string>("BidDescription")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -85,11 +83,18 @@ namespace Assignment1Group26.Migrations
                     b.Property<DateTime>("BidStartDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<double?>("BidStartPrice")
+                        .IsRequired()
+                        .HasColumnType("float");
+
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<int>("ClientId")
                         .HasColumnType("int");
+
+                    b.Property<double?>("HighestBid")
+                        .HasColumnType("float");
 
                     b.Property<byte[]>("ImageData")
                         .HasColumnType("varbinary(max)");
@@ -116,6 +121,9 @@ namespace Assignment1Group26.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BidsPlacedId"), 1L, 1);
 
+                    b.Property<double>("BidAmount")
+                        .HasColumnType("float");
+
                     b.Property<DateTime>("BidDate")
                         .HasColumnType("datetime2");
 
@@ -123,9 +131,6 @@ namespace Assignment1Group26.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("ClientId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("LatestBid")
                         .HasColumnType("int");
 
                     b.HasKey("BidsPlacedId");
@@ -178,7 +183,7 @@ namespace Assignment1Group26.Migrations
                     b.Property<bool>("Blocked")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime?>("ClientBirthData")
+                    b.Property<DateTime?>("ClientBirthDate")
                         .IsRequired()
                         .HasColumnType("datetime2");
 
@@ -248,9 +253,6 @@ namespace Assignment1Group26.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Rating")
-                        .HasColumnType("int");
-
                     b.HasKey("ReviewId");
 
                     b.ToTable("reviews");
@@ -262,8 +264,7 @@ namespace Assignment1Group26.Migrations
                             ClientId = 1,
                             Comment = "Awsome Experience, it was Delvired on Time, #HappyCustomer",
                             CreatedBy = 1,
-                            CreatedByStr = "john.smith@gmail.com",
-                            Rating = 1
+                            CreatedByStr = "john.smith@gmail.com"
                         },
                         new
                         {
@@ -271,8 +272,7 @@ namespace Assignment1Group26.Migrations
                             ClientId = 1,
                             Comment = "terrible Experience, i'm Done! Buying from this seller, #SadSeller",
                             CreatedBy = 2,
-                            CreatedByStr = "Vedoor.Barakat@gmail.com",
-                            Rating = 2
+                            CreatedByStr = "Vedoor.Barakat@gmail.com"
                         },
                         new
                         {
@@ -280,8 +280,7 @@ namespace Assignment1Group26.Migrations
                             ClientId = 2,
                             Comment = "Fair Experience, got what i Paid for, #FairCustomer",
                             CreatedBy = 1,
-                            CreatedByStr = "john.smith@gmail.com",
-                            Rating = 2
+                            CreatedByStr = "john.smith@gmail.com"
                         });
                 });
 

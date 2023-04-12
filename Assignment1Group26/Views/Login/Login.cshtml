@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-md-6 offset-md-3">
             <h2 class="text-center text-dark mt-5">Please enter your credentials</h2>
-            <div class="card my-5">
+            <div class="card formStyle my-5">
 
                 <form class="card-body cardbody-color p-lg-5" asp-controller="Login" asp-action="MultiFactor">
 
@@ -18,11 +18,16 @@
                         <input asp-for="keepLoggedIn" type="checkbox"/>
                         keep me logged In.
                     </div>
+                    <a style="font-size: 14px;margin-left: 11px;" id="modalOpener">Forgot Password ?</a>
+
                     @if (ViewData["ValidationMessage"] != null)
                         {
                             <h2 style="color:red;">@ViewData["ValidationMessage"]</h2>
                         }
-                    <div class="text-center"><button type="submit" class="btn btn-color px-5 mb-5 w-100">Login</button></div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-color px-5 mb-5 w-100">Login</button>
+                    </div>
                     <div id="emailHelp" class="form-text text-center mb-5 text-dark">
                         
 
@@ -32,10 +37,45 @@
                             Create an
                             Account.
                         </a>
+
                     </div>
                 </form>
+
             </div>
 
+        </div>
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1>Placing Bid</h1>
+                    </div>
+                    <div class="modal-body" style="margin-left: 17px;">
+                        <div class="form-body">
+                            <div class="row">
+                                <div class="container" style="margin-bottom: 22px;">
+                                    <h3 style="margin-bottom: 22px;">Please Select Or Enter the Amount you'd Like to Add to the Heighest bid</h3>
+                                </div>
+                                <div class="container" style="margin-bottom:20px">
+                                    <div class="card">
+                                        <h2>
+                                            Enter Bid Amount:
+                                        </h2>
+
+                                        <form asp-action="Add" asp-controller="Details" method="post" enctype="multipart/form-data">
+                                            <input asp-for="ClientUserName" class="input__field" type="number" style="margin-bottom:10px;width: 360px;" id="bid_input" placeholder="example@gmail.com" value="">
+                                            <div class="button-group">
+                                                <input asp-for="ClientId" hidden readonly>
+                                                <button type="submit">Submit</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
