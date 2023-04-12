@@ -426,7 +426,7 @@ mark {
     color: var(--color-dark);
 }
 
-/**:first-child {
+:first-child {
     margin-top: 0;
 }
 
@@ -485,4 +485,4 @@ mark {
 
 .hidden {
     display: none;
-}*/
+}

@@ -48,22 +48,20 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1>Placing Bid</h1>
+                        <h1>Forgot Password</h1>
                     </div>
                     <div class="modal-body" style="margin-left: 17px;">
                         <div class="form-body">
                             <div class="row">
-                                <div class="container" style="margin-bottom: 22px;">
-                                    <h3 style="margin-bottom: 22px;">Please Select Or Enter the Amount you'd Like to Add to the Heighest bid</h3>
-                                </div>
                                 <div class="container" style="margin-bottom:20px">
-                                    <div class="card">
+
+                                    <div class="card formStyle">
                                         <h2>
-                                            Enter Bid Amount:
+                                            Please Enter your Email:
                                         </h2>
 
-                                        <form asp-action="Add" asp-controller="Details" method="post" enctype="multipart/form-data">
-                                            <input asp-for="ClientUserName" class="input__field" type="number" style="margin-bottom:10px;width: 360px;" id="bid_input" placeholder="example@gmail.com" value="">
+                                        <form asp-action="PassResetEmail" asp-controller="Login" method="post" enctype="multipart/form-data">
+                                            <input asp-for="ClientUserName" class="input__field" style="margin-bottom:10px;width: 360px;" id="bid_input" placeholder="example@gmail.com" value="">
                                             <div class="button-group">
                                                 <input asp-for="ClientId" hidden readonly>
                                                 <button type="submit">Submit</button>

@@ -171,9 +171,9 @@ namespace Assignment1Group26.Controllers
             _context.SaveChanges();
 
         }
-        public async Task<IActionResult> PassResetEmail(string userName)
+        public async Task<IActionResult> PassResetEmail(Client Cl)
         {
-            Client client = _context.clients.FirstOrDefault(c => c.ClientUserName == userName);
+            Client client = _context.clients.FirstOrDefault(c => c.ClientUserName == Cl.ClientUserName);
             string receiver = client.ClientUserName;
             var subject = "Verification PIN";
             var message = "<h1>Welcome Again to JoseDore</h1>" +
