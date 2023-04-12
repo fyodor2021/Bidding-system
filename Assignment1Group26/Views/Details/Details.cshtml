@@ -1,4 +1,4 @@
-﻿@model Bid
+﻿@model DetailsVeiwModel
 <style>
 
     button {
@@ -159,21 +159,21 @@
         <div class="col-md-5" style="margin-top: 37px;">
             <div class="project-info-box mt-0">
                 <h5>PROJECT DETAILS</h5>
-                <p class="mb-0">@Model.BidDescription</p>
+                <p class="mb-0">@Model.Bid.BidDescription</p>
             </div>
             @{
-                var dateLeft = Model.BidEndDate.Subtract(DateTime.Now);
-                var datesToStart = Model.BidStartDate.Subtract(DateTime.Now);
+                var dateLeft = Model.Bid.BidEndDate.Subtract(DateTime.Now);
+                var datesToStart = Model.Bid.BidStartDate.Subtract(DateTime.Now);
             }
             <div class="project-info-box">
-                <p><b>Sold By:</b><a asp-controller="Profile" asp-action="CommonProfile" asp-route-id="@Model.Client.ClientId">@Model.Client.ClientFirstName @Model.Client.ClientLastName</a></p>
+                <p><b>Sold By:</b><a asp-controller="Profile" asp-action="CommonProfile" asp-route-id="@Model.Bid.Client.ClientId">@Model.Bid.Client.ClientFirstName @Model.Bid.Client.ClientLastName</a></p>
 
-                <p><b>Item Name:</b> @Model.BidName</p>
-                <p><b>Start Date:</b> @Model.BidStartDate</p>
-                <p><b>End Date:</b> @Model.BidEndDate</p>
-                <p class="mb-0"><b>Cost:</b> $@Model.BidCost</p>
-                <p><b>Condition:</b> @Model.AssetCondition.AssetConditionStatus</p>
-                <p><b>Category:</b> @Model.Category.CategoryName</p>
+                <p><b>Item Name:</b> @Model.Bid.BidName</p>
+                <p><b>Start Date:</b> @Model.Bid.BidStartDate</p>
+                <p><b>End Date:</b> @Model.Bid.BidEndDate</p>
+                <p class="mb-0"><b>Cost:</b> $@Model.Bid.BidCost</p>
+                <p><b>Condition:</b> @Model.Bid.AssetCondition.AssetConditionStatus</p>
+                <p><b>Category:</b> @Model.Bid.Category.CategoryName</p>
                 @if (datesToStart > TimeSpan.Zero)
                 {
                     <p><b>Status: </b><botton class="btn-outline-danger"><strong>INACTIVE</strong></botton></p>
@@ -236,7 +236,7 @@
         </div>
 
         <div class="col-md-7">
-            <img src="data:image/*;base64,@(Convert.ToBase64String(Model.ImageData))" alt="project-image" class="rounded" style="margin-top:36px; margin-bottom:10px">
+            <img src="data:image/*;base64,@(Convert.ToBase64String(Model.Bid.ImageData))" alt="project-image" class="rounded" style="margin-top:36px; margin-bottom:10px">
             @if (datesToStart > TimeSpan.Zero)
             {
                 <h3 class="card-text">Item Starts:</h3>

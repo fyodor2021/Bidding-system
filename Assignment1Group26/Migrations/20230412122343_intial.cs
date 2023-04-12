@@ -23,6 +23,22 @@ namespace Assignment1Group26.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "bidsPlaced",
+                columns: table => new
+                {
+                    BidsPlacedId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    LatestBid = table.Column<int>(type: "int", nullable: false),
+                    BidId = table.Column<int>(type: "int", nullable: false),
+                    ClientId = table.Column<int>(type: "int", nullable: false),
+                    BidDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_bidsPlaced", x => x.BidsPlacedId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "categories",
                 columns: table => new
                 {
@@ -87,6 +103,7 @@ namespace Assignment1Group26.Migrations
                     AssetConditionId = table.Column<int>(type: "int", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     ClientId = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<bool>(type: "bit", nullable: false),
                     ImageData = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
                 },
                 constraints: table =>
@@ -172,6 +189,9 @@ namespace Assignment1Group26.Migrations
         {
             migrationBuilder.DropTable(
                 name: "bids");
+
+            migrationBuilder.DropTable(
+                name: "bidsPlaced");
 
             migrationBuilder.DropTable(
                 name: "reviews");

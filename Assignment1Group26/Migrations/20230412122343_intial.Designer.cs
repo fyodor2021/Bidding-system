@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Assignment1Group26.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230411225629_intial")]
+    [Migration("20230412122343_intial")]
     partial class intial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -96,6 +96,9 @@ namespace Assignment1Group26.Migrations
                     b.Property<byte[]>("ImageData")
                         .HasColumnType("varbinary(max)");
 
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
                     b.HasKey("BidId");
 
                     b.HasIndex("AssetConditionId");
@@ -105,6 +108,31 @@ namespace Assignment1Group26.Migrations
                     b.HasIndex("ClientId");
 
                     b.ToTable("bids");
+                });
+
+            modelBuilder.Entity("Assignment1Group26.Models.BidsPlaced", b =>
+                {
+                    b.Property<int>("BidsPlacedId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BidsPlacedId"), 1L, 1);
+
+                    b.Property<DateTime>("BidDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("BidId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ClientId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LatestBid")
+                        .HasColumnType("int");
+
+                    b.HasKey("BidsPlacedId");
+
+                    b.ToTable("bidsPlaced");
                 });
 
             modelBuilder.Entity("Assignment1Group26.Models.Category", b =>
