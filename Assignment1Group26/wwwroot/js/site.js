@@ -19,7 +19,6 @@ setInterval(function () {
         var timer = timers[timerCounter];
         var secondsDivs = timer.getElementsByClassName("seconds");
         if (secondsDivs[0].innerHTML >= 1) {
-            console.log(secondsDivs[0]);
             secondsDivs[0].innerHTML = secondsDivs[0].innerHTML - 1;
         } else {
             secondsDivs[0].innerHTML = 60;
@@ -37,15 +36,11 @@ setInterval(function () {
                 }
             }
         }
-        
-        
-        //for (let secondsCounter = 0; secondsCounter < timers.length; secondsCounter++) {
-        //    if (secondsDivs[secondsCounter].innerHTML >= 1) {
-        //        secondsDivs[secondsCounter].innerHTML = secondsDivs[secondsCounter].innerHTML - 1
-        //    }
-        //}
     }
 }, 1000);
-//setInterval(document.getElementsByClassName(".hours"), 1)
-//setInterval(document.getElementsByClassName(".minutes"), 1)
-//setInterval(document.getElementsByClassName(".seconds"), 1)
+
+$('#modalOpener').click(function (event) {
+    $('#exampleModal').modal('show')
+})
+
+    
