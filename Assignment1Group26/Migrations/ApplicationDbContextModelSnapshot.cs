@@ -4,7 +4,6 @@ using Assignment1Group26.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -12,10 +11,9 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Assignment1Group26.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230412192956_forth")]
-    partial class forth
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -253,6 +251,9 @@ namespace Assignment1Group26.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
+
                     b.HasKey("ReviewId");
 
                     b.ToTable("reviews");
@@ -264,7 +265,8 @@ namespace Assignment1Group26.Migrations
                             ClientId = 1,
                             Comment = "Awsome Experience, it was Delvired on Time, #HappyCustomer",
                             CreatedBy = 1,
-                            CreatedByStr = "john.smith@gmail.com"
+                            CreatedByStr = "john.smith@gmail.com",
+                            Rating = 1
                         },
                         new
                         {
@@ -272,7 +274,8 @@ namespace Assignment1Group26.Migrations
                             ClientId = 1,
                             Comment = "terrible Experience, i'm Done! Buying from this seller, #SadSeller",
                             CreatedBy = 2,
-                            CreatedByStr = "Vedoor.Barakat@gmail.com"
+                            CreatedByStr = "Vedoor.Barakat@gmail.com",
+                            Rating = 2
                         },
                         new
                         {
@@ -280,7 +283,8 @@ namespace Assignment1Group26.Migrations
                             ClientId = 2,
                             Comment = "Fair Experience, got what i Paid for, #FairCustomer",
                             CreatedBy = 1,
-                            CreatedByStr = "john.smith@gmail.com"
+                            CreatedByStr = "john.smith@gmail.com",
+                            Rating = 2
                         });
                 });
 

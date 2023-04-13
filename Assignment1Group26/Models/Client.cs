@@ -39,6 +39,7 @@ namespace Assignment1Group26.Models
         public int? FifthNumber { get; set; }
         [NotMapped]
         public int? SixthNumber { get; set; }
+        
         public int MultiPin { get; set; } = 11111111;
         public string? VerficationToken { get; set; }
         public bool keepLoggedIn { get; set; }
