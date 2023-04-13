@@ -373,13 +373,11 @@ td {
     margin: 2px;
     text-align:center;
 }
-<<<<<<< HEAD
 .stars {
     color: orange;
     font-size: 25px;
     display: inline-block;
 }
-=======
 .bidButton {
     padding: 0;
 }
@@ -492,9 +490,11 @@ mark {
 
 .hidden {
     display: none;
-<<<<<<< HEAD
-}*/
->>>>>>> 8387b5a4194ac408724932caffc8fcbf563e573a
-=======
+    <<<<<<< HEAD
 }
->>>>>>> bd695f96cfeee005d467d8d243ec537af8608aef
+.row{
+    max-width:unset;
+}
+.card-body{
+    width:unset;
+}

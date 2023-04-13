@@ -3,6 +3,7 @@ using Assignment1Group26.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using System.Net.Mail;
 using System.Reflection.Metadata.Ecma335;
 using System.Security.Claims;
@@ -121,5 +122,28 @@ namespace Assignment1Group26.Controllers
             return View("../../Views/Profile/Profile", clientToDisplay);
 
         }
+        
+        [HttpGet]
+        public IActionResult LeadingBids(int id)
+        {
+            var tables = new LeadingBidsModel
+            {
+                Bids = _context.bids.ToList(),
+                Client = _context.clients.FirstOrDefault(c => c.ClientId == id),
+                BidsPlaced = _context.bidsPlaced.Where(c => c.ClientId == id).ToList()
+            };
+            var bidIds = tables.BidsPlaced.Select(bp => bp.BidId);
+            var clientPlacedBids = _context.bids.Where(b => bidIds.Contains(b.BidId)).ToList();
+
+
+            var bidHighestAmount = tables.BidsPlaced.Select(bp => bp.BidAmount).ToList();
+            var leadingBids = _context.bids.Where(b => bidHighestAmount.Contains((double)b.HighestBid)).ToList();
+            tables.Bids = leadingBids;
+
+
+            return View("../../Views/PlacedBids/PlacedBids", tables);
+
+        }
     }
+    
 }

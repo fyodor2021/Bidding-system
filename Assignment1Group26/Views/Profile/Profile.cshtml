@@ -24,6 +24,8 @@
                         <div class="d-flex justify-content-center mb-2">
                             <a type="button" asp-controller="Profile" asp-action="Edit" asp-route-id="@Model.ClientId" class="btn btn-primary">Edit</a>
                             <a type="button" target="_blank" asp-action="Index" asp-controller="Home" class="btn btn-outline-primary ms-1">Home</a>
+                            <a type="button" asp-controller="Profile" asp-action="LeadingBids" asp-route-id="@Model.ClientId" class="btn btn-primary">My Leading Bids</a>
+
                             @if (base.User.Identity.Name == "Admin")
                             {
                                 @if (Model.ClientRole != "Admin")
@@ -31,11 +33,12 @@
                                     @if (Model.Blocked)
                                     {
                                         <a class="btn btn-info btn-outline-danger" style="background-color:white;" asp-action="Unblock" asp-controller="Profile" asp-route-id="@Model.ClientId">UnBlock</a>
+                                        <a type="button" asp-controller="Profile" asp-action="LeadingBids" asp-route-id="@Model.ClientId" class="btn btn-primary">My Leading Bids</a>
                                     }
                                     else
                                     {
                                         <a class="btn btn-info btn-outline-danger " style="background-color:white;" asp-action="Block" asp-controller="Profile" asp-route-id="@Model.ClientId">Block</a>
-
+                                        <a type="button" asp-controller="Profile" asp-action="LeadingBids" asp-route-id="@Model.ClientId" class="btn btn-primary">My Leading Bids</a>
                                     }
                                 }
                             }

@@ -64,94 +64,103 @@
                 <p class="mb-0"><b>Cost:</b> $@Model.Bid.BidStartPrice</p>
                 <p><b>Condition:</b> @Model.Bid.AssetCondition.AssetConditionStatus</p>
                 <p><b>Category:</b> @Model.Bid.Category.CategoryName</p>
+
                 @if (datesToStart > TimeSpan.Zero)
                 {
-                    <p><b>Status: </b><botton class="btn-outline-danger"><strong>INACTIVE</strong></botton></p>
+                    @if (dateLeft > TimeSpan.Zero)
+                    {
+                        <p><b>Status: </b><botton class="btn-outline-success"><strong>ACTIVE</strong></botton></p>
+                    }
+                    else{
+                        <p><b>Status: </b><botton class="btn-outline-danger"><strong>INACTIVE</strong></botton></p>
+                    }
+
                 }
                 else
                 {
-                    <p><b>Status: </b><botton class="btn-outline-success"><strong>ACTIVE</strong></botton></p>
-                    <a type="submit" value="Item" class="btn btn-primary" style="width:7.5rem;" id="modalOpener">Place Bid</a>
+
+                    @if (dateLeft > TimeSpan.Zero)
+                    {
+                        <p><b>Status: </b><botton class="btn-outline-success"><strong>ACTIVE</strong></botton></p>
+                        <a type="submit" value="Item" class="btn btn-primary" style="width:7.5rem;" id="modalOpener">Place Bid</a>
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1>Placing Bid</h1>
+                                    </div>
+                                    <div class="modal-body" style="margin-left: 17px;">
+                                        <div class="form-body">
+                                            <div class="row">
+                                                <div class="container" style="margin-bottom: 22px;">
+                                                    <h3 style="margin-bottom: 22px;">Please Select Or Enter the Amount you'd Like to Add to the Heighest bid</h3>
+                                                    <div class="row">
+                                                        <div style="display:inline" class="col bidButton">
+                                                            <form asp-action="Add" asp-controller="Details" method="post" enctype="multipart/form-data" style="width: 20px;">
 
 
-                    <!-- Modal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1>Placing Bid</h1>
-                                </div>
-                                <div class="modal-body" style="margin-left: 17px;">
-                                    <div class="form-body">
-                                        <div class="row">
-                                            <div class="container" style="margin-bottom: 22px;">
-                                                <h3 style="margin-bottom: 22px;">Please Select Or Enter the Amount you'd Like to Add to the Heighest bid</h3>
-                                                <div class="row">
-                                                    <div style="display:inline" class="col bidButton">
-                                                        <form asp-action="Add" asp-controller="Details" method="post" enctype="multipart/form-data" style="width: 20px;">
+                                                                <input hidden readonly asp-for="BidPlaced.BidAmount" value="@(Model.Bid.HighestBid + 10)" style="width: 20px;">
+                                                                <input asp-for="Bid.BidId" hidden readonly>
+
+                                                                <button type="submit" style="--color:#031866;--slant:20px;--border:5px">$@(Model.Bid.HighestBid + 10)</button>
+
+                                                            </form>
+                                                        </div>
+                                                        <div style="display:inline" class="col bidButton">
+                                                            <form asp-action="Add" asp-controller="Details" method="post" enctype="multipart/form-data">
 
 
-                                                            <input hidden readonly asp-for="BidPlaced.BidAmount" value="@(Model.Bid.HighestBid + 10)" style="width: 20px;">
-                                                            <input asp-for="Bid.BidId" hidden readonly>
+                                                                <input hidden readonly asp-for="BidPlaced.BidAmount" value="@(Model.Bid.HighestBid +20)" style="width: 20px;">
+                                                                <input asp-for="Bid.BidId" hidden readonly>
 
-                                                            <button type="submit" style="--color:#031866;--slant:20px;--border:5px">$@(Model.Bid.HighestBid + 10)</button>
+                                                                <button type="submit" style="--color:#031866;--slant:20px;--border:5px">$@(Model.Bid.HighestBid + 20)</button>
 
-                                                        </form>
+                                                            </form>
+                                                        </div>
+                                                        <div style="display:inline" class="col bidButton">
+                                                            <form asp-action="Add" asp-controller="Details" method="post" enctype="multipart/form-data">
+
+
+                                                                <input hidden readonly asp-for="BidPlaced.BidAmount" value="@(Model.Bid.HighestBid + 50)" style="width: 20px;">
+                                                                <input asp-for="Bid.BidId" hidden readonly>
+
+                                                                <button type="submit" style="--color:#031866;--slant:20px;--border:5px">$@(Model.Bid.HighestBid + 50)</button>
+
+                                                            </form>
+                                                        </div>
+                                                        <div style="display:inline" class="col bidButton">
+                                                            <form asp-action="Add" asp-controller="Details" method="post" enctype="multipart/form-data" style="width: 20px;">
+
+
+                                                                <input hidden readonly asp-for="BidPlaced.BidAmount" value="@(Model.Bid.HighestBid + 100)">
+                                                                <input asp-for="Bid.BidId" hidden readonly>
+
+                                                                <button type="submit" style="--color:#031866;--slant:20px;--border:5px">$@(Model.Bid.HighestBid + 100)</button>
+
+                                                            </form>
+                                                        </div>
+
+
                                                     </div>
-                                                    <div style="display:inline" class="col bidButton">
-                                                        <form asp-action="Add" asp-controller="Details" method="post" enctype="multipart/form-data">
 
 
-                                                            <input hidden readonly asp-for="BidPlaced.BidAmount" value="@(Model.Bid.HighestBid +20)" style="width: 20px;">
-                                                            <input asp-for="Bid.BidId" hidden readonly>
-
-                                                            <button type="submit" style="--color:#031866;--slant:20px;--border:5px">$@(Model.Bid.HighestBid + 20)</button>
-
-                                                        </form>
-                                                    </div>
-                                                    <div style="display:inline" class="col bidButton">
-                                                        <form asp-action="Add" asp-controller="Details" method="post" enctype="multipart/form-data">
-
-
-                                                            <input hidden readonly asp-for="BidPlaced.BidAmount" value="@(Model.Bid.HighestBid + 50)" style="width: 20px;">
-                                                            <input asp-for="Bid.BidId" hidden readonly>
-
-                                                            <button type="submit" style="--color:#031866;--slant:20px;--border:5px">$@(Model.Bid.HighestBid + 50)</button>
-
-                                                        </form>
-                                                    </div>
-                                                    <div style="display:inline" class="col bidButton">
-                                                        <form asp-action="Add" asp-controller="Details" method="post" enctype="multipart/form-data" style="width: 20px;">
-
-
-                                                            <input hidden readonly asp-for="BidPlaced.BidAmount" value="@(Model.Bid.HighestBid + 100)">
-                                                            <input asp-for="Bid.BidId" hidden readonly>
-
-                                                            <button type="submit" style="--color:#031866;--slant:20px;--border:5px">$@(Model.Bid.HighestBid + 100)</button>
-
-                                                        </form>
-                                                    </div>
 
 
                                                 </div>
+                                                <div class="container" style="margin-bottom:20px">
+                                                    <div class="card formStyle">
+                                                        <h2>
+                                                            Enter Bid Amount:
+                                                        </h2>
 
-
-
-
-                                            </div>
-                                            <div class="container" style="margin-bottom:20px">
-                                                <div class="card formStyle">
-                                                    <h2>
-                                                        Enter Bid Amount:
-                                                    </h2>
-
-                                                    <form asp-action="Add" asp-controller="Details" method="post" enctype="multipart/form-data">
-                                                        <input asp-for="BidPlaced.BidAmount" class="input__field" type="number" style="margin-bottom:10px;width: 360px;" id="bid_input" placeholder="Current Highest Bid: @Model.Bid.HighestBid" value="">
-                                                        <div class="button-group">
-                                                            <input asp-for="Bid.BidId" hidden readonly>
-                                                            <button type="submit">Submit</button>
-                                                        </div>
-                                                    </form>
+                                                        <form asp-action="Add" asp-controller="Details" method="post" enctype="multipart/form-data">
+                                                            <input asp-for="BidPlaced.BidAmount" class="input__field" type="number" style="margin-bottom:10px;width: 360px;" id="bid_input" placeholder="Current Highest Bid: @Model.Bid.HighestBid" value="">
+                                                            <div class="button-group">
+                                                                <input asp-for="Bid.BidId" hidden readonly>
+                                                                <button type="submit">Submit</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -159,7 +168,14 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    }
+                    else
+                    {
+                        <p><b>Status: </b><botton class="btn-outline-danger"><strong>INACTIVE</strong></botton></p>
+                        
+                    }
+
+                   
                 }
 
 
@@ -170,51 +186,60 @@
 
         <div class="col-md-7">
             <img src="data:image/*;base64,@(Convert.ToBase64String(Model.Bid.ImageData))" alt="project-image" class="rounded" style="margin-top:36px; margin-bottom:10px">
-            @if (datesToStart > TimeSpan.Zero)
+            
+            @if (dateLeft > TimeSpan.Zero)
             {
-                <h3 class="card-text">Item Starts:</h3>
-                <div class="card_body card_body_timer timer">
-                    <div class="countdown_section">
-                        <div id="days" class="value days detail-timer" style="width:100px; height:100px">@datesToStart.Days</div>
-                        <div class="countdown_label">DAYS</div>
+                @if (datesToStart > TimeSpan.Zero)
+                {
+                    <h3 class="card-text">Item Starts:</h3>
+                    <div class="card_body card_body_timer timer">
+                        <div class="countdown_section">
+                            <div id="days" class="value days detail-timer" style="width:100px; height:100px">@datesToStart.Days</div>
+                            <div class="countdown_label">DAYS</div>
+                        </div>
+                        <div class="countdown_section">
+                            <div id="hours" class="value hours detail-timer" style="width:100px; height:100px">@datesToStart.Hours</div>
+                            <div class="countdown_label">HOURS</div>
+                        </div>
+                        <div class="countdown_section">
+                            <div id="minutes" class="value minutes detail-timer" style="width:100px; height:100px">@datesToStart.Minutes</div>
+                            <div class="countdown_label">MINUTES</div>
+                        </div>
+                        <div class="countdown_section">
+                            <div id="seconds" class="value seconds detail-timer" style="width:100px; height:100px">@datesToStart.Seconds</div>
+                            <div class="countdown_label">SECONDS</div>
+                        </div>
                     </div>
-                    <div class="countdown_section">
-                        <div id="hours" class="value hours detail-timer" style="width:100px; height:100px">@datesToStart.Hours</div>
-                        <div class="countdown_label">HOURS</div>
+                }
+                else
+                {
+                    <h3 class="card-text">Item Ends:</h3>
+                    <div class="card_body card_body_timer timer">
+                        <div class="countdown_section">
+                            <div id="days" class="value days detail-timer" style="width:100px; height:100px">@dateLeft.Days</div>
+                            <div class="countdown_label">DAYS</div>
+                        </div>
+                        <div class="countdown_section">
+                            <div id="hours" class="value hours detail-timer" style="width:100px; height:100px">@dateLeft.Hours</div>
+                            <div class="countdown_label">HOURS</div>
+                        </div>
+                        <div class="countdown_section">
+                            <div id="minutes" class="value minutes detail-timer" style="width:100px; height:100px">@dateLeft.Minutes</div>
+                            <div class="countdown_label">MINUTES</div>
+                        </div>
+                        <div class="countdown_section">
+                            <div id="seconds" class="value seconds detail-timer" style="width:100px; height:100px">@dateLeft.Seconds</div>
+                            <div class="countdown_label">SECONDS</div>
+                        </div>
+
                     </div>
-                    <div class="countdown_section">
-                        <div id="minutes" class="value minutes detail-timer" style="width:100px; height:100px">@datesToStart.Minutes</div>
-                        <div class="countdown_label">MINUTES</div>
-                    </div>
-                    <div class="countdown_section">
-                        <div id="seconds" class="value seconds detail-timer" style="width:100px; height:100px">@datesToStart.Seconds</div>
-                        <div class="countdown_label">SECONDS</div>
-                    </div>
-                </div>
+                }
             }
             else
             {
-                <h3 class="card-text">Item Ends:</h3>
-                <div class="card_body card_body_timer timer">
-                    <div class="countdown_section">
-                        <div id="days" class="value days detail-timer" style="width:100px; height:100px">@dateLeft.Days</div>
-                        <div class="countdown_label">DAYS</div>
-                    </div>
-                    <div class="countdown_section">
-                        <div id="hours" class="value hours detail-timer" style="width:100px; height:100px">@dateLeft.Hours</div>
-                        <div class="countdown_label">HOURS</div>
-                    </div>
-                    <div class="countdown_section">
-                        <div id="minutes" class="value minutes detail-timer" style="width:100px; height:100px">@dateLeft.Minutes</div>
-                        <div class="countdown_label">MINUTES</div>
-                    </div>
-                    <div class="countdown_section">
-                        <div id="seconds" class="value seconds detail-timer" style="width:100px; height:100px">@dateLeft.Seconds</div>
-                        <div class="countdown_label">SECONDS</div>
-                    </div>
-
-                </div>
+                <h1>Bid Expired </h1>
             }
+           
             <h5 style="color:red;">@ViewData["errorMessage"]</h5>
         </div>
 

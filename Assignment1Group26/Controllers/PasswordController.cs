@@ -33,6 +33,7 @@ namespace Assignment1Group26.Controllers
         }
         public IActionResult PassReset(Client Cl)
         {
+
             if(Cl.ClientPassword == Cl.ClientRetypePassword)
             {
                 Client client = _context.clients.FirstOrDefault(c => c.ClientUserName == Cl.ClientUserName);
@@ -81,7 +82,7 @@ namespace Assignment1Group26.Controllers
                 var subject = "Password Reset";
                 var message = "<h1>Password is Successfully Reset</h1>";
                 await _emailSender.SendEmailAsync(receiver, subject, message);
-                ViewData["ValidationMessage"] = "Check Your Email";
+                ViewData["ValidationMessage"] = "Password Updated Successfully";
                 return View("../../Views/Login/Login", client);
         }
     }
