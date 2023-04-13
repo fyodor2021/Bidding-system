@@ -39,7 +39,7 @@ namespace Assignment1Group26.Controllers
                 client.ClientPassword = Cl.ClientPassword;
                 _context.clients.Update(client);
                 _context.SaveChanges();
-                return RedirectToAction("Password", "ConfirmationEmail", client);
+                return RedirectToAction("ConfirmationEmail", "Password", client);
             }
             else
             {
@@ -75,7 +75,7 @@ namespace Assignment1Group26.Controllers
         }
         public async Task<IActionResult> ConfirmationEmail(Client Cl)
         {
-            Client client = _context.clients.FirstOrDefault(c => c.ClientUserName == Cl.ClientUserName);
+                Client client = _context.clients.FirstOrDefault(c => c.ClientUserName == Cl.ClientUserName);
                 string receiver = client.ClientUserName;
                 var hostName = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}/";
                 var subject = "Password Reset";
