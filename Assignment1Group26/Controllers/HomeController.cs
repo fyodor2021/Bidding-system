@@ -25,13 +25,35 @@ namespace Assignment1Group26.Controllers
                 AssetConditions= _context.assetConditions.ToList()
 
             };
+            foreach (var bid in tables.Bids)
+            {
+                if(bid.BidStartDate < DateTime.Now)
+                {
+                    if (bid.BidEndDate < DateTime.Now)
+                    {
+                        bid.expired = true;
+                        bid.Status = false;
+                        _context.bids.Update(bid);
+                    }
+                    else
+                    {
+                        bid.expired = false;
+                        bid.Status = true;
+                        _context.bids.Update(bid);
+                    }
+                }
+                else
+                {
+                    bid.expired = false;
+                    bid.Status = false;
+                    _context.bids.Update(bid);
+                }
+                
+                
+            }
+            _context.SaveChanges();
 
-            
-            
             return View(tables);
-
-
-
         }
 
         public async Task<IActionResult> Logout()

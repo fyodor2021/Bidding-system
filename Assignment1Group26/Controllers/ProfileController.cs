@@ -132,6 +132,33 @@ namespace Assignment1Group26.Controllers
                 Client = _context.clients.FirstOrDefault(c => c.ClientId == id),
                 BidsPlaced = _context.bidsPlaced.Where(c => c.ClientId == id).ToList()
             };
+            foreach (var bid in tables.Bids)
+            {
+                    if (bid.BidStartDate < DateTime.Now)
+                    {
+                        if (bid.BidEndDate < DateTime.Now)
+                        {
+                            bid.expired = true;
+                            bid.Status = false;
+                            _context.bids.Update(bid);
+                        }
+                        else
+                        {
+                            bid.expired = false;
+                            bid.Status = true;
+                            _context.bids.Update(bid);
+                        }
+                    }
+                    else
+                    {
+                        bid.expired = false;
+                        bid.Status = false;
+                        _context.bids.Update(bid);
+                    }
+
+
+            }
+            _context.SaveChanges();
             var bidIds = tables.BidsPlaced.Select(bp => bp.BidId);
             var clientPlacedBids = _context.bids.Where(b => bidIds.Contains(b.BidId)).ToList();
 

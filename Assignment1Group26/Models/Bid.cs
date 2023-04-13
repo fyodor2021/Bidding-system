@@ -36,6 +36,7 @@ namespace Assignment1Group26.Models
 
         public Category? Category { get; set; }
         public bool Status { get; set; } = false;
+        public bool expired { get; set; } = false;
         public double? HighestBid { get;set; }
         
         public byte[]? ImageData { get; set; }

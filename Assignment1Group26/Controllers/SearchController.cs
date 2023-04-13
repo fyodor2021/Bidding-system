@@ -14,7 +14,7 @@ namespace Assignment1Group26.Controllers
         }
 
         [HttpGet]
-        public IActionResult Sort(string Search, int selectedCategories, int selectedAsset, int selectedPriceRange) {
+        public IActionResult Sort(string Search, int selectedCategories, int selectedAsset, int selectedPriceRange, int status) {
             var tables = new HomeViewModel
             {
                 Bids = _context.bids.ToList(),
@@ -22,7 +22,7 @@ namespace Assignment1Group26.Controllers
                 AssetConditions = _context.assetConditions.ToList()
 
             };
-
+            
 
          
           
@@ -46,6 +46,20 @@ namespace Assignment1Group26.Controllers
                    
                     
             }
+            if (status != 0)
+            {
+                if (status == 1)
+                {
+                    tables.Bids = tables.Bids.Where(b => b.Status == true).ToList();
+                }
+                else
+                {
+                    tables.Bids = tables.Bids.Where(b => b.Status == false).ToList();
+                }
+
+
+            }
+
             if (!String.IsNullOrEmpty(Search))
             {
                tables.Bids = tables.Bids.Where(b => b.BidName.Contains(Search, StringComparison.OrdinalIgnoreCase)).ToList();

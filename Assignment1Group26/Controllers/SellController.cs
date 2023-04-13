@@ -30,12 +30,33 @@ namespace Assignment1Group26.Controllers
                     {
                         Bids = _context.bids.Where(b => b.ClientId == client.ClientId).ToList(),
                         Clients = _context.clients.Where(c => c.ClientId == client.ClientId).ToList()
-
-
-
-
-
                     };
+                    foreach (var bid in sellTables.Bids)
+                    {
+                            if (bid.BidStartDate < DateTime.Now)
+                            {
+                                if (bid.BidEndDate < DateTime.Now)
+                                {
+                                    bid.expired = true;
+                                    bid.Status = false;
+                                    _context.bids.Update(bid);
+                                }
+                                else
+                                {
+                                    bid.expired = false;
+                                    bid.Status = true;
+                                    _context.bids.Update(bid);
+                                }
+                            }
+                            else
+                            {
+                                bid.expired = false;
+                                bid.Status = false;
+                                _context.bids.Update(bid);
+                            }
+                    }
+                    _context.SaveChanges();
+
 
                     return View(sellTables);
                 }

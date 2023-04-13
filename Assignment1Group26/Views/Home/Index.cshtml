@@ -71,6 +71,22 @@
                                         Lowest to Highest
                                     </span>
                                 </label>
+                                <header class="card-header">
+                                    <h6 class="title">Status</h6>
+                                </header>
+                                <label class="form-check">
+                                    <input class="form-check-input unCheck" type="radio" value="1" name="status">
+                                    <span class="form-check-label">
+                                        Active
+                                    </span>
+                                </label>
+                                <label class="form-check">
+                                    <input class="form-check-input unCheck" type="radio" value="2" name="status">
+                                    <span class="form-check-label">
+                                        Inactive
+                                    </span>
+                                </label>
+
                             </form>
                             <button class="btn bg-white" onclick="unCheck()">DeSelect</button>
 
@@ -79,7 +95,7 @@
                 </article>
             </div>
         </div>
-        <a asp-controller="Payment" asp-action="Payment" >Payment</a>
+        @*<a asp-controller="Payment" asp-action="Payment" >Payment</a>*@
 
         <div class="col" id="main">
             @foreach (Bid b in Model.Bids)
@@ -96,6 +112,7 @@
                     <div class="card-body">
                         
                         <h5 class="card-title">@b.BidName</h5>
+                        <h5 class="card-title">@b.expired</h5>
                         <p class="card-text">$@b.BidStartPrice</p>
                         @if (dateLeft > TimeSpan.Zero)
                         {
