@@ -4,7 +4,7 @@ namespace Assignment1Group26.Data
 {
     public class StripeSetting
     {
-        public string SecretKey { get; set; }
-        public string PublishableKey { get; set; }
+        public string? SessionId { get; set; }
+        public string? PubKey { get; set; }
     }
 }

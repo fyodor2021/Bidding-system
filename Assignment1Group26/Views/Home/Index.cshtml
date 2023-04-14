@@ -95,7 +95,6 @@
                 </article>
             </div>
         </div>
-        @*<a asp-controller="Payment" asp-action="Payment" >Payment</a>*@
 
         <div class="col" id="main">
             @foreach (Bid b in Model.Bids)
@@ -106,7 +105,7 @@
                     <a asp-controller="Details" asp-action="Details" asp-route-id="@b.BidId">
                         @if (b.ImageData != null)
                         {
-                                                    <img class="card-img-top" src="data:image/*;base64,@(Convert.ToBase64String(b.ImageData))">
+                          <img class="card-img-top" src="data:image/*;base64,@(Convert.ToBase64String(b.ImageData))">
                         }
                     </a>
                     <div class="card-body">

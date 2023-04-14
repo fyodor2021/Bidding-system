@@ -26,9 +26,12 @@
                 <th scope="col">Seller #</th>
                 <th scope="col">Seller Name</th>
             }
-            <th scope="col">Item Name</th>
-            <th scope="col">Category</th>
-            <th scope="col">Actions</th>
+            <th scope="col"> Name</th>
+            <th scope="col">Seller</th>
+            <th scope="col">Description</th>
+            <th scope="col">Best Bid</th>
+
+
         </tr>
     </thead>
     <tbody>
@@ -37,10 +40,11 @@
              var client = Model.Clients.FirstOrDefault(c => c.ClientId == b.ClientId);
             <tr>
                 <th class="cell" scope="row" >@b.BidId</th>
-                <th class="cell" scope="row">@b.ClientId</th>
-                <th class="cell" scope="row"><a asp-controller="Profile" asp-action="CommonProfile" asp-route-id="@client.ClientId">@client.ClientFirstName @client.ClientLastName</a></th>
                 <td class="align-items-center justify-content">@b.BidName</td>
+
+                <th class="cell" scope="row"><a asp-controller="Profile" asp-action="CommonProfile" asp-route-id="@client.ClientId">@client.ClientFirstName @client.ClientLastName</a></th>
                 <td class ="align-items-center justify-content">@b.BidDescription</td>
+                <th class="cell" scope="row" @b.HighestBid></th>
 
                 <td><a asp-route-id="@b.BidId" asp-controller="Sell" asp-action="Edit" class="btn btn-outline-primary">Edit</a>
                     <a asp-route-id="@b.BidId" asp-controller="Details" asp-action="Details" class="btn btn-outline-primary">Review</a>

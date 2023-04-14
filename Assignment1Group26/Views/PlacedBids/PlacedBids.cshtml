@@ -4,10 +4,7 @@
 <div class="col" id="main">
 
 
-	<div style="display: flex">
-
-
-		<div class="list-group" style="width: 45%; margin-right:  50px;">
+		<div class="list-group" >
 			<h1>Your Leading bids</h1>
 
 
@@ -18,27 +15,91 @@
 				<a asp-controller="Details" asp-action="Details" asp-route-id="@b.BidId" class="list-group-item list-group-item-action ">
 					<div class="d-flex w-100 justify-content-between">
 						<h5 class="mb-1">@b.BidName</h5>
-						<small style="color: red">@dateLeft.Days Days Left</small>
 					</div>
 					<p class="mb-1">Your Bid: $@b.HighestBid.</p>
 					<small>Bid Starting Price: $@b.BidStartPrice</small>
+                    @if (dateLeft > TimeSpan.Zero)
+                    {
+
+                        @if (datesToStart > TimeSpan.Zero)
+                        {
+                            <h5 class="card-text">Bid Starts:</h5>
+                            <div class="card_body card_body_timer timer">
+                                <div class="countdown_section">
+                                    <div id="days" class="value days">@datesToStart.Days</div>
+                                    <div class="countdown_label">DAYS</div>
+                                </div>
+                                <div class="countdown_section">
+                                    <div id="hours" class="value hours">@datesToStart.Hours</div>
+                                    <div class="countdown_label">HOURS</div>
+                                </div>
+                                <div class="countdown_section">
+                                    <div id="minutes" class="value minutes">@datesToStart.Minutes</div>
+                                    <div class="countdown_label">MINUTES</div>
+                                </div>
+                                <div class="countdown_section">
+                                    <div id="seconds" class="value seconds">@datesToStart.Seconds</div>
+                                    <div class="countdown_label">SECONDS</div>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <h5 class="card-text">Bid Starts:</h5>
+                            <div class="card_body card_body_timer ">
+                                <div class="countdown_section">
+                                    <div id="days" class="value ">00</div>
+                                    <div class="countdown_label">DAYS</div>
+                                </div>
+                                <div class="countdown_section">
+                                    <div id="hours" class="value">00</div>
+                                    <div class="countdown_label">HOURS</div>
+                                </div>
+                                <div class="countdown_section">
+                                    <div id="minutes" class="value">00</div>
+                                    <div class="countdown_label">MINUTES</div>
+                                </div>
+                                <div class="countdown_section">
+                                    <div id="seconds" class="value">00</div>
+                                    <div class="countdown_label">SECONDS</div>
+                                </div>
+
+                            </div>
+
+                            <h5 class="card-text">bid Ends:</h5>
+                            <div class="card_body card_body_timer timer">
+                                <div class="countdown_section">
+                                    <div id="days" class="value days">@dateLeft.Days</div>
+                                    <div class="countdown_label">DAYS</div>
+                                </div>
+                                <div class="countdown_section">
+                                    <div id="hours" class="value hours">@dateLeft.Hours</div>
+                                    <div class="countdown_label">HOURS</div>
+                                </div>
+                                <div class="countdown_section">
+                                    <div id="minutes" class="value minutes">@dateLeft.Minutes</div>
+                                    <div class="countdown_label">MINUTES</div>
+                                </div>
+                                <div class="countdown_section">
+                                    <div id="seconds" class="value seconds">@dateLeft.Seconds</div>
+                                    <div class="countdown_label">SECONDS</div>
+                                </div>
+
+                            </div>
+
+                        }
+                    }
+                    else
+                    {
+                        <h4>Bid Expired</h4>
+                    }
 				</a>
 
 			}
 		</div>
 
-		<div style="width: 45%; float: right">
-			<h1>Your Total Bidding amount is @Model.TotalBiddingAmount</h1>
-			<h2 class='fas fa-car' style='font-size:36px'> Car Bidding: @Model.CarsSpending</h2>
-			<h2 class='fas fa-tshirt' style='font-size:36px'> Clothes Bidding: @Model.ClothesSpending</h2>
-			<h2 class='fas fa-keyboard' style='font-size:36px'> Electronic Bidding: @Model.ElectronicSpending</h2>
-		</div>
 
-
-
-
-
-	</div>
+    <a type="button" asp-area="" asp-controller="Profile" asp-action="Profile">Back</a>
 
 
 

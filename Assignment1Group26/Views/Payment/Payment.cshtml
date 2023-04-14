@@ -2,16 +2,38 @@
 @inject IOptions<Assignment1Group26.Data.StripeSetting> Stripe
 @{
 }
-<form asp-action="Charge" asp-controller="Payment" method="post">
-    <script src="https://checkout.stripe.com/checkout.js" 
-    class="stripe-button"
-            data-key="pk_test_51MvUuvAO8tl6rEU1DjtXyuH1egkj7W76KkaMska7K4oEGG8HiNqUuwdVz7etwP7Q5xGFa8Fp1LAy8O8ptbKH4BFj00DAMQsl1F"
-            data-amount="5000"
-            data-name="Demo Site"
-            data-description="Sample Charge"
-            data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
-            data-currency="usd"
-            data-email="customer@example.com"
-            data-locale="auto">
-    </script>
-</form>
+@model PaymentModel
+
+
+<div class="list-group" style="width: 45%; margin-right:  50px;">
+	<h1>Your winning bids</h1>
+
+
+	@foreach (Bid b in Model.Bids)
+	{
+		var total = b.HighestBid * 100;
+		var dateLeft = b.BidEndDate.Subtract(DateTime.Now);
+		var datesToStart = b.BidStartDate.Subtract(DateTime.Now);
+		<a asp-controller="Details" asp-action="Details" asp-route-id="@b.BidId" class="list-group-item list-group-item-action ">
+			<div class="d-flex w-100 justify-content-between">
+				<h5 class="mb-1">@b.BidName</h5>
+				<small style="color: red">@dateLeft.Days Days Left</small>
+			</div>
+			<p class="mb-1">Your Bid: $@b.HighestBid.</p>
+			<small>Bid Starting Price: $@b.BidStartPrice</small>
+			<form asp-action="Charge" asp-controller="Payment" method="post">
+				<script src="https://checkout.stripe.com/checkout.js"
+					class="stripe-button"
+					data-key="pk_test_51MvUuvAO8tl6rEU1DjtXyuH1egkj7W76KkaMska7K4oEGG8HiNqUuwdVz7etwP7Q5xGFa8Fp1LAy8O8ptbKH4BFj00DAMQsl1F"
+					data-amount="@total"
+					data-name="Josedore"
+					data-description="Bid Won"
+					data-currency="usd"
+					data-email="@Model.Client.ClientUserName"
+					data-locale="auto">
+				</script>
+			</form>
+		</a>
+
+	}
+</div>

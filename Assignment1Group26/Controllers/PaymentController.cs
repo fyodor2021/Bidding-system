@@ -1,5 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Assignment1Group26.Models;
+using Assignment1Group26.Service;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Stripe;
+using System.Linq;
 using System.Threading.Tasks;
 
 
@@ -11,9 +15,39 @@ namespace Assignment1Group26.Controllers
 {
     public class PaymentController : Controller
     {
-        public IActionResult Payment()
+        private ApplicationDbContext _context;
+        public PaymentController(ApplicationDbContext context)
         {
-            return View();
+            _context = context;
+        }
+
+        public IActionResult Payment(int id)
+        {
+            var tables = new PaymentModel
+            {
+                Total = 0,
+                Bids = _context.bids.ToList(),
+                Client = _context.clients.FirstOrDefault(c => c.ClientId == id),
+                BidsPlaced = _context.bidsPlaced.Where(c => c.ClientId == id).ToList(),
+                WinningBids = _context.bids.Where(b => b.expired == true).ToList()
+            };
+            var bidIds = tables.BidsPlaced.Select(bp => bp.BidId);
+            var clientPlacedBids = _context.bids.Where(b => bidIds.Contains(b.BidId)).ToList();
+            var bidHighestAmount = tables.BidsPlaced.Select(bp => bp.BidAmount).ToList();
+            var leadingBids = _context.bids.Where(b => b.expired == true && bidHighestAmount.Contains((double)b.HighestBid)).ToList();
+
+
+            
+
+
+            tables.Bids = leadingBids;
+
+
+            return View("../../Views/Payment/Payment", tables);
+
+
+
+
         }
         public IActionResult Charge(string stripeEmail, string stripeToken)
         {
