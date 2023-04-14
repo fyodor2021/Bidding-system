@@ -98,9 +98,12 @@ namespace Assignment1Group26.Controllers
         public IActionResult CommonProfile(int id) {
            var tables = new ProfileReviewModel
            {
+               clients = _context.clients.ToList(),
+               purchases = _context.purchases.Where(p => p.SellerId == id),
                Reviews = _context.reviews.Where(r => r.ClientId == id), 
                Client = _context.clients.FirstOrDefault(c => c.ClientId == id)
            };
+
           
            
             return View(tables);
