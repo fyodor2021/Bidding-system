@@ -19,12 +19,10 @@ namespace Assignment1Group26.Controllers
     {
         private ApplicationDbContext _context;
         private readonly IEmailSender _emailSender;
-        private IServiceProvider _serviceProvider;
-        public LoginController(ApplicationDbContext context, IEmailSender emailSender, IServiceProvider serviceProvider)
+        public LoginController(ApplicationDbContext context, IEmailSender emailSender)
         {
             _context = context;
             _emailSender = emailSender;
-            _serviceProvider = serviceProvider;
         }
 
 
@@ -45,8 +43,8 @@ namespace Assignment1Group26.Controllers
             string multiPin = client.MultiPin.ToString();
             if(assembledPin != "")
             {
-                if (client.MultiPin == int.Parse(assembledPin) || client.ClientRole == "Admin")
-                {
+             if (client.MultiPin == int.Parse(assembledPin) || client.ClientRole == "Admin")
+             {
                     List<Claim> claims;
                     if (client.ClientRole == "Admin")
                     {
@@ -76,7 +74,7 @@ namespace Assignment1Group26.Controllers
                         new ClaimsPrincipal(ClaimsIdentity), properties);
 
                     return RedirectToAction("Profile", "Profile");
-                }
+             }
                 ViewData["ValidationMessage"] = "The PIN you Entered is InCorrect";
                 return View("../../Views/Email/EmailVerifyPage", client);
             }
@@ -106,14 +104,13 @@ namespace Assignment1Group26.Controllers
                         };
                         await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
                             new ClaimsPrincipal(ClaimsIdentity), properties);
+                                    return RedirectToAction("Profile", "Profile");
+                  }
+                  ViewData["ValidationMessage"] = "The PIN you Entered is InCorrect";
+                  return View("../../Views/Email/EmailVerifyPage", client);
+              }
 
-                        return RedirectToAction("Profile", "Profile");
-                    }
-                    ViewData["ValidationMessage"] = "The PIN you Entered is InCorrect";
-                    return View("../../Views/Email/EmailVerifyPage", client);
-                }
-
-            }
+          }
 
         }
 
@@ -132,16 +129,16 @@ namespace Assignment1Group26.Controllers
                             int x = rn.Next(100000, 999999);
 
                             string receiver;
-                            if (c.ClientUserName != null)
+                            if (client.ClientUserName != null)
                             {
-                                receiver = c.ClientUserName;
+                                receiver = client.ClientUserName;
                             }
                             else
                             {
                                 receiver = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
                             }
 
-                            var subject = "Verification PIN";
+                           var subject = "Verification PIN";
                             var message = "<h1>Welcome Again to JoseDore</h1>" +
                                           "<h4>Your PIN for this session is: </h4>" + "<h2>" + x + "</h2>";
 
@@ -153,7 +150,7 @@ namespace Assignment1Group26.Controllers
                         }
                         else
                         {
-                            ViewData["ValidationMessage"] = "You're Blocked";
+                           ViewData["ValidationMessage"] = "You're Blocked";
                             return View("../../Views/Login/Login");
                         }
                     }
@@ -180,34 +177,7 @@ namespace Assignment1Group26.Controllers
 
         }
 
-        public string RenderPartialViewToString(string viewName, object model)
-        {
-            if (string.IsNullOrEmpty(viewName))
-                viewName = ControllerContext.ActionDescriptor.DisplayName;
-
-            ViewData.Model = model;
-
-            using (StringWriter sw = new StringWriter())
-            {
-                var engine = _serviceProvider.GetService(typeof(ICompositeViewEngine)) as ICompositeViewEngine; // Resolver.GetService(typeof(ICompositeViewEngine)) as ICompositeViewEngine;
-                ViewEngineResult viewResult = engine.FindView(ControllerContext, viewName, false);
-
-                ViewContext viewContext = new ViewContext(
-                    ControllerContext,
-                    viewResult.View,
-                    ViewData,
-                    TempData,
-                    sw,
-                    new HtmlHelperOptions() //Added this parameter in
-                );
-
-                //Everything is async now!
-                var t = viewResult.View.RenderAsync(viewContext);
-                t.Wait();
-
-                return sw.GetStringBuilder().ToString();
-            }
-        }
+        
 
         public async Task<IActionResult> ResendEmail(int id)
         {
@@ -223,17 +193,21 @@ namespace Assignment1Group26.Controllers
         public Client findClient(string userName)
         {
            var client =  _context.clients.FirstOrDefault(c => c.ClientUserName == userName);
-            if(client != null)
+            var clUserName = _context.clients.FirstOrDefault(c => c.ClientUserNameWithoutAt == userName);
+            if (client != null)
             {
                 return  client;
+            }
+            if(clUserName != null)
+            {
+                return clUserName;
             }
             return null;
         }
 
     }
-    
+    }
 
-}
 
     
 

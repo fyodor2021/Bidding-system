@@ -12,8 +12,13 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Assignment1Group26.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
+<<<<<<<< HEAD:Assignment1Group26/Migrations/20230414183153_initial.Designer.cs
     [Migration("20230414183153_initial")]
     partial class initial
+========
+    [Migration("20230414192158_intial")]
+    partial class intial
+>>>>>>>> 7683f63ca8a3f02fb34321767fdb8bcf666e5dfa:Assignment1Group26/Migrations/20230414192158_intial.Designer.cs
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -136,6 +141,9 @@ namespace Assignment1Group26.Migrations
                     b.Property<int>("ClientId")
                         .HasColumnType("int");
 
+                    b.Property<bool?>("WinOrLostEmailSent")
+                        .HasColumnType("bit");
+
                     b.HasKey("BidsPlacedId");
 
                     b.ToTable("bidsPlaced");
@@ -238,7 +246,11 @@ namespace Assignment1Group26.Migrations
                         {
                             ClientId = 1,
                             Blocked = false,
+<<<<<<<< HEAD:Assignment1Group26/Migrations/20230414183153_initial.Designer.cs
                             ClientBirthDate = new DateTime(2023, 4, 14, 14, 31, 53, 615, DateTimeKind.Local).AddTicks(6211),
+========
+                            ClientBirthDate = new DateTime(2023, 4, 14, 15, 21, 57, 937, DateTimeKind.Local).AddTicks(3424),
+>>>>>>>> 7683f63ca8a3f02fb34321767fdb8bcf666e5dfa:Assignment1Group26/Migrations/20230414192158_intial.Designer.cs
                             ClientFirstName = "John",
                             ClientLastName = "Smith",
                             ClientPassword = "password",
@@ -253,7 +265,11 @@ namespace Assignment1Group26.Migrations
                         {
                             ClientId = 2,
                             Blocked = false,
+<<<<<<<< HEAD:Assignment1Group26/Migrations/20230414183153_initial.Designer.cs
                             ClientBirthDate = new DateTime(2023, 4, 14, 14, 31, 53, 615, DateTimeKind.Local).AddTicks(6253),
+========
+                            ClientBirthDate = new DateTime(2023, 4, 14, 15, 21, 57, 937, DateTimeKind.Local).AddTicks(3457),
+>>>>>>>> 7683f63ca8a3f02fb34321767fdb8bcf666e5dfa:Assignment1Group26/Migrations/20230414192158_intial.Designer.cs
                             ClientFirstName = "vedoor",
                             ClientLastName = "Barakat",
                             ClientPassword = "password",
@@ -268,7 +284,11 @@ namespace Assignment1Group26.Migrations
                         {
                             ClientId = 3,
                             Blocked = false,
+<<<<<<<< HEAD:Assignment1Group26/Migrations/20230414183153_initial.Designer.cs
                             ClientBirthDate = new DateTime(2023, 4, 14, 14, 31, 53, 615, DateTimeKind.Local).AddTicks(6256),
+========
+                            ClientBirthDate = new DateTime(2023, 4, 14, 15, 21, 57, 937, DateTimeKind.Local).AddTicks(3459),
+>>>>>>>> 7683f63ca8a3f02fb34321767fdb8bcf666e5dfa:Assignment1Group26/Migrations/20230414192158_intial.Designer.cs
                             ClientFirstName = "josephine",
                             ClientLastName = "abdulaziz",
                             ClientPassword = "juju123",

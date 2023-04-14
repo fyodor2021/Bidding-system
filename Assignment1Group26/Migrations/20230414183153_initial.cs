@@ -31,6 +31,7 @@ namespace Assignment1Group26.Migrations
                     BidId = table.Column<int>(type: "int", nullable: false),
                     ClientId = table.Column<int>(type: "int", nullable: false),
                     BidAmount = table.Column<double>(type: "float", nullable: false),
+                    WinOrLostEmailSent = table.Column<bool>(type: "bit", nullable: true),
                     BidDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -160,9 +161,15 @@ namespace Assignment1Group26.Migrations
                 columns: new[] { "ClientId", "Blocked", "ClientBirthDate", "ClientFirstName", "ClientImage", "ClientLastName", "ClientPassword", "ClientPhoneNumber", "ClientRole", "ClientUserName", "EmailConfirmed", "MultiPin", "VerficationToken", "keepLoggedIn" },
                 values: new object[,]
                 {
+<<<<<<<< HEAD:Assignment1Group26/Migrations/20230414183153_initial.cs
                     { 1, false, new DateTime(2023, 4, 14, 14, 31, 53, 615, DateTimeKind.Local).AddTicks(6211), "John", null, "Smith", "password", "4379998049", "Client", "john.smith@gmail.com", true, 11111111, null, false },
                     { 2, false, new DateTime(2023, 4, 14, 14, 31, 53, 615, DateTimeKind.Local).AddTicks(6253), "vedoor", null, "Barakat", "password", "4379998049", "Client", "Vedoor.Barakat@gmail.com", true, 11111111, null, false },
                     { 3, false, new DateTime(2023, 4, 14, 14, 31, 53, 615, DateTimeKind.Local).AddTicks(6256), "josephine", null, "abdulaziz", "juju123", "4379998049", "Admin", "juju.josedore@gmail.com", true, 11111111, null, false }
+========
+                    { 1, false, new DateTime(2023, 4, 14, 15, 21, 57, 937, DateTimeKind.Local).AddTicks(3424), "John", null, "Smith", "password", "4379998049", "Client", "john.smith@gmail.com", true, 11111111, null, false },
+                    { 2, false, new DateTime(2023, 4, 14, 15, 21, 57, 937, DateTimeKind.Local).AddTicks(3457), "vedoor", null, "Barakat", "password", "4379998049", "Client", "Vedoor.Barakat@gmail.com", true, 11111111, null, false },
+                    { 3, false, new DateTime(2023, 4, 14, 15, 21, 57, 937, DateTimeKind.Local).AddTicks(3459), "josephine", null, "abdulaziz", "juju123", "4379998049", "Admin", "juju.josedore@gmail.com", true, 11111111, null, false }
+>>>>>>>> 7683f63ca8a3f02fb34321767fdb8bcf666e5dfa:Assignment1Group26/Migrations/20230414192158_intial.cs
                 });
 
             migrationBuilder.InsertData(

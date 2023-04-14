@@ -12,8 +12,13 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Assignment1Group26.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
+<<<<<<<< HEAD:Assignment1Group26/Migrations/20230414201200_second.Designer.cs
     [Migration("20230414201200_second")]
     partial class second
+========
+    [Migration("20230414201534_int")]
+    partial class @int
+>>>>>>>> 7683f63ca8a3f02fb34321767fdb8bcf666e5dfa:Assignment1Group26/Migrations/20230414201534_int.Designer.cs
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -136,6 +141,9 @@ namespace Assignment1Group26.Migrations
                     b.Property<int>("ClientId")
                         .HasColumnType("int");
 
+                    b.Property<bool?>("WinOrLostEmailSent")
+                        .HasColumnType("bit");
+
                     b.HasKey("BidsPlacedId");
 
                     b.ToTable("bidsPlaced");
@@ -217,6 +225,9 @@ namespace Assignment1Group26.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ClientUserNameWithoutAt")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
@@ -238,7 +249,11 @@ namespace Assignment1Group26.Migrations
                         {
                             ClientId = 1,
                             Blocked = false,
+<<<<<<<< HEAD:Assignment1Group26/Migrations/20230414201200_second.Designer.cs
                             ClientBirthDate = new DateTime(2023, 4, 14, 16, 11, 59, 772, DateTimeKind.Local).AddTicks(1309),
+========
+                            ClientBirthDate = new DateTime(2023, 4, 14, 16, 15, 34, 439, DateTimeKind.Local).AddTicks(2767),
+>>>>>>>> 7683f63ca8a3f02fb34321767fdb8bcf666e5dfa:Assignment1Group26/Migrations/20230414201534_int.Designer.cs
                             ClientFirstName = "John",
                             ClientLastName = "Smith",
                             ClientPassword = "password",
@@ -253,7 +268,11 @@ namespace Assignment1Group26.Migrations
                         {
                             ClientId = 2,
                             Blocked = false,
+<<<<<<<< HEAD:Assignment1Group26/Migrations/20230414201200_second.Designer.cs
                             ClientBirthDate = new DateTime(2023, 4, 14, 16, 11, 59, 772, DateTimeKind.Local).AddTicks(1366),
+========
+                            ClientBirthDate = new DateTime(2023, 4, 14, 16, 15, 34, 439, DateTimeKind.Local).AddTicks(2799),
+>>>>>>>> 7683f63ca8a3f02fb34321767fdb8bcf666e5dfa:Assignment1Group26/Migrations/20230414201534_int.Designer.cs
                             ClientFirstName = "vedoor",
                             ClientLastName = "Barakat",
                             ClientPassword = "password",
@@ -268,7 +287,11 @@ namespace Assignment1Group26.Migrations
                         {
                             ClientId = 3,
                             Blocked = false,
+<<<<<<<< HEAD:Assignment1Group26/Migrations/20230414201200_second.Designer.cs
                             ClientBirthDate = new DateTime(2023, 4, 14, 16, 11, 59, 772, DateTimeKind.Local).AddTicks(1371),
+========
+                            ClientBirthDate = new DateTime(2023, 4, 14, 16, 15, 34, 439, DateTimeKind.Local).AddTicks(2802),
+>>>>>>>> 7683f63ca8a3f02fb34321767fdb8bcf666e5dfa:Assignment1Group26/Migrations/20230414201534_int.Designer.cs
                             ClientFirstName = "josephine",
                             ClientLastName = "abdulaziz",
                             ClientPassword = "juju123",
@@ -279,6 +302,7 @@ namespace Assignment1Group26.Migrations
                             MultiPin = 11111111,
                             keepLoggedIn = false
                         });
+<<<<<<<< HEAD:Assignment1Group26/Migrations/20230414201200_second.Designer.cs
                 });
 
             modelBuilder.Entity("Assignment1Group26.Models.Purchase", b =>
@@ -301,6 +325,8 @@ namespace Assignment1Group26.Migrations
                     b.HasKey("PurchaseId");
 
                     b.ToTable("purchases");
+========
+>>>>>>>> 7683f63ca8a3f02fb34321767fdb8bcf666e5dfa:Assignment1Group26/Migrations/20230414201534_int.Designer.cs
                 });
 
             modelBuilder.Entity("Assignment1Group26.Models.Review", b =>
