@@ -1,4 +1,5 @@
 ﻿using Assignment1Group26.Models;
+using Assignment1Group26.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -12,9 +13,11 @@ namespace Assignment1Group26.Controllers
     public class SellController : Controller
     {
         private ApplicationDbContext _context;
-        public SellController(ApplicationDbContext context)
+        private IEmailSender _emailSender;
+        public SellController(ApplicationDbContext context, IEmailSender emailSender)
         {
             _context = context;
+            _emailSender = emailSender;
         }
 
         public IActionResult Index()
@@ -22,24 +25,36 @@ namespace Assignment1Group26.Controllers
             
             var clientUserName = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
             var client = _context.clients.FirstOrDefault(c => c.ClientUserName == clientUserName);
-            if( client.ClientRole != "Admin")
+            if(client != null)
             {
-                if (client.EmailConfirmed == true)
+                if (client.ClientRole != "Admin")
                 {
-                    var sellTables = new SellViewModel
+                    if (client.EmailConfirmed == true)
                     {
-                        Bids = _context.bids.Where(b => b.ClientId == client.ClientId).ToList(),
-                        Clients = _context.clients.Where(c => c.ClientId == client.ClientId).ToList()
-                    };
-                    foreach (var bid in sellTables.Bids)
-                    {
+                        var sellTables = new SellViewModel
+                        {
+                            Bids = _context.bids.Where(b => b.ClientId == client.ClientId).ToList(),
+                            Clients = _context.clients.Where(c => c.ClientId == client.ClientId).ToList()
+                        };
+                        foreach (var bid in sellTables.Bids)
+                        {
                             if (bid.BidStartDate < DateTime.Now)
                             {
                                 if (bid.BidEndDate < DateTime.Now)
                                 {
-                                    bid.expired = true;
-                                    bid.Status = false;
-                                    _context.bids.Update(bid);
+                                    if (bid.expired = false)
+                                    {
+                                        bid.expired = true;
+                                        bid.Status = false;
+                                        _context.bids.Update(bid);
+                                        var allTheBidsPlaced = _context.bidsPlaced.Where(bsp => bsp.BidId == bid.BidId).ToList();
+                                        foreach (var bidPlaced in allTheBidsPlaced)
+                                        {
+                                            var cl = _context.clients.FirstOrDefault(c => c.ClientId == bidPlaced.ClientId);
+                                            ExpiredEmail(client, bid);
+                                        }
+                                    }
+
                                 }
                                 else
                                 {
@@ -54,24 +69,41 @@ namespace Assignment1Group26.Controllers
                                 bid.Status = false;
                                 _context.bids.Update(bid);
                             }
+
+
+                        }
+                        _context.SaveChanges();
+
+                        return View(sellTables);
                     }
-                    _context.SaveChanges();
-
-
+                }
+                else
+                {
+                    var sellTables = new SellViewModel
+                    {
+                        Bids = _context.bids.OrderBy(b => b.ClientId).ToList(),
+                        Clients = _context.clients.ToList(),
+                    };
                     return View(sellTables);
                 }
+
+                return View("../Email/EmailVerifyPage");
             }
             else
             {
-                var sellTables = new SellViewModel
-                {
-                    Bids = _context.bids.OrderBy(b => b.ClientId).ToList(),
-                    Clients = _context.clients.ToList(),
-                };
-                return View(sellTables);
+                return View("../Login/Login");
             }
             
-            return View("../Email/EmailVerifyPage");
+        }
+        public async Task ExpiredEmail(Client cl, Bid bid)
+        {
+            string receiver = cl.ClientUserName;
+            var subject = "Bidding Notification";
+            var message = "<h1>Hello " + cl.ClientFirstName + "</h1>" +
+                          "<h2>This Email is to Notify you That the " + bid.BidName + " Has Ended </h2>" +
+                            "<h2>We Would Like to Thank you For Participating In the Bidding Process </h2>";
+
+            await _emailSender.SendEmailAsync(receiver, subject, message);
         }
         [HttpGet]
         public IActionResult Add()

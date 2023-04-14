@@ -5,14 +5,18 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using Assignment1Group26.Service;
+
 namespace Assignment1Group26.Controllers
 {
     public class HomeController : Controller
     {
         private ApplicationDbContext _context;
-        public HomeController(ApplicationDbContext context)
+        private IEmailSender _emailSender;
+        public HomeController(ApplicationDbContext context,IEmailSender emailSender)
         {
             _context = context;
+            _emailSender = emailSender;
         }
         
 
@@ -31,9 +35,19 @@ namespace Assignment1Group26.Controllers
                 {
                     if (bid.BidEndDate < DateTime.Now)
                     {
-                        bid.expired = true;
-                        bid.Status = false;
-                        _context.bids.Update(bid);
+                        if(bid.expired == false)
+                        {
+                            bid.expired = true;
+                            bid.Status = false;
+                            _context.bids.Update(bid);
+                            var allTheBidsPlaced = _context.bidsPlaced.Where(bsp => bsp.BidId == bid.BidId).ToList();
+                            foreach (var bidPlaced in allTheBidsPlaced)
+                            {
+                               var client =  _context.clients.FirstOrDefault(c => c.ClientId == bidPlaced.ClientId);
+                                ExpiredEmail(client, bid);
+                            }
+                        }
+                        
                     }
                     else
                     {
@@ -55,12 +69,23 @@ namespace Assignment1Group26.Controllers
 
             return View(tables);
         }
+        public async Task ExpiredEmail(Client cl, Bid bid)
+        {
+            string receiver = cl.ClientUserName;
+            var subject = "Bidding Notification";
+            var message = "<h1>Hello " + cl.ClientFirstName + "</h1>" +
+                          "<h2>This Email is to Notify you That the " + bid.BidName + " Has Ended </h2>"+
+                            "<h2>We Would Like to Thank you For Participating In the Bidding Process </h2>";
+
+            await _emailSender.SendEmailAsync(receiver, subject, message);
+        }
 
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Login","Login");
         }
+
     }
 }
 
