@@ -4,180 +4,185 @@
 <div class="col" id="main">
 
 
-		<div class="list-group" >
-			<h1>Your Leading bids</h1>
+	<div class="list-group">
+		<h1>Your Leading bids</h1>
 
 
-			@foreach (Bid b in Model.Bids)
-			{
-				var dateLeft = b.BidEndDate.Subtract(DateTime.Now);
-				var datesToStart = b.BidStartDate.Subtract(DateTime.Now);
-				<a asp-controller="Details" asp-action="Details" asp-route-id="@b.BidId" class="list-group-item list-group-item-action ">
-					<div class="d-flex w-100 justify-content-between">
-						<h5 class="mb-1">@b.BidName</h5>
-                        
-                @if (b.Status == false)
-                {
-                    <p><botton class="btn-outline-danger"><strong>INACTIVE</strong></botton></p>
+		@foreach (Bid b in Model.WinningBids)
+		{
+			var dateLeft = b.BidEndDate.Subtract(DateTime.Now);
+			var datesToStart = b.BidStartDate.Subtract(DateTime.Now);
+			<a asp-controller="Details" asp-action="Details" asp-route-id="@b.BidId" class="list-group-item list-group-item-action ">
+				<div class="d-flex w-100 justify-content-between">
+					<h5 class="mb-1">@b.BidName</h5>
 
-                }
-                else
-                {
-                    <p><botton class="btn-outline-success"><strong>ACTIVE</strong></botton></p>
-                    
-                }
-					</div>
-					<p class="mb-1">Your Bid: $@b.HighestBid.</p>
-					<small>Bid Starting Price: $@b.BidStartPrice</small>
-                    @if (dateLeft > TimeSpan.Zero)
-                    {
+					@if (b.Status == false)
+					{
+						<p><botton class="btn-outline-danger"><strong>INACTIVE</strong></botton></p>
 
-                        @if (datesToStart > TimeSpan.Zero)
-                        {
-                            <h5 class="card-text">Bid Starts:</h5>
-                            <div class="card_body card_body_timer timer">
-                                <div class="countdown_section">
-                                    <div id="days" class="value days">@datesToStart.Days</div>
-                                    <div class="countdown_label">DAYS</div>
-                                </div>
-                                <div class="countdown_section">
-                                    <div id="hours" class="value hours">@datesToStart.Hours</div>
-                                    <div class="countdown_label">HOURS</div>
-                                </div>
-                                <div class="countdown_section">
-                                    <div id="minutes" class="value minutes">@datesToStart.Minutes</div>
-                                    <div class="countdown_label">MINUTES</div>
-                                </div>
-                                <div class="countdown_section">
-                                    <div id="seconds" class="value seconds">@datesToStart.Seconds</div>
-                                    <div class="countdown_label">SECONDS</div>
-                                </div>
-                            </div>
-                        }
-                        else
-                        {
-                            
+					}
+					else
+					{
+						<p><botton class="btn-outline-success"><strong>ACTIVE</strong></botton></p>
 
-                            <h5 class="card-text">bid Ends:</h5>
-                            <div class="card_body card_body_timer timer">
-                                <div class="countdown_section">
-                                    <div id="days" class="value days">@dateLeft.Days</div>
-                                    <div class="countdown_label">DAYS</div>
-                                </div>
-                                <div class="countdown_section">
-                                    <div id="hours" class="value hours">@dateLeft.Hours</div>
-                                    <div class="countdown_label">HOURS</div>
-                                </div>
-                                <div class="countdown_section">
-                                    <div id="minutes" class="value minutes">@dateLeft.Minutes</div>
-                                    <div class="countdown_label">MINUTES</div>
-                                </div>
-                                <div class="countdown_section">
-                                    <div id="seconds" class="value seconds">@dateLeft.Seconds</div>
-                                    <div class="countdown_label">SECONDS</div>
-                                </div>
+					}
+				</div>
+				<p class="mb-1">Your Bid: $@b.HighestBid.</p>
+				<small>Bid Starting Price: $@b.BidStartPrice</small>
+				@if (dateLeft > TimeSpan.Zero)
+				{
 
-                            </div>
-
-                        }
-                    }
-                    else
-                    {
-                        <h4>Bid Expired</h4>
-                    }
-				</a>
-
-			}
-		</div>
-
-    <br>
-    <h1>Your Lost bids</h1>
+					@if (datesToStart > TimeSpan.Zero)
+					{
+						<h5 class="card-text">Bid Starts:</h5>
+						<div class="card_body card_body_timer timer">
+							<div class="countdown_section">
+								<div id="days" class="value days">@datesToStart.Days</div>
+								<div class="countdown_label">DAYS</div>
+							</div>
+							<div class="countdown_section">
+								<div id="hours" class="value hours">@datesToStart.Hours</div>
+								<div class="countdown_label">HOURS</div>
+							</div>
+							<div class="countdown_section">
+								<div id="minutes" class="value minutes">@datesToStart.Minutes</div>
+								<div class="countdown_label">MINUTES</div>
+							</div>
+							<div class="countdown_section">
+								<div id="seconds" class="value seconds">@datesToStart.Seconds</div>
+								<div class="countdown_label">SECONDS</div>
+							</div>
+						</div>
+					}
+					else
+					{
 
 
-    @foreach (Bid b in Model.LostBids)
-    {
-        var dateLeft = b.BidEndDate.Subtract(DateTime.Now);
-        var datesToStart = b.BidStartDate.Subtract(DateTime.Now);
-        <a asp-controller="Details" asp-action="Details" asp-route-id="@b.BidId" class="list-group-item list-group-item-action ">
-            <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">@b.BidName</h5>
+						<h5 class="card-text">bid Ends:</h5>
+						<div class="card_body card_body_timer timer">
+							<div class="countdown_section">
+								<div id="days" class="value days">@dateLeft.Days</div>
+								<div class="countdown_label">DAYS</div>
+							</div>
+							<div class="countdown_section">
+								<div id="hours" class="value hours">@dateLeft.Hours</div>
+								<div class="countdown_label">HOURS</div>
+							</div>
+							<div class="countdown_section">
+								<div id="minutes" class="value minutes">@dateLeft.Minutes</div>
+								<div class="countdown_label">MINUTES</div>
+							</div>
+							<div class="countdown_section">
+								<div id="seconds" class="value seconds">@dateLeft.Seconds</div>
+								<div class="countdown_label">SECONDS</div>
+							</div>
 
-                @if (b.Status == false)
-                {
-                    <p><botton class="btn-outline-danger"><strong>INACTIVE</strong></botton></p>
+						</div>
 
-                }
-                else
-                {
-                    <p><botton class="btn-outline-success"><strong>ACTIVE</strong></botton></p>
+					}
+				}
+				else
+				{
+					<h4>Bid Expired</h4>
+				}
+			</a>
 
-                }
-            </div>
-            <p class="mb-1">Your Bid: $@b.HighestBid.</p>
-            <small>Bid Starting Price: $@b.BidStartPrice</small>
-            @if (dateLeft > TimeSpan.Zero)
-            {
+		}
+	</div>
 
-                @if (datesToStart > TimeSpan.Zero)
-                {
-                    <h5 class="card-text">Bid Starts:</h5>
-                    <div class="card_body card_body_timer timer">
-                        <div class="countdown_section">
-                            <div id="days" class="value days">@datesToStart.Days</div>
-                            <div class="countdown_label">DAYS</div>
-                        </div>
-                        <div class="countdown_section">
-                            <div id="hours" class="value hours">@datesToStart.Hours</div>
-                            <div class="countdown_label">HOURS</div>
-                        </div>
-                        <div class="countdown_section">
-                            <div id="minutes" class="value minutes">@datesToStart.Minutes</div>
-                            <div class="countdown_label">MINUTES</div>
-                        </div>
-                        <div class="countdown_section">
-                            <div id="seconds" class="value seconds">@datesToStart.Seconds</div>
-                            <div class="countdown_label">SECONDS</div>
-                        </div>
-                    </div>
-                }
-                else
-                {
+	<br>
 
 
-                    <h5 class="card-text">bid Ends:</h5>
-                    <div class="card_body card_body_timer timer">
-                        <div class="countdown_section">
-                            <div id="days" class="value days">@dateLeft.Days</div>
-                            <div class="countdown_label">DAYS</div>
-                        </div>
-                        <div class="countdown_section">
-                            <div id="hours" class="value hours">@dateLeft.Hours</div>
-                            <div class="countdown_label">HOURS</div>
-                        </div>
-                        <div class="countdown_section">
-                            <div id="minutes" class="value minutes">@dateLeft.Minutes</div>
-                            <div class="countdown_label">MINUTES</div>
-                        </div>
-                        <div class="countdown_section">
-                            <div id="seconds" class="value seconds">@dateLeft.Seconds</div>
-                            <div class="countdown_label">SECONDS</div>
-                        </div>
+	@if (Model.LostBids != null)
+	{
+		<h1>Your Lost bids</h1>
 
-                    </div>
 
-                }
-            }
-            else
-            {
-                <h4>Bid Expired</h4>
-            }
-        </a>
 
-    }
-</div>
 
-<br>
-    <a type="button" class="btn btn-dark" asp-area="" asp-controller="Profile" asp-action="Profile">Back</a>
+		@foreach (Bid b in Model.LostBids)
+		{
+			var dateLeft = b.BidEndDate.Subtract(DateTime.Now);
+			var datesToStart = b.BidStartDate.Subtract(DateTime.Now);
+			<a asp-controller="Details" asp-action="Details" asp-route-id="@b.BidId" class="list-group-item list-group-item-action ">
+				<div class="d-flex w-100 justify-content-between">
+					<h5 class="mb-1">@b.BidName</h5>
+
+					@if (b.Status == false)
+					{
+						<p><botton class="btn-outline-danger"><strong>INACTIVE</strong></botton></p>
+
+					}
+					else
+					{
+						<p><botton class="btn-outline-success"><strong>ACTIVE</strong></botton></p>
+
+					}
+				</div>
+				<p class="mb-1">Your Bid: $@b.HighestBid.</p>
+				<small>Bid Starting Price: $@b.BidStartPrice</small>
+				@if (dateLeft > TimeSpan.Zero)
+				{
+
+					@if (datesToStart > TimeSpan.Zero)
+					{
+						<h5 class="card-text">Bid Starts:</h5>
+						<div class="card_body card_body_timer timer">
+							<div class="countdown_section">
+								<div id="days" class="value days">@datesToStart.Days</div>
+								<div class="countdown_label">DAYS</div>
+							</div>
+							<div class="countdown_section">
+								<div id="hours" class="value hours">@datesToStart.Hours</div>
+								<div class="countdown_label">HOURS</div>
+							</div>
+							<div class="countdown_section">
+								<div id="minutes" class="value minutes">@datesToStart.Minutes</div>
+								<div class="countdown_label">MINUTES</div>
+							</div>
+							<div class="countdown_section">
+								<div id="seconds" class="value seconds">@datesToStart.Seconds</div>
+								<div class="countdown_label">SECONDS</div>
+							</div>
+						</div>
+					}
+					else
+					{
+
+
+						<h5 class="card-text">bid Ends:</h5>
+						<div class="card_body card_body_timer timer">
+							<div class="countdown_section">
+								<div id="days" class="value days">@dateLeft.Days</div>
+								<div class="countdown_label">DAYS</div>
+							</div>
+							<div class="countdown_section">
+								<div id="hours" class="value hours">@dateLeft.Hours</div>
+								<div class="countdown_label">HOURS</div>
+							</div>
+							<div class="countdown_section">
+								<div id="minutes" class="value minutes">@dateLeft.Minutes</div>
+								<div class="countdown_label">MINUTES</div>
+							</div>
+							<div class="countdown_section">
+								<div id="seconds" class="value seconds">@dateLeft.Seconds</div>
+								<div class="countdown_label">SECONDS</div>
+							</div>
+
+						</div>
+
+					}
+				}
+				else
+				{
+					<h4>Bid Expired</h4>
+				}
+			</a>
+
+		}
+	}
+	<br>
+	<a type="button" class="btn btn-dark" asp-area="" asp-controller="Profile" asp-action="Profile">Back</a>
 
 
 
