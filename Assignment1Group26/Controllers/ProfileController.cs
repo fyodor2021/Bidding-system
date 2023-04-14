@@ -122,55 +122,51 @@ namespace Assignment1Group26.Controllers
             return View("../../Views/Profile/Profile", clientToDisplay);
 
         }
-        
-        [HttpGet]
-        public IActionResult LeadingBids(int id)
-        {
-            var tables = new LeadingBidsModel
-            {
-                Bids = _context.bids.ToList(),
-                Client = _context.clients.FirstOrDefault(c => c.ClientId == id),
-                BidsPlaced = _context.bidsPlaced.Where(c => c.ClientId == id).ToList()
-            };
-            foreach (var bid in tables.Bids)
-            {
-                    if (bid.BidStartDate < DateTime.Now)
-                    {
-                        if (bid.BidEndDate < DateTime.Now)
-                        {
-                            bid.expired = true;
-                            bid.Status = false;
-                            _context.bids.Update(bid);
-                        }
-                        else
-                        {
-                            bid.expired = false;
-                            bid.Status = true;
-                            _context.bids.Update(bid);
-                        }
-                    }
-                    else
-                    {
-                        bid.expired = false;
-                        bid.Status = false;
-                        _context.bids.Update(bid);
-                    }
+		[HttpGet]
+		public IActionResult LeadingBids(int id)
+		{
+			var tables = new LeadingBidsModel
+			{
+				TotalBiddingAmount = 0,
+				ElectronicSpending = 0,
+				CarsSpending = 0,
+				ClothesSpending = 0,
+				Bids = _context.bids.ToList(),
+				Client = _context.clients.FirstOrDefault(c => c.ClientId == id),
+				BidsPlaced = _context.bidsPlaced.Where(c => c.ClientId == id).ToList()
+			};
+			var bidIds = tables.BidsPlaced.Select(bp => bp.BidId);
+			var clientPlacedBids = _context.bids.Where(b => bidIds.Contains(b.BidId)).ToList();
 
 
-            }
-            _context.SaveChanges();
-            var bidIds = tables.BidsPlaced.Select(bp => bp.BidId);
-            var clientPlacedBids = _context.bids.Where(b => bidIds.Contains(b.BidId)).ToList();
+			var bidHighestAmount = tables.BidsPlaced.Select(bp => bp.BidAmount).ToList();
+
+			var leadingBids = _context.bids.Where(b => bidHighestAmount.Contains((double)b.HighestBid)).ToList();
 
 
-            var bidHighestAmount = tables.BidsPlaced.Select(bp => bp.BidAmount).ToList();
-            var leadingBids = _context.bids.Where(b => bidHighestAmount.Contains((double)b.HighestBid)).ToList();
-            tables.Bids = leadingBids;
+			foreach (Bid b in leadingBids)
+			{
+				tables.TotalBiddingAmount += b.HighestBid;
+				if (b.CategoryId == 1)
+				{
+					tables.ClothesSpending += b.HighestBid;
+				}
+				if (b.CategoryId == 2)
+				{
+					tables.CarsSpending += b.HighestBid;
+				}
+				if (b.CategoryId == 3)
+				{
+					tables.ElectronicSpending += b.HighestBid;
+				}
+			}
 
 
-            return View("../../Views/PlacedBids/PlacedBids", tables);
+			tables.Bids = leadingBids;
 
-        }
-    }
-    
+
+			return View("../../Views/PlacedBids/PlacedBids", tables);
+
+		}
+	}
 }
