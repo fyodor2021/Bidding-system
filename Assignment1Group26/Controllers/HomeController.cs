@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Assignment1Group26.Service;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
+using System.Linq;
 
 namespace Assignment1Group26.Controllers
 {
@@ -35,16 +37,23 @@ namespace Assignment1Group26.Controllers
                 {
                     if (bid.BidEndDate < DateTime.Now)
                     {
-                        if(bid.expired == false)
+                        
+                       
+                        if (bid.expired == false)
                         {
+                            var distinctBids = _context.bidsPlaced
+                          .Select(bid => new { ClientId = bid.ClientId })
+                          .Distinct()
+                          .ToList();
                             bid.expired = true;
                             bid.Status = false;
                             _context.bids.Update(bid);
-                            var allTheBidsPlaced = _context.bidsPlaced.Where(bsp => bsp.BidId == bid.BidId).ToList();
-                            foreach (var bidPlaced in allTheBidsPlaced)
+                            
+                            
+                          foreach (var bidPlaced in distinctBids)
                             {
-                               var client =  _context.clients.FirstOrDefault(c => c.ClientId == bidPlaced.ClientId);
-                                ExpiredEmail(client, bid);
+                                var client = _context.clients.FirstOrDefault(c=>c.ClientId == bidPlaced.ClientId);
+                               ExpiredEmail(client, bid);
                             }
                         }
                         
