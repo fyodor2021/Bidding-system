@@ -6,6 +6,12 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Cryptography;
 using Assignment1Group26.Service;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewEngines;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using System.IO;
+using Microsoft.AspNetCore.Mvc.ViewEngines;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace Assignment1Group26.Controllers
 {
@@ -13,11 +19,12 @@ namespace Assignment1Group26.Controllers
     {
         private ApplicationDbContext _context;
         private readonly IEmailSender _emailSender;
-
-        public LoginController(ApplicationDbContext context, IEmailSender emailSender)
+        private IServiceProvider _serviceProvider;
+        public LoginController(ApplicationDbContext context, IEmailSender emailSender, IServiceProvider serviceProvider)
         {
             _context = context;
             _emailSender = emailSender;
+            _serviceProvider = serviceProvider;
         }
 
 
@@ -113,7 +120,7 @@ namespace Assignment1Group26.Controllers
         public async Task<IActionResult> MultiFactor(Client c)
         {
             Client client = findClient(c.ClientUserName);
-            if(client != null)
+            if (client != null)
             {
                 if (client.ClientRole != "Admin")
                 {
@@ -137,6 +144,7 @@ namespace Assignment1Group26.Controllers
                             var subject = "Verification PIN";
                             var message = "<h1>Welcome Again to JoseDore</h1>" +
                                           "<h4>Your PIN for this session is: </h4>" + "<h2>" + x + "</h2>";
+
                             updatePin(client.ClientId, x);
 
                             await _emailSender.SendEmailAsync(receiver, subject, message);
@@ -171,7 +179,36 @@ namespace Assignment1Group26.Controllers
             _context.SaveChanges();
 
         }
-        
+
+        public string RenderPartialViewToString(string viewName, object model)
+        {
+            if (string.IsNullOrEmpty(viewName))
+                viewName = ControllerContext.ActionDescriptor.DisplayName;
+
+            ViewData.Model = model;
+
+            using (StringWriter sw = new StringWriter())
+            {
+                var engine = _serviceProvider.GetService(typeof(ICompositeViewEngine)) as ICompositeViewEngine; // Resolver.GetService(typeof(ICompositeViewEngine)) as ICompositeViewEngine;
+                ViewEngineResult viewResult = engine.FindView(ControllerContext, viewName, false);
+
+                ViewContext viewContext = new ViewContext(
+                    ControllerContext,
+                    viewResult.View,
+                    ViewData,
+                    TempData,
+                    sw,
+                    new HtmlHelperOptions() //Added this parameter in
+                );
+
+                //Everything is async now!
+                var t = viewResult.View.RenderAsync(viewContext);
+                t.Wait();
+
+                return sw.GetStringBuilder().ToString();
+            }
+        }
+
         public async Task<IActionResult> ResendEmail(int id)
         {
             Client client = _context.clients.FirstOrDefault(c => c.ClientId == id);

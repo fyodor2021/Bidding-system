@@ -69,7 +69,10 @@
                 else
                 {
                     <p><b>Status: </b><botton class="btn-outline-success"><strong>ACTIVE</strong></botton></p>
-                    <a value="Item" class="btn btn-primary" style="width:7.5rem;" id="modalOpener">Place Bid</a>
+                    if(base.User.Identity.Name != Model.Bid.Client.ClientUserName)
+                    {
+                        <a value="Item" class="btn btn-primary" style="width:7.5rem;" id="modalOpener">Place Bid</a>
+                    }
                 }
                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
@@ -87,10 +90,28 @@
                                                     <form asp-action="Add" asp-controller="Details" method="post" enctype="multipart/form-data" style="width: 20px;">
 
 
-                                                        <input hidden readonly asp-for="BidPlaced.BidAmount" value="@(Model.Bid.HighestBid + 10)" style="width: 20px;">
+                                                        <input hidden readonly asp-for="BidPlaced.BidAmount" value="@if(Model.Bid.HighestBid != null)
+                                                            {
+                                                                @(Model.Bid.HighestBid + 10)
+
+                                                            }
+                                                            else
+                                                            {
+                                                                @(Model.Bid.BidStartPrice + 10)
+                                                            }" style="width: 20px;">
                                                         <input asp-for="Bid.BidId" hidden readonly>
 
-                                                        <button type="submit" style="--color:#031866;--slant:20px;--border:5px">$@(Model.Bid.HighestBid + 10)</button>
+                                                        <button type="submit" style="--color:#031866;--slant:20px;--border:5px">
+                                                            $@if (Model.Bid.HighestBid != null)
+                                                            {
+                                                                @(Model.Bid.HighestBid + 10)
+
+                                                            }
+                                                            else
+                                                            {
+                                                                @(Model.Bid.BidStartPrice + 10)
+                                                            }
+                                                        </button>
 
                                                     </form>
                                                 </div>
@@ -98,10 +119,28 @@
                                                     <form asp-action="Add" asp-controller="Details" method="post" enctype="multipart/form-data">
 
 
-                                                        <input hidden readonly asp-for="BidPlaced.BidAmount" value="@(Model.Bid.HighestBid +20)" style="width: 20px;">
+                                                        <input hidden readonly asp-for="BidPlaced.BidAmount" value="@if(Model.Bid.HighestBid != null)
+                                                            {
+                                                                @(Model.Bid.HighestBid + 20)
+
+                                                            }
+                                                            else
+                                                            {
+                                                                @(Model.Bid.BidStartPrice + 20)
+                                                            }" style="width: 20px;">
                                                         <input asp-for="Bid.BidId" hidden readonly>
 
-                                                        <button type="submit" style="--color:#031866;--slant:20px;--border:5px">$@(Model.Bid.HighestBid + 20)</button>
+                                                        <button type="submit" style="--color:#031866;--slant:20px;--border:5px">
+                                                            $@if (Model.Bid.HighestBid != null)
+                                                            {
+                                                                @(Model.Bid.HighestBid + 20)
+
+                                                            }
+                                                            else
+                                                            {
+                                                                @(Model.Bid.BidStartPrice + 20)
+                                                            }
+                                                        </button>
 
                                                     </form>
                                                 </div>
@@ -109,10 +148,28 @@
                                                     <form asp-action="Add" asp-controller="Details" method="post" enctype="multipart/form-data">
 
 
-                                                        <input hidden readonly asp-for="BidPlaced.BidAmount" value="@(Model.Bid.HighestBid + 50)" style="width: 20px;">
+                                                        <input hidden readonly asp-for="BidPlaced.BidAmount" value="@if(Model.Bid.HighestBid != null)
+                                                            {
+                                                                @(Model.Bid.HighestBid + 50)
+
+                                                            }
+                                                            else
+                                                            {
+                                                                @(Model.Bid.BidStartPrice + 50)
+                                                            }" style="width: 20px;">
                                                         <input asp-for="Bid.BidId" hidden readonly>
 
-                                                        <button type="submit" style="--color:#031866;--slant:20px;--border:5px">$@(Model.Bid.HighestBid + 50)</button>
+                                                        <button type="submit" style="--color:#031866;--slant:20px;--border:5px">
+                                                            $@if (Model.Bid.HighestBid != null)
+                                                            {
+                                                                @(Model.Bid.HighestBid + 50)
+
+                                                            }
+                                                            else
+                                                            {
+                                                                @(Model.Bid.BidStartPrice + 50)
+                                                            }
+                                                        </button>
 
                                                     </form>
                                                 </div>
@@ -120,10 +177,28 @@
                                                     <form asp-action="Add" asp-controller="Details" method="post" enctype="multipart/form-data" style="width: 20px;">
 
 
-                                                        <input hidden readonly asp-for="BidPlaced.BidAmount" value="@(Model.Bid.HighestBid + 100)">
+                                                        <input hidden readonly asp-for="BidPlaced.BidAmount" value="@if(Model.Bid.HighestBid != null)
+                                                            {
+                                                                @(Model.Bid.HighestBid + 100)
+
+                                                            }
+                                                            else
+                                                            {
+                                                                @(Model.Bid.BidStartPrice + 100)
+                                                            }">
                                                         <input asp-for="Bid.BidId" hidden readonly>
 
-                                                        <button type="submit" style="--color:#031866;--slant:20px;--border:5px">$@(Model.Bid.HighestBid + 100)</button>
+                                                        <button type="submit" style="--color:#031866;--slant:20px;--border:5px">
+                                                            @if(Model.Bid.HighestBid != null)
+                                                            {
+                                                                @(Model.Bid.HighestBid + 100)
+                                                                
+                                                            }
+                                                            else
+                                                            {
+                                                                @(Model.Bid.BidStartPrice + 100)
+                                                            } 
+                                                        </button>
 
                                                     </form>
                                                 </div>
@@ -136,7 +211,16 @@
                                                 </h2>
 
                                                 <form asp-action="Add" asp-controller="Details" method="post" enctype="multipart/form-data">
-                                                    <input asp-for="BidPlaced.BidAmount" class="input__field" type="number" style="margin-bottom:10px;width: 360px;" id="bid_input" placeholder="Current Highest Bid: @Model.Bid.HighestBid" value="">
+                                                    <input asp-for="BidPlaced.BidAmount" class="input__field" type="number" style="margin-bottom:10px;width: 360px;" id="bid_input" placeholder="Current Highest Bid: 
+                                                            @if(Model.Bid.HighestBid != null)
+                                                            {
+                                                                @Model.Bid.HighestBid
+
+                                                            }
+                                                            else
+                                                            {
+                                                                @Model.Bid.BidStartPrice
+                                                            }" value="">
                                                     <div class="button-group">
                                                         <input asp-for="Bid.BidId" hidden readonly>
                                                         <button type="submit">Submit</button>

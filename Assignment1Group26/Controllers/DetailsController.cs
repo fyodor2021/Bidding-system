@@ -2,6 +2,9 @@
 using Assignment1Group26.Service;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Razor.Compilation;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewEngines;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
@@ -32,13 +35,14 @@ namespace Assignment1Group26.Controllers
             var clientUserName = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
             var bid = _context.bids.FirstOrDefault(b => b.BidId == dvm.Bid.BidId);
             var client = _context.clients.FirstOrDefault(c => c.ClientUserName == clientUserName);
-            if (dvm.BidPlaced.BidDate <= bid.BidEndDate) 
+            if (dvm.BidPlaced.BidDate <= bid.BidEndDate)
             {
 
                 if (clientUserName != null)
                 {
                     if (client.ClientId != bid.ClientId)
                     {
+
                         if (dvm.BidPlaced.BidAmount < bid.HighestBid)
                         {
                             var tableBid = _context.bids.Include(c => c.AssetCondition).Include(c => c.Category).Include(c => c.Client).FirstOrDefault(b => b.BidId == bid.BidId);
@@ -52,15 +56,23 @@ namespace Assignment1Group26.Controllers
                         }
                         else
                         {
+                            var bidLost = _context.bidsPlaced.Where(b => b.BidId == bid.BidId).OrderByDescending(b => b.BidAmount).FirstOrDefault();
                             bid.HighestBid = dvm.BidPlaced.BidAmount;
                             _context.bids.Update(bid);
                             dvm.BidPlaced.ClientId = client.ClientId;
                             dvm.BidPlaced.BidId = bid.BidId;
                             _context.bidsPlaced.Add(dvm.BidPlaced);
                             _context.SaveChanges();
+                            sendAcceptanceEmail(client.ClientId, dvm.BidPlaced);
+                            if (bidLost != null)
+                            {
+                               sendOutBittedEmail(bidLost.ClientId, dvm.BidPlaced);
+
+                            }
                         }
 
                         return RedirectToAction("Details", "Details", new { id = dvm.Bid.BidId });
+
                     }
                     else
                     {
@@ -91,18 +103,30 @@ namespace Assignment1Group26.Controllers
                 return View("../../Views/Details/Details", tables);
             }
 
-            
+
         }
-        public async Task<IActionResult> sendAcceptanceEmail(int id)
+        public async Task sendAcceptanceEmail(int id, BidsPlaced bsp)
         {
             Client client = _context.clients.FirstOrDefault(c => c.ClientId == id);
+            Bid bid = _context.bids.FirstOrDefault(b => b.BidId == bsp.BidId);
             string receiver = client.ClientUserName;
-            var subject = "Verification PIN";
-            var message = "<h1>Welcome Again to JoseDore</h1>" +
-                          "<h2>Your PIN for this session is " + client.MultiPin;
+            var subject = "Bidding Notification";
+            var message = "<h1>Hello " + client.ClientFirstName +"</h1>" +
+                          "<h2>Your bid of " + bsp.BidAmount + " for "+ bid.BidName +" Has Been Place</h2>";
 
             await _emailSender.SendEmailAsync(receiver, subject, message);
-            return View("../../Views/Email/EmailVerifyPage", client);
         }
+        public async Task sendOutBittedEmail(int id, BidsPlaced bsp)
+        {
+            Client client = _context.clients.FirstOrDefault(c => c.ClientId == id);
+            Bid bid = _context.bids.FirstOrDefault(b => b.BidId == bsp.BidId);
+            string receiver = client.ClientUserName;
+            var subject = "Bidding Notification";
+            var message = "<h1>Hello " + client.ClientFirstName +"</h1>" +
+                "<h2>This is a notificatio to Inform you that someone out Bid you bid of " + bsp.BidAmount + " For " + bid.BidName + " </h2>";
+
+            await _emailSender.SendEmailAsync(receiver, subject, message);
+        }
+       
     }
 }

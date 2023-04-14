@@ -8,5 +8,6 @@ namespace Assignment1Group26.Controllers
         {
             return View("../../Views/PlacingBid/PlacingBid");
         }
+
     }
 }
