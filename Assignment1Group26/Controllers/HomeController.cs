@@ -41,7 +41,7 @@ namespace Assignment1Group26.Controllers
                     if (bid.BidEndDate < DateTime.Now)
                     {
                                            
-                        if (bid.expired == false)
+                       if (bid.expired == false)
                         {
                             var distinctBids = _context.bidsPlaced
                             .Select(bid => new { ClientId = bid.ClientId })
@@ -56,7 +56,8 @@ namespace Assignment1Group26.Controllers
                                 var client = _context.clients.FirstOrDefault(c=>c.ClientId == bidPlaced.ClientId);
                                 ExpiredEmail(client, bid);
                                  var theBidsPlacedByThisClient = _context.bidsPlaced.Where(bsp => bsp.ClientId == client.ClientId);
-                                foreach (var bidPlacedByClient in theBidsPlacedByThisClient)
+                            var thebidsPlacedByThisClientForThisItem = theBidsPlacedByThisClient.Where(c => c.BidId == bid.BidId);
+                                foreach (var bidPlacedByClient in thebidsPlacedByThisClientForThisItem)
                                 {
                                     if(bidPlacedByClient.BidAmount == bid.HighestBid)
                                     {
