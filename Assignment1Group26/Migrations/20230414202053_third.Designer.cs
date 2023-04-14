@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Assignment1Group26.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230414021805_intial")]
-    partial class intial
+    [Migration("20230414202053_third")]
+    partial class third
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -232,6 +232,78 @@ namespace Assignment1Group26.Migrations
                     b.HasKey("ClientId");
 
                     b.ToTable("clients");
+
+                    b.HasData(
+                        new
+                        {
+                            ClientId = 1,
+                            Blocked = false,
+                            ClientBirthDate = new DateTime(2023, 4, 14, 16, 20, 53, 226, DateTimeKind.Local).AddTicks(5611),
+                            ClientFirstName = "John",
+                            ClientLastName = "Smith",
+                            ClientPassword = "password",
+                            ClientPhoneNumber = "4379998049",
+                            ClientRole = "Client",
+                            ClientUserName = "john.smith@gmail.com",
+                            EmailConfirmed = true,
+                            MultiPin = 11111111,
+                            keepLoggedIn = false
+                        },
+                        new
+                        {
+                            ClientId = 2,
+                            Blocked = false,
+                            ClientBirthDate = new DateTime(2023, 4, 14, 16, 20, 53, 226, DateTimeKind.Local).AddTicks(5664),
+                            ClientFirstName = "vedoor",
+                            ClientLastName = "Barakat",
+                            ClientPassword = "password",
+                            ClientPhoneNumber = "4379998049",
+                            ClientRole = "Client",
+                            ClientUserName = "Vedoor.Barakat@gmail.com",
+                            EmailConfirmed = true,
+                            MultiPin = 11111111,
+                            keepLoggedIn = false
+                        },
+                        new
+                        {
+                            ClientId = 3,
+                            Blocked = false,
+                            ClientBirthDate = new DateTime(2023, 4, 14, 16, 20, 53, 226, DateTimeKind.Local).AddTicks(5668),
+                            ClientFirstName = "josephine",
+                            ClientLastName = "abdulaziz",
+                            ClientPassword = "juju123",
+                            ClientPhoneNumber = "4379998049",
+                            ClientRole = "Admin",
+                            ClientUserName = "juju.josedore@gmail.com",
+                            EmailConfirmed = true,
+                            MultiPin = 11111111,
+                            keepLoggedIn = false
+                        });
+                });
+
+            modelBuilder.Entity("Assignment1Group26.Models.Purchase", b =>
+                {
+                    b.Property<int>("PurchaseId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PurchaseId"), 1L, 1);
+
+                    b.Property<int>("BidId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ClientId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SellerId")
+                        .HasColumnType("int");
+
+                    b.Property<double>("TotalPaid")
+                        .HasColumnType("float");
+
+                    b.HasKey("PurchaseId");
+
+                    b.ToTable("purchases");
                 });
 
             modelBuilder.Entity("Assignment1Group26.Models.Review", b =>

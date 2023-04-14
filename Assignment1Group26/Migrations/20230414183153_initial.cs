@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Assignment1Group26.Migrations
 {
-    public partial class intial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -153,6 +153,16 @@ namespace Assignment1Group26.Migrations
                     { 1, "Clothes" },
                     { 2, "Cars" },
                     { 3, "Electronics" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "clients",
+                columns: new[] { "ClientId", "Blocked", "ClientBirthDate", "ClientFirstName", "ClientImage", "ClientLastName", "ClientPassword", "ClientPhoneNumber", "ClientRole", "ClientUserName", "EmailConfirmed", "MultiPin", "VerficationToken", "keepLoggedIn" },
+                values: new object[,]
+                {
+                    { 1, false, new DateTime(2023, 4, 14, 14, 31, 53, 615, DateTimeKind.Local).AddTicks(6211), "John", null, "Smith", "password", "4379998049", "Client", "john.smith@gmail.com", true, 11111111, null, false },
+                    { 2, false, new DateTime(2023, 4, 14, 14, 31, 53, 615, DateTimeKind.Local).AddTicks(6253), "vedoor", null, "Barakat", "password", "4379998049", "Client", "Vedoor.Barakat@gmail.com", true, 11111111, null, false },
+                    { 3, false, new DateTime(2023, 4, 14, 14, 31, 53, 615, DateTimeKind.Local).AddTicks(6256), "josephine", null, "abdulaziz", "juju123", "4379998049", "Admin", "juju.josedore@gmail.com", true, 11111111, null, false }
                 });
 
             migrationBuilder.InsertData(

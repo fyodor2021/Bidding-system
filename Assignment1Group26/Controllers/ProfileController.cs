@@ -131,11 +131,9 @@ namespace Assignment1Group26.Controllers
 		{
 			var tables = new LeadingBidsModel
 			{
-			    TotalBiddingAmount = 0,
-				ElectronicSpending = 0,
-				CarsSpending = 0,
-				ClothesSpending = 0,
-				Bids = _context.bids.ToList(),
+			    WinningBids = _context.bids.ToList(),
+                LostBids= _context.bids.ToList(),
+                Bids = _context.bids.ToList(),
 				Client = _context.clients.FirstOrDefault(c => c.ClientId == id),
 				BidsPlaced = _context.bidsPlaced.Where(c => c.ClientId == id).ToList()
 			};
@@ -146,27 +144,15 @@ namespace Assignment1Group26.Controllers
 			var bidHighestAmount = tables.BidsPlaced.Select(bp => bp.BidAmount).ToList();
 
 			var leadingBids = _context.bids.Where(b => bidHighestAmount.Contains((double)b.HighestBid)).ToList();
+            var lostbids = _context.bids.Where(b => b.expired == true && !bidHighestAmount.Contains((double)b.HighestBid)).ToList();
 
 
-			foreach (Bid b in leadingBids)
-			{
-				tables.TotalBiddingAmount += b.HighestBid;
-				if (b.CategoryId == 1)
-				{
-					tables.ClothesSpending += b.HighestBid;
-				}
-				if (b.CategoryId == 2)
-				{
-					tables.CarsSpending += b.HighestBid;
-				}
-				if (b.CategoryId == 3)
-				{
-					tables.ElectronicSpending += b.HighestBid;
-				}
-			}
 
 
-			tables.Bids = leadingBids;
+
+
+            tables.Bids = leadingBids;
+            tables.LostBids= lostbids;
 
 
 			return View("../../Views/PlacedBids/PlacedBids", tables);

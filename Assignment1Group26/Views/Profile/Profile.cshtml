@@ -1,14 +1,6 @@
 ﻿@model Client
 <section >
-      <div class="col-lg-4">
-                <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
-                    <a type="button" class="btn btn-dark" asp-controller="Profile" asp-action="Edit" asp-route-id="@Model.ClientId">Edit</a>
-                    <a type="button" class="btn btn-dark" asp-action="Index" asp-controller="Home">Home</a>
-                    <a type="button" class="btn btn-dark" asp-area="" asp-controller="Sell" asp-action="Index">Sell</a>
-                    <a type="button" class="btn btn-dark" asp-controller="Profile" asp-action="LeadingBids" asp-route-id="@Model.ClientId">My Leading Bids</a>
-                    <a type="button" class="btn btn-dark" asp-controller="Payment" asp-action="Payment" asp-route-id="@Model.ClientId">My winning Payment</a>
-                </div>
-            </div>
+      
 
   
     <div class="container py-5 ">
@@ -16,6 +8,18 @@
     
         
         <div class="row">
+            <div class="col-lg-2" style="padding-right: 0px;   height: 100%;
+}">
+                <div class="card  mb-8" style="padding: 0px; box-shadow: 0 ; ">
+                <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+                    <a type="button" class="btn btn-dark" asp-controller="Profile" asp-action="Edit" asp-route-id="@Model.ClientId">Edit</a>
+                    <a type="button" class="btn btn-dark" asp-action="Index" asp-controller="Home">Home</a>
+                    <a type="button" class="btn btn-dark" asp-area="" asp-controller="Sell" asp-action="Index">Sell</a>
+                    <a type="button" class="btn btn-dark" asp-controller="Profile" asp-action="LeadingBids" asp-route-id="@Model.ClientId">My Leading Bids</a>
+                    <a type="button" class="btn btn-dark" asp-controller="Payment" asp-action="Payment" asp-route-id="@Model.ClientId">My winning Payment</a>
+                </div>
+                </div>
+            </div>
            
             <div class="col-lg-4" style="width:25.45%;">
                 <div class="card formStyle mb-4">
@@ -59,7 +63,7 @@
                 
             </div>
 
-            <div class="col-lg-4">
+            <div class="col-lg-6">
                 <div class="card formStyle mb-8">
                     <div class="card-body">
                         <div class="row">

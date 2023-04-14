@@ -14,6 +14,7 @@ namespace Assignment1Group26.Models
         public DbSet<AssetCondition> assetConditions { get; set; }
         public DbSet<Review> reviews { get; set; }
         public DbSet<BidsPlaced> bidsPlaced { get; set; }
+        public DbSet<Purchase> purchases { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -5,35 +5,102 @@
 @model PaymentModel
 
 
-<div class="list-group" style="width: 45%; margin-right:  50px;">
-	<h1>Your winning bids</h1>
+    <div class="list-group">
+        <h1>Your winning bids</h1>
 
 
-	@foreach (Bid b in Model.Bids)
-	{
-		var total = b.HighestBid * 100;
-		var dateLeft = b.BidEndDate.Subtract(DateTime.Now);
-		var datesToStart = b.BidStartDate.Subtract(DateTime.Now);
-		<a asp-controller="Details" asp-action="Details" asp-route-id="@b.BidId" class="list-group-item list-group-item-action ">
-			<div class="d-flex w-100 justify-content-between">
-				<h5 class="mb-1">@b.BidName</h5>
-				<small style="color: red">@dateLeft.Days Days Left</small>
-			</div>
-			<p class="mb-1">Your Bid: $@b.HighestBid.</p>
-			<small>Bid Starting Price: $@b.BidStartPrice</small>
-			<form asp-action="Charge" asp-controller="Payment" method="post">
-				<script src="https://checkout.stripe.com/checkout.js"
-					class="stripe-button"
-					data-key="pk_test_51MvUuvAO8tl6rEU1DjtXyuH1egkj7W76KkaMska7K4oEGG8HiNqUuwdVz7etwP7Q5xGFa8Fp1LAy8O8ptbKH4BFj00DAMQsl1F"
-					data-amount="@total"
-					data-name="Josedore"
-					data-description="Bid Won"
-					data-currency="usd"
-					data-email="@Model.Client.ClientUserName"
-					data-locale="auto">
-				</script>
-			</form>
-		</a>
+        @foreach (Bid b in Model.Bids)
+        {
+            var total = (b.HighestBid) * 100;
 
-	}
-</div>
+            var dateLeft = b.BidEndDate.Subtract(DateTime.Now);
+            var datesToStart = b.BidStartDate.Subtract(DateTime.Now);
+            <a asp-controller="Details" asp-action="Details" asp-route-id="@b.BidId" class="list-group-item list-group-item-action ">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">@b.BidName</h5>
+
+                   
+                    <form asp-action="Charge" asp-controller="Payment"method="post">
+                        <script src="https://checkout.stripe.com/checkout.js"
+                            class="stripe-button"
+                            data-key="pk_test_51MvUuvAO8tl6rEU1DjtXyuH1egkj7W76KkaMska7K4oEGG8HiNqUuwdVz7etwP7Q5xGFa8Fp1LAy8O8ptbKH4BFj00DAMQsl1F"
+                            data-amount="@total"
+                            data-name="Josedore"
+                            data-description="Item Name: @b.BidName"
+                            data-currency="usd"
+                            data-email="@Model.Client.ClientUserName"
+                            data-locale="auto">
+                        </script>
+                    <input type="hidden" name="bidId" value="@b.BidId" />
+                    <input type="hidden" name="total" value="@b.HighestBid" />
+                    <input type="hidden" name="clientId" value="@Model.Client.ClientId" />
+                    <input type="hidden" name="sellerId" value="@b.ClientId" />
+
+
+                    </form>
+                </div>
+                <p class="mb-1">Your Bid: $@b.HighestBid.</p>
+                <small>Bid Starting Price: $@b.BidStartPrice</small>
+                @if (dateLeft > TimeSpan.Zero)
+                {
+
+                    @if (datesToStart > TimeSpan.Zero)
+                    {
+                        <h5 class="card-text">Bid Starts:</h5>
+                        <div class="card_body card_body_timer timer">
+                            <div class="countdown_section">
+                                <div id="days" class="value days">@datesToStart.Days</div>
+                                <div class="countdown_label">DAYS</div>
+                            </div>
+                            <div class="countdown_section">
+                                <div id="hours" class="value hours">@datesToStart.Hours</div>
+                                <div class="countdown_label">HOURS</div>
+                            </div>
+                            <div class="countdown_section">
+                                <div id="minutes" class="value minutes">@datesToStart.Minutes</div>
+                                <div class="countdown_label">MINUTES</div>
+                            </div>
+                            <div class="countdown_section">
+                                <div id="seconds" class="value seconds">@datesToStart.Seconds</div>
+                                <div class="countdown_label">SECONDS</div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+
+
+                        <h5 class="card-text">bid Ends:</h5>
+                        <div class="card_body card_body_timer timer">
+                            <div class="countdown_section">
+                                <div id="days" class="value days">@dateLeft.Days</div>
+                                <div class="countdown_label">DAYS</div>
+                            </div>
+                            <div class="countdown_section">
+                                <div id="hours" class="value hours">@dateLeft.Hours</div>
+                                <div class="countdown_label">HOURS</div>
+                            </div>
+                            <div class="countdown_section">
+                                <div id="minutes" class="value minutes">@dateLeft.Minutes</div>
+                                <div class="countdown_label">MINUTES</div>
+                            </div>
+                            <div class="countdown_section">
+                                <div id="seconds" class="value seconds">@dateLeft.Seconds</div>
+                                <div class="countdown_label">SECONDS</div>
+                            </div>
+
+                        </div>
+
+                    }
+                }
+                else
+                {
+                    <h4>Bid Expired</h4>
+                }
+            </a>
+
+        }
+    </div>
+
+    <br>
+    <a type="button" class="btn btn-dark" asp-area="" asp-controller="Profile" asp-action="Profile">Back</a>

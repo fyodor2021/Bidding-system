@@ -49,7 +49,7 @@ namespace Assignment1Group26.Controllers
 
 
         }
-        public IActionResult Charge(string stripeEmail, string stripeToken)
+        public IActionResult Charge(string stripeEmail, string stripeToken, int bidId, int clientId,int sellerId, double total)
         {
             var customers = new CustomerService();
             var charges = new ChargeService();
@@ -62,10 +62,9 @@ namespace Assignment1Group26.Controllers
                 Email= stripeEmail,
                 Source =stripeToken,
             });
-
             var charge = charges.Create(new ChargeCreateOptions
             {
-                Amount = 500,
+                Amount = (long?)total*100,
                 Description="Test Payment",
                 Currency = "usd",
                 Customer = customer.Id,
@@ -75,6 +74,18 @@ namespace Assignment1Group26.Controllers
 
             if (charge.Status == "succeeded" ) { 
                 string BalanceTransactionId = charge.BalanceTransactionId;
+                Purchase p = new Purchase();
+                p.BidId = bidId;
+                p.ClientId = clientId;
+                p.SellerId = sellerId;
+                p.TotalPaid = total;
+
+                _context.purchases.Add(p);
+                _context.SaveChanges();
+
+
+
+
                 return View();
 
 

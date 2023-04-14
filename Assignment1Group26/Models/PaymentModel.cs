@@ -7,7 +7,6 @@
         public IEnumerable<Bid>? WinningBids { get; set; }
 
 
-
      
         public double? Total { get; set; }
         public Bid? Bid { set; get; }
