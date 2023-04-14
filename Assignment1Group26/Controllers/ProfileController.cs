@@ -29,6 +29,10 @@ namespace Assignment1Group26.Controllers
                 {
                     return View(client);
                 }
+                else
+                {
+                    return View("../Login/Login");
+                }
             }
             else
             {
@@ -127,7 +131,7 @@ namespace Assignment1Group26.Controllers
 		{
 			var tables = new LeadingBidsModel
 			{
-				TotalBiddingAmount = 0,
+			    TotalBiddingAmount = 0,
 				ElectronicSpending = 0,
 				CarsSpending = 0,
 				ClothesSpending = 0,

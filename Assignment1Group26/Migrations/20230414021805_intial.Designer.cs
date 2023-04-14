@@ -4,6 +4,7 @@ using Assignment1Group26.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Assignment1Group26.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230414021805_intial")]
+    partial class intial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -230,53 +232,6 @@ namespace Assignment1Group26.Migrations
                     b.HasKey("ClientId");
 
                     b.ToTable("clients");
-
-                    b.HasData(
-                        new
-                        {
-                            ClientId = 1,
-                            Blocked = false,
-                            ClientBirthDate = new DateTime(2023, 4, 14, 11, 17, 44, 589, DateTimeKind.Local).AddTicks(3436),
-                            ClientFirstName = "John",
-                            ClientLastName = "Smith",
-                            ClientPassword = "password",
-                            ClientPhoneNumber = "4379998049",
-                            ClientRole = "Client",
-                            ClientUserName = "john.smith@gmail.com",
-                            EmailConfirmed = true,
-                            MultiPin = 11111111,
-                            keepLoggedIn = false
-                        },
-                        new
-                        {
-                            ClientId = 2,
-                            Blocked = false,
-                            ClientBirthDate = new DateTime(2023, 4, 14, 11, 17, 44, 589, DateTimeKind.Local).AddTicks(3514),
-                            ClientFirstName = "vedoor",
-                            ClientLastName = "Barakat",
-                            ClientPassword = "password",
-                            ClientPhoneNumber = "4379998049",
-                            ClientRole = "Client",
-                            ClientUserName = "Vedoor.Barakat@gmail.com",
-                            EmailConfirmed = true,
-                            MultiPin = 11111111,
-                            keepLoggedIn = false
-                        },
-                        new
-                        {
-                            ClientId = 3,
-                            Blocked = false,
-                            ClientBirthDate = new DateTime(2023, 4, 14, 11, 17, 44, 589, DateTimeKind.Local).AddTicks(3518),
-                            ClientFirstName = "josephine",
-                            ClientLastName = "abdulaziz",
-                            ClientPassword = "juju123",
-                            ClientPhoneNumber = "4379998049",
-                            ClientRole = "Admin",
-                            ClientUserName = "juju.josedore@gmail.com",
-                            EmailConfirmed = true,
-                            MultiPin = 11111111,
-                            keepLoggedIn = false
-                        });
                 });
 
             modelBuilder.Entity("Assignment1Group26.Models.Review", b =>

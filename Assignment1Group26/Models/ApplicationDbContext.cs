@@ -33,7 +33,6 @@ namespace Assignment1Group26.Models
                 );
 
             
-            /*
             modelBuilder.Entity<Client>().HasData(
 
                   new Client
@@ -44,6 +43,8 @@ namespace Assignment1Group26.Models
                       ClientUserName = "john.smith@gmail.com",
                       ClientPassword = "password",
                       EmailConfirmed = true,
+                      ClientBirthDate = DateTime.Now,
+                      ClientPhoneNumber= "4379998049",
                       ClientRole = "Client"
                   },
 
@@ -55,6 +56,8 @@ namespace Assignment1Group26.Models
                       ClientUserName = "Vedoor.Barakat@gmail.com",
                       ClientPassword = "password",
                       EmailConfirmed = true,
+                      ClientBirthDate = DateTime.Now,
+                      ClientPhoneNumber = "4379998049",
                       ClientRole = "Client"
                   },
                   new Client
@@ -65,11 +68,14 @@ namespace Assignment1Group26.Models
                       ClientUserName = "juju.josedore@gmail.com",
                       ClientPassword = "juju123",
                       EmailConfirmed = true,
+                      ClientBirthDate = DateTime.Now,
+                      ClientPhoneNumber = "4379998049",
                       ClientRole = "Admin"
                   }
 
 
               );
+            /*
 
             modelBuilder.Entity<BidsPlaced>().HasData(
 
