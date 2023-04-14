@@ -144,7 +144,7 @@ namespace Assignment1Group26.Controllers
 			var bidHighestAmount = tables.BidsPlaced.Select(bp => bp.BidAmount).ToList();
 
 			var leadingBids = _context.bids.Where(b => bidHighestAmount.Contains((double)b.HighestBid)).ToList();
-			var lostbids = _context.bids.Where(b => b.expired == true && b.ClientId == id && !bidHighestAmount.Contains((double)b.HighestBid)).ToList();
+			var lostBids = clientPlacedBids.Where(b => !leadingBids.Any(hb => hb.BidId == b.BidId)).ToList();
 
 
 
@@ -153,7 +153,7 @@ namespace Assignment1Group26.Controllers
 
 
 			tables.WinningBids = leadingBids;
-            tables.LostBids= lostbids;
+            tables.LostBids= lostBids;
 
 
 			return View("../../Views/PlacedBids/PlacedBids", tables);
