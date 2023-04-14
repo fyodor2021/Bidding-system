@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Assignment1Group26.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230414151744_client1")]
-    partial class client1
+    [Migration("20230414192158_intial")]
+    partial class intial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -136,6 +136,9 @@ namespace Assignment1Group26.Migrations
                     b.Property<int>("ClientId")
                         .HasColumnType("int");
 
+                    b.Property<bool?>("WinOrLostEmailSent")
+                        .HasColumnType("bit");
+
                     b.HasKey("BidsPlacedId");
 
                     b.ToTable("bidsPlaced");
@@ -238,7 +241,7 @@ namespace Assignment1Group26.Migrations
                         {
                             ClientId = 1,
                             Blocked = false,
-                            ClientBirthDate = new DateTime(2023, 4, 14, 11, 17, 44, 589, DateTimeKind.Local).AddTicks(3436),
+                            ClientBirthDate = new DateTime(2023, 4, 14, 15, 21, 57, 937, DateTimeKind.Local).AddTicks(3424),
                             ClientFirstName = "John",
                             ClientLastName = "Smith",
                             ClientPassword = "password",
@@ -253,7 +256,7 @@ namespace Assignment1Group26.Migrations
                         {
                             ClientId = 2,
                             Blocked = false,
-                            ClientBirthDate = new DateTime(2023, 4, 14, 11, 17, 44, 589, DateTimeKind.Local).AddTicks(3514),
+                            ClientBirthDate = new DateTime(2023, 4, 14, 15, 21, 57, 937, DateTimeKind.Local).AddTicks(3457),
                             ClientFirstName = "vedoor",
                             ClientLastName = "Barakat",
                             ClientPassword = "password",
@@ -268,7 +271,7 @@ namespace Assignment1Group26.Migrations
                         {
                             ClientId = 3,
                             Blocked = false,
-                            ClientBirthDate = new DateTime(2023, 4, 14, 11, 17, 44, 589, DateTimeKind.Local).AddTicks(3518),
+                            ClientBirthDate = new DateTime(2023, 4, 14, 15, 21, 57, 937, DateTimeKind.Local).AddTicks(3459),
                             ClientFirstName = "josephine",
                             ClientLastName = "abdulaziz",
                             ClientPassword = "juju123",

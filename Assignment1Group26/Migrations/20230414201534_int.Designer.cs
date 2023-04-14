@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Assignment1Group26.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230414043402_first")]
-    partial class first
+    [Migration("20230414201534_int")]
+    partial class @int
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -136,6 +136,9 @@ namespace Assignment1Group26.Migrations
                     b.Property<int>("ClientId")
                         .HasColumnType("int");
 
+                    b.Property<bool?>("WinOrLostEmailSent")
+                        .HasColumnType("bit");
+
                     b.HasKey("BidsPlacedId");
 
                     b.ToTable("bidsPlaced");
@@ -217,6 +220,9 @@ namespace Assignment1Group26.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ClientUserNameWithoutAt")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
@@ -232,6 +238,53 @@ namespace Assignment1Group26.Migrations
                     b.HasKey("ClientId");
 
                     b.ToTable("clients");
+
+                    b.HasData(
+                        new
+                        {
+                            ClientId = 1,
+                            Blocked = false,
+                            ClientBirthDate = new DateTime(2023, 4, 14, 16, 15, 34, 439, DateTimeKind.Local).AddTicks(2767),
+                            ClientFirstName = "John",
+                            ClientLastName = "Smith",
+                            ClientPassword = "password",
+                            ClientPhoneNumber = "4379998049",
+                            ClientRole = "Client",
+                            ClientUserName = "john.smith@gmail.com",
+                            EmailConfirmed = true,
+                            MultiPin = 11111111,
+                            keepLoggedIn = false
+                        },
+                        new
+                        {
+                            ClientId = 2,
+                            Blocked = false,
+                            ClientBirthDate = new DateTime(2023, 4, 14, 16, 15, 34, 439, DateTimeKind.Local).AddTicks(2799),
+                            ClientFirstName = "vedoor",
+                            ClientLastName = "Barakat",
+                            ClientPassword = "password",
+                            ClientPhoneNumber = "4379998049",
+                            ClientRole = "Client",
+                            ClientUserName = "Vedoor.Barakat@gmail.com",
+                            EmailConfirmed = true,
+                            MultiPin = 11111111,
+                            keepLoggedIn = false
+                        },
+                        new
+                        {
+                            ClientId = 3,
+                            Blocked = false,
+                            ClientBirthDate = new DateTime(2023, 4, 14, 16, 15, 34, 439, DateTimeKind.Local).AddTicks(2802),
+                            ClientFirstName = "josephine",
+                            ClientLastName = "abdulaziz",
+                            ClientPassword = "juju123",
+                            ClientPhoneNumber = "4379998049",
+                            ClientRole = "Admin",
+                            ClientUserName = "juju.josedore@gmail.com",
+                            EmailConfirmed = true,
+                            MultiPin = 11111111,
+                            keepLoggedIn = false
+                        });
                 });
 
             modelBuilder.Entity("Assignment1Group26.Models.Review", b =>

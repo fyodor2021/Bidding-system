@@ -43,6 +43,8 @@ namespace Assignment1Group26.Controllers
                         c.VerficationToken = getToken();
                         c.keepLoggedIn = false;
                         c.ClientRole = "Client";
+           
+                        c.ClientUserNameWithoutAt = c.ClientUserName.Substring(0, c.ClientUserName.IndexOf("@"));
                         _context.clients.Add(c);
                         _context.SaveChanges();
                         List<Claim> claims = new List<Claim>()

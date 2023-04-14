@@ -12,6 +12,8 @@ namespace Assignment1Group26.Models
         public int BidId { get; set; }
         public int ClientId { get; set; }
         public double BidAmount { get; set; }
+        public bool? WinOrLostEmailSent { get; set; } = false;
+
         public DateTime BidDate { get; set; } = DateTime.Now;
 
     }

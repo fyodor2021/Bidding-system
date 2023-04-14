@@ -19,6 +19,7 @@ namespace Assignment1Group26.Models
 
         [EmailAddress(ErrorMessage = "Invalid email address.")]
         public string? ClientUserName { get; set; }
+        public string? ClientUserNameWithoutAt { get; set; }
         [Required]
         [StringLength(10, MinimumLength = 6, ErrorMessage = "Password must be between 6-10 characters long")]
         public string? ClientPassword { get; set; }
@@ -39,7 +40,6 @@ namespace Assignment1Group26.Models
         public int? FifthNumber { get; set; }
         [NotMapped]
         public int? SixthNumber { get; set; }
-        
         public int MultiPin { get; set; } = 11111111;
         public string? VerficationToken { get; set; }
         public bool keepLoggedIn { get; set; }
