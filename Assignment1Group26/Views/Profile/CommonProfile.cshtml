@@ -51,134 +51,89 @@
                     @Model.Client.ClientUserName
                 </div>
             </div>
+           
+            <div class="">
+                <div class="row">
 
-            <div class="col-md-8">
-                <div class="card formStyle mb-3">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">Full Name</h6>
-                            </div>
-                            <div class="col-sm-9 text-secondary">
-                                @Model.Client.ClientFirstName  @Model.Client.ClientLastName
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">Email</h6>
-                            </div>
-                            <div class="col-sm-9 text-secondary">
-                                @Model.Client.ClientUserName
-                            </div>
-                        </div>
+                    @foreach (Review r in Model.Reviews)
+                    {
+                        <div class="card formStyle profile-card">
 
-                        <div class="row">
-                        </div>
+                            <div class="row text-left">
+                                <h6>@Model.Client.ClientUserName</h6>
+                                <div>
+                                    @for (int i = 0; i < r.Rating; i++)
 
+                                    {
+                                        <span class="fa fa-star stars"></span>
+                                    }
+                                    @for (int i = r.Rating; i < 5; i++)
 
-                        <div class="row">
-
-                            @foreach (Review r in Model.Reviews)
-                            {
-                                <div class="card formStyle profile-card">
-
-                                    <div class="row text-left">
-                                        <p class="content">@r.Comment</p>
-                                        @if (base.User.Identity.Name == "Admin")
-                                        {
-                                            <div class="form-outline w-100 col">
-                                                <a asp-controller="Review" asp-action="Delete" asp-route-id="@r.ReviewId" class="btn btn-danger btn-sm">
-                                                    Delete
-                                                </a>
-                                            </div>
-                                        }
-
-                                    </div>
-
+                                    {
+                                        <span class="fa fa-star "></span>
+                                    }
+                                    <br>
                                 </div>
 
-                                <div class="row">
-                                </div>
-                            }
+                                <p class="content">@r.Comment</p>
 
-                            <div class="row">
-
-                                @foreach (Review r in Model.Reviews)
+                                @if (base.User.Identity.Name == "Admin")
                                 {
-                                    <div class="card formStyle profile-card">
-
-                                        <div class="row text-left">
-                                            <div>
-                                                @for (int i = 0; i < r.Rating; i++)
-
-                                                {
-                                                    <span class="fa fa-star stars"></span>
-                                                }
-                                                @for (int i = r.Rating; i < 5; i++)
-
-                                                {
-                                                    <span class="fa fa-star "></span>
-                                                }
-                                                <br>
-                                            </div>
-                                            <p class="content">@r.Comment</p>
-
-                                            @if (base.User.Identity.Name == "Admin")
-                                            {
-                                                <div class="form-outline w-100 col">
-                                                    <a asp-controller="Review" asp-action="Delete" asp-route-id="@r.ReviewId" class="btn btn-danger btn-sm">
-                                                        Delete
-                                                    </a>
-                                                </div>
-                                            }
-
-                                        </div>
-
-
-
+                                    <div class="form-outline w-100 col">
+                                        <a asp-controller="Review" asp-action="Delete" asp-route-id="@r.ReviewId" class="btn btn-danger btn-sm">
+                                            Delete
+                                        </a>
                                     </div>
-
                                 }
 
-                                @if (base.User.Identity.Name != "Admin" && base.User.Identity.Name != Model.Client.ClientUserName)
-                                {
-                                    <form asp-controller="Review" asp-action="Add" enctype="multipart/form-data" method="post">
-                                        <input hidden readonly asp-for="@Model.Review.CreatedByStr" value="@base.User.Identity.Name">
-                                        <input hidden readonly asp-for="Review.ClientId" value="@Model.Client.ClientId">
-                                        <div class=" formStyle">
-                                            <div class="card-footer py-3 border-0" style="background-color: #f8f9fa; border-radius: 3%;">
-                                                <div>
-                                                    <div class="form-outline w-100" onmouseout="RateSelected()">
-                                                        <span Id="span1" onmouseout="RateSelected(1)" onmouseover="RateOver(1)" onclick="RateClick(1)" class="fa fa-star checked"></span>
-                                                        <span Id="span2" onmouseout="RateSelected(2)" onmouseover="RateOver(2)" onclick="RateClick(2)" class="fa fa-star checked"></span>
-                                                        <span Id="span3" onmouseout="RateSelected(3)" onmouseover="RateOver(3)" onclick="RateClick(3)" class="fa fa-star checked"></span>
-                                                        <span Id="span4" onmouseout="RateSelected(4)" onmouseover="RateOver(4)" onclick="RateClick(4)" class="fa fa-star checked"></span>
-                                                        <span Id="span5" onmouseout="RateSelected(5)" onmouseover="RateOver(5)" onclick="RateClick(5)" class="fa fa-star"></span>
-                                                    </div>
-                                                    <br>
-                                                    <input hidden id="lbRating" asp-for="Review.Rating">
-                                                    <div class="form-outline w-100">
-                                                        <textarea asp-for="Review.Comment" class="form-control" id="review-box" rows="4" style="background: #fff;"></textarea>
-                                                        <label class="form-label" for="review-box">Tell Us How We Did!</label>
-                                                    </div>
-                                                </div>
-                                                <div class="float-end mt-2 pt-1">
-                                                    <button type="submit" class="btn btn-primary btn-sm">
-                                                        Post comment
-                                                    </button>
-                                                    <a asp-controller="Home" asp-action="Index" class="btn btn-primary btn-sm">
-                                                        Home
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                }
+                            </div>
+
+
+
+                        </div>
+
+                    }
+            </div>
+            
+
+                @if (base.User.Identity.Name != "Admin" && base.User.Identity.Name != Model.Client.ClientUserName)
+                {
+                    <form asp-controller="Review" asp-action="Add" enctype="multipart/form-data" method="post" style="margin-top:25px;padding: 0;">
+                        <input hidden readonly asp-for="@Model.Review.CreatedByStr" value="@base.User.Identity.Name">
+                        <input hidden readonly asp-for="Review.ClientId" value="@Model.Client.ClientId">
+                        <div class=" formStyle">
+                            <div class="card-footer py-3 border-0" style="background-color: #f8f9fa; border-radius: 3%;">
+                                <div>
+                                    <div class="form-outline w-100" onmouseout="RateSelected()">
+                                        <span Id="span1" onmouseout="RateSelected(1)" onmouseover="RateOver(1)" onclick="RateClick(1)" class="fa fa-star checked"></span>
+                                        <span Id="span2" onmouseout="RateSelected(2)" onmouseover="RateOver(2)" onclick="RateClick(2)" class="fa fa-star checked"></span>
+                                        <span Id="span3" onmouseout="RateSelected(3)" onmouseover="RateOver(3)" onclick="RateClick(3)" class="fa fa-star checked"></span>
+                                        <span Id="span4" onmouseout="RateSelected(4)" onmouseover="RateOver(4)" onclick="RateClick(4)" class="fa fa-star checked"></span>
+                                        <span Id="span5" onmouseout="RateSelected(5)" onmouseover="RateOver(5)" onclick="RateClick(5)" class="fa fa-star"></span>
+                                    </div>
+                                    <br>
+                                    <input hidden id="lbRating" asp-for="Review.Rating">
+                                    <div class="form-outline w-100">
+                                        <textarea asp-for="Review.Comment" class="form-control" id="review-box" rows="4" style="background: #fff;"></textarea>
+                                        <label class="form-label" for="review-box">Tell Us How We Did!</label>
+                                    </div>
+                                </div>
+                                <div class="float-end mt-2 pt-1">
+                                    <button type="submit" class="btn btn-primary btn-sm">
+                                        Post comment
+                                    </button>
+                                    <a asp-controller="Home" asp-action="Index" class="btn btn-primary btn-sm">
+                                        Home
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    </form>
+                }
+            </div>
+        </div>
+    </div>
+</div>
             </div>
         </div>
     </div>

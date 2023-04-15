@@ -4,24 +4,23 @@
 
   
     <div class="container py-5 ">
-      
+      <div class="row">
+                <div class="card  mb-8" style="padding: 0px; box-shadow: 0 ; ">
+                    <div class="formStyle flex-row" role="group"  >
+                    <a type="button" class="btn btn-dark" style="width:19.5%" asp-controller="Profile" asp-action="Edit" asp-route-id="@Model.ClientId">Edit</a>
+                    <a type="button" class="btn btn-dark" style="width:19.5%" asp-action="Index" asp-controller="Home">Home</a>
+                    <a type="button" class="btn btn-dark" style="width:19.5%" asp-area="" asp-controller="Sell" asp-action="Index">My items</a>
+                    <a type="button" class="btn btn-dark" style="width:19.5%" asp-controller="Profile" asp-action="LeadingBids" asp-route-id="@Model.ClientId">My Bids</a>
+                    <a type="button" class="btn btn-dark" style="width:19.5%" asp-controller="Payment" asp-action="Payment" asp-route-id="@Model.ClientId">My Cart</a>
+                    </div>
+                </div>
+      </div>
     
         
-        <div class="row">
-            <div class="col-lg-2" style="padding-right: 0px;   height: 100%;
-}">
-                <div class="card  mb-8" style="padding: 0px; box-shadow: 0 ; ">
-                <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
-                    <a type="button" class="btn btn-dark" asp-controller="Profile" asp-action="Edit" asp-route-id="@Model.ClientId">Edit</a>
-                    <a type="button" class="btn btn-dark" asp-action="Index" asp-controller="Home">Home</a>
-                    <a type="button" class="btn btn-dark" asp-area="" asp-controller="Sell" asp-action="Index">My items</a>
-                    <a type="button" class="btn btn-dark" asp-controller="Profile" asp-action="LeadingBids" asp-route-id="@Model.ClientId">My Bids</a>
-                    <a type="button" class="btn btn-dark" asp-controller="Payment" asp-action="Payment" asp-route-id="@Model.ClientId">My Cart</a>
-                </div>
-                </div>
-            </div>
+        <div class="row profile-cards" style="display:flex;justify-content:space-between:width:100%">
+            
            
-            <div class="col-lg-4" style="width:25.45%;">
+            <div class="col-lg-4 " style="width:25.45%;">
                 <div class="card formStyle mb-4">
                     <div class="card-body text-center">
                         @if (Model.ClientImage != null)

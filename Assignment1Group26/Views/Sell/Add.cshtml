@@ -1,5 +1,4 @@
 ﻿@model Bid
-{
     <div class="container">
         <div class="row">
             <h1>@ViewBag.Action Bid</h1>
@@ -89,7 +88,7 @@
                             <div class="custom-file">
                                 <label class="custom-file-label" for="inputGroupFile04">Upload the item image</label>
                                 <input asp-for="@Model.ImageFile" type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
-                                <input type="hidden" name="ImageData" asp-for="@Model.ImageData" value="@Convert.ToBase64String(Model.ImageData ?? new byte[0])"  />
+                                <input hidden readonly type="hidden" name="ImageData" asp-for="@Model.ImageData" value="@Convert.ToBase64String(Model.ImageData ?? new byte[0])">
 
                                 <input asp-for="ImageFile" type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
 
@@ -118,5 +117,5 @@
             </div>
         </div>
     </div>
-}
+
 
