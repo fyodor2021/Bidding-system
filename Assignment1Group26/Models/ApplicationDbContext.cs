@@ -63,11 +63,11 @@ namespace Assignment1Group26.Models
                   },
                   new Client
                   {
-                      ClientFirstName = "josephine",
-                      ClientLastName = "abdulaziz",
+                      ClientFirstName = "Admin",
+                      ClientLastName = "Admin",
                       ClientId = 3,
-                      ClientUserName = "juju.josedore@gmail.com",
-                      ClientPassword = "juju123",
+                      ClientUserName = "Admin@gmail.com",
+                      ClientPassword = "123Password1$",
                       EmailConfirmed = true,
                       ClientBirthDate = DateTime.Now,
                       ClientPhoneNumber = "4379998049",

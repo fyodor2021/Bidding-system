@@ -17,6 +17,8 @@ namespace Assignment1Group26.Controllers
         }
         public IActionResult Add(ProfileReviewModel rvm) 
         {
+
+            var clients = _context.clients.ToList();
             Client client = _context.clients.FirstOrDefault(c => c.ClientUserName == rvm.Review.CreatedByStr);
             Review reviewToAdd = new Review();
             if (client != null && rvm.Review != null)

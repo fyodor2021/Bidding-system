@@ -21,7 +21,7 @@ namespace Assignment1Group26.Models
         public string? ClientUserName { get; set; }
         public string? ClientUserNameWithoutAt { get; set; }
         [Required]
-        [StringLength(10, MinimumLength = 6, ErrorMessage = "Password must be between 6-10 characters long")]
+        [StringLength(15, MinimumLength = 6, ErrorMessage = "Password must be between 6-10 characters long")]
         public string? ClientPassword { get; set; }
         [NotMapped]
         public string? ClientRetypePassword { get; set; }

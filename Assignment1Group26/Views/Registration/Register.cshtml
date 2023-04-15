@@ -24,10 +24,10 @@
                      <p style="color:red">@Html.ValidationMessageFor(c=>c.ClientPhoneNumber)</p>
 
                     <div class="mb-3">
-                        <input asp-for="ClientPhoneNumber" type="text" class="form-control" id="Username" aria-describedby="emailHelp"
+                        <input asp-for="ClientPhoneNumber" type="number" class="form-control" id="Username" aria-describedby="emailHelp"
                                placeholder="Phone Number">
                     </div>
-                    <p style="color:red"> @Html.ValidationMessageFor(c=>c.ClientBirthDate)>
+                    <p style="color:red">@Html.ValidationMessageFor(c=>c.ClientBirthDate)</p>
                     <div class="mb-3">
                             <input asp-for="ClientBirthDate" type="date" class="form-control" id="Username" aria-describedby="emailHelp"
                                    placeholder="Date of Birth">
