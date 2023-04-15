@@ -98,9 +98,12 @@ namespace Assignment1Group26.Controllers
         public IActionResult CommonProfile(int id) {
            var tables = new ProfileReviewModel
            {
+               clients = _context.clients.ToList(),
+               purchases = _context.purchases.Where(p => p.SellerId == id),
                Reviews = _context.reviews.Where(r => r.ClientId == id), 
                Client = _context.clients.FirstOrDefault(c => c.ClientId == id)
            };
+
           
            
             return View(tables);
@@ -144,7 +147,7 @@ namespace Assignment1Group26.Controllers
 			var bidHighestAmount = tables.BidsPlaced.Select(bp => bp.BidAmount).ToList();
 
 			var leadingBids = _context.bids.Where(b => bidHighestAmount.Contains((double)b.HighestBid)).ToList();
-			var lostbids = _context.bids.Where(b => b.expired == true && b.ClientId == id && !bidHighestAmount.Contains((double)b.HighestBid)).ToList();
+			var lostBids = clientPlacedBids.Where(b => !leadingBids.Any(hb => hb.BidId == b.BidId)).ToList();
 
 
 
@@ -153,7 +156,7 @@ namespace Assignment1Group26.Controllers
 
 
 			tables.WinningBids = leadingBids;
-            tables.LostBids= lostbids;
+            tables.LostBids= lostBids;
 
 
 			return View("../../Views/PlacedBids/PlacedBids", tables);
